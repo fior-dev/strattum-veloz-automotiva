@@ -8,3 +8,4 @@ A Strattum pediu este registro como entrega do case. Cada linha diz o que foi fe
 | 11/11 | Discovery | Gemini | Transcrição | Resumo das descobertas e primeira versão das regras de alocação, com 3 níveis de teste |
 | 11/11 | Premissas | IA, colada pelo José | Regras do Gemini | Simplificação para 3 variantes, destrutivo sim/não e replanejamento por troca |
 | 11/11 | Discovery | Claude Code (Opus 5.5) | Transcrição, notas do José, premissas, *FDE Playbook* | `docs/01-discovery.md` v0.1 |
+| 11/11 | Discovery | Claude Code (Opus 5.5, esforço high), revisão independente | `docs/01-discovery.md` v0.1, transcrição, notas | 18 correções aplicadas na v0.2: etiquetas de fonte, "como hoje" definido, regra de repetição, heurística, premissas do mock, critérios por requisito |
