@@ -28,6 +28,7 @@ Testes: `cd backend; uv run pytest`. Build da tela: `cd frontend; npm run build`
 | `docs/adr/` | Decisões difíceis de reverter |
 | `docs/tickets/` | Fatias do protótipo |
 | `AI-LOG.md` | Registro do uso de IA, uma das entregas do case |
+| [`painel/index.html`](painel/index.html) | Painel de gestão do projeto: decisões, SDLC, tickets, rastreabilidade e prazo. Regenerar: `node painel/gerar.mjs` |
 | `backend/domain/motor.py` | O motor de alocação |
 | `backend/scripts/gerar_mock.py` | Gera o dado mockado, com semente fixa |
 
