@@ -26,6 +26,7 @@ O que existe: plano compartilhado com folga à vista, Gantt, replanejamento com 
 | Piso barato ao lado do plano | max(⌈Σ duração ÷ 20⌉, nº de destrutivos): mostra a distância até o ótimo sem solver | `domain/folga.py`, comparativo na tela |
 | Guardrails no copiloto | O texto do usuário só vira evento validado; recusa pedido fora do escopo e dado pessoal na entrada e na saída | `infrastructure/llm_litellm.py` (antes e depois da chamada); `application/copiloto.py` já recusa evento inválido |
 | Streaming da explicação | A explicação do copiloto aparece enquanto o modelo escreve | `infrastructure/llm_litellm.py` (`stream=True`) e rota SSE em `presentation/api.py` |
+| Histograma de uso com o plano estourado | Hoje o histograma para na semana 20 mesmo quando o gerente aceitou passar do marco (revisão de 12/11, achado 7) | `domain/gestao.py` (`uso_por_semana` com o fim do plano) |
 | Simulação de reprovações (H-2) | Monte Carlo sobre o plano: quantos carros de folga seguram 90% dos cenários | `domain/` (função pura nova), sem tocar no motor |
 
 ## v3 · produto (vários lançamentos)

@@ -157,3 +157,42 @@ def test_rn06_proposta_que_passa_do_marco_so_e_aceita_se_o_gerente_permitir():
         rep.aceitar()
     assert rep.pendente is not None and caso.repo.versoes() == [1]  # bloqueado: nada gravado
     assert rep.aceitar(estourar=True).versao == 2
+
+
+def test_rn06_atraso_maior_que_o_horizonte_e_recusado_tambem_fora_da_api():
+    """Revisão de 12/11, achado 1: o copiloto chama mudar_status direto, sem o limite da rota."""
+    import pytest
+    from application.planejamento import Replanejamento
+    from domain.motor import EventoInvalido
+    caso = uc()
+    rep = Replanejamento(caso.repo, caso)
+    with pytest.raises(EventoInvalido, match="20"):
+        rep.mudar_status(caso.plano().alocacoes[0].teste_id, "atrasado", 100000)
+
+
+def test_rn06_proposta_que_nao_piora_um_plano_ja_estourado_nao_pede_a_opcao():
+    """Revisão de 12/11, achado 3: o bloqueio vale para a proposta que empurra o fim além do marco."""
+    from application.planejamento import Replanejamento
+    caso = uc()
+    rep = Replanejamento(caso.repo, caso)
+    alvo = max(caso.plano().alocacoes, key=lambda a: a.fim)
+    rep.mudar_status(alvo.teste_id, "atrasado", 20)
+    rep.aceitar(estourar=True)
+    assert caso.plano().semana_fim() > 20
+    outro = min(caso.plano().alocacoes, key=lambda a: a.fim)
+    rep.mudar_status(outro.teste_id, "atrasado", 1)
+    assert rep.pendente.plano.semana_fim() == caso.plano().semana_fim()
+    assert rep.aceitar().versao == 3
+
+
+def test_rn07_aceite_de_outra_proposta_e_recusado():
+    """Revisão de 12/11, achado 2: na demo publicada, outro avaliador pode trocar a proposta pendente."""
+    import pytest
+    from application.planejamento import Replanejamento
+    from domain.motor import EventoInvalido
+    caso = uc()
+    rep = Replanejamento(caso.repo, caso)
+    rep.mudar_status(caso.plano().alocacoes[0].teste_id, "atrasado", 1)
+    with pytest.raises(EventoInvalido, match="mudou"):
+        rep.aceitar(evento="outra coisa")
+    assert rep.aceitar(evento=rep.pendente.evento).versao == 2

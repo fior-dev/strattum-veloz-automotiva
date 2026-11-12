@@ -1,4 +1,5 @@
 """Casos de uso do planejamento. Recebem a port pelo construtor (ADR 0001)."""
+import threading
 from dataclasses import replace
 
 from functools import cache
@@ -61,6 +62,7 @@ class Replanejamento:
         self.repo = repo
         self.planejamento = planejamento
         self.pendente: Proposta | None = None  # ponytail: uma proposta por vez, em memória
+        self._trava = threading.Lock()  # rotas síncronas rodam em threads: dois aceites ao mesmo tempo
 
     def _testes(self):
         return {t.id: t for t in self.repo.testes()}
@@ -109,24 +111,32 @@ class Replanejamento:
         return self.planejamento.ajustar_folga(folga)
 
     def propor(self, evento) -> Proposta:
-        self._sem_pendente()
-        atual = self.planejamento.plano()
-        self.pendente = replanejar(atual, evento, self._testes())
-        self.pendente.marco = impacto_no_marco(atual, self.pendente.plano, getattr(evento, "teste_id", None))
-        return self.pendente
+        with self._trava:
+            self._sem_pendente()
+            atual = self.planejamento.plano()
+            p = replanejar(atual, evento, self._testes())
+            p.marco = impacto_no_marco(atual, p.plano, getattr(evento, "teste_id", None))
+            self.pendente = p
+            return p
 
-    def aceitar(self, estourar: bool = False) -> Plano:
+    def aceitar(self, estourar: bool = False, evento: str | None = None) -> Plano:
         """RF-06: cria a versão N+1; a versão N continua consultável.
-        RN-06: proposta que passa do marco só entra se o gerente escolher estourar (decisão do José, 12/11)."""
-        if self.pendente is None:
-            raise EventoInvalido("Não há proposta pendente")
-        fim = self.pendente.plano.semana_fim()
-        if fim > MARCO and not estourar:
-            raise EventoInvalido(f"A proposta termina na semana {fim}, depois do marco na semana {MARCO}. "
-                                 "Recuse, ou marque a opção de passar do marco")
-        plano, self.pendente = self.pendente.plano, None
-        self.repo.salvar(plano)
-        return plano
+        RN-06: proposta que empurra o fim além do marco só entra se o gerente escolher estourar (decisão do José, 12/11).
+        evento: a proposta que o gerente viu; na demo publicada, outro avaliador pode tê-la trocado."""
+        with self._trava:
+            p = self.pendente
+            if p is None:
+                raise EventoInvalido("Não há proposta pendente")
+            if evento is not None and evento != p.evento:
+                raise EventoInvalido(f"A proposta mudou: agora é \"{p.evento}\". Confira antes de aceitar")
+            fim, fim_antes = p.plano.semana_fim(), self.planejamento.plano().semana_fim()
+            if fim > max(MARCO, fim_antes) and not estourar:
+                raise EventoInvalido(f"A proposta termina na semana {fim}, depois do marco na semana {MARCO}. "
+                                     "Recuse, ou marque a opção de passar do marco")
+            self.pendente = None
+            self.repo.salvar(p.plano)
+            return p.plano
 
     def recusar(self) -> None:
-        self.pendente = None
+        with self._trava:
+            self.pendente = None

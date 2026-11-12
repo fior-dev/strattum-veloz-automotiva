@@ -53,7 +53,7 @@ docker build -t veloz-demo .
 docker run --rm -p 8088:8000 --env-file backend\.env -e DATA_BACKEND=json veloz-demo
 ```
 
-Sem `--env-file`, o copiloto roda offline. Todos que abrem a URL dividem o mesmo plano; reiniciar o contêiner volta à versão 1.
+Sem `--env-file`, o copiloto roda offline. O `--env-file` leva todas as chaves do `.env` para o contêiner: serve só na sua máquina. No host publicado, passe só `OPENROUTER_API_KEY` e `LLM_MODEL`. Todos que abrem a URL dividem o mesmo plano; reiniciar o contêiner volta à versão 1.
 
 Testes: `cd backend; uv run pytest`. Build da tela: `cd frontend; npm run build`.
 

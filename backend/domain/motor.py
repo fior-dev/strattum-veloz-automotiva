@@ -143,8 +143,8 @@ def replanejar(plano: Plano, evento, testes: dict[str, Teste], horizonte: int = 
         return [a for a in alocs if a.prototipo_id == pid]
 
     if isinstance(evento, Atraso):
-        if evento.semanas < 1:
-            raise EventoInvalido("O atraso tem de ser de pelo menos 1 semana")
+        if not 1 <= evento.semanas <= horizonte:
+            raise EventoInvalido(f"O atraso tem de ser de 1 a {horizonte} semanas")
         a = _ultima_alocacao(plano, evento.teste_id)
         novo = replace(a, fim=a.fim + evento.semanas)
         alocs[alocs.index(a)] = novo

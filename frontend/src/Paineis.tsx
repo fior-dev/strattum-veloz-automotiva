@@ -84,7 +84,8 @@ export function PainelProposta({ proposta, plano, aoDecidir }: { proposta: Propo
   const [erro, setErro] = useState('')
   const decidir = (p: Promise<unknown>) => p.then(aoDecidir).catch((e) => setErro(e.message))
   const vazio = !proposta.sugestoes.length && !proposta.impactados.length
-  const estoura = (proposta.marco?.fim_depois ?? 0) > plano.horizonte // RN-06: bloqueado por padrão
+  // RN-06: bloqueado por padrão quando a proposta empurra o fim além do marco
+  const estoura = !!proposta.marco && proposta.marco.fim_depois > Math.max(plano.horizonte, proposta.marco.fim_antes)
   const [estourar, setEstourar] = useState(false)
   return (
     <aside className="bg-pista border-2 border-faixa rounded-md p-4 text-sm space-y-3">
@@ -119,7 +120,7 @@ export function PainelProposta({ proposta, plano, aoDecidir }: { proposta: Propo
         <span>A proposta termina na semana <b>{proposta.marco!.fim_depois}</b>, depois do lançamento na semana {plano.horizonte}. Por padrão o aceite fica bloqueado. Marque para aceitar mesmo assim; o Gantt mostra as semanas a mais.</span>
       </label>}
       <div className="flex gap-2">
-        <button className={primario} disabled={estoura && !estourar} onClick={() => decidir(replan.aceitar(estourar))}>Aceitar e criar a versão {proposta.versao_nova}</button>
+        <button className={primario} disabled={estoura && !estourar} onClick={() => decidir(replan.aceitar(proposta.evento, estourar))}>Aceitar e criar a versão {proposta.versao_nova}</button>
         <button className={botao} onClick={() => decidir(replan.recusar())}>Recusar</button>
       </div>
       <p className="text-xs text-grafite">Quem aceita é o gerente da coordenação (RN-07). Até lá, o plano não muda.</p>

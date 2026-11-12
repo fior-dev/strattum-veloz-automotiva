@@ -17,5 +17,7 @@ RUN uv sync --frozen --no-dev --no-install-project
 COPY backend/ ./
 COPY --from=tela /tela/dist /app/tela
 ENV TELA_DIR=/app/tela PORT=8000
+RUN useradd --system --no-create-home veloz
+USER veloz
 EXPOSE 8000
-CMD ["sh", "-c", "uv run --no-dev uvicorn presentation.api:app --host 0.0.0.0 --port ${PORT}"]
+CMD ["sh", "-c", "/app/.venv/bin/uvicorn presentation.api:app --host 0.0.0.0 --port ${PORT}"]

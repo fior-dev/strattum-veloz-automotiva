@@ -4,7 +4,8 @@
 export function Gantt({ plano, aoClicar, destaque, folgas = {}, marco = 20 }: {
   plano: Plano; aoClicar?: (a: Alocacao) => void; destaque?: Set<string>; folgas?: Record<string, number>; marco?: number
 }) {
-  const n = Math.max(plano.horizonte, plano.semana_fim) // o gerente pode aceitar um plano que passa do marco (RN-06)
+  // o gerente pode aceitar um plano que passa do marco (RN-06); o atraso vai até 20 semanas, então no máximo o dobro
+  const n = Math.min(Math.max(plano.horizonte, plano.semana_fim), plano.horizonte * 2)
   const semanas = Array.from({ length: n }, (_, i) => i + 1)
   const porCarro = new Map<string, Alocacao[]>()
   for (const a of plano.alocacoes) porCarro.set(a.prototipo_id, [...(porCarro.get(a.prototipo_id) ?? []), a])

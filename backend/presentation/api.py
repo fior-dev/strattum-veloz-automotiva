@@ -103,9 +103,10 @@ def ver_proposta(rp: Replanejamento = Depends(replanejamento)):
 
 
 @app.post("/api/proposta/aceitar", summary="O gerente da coordenação aceita: nasce a versão N+1 (RN-07, RF-06)")
-def aceitar(estourar: bool = False, rp: Replanejamento = Depends(replanejamento)):
-    """estourar=true: o gerente aceita uma proposta que termina depois do marco (RN-06). Sem ele, 422."""
-    return {"versao": _sem_erro(lambda: rp.aceitar(estourar)).versao}
+def aceitar(estourar: bool = False, evento: str | None = None, rp: Replanejamento = Depends(replanejamento)):
+    """estourar=true: o gerente aceita uma proposta que empurra o fim além do marco (RN-06). Sem ele, 422.
+    evento: a proposta que a tela mostrou; se outra pessoa a trocou, 422."""
+    return {"versao": _sem_erro(lambda: rp.aceitar(estourar, evento)).versao}
 
 
 @app.post("/api/proposta/recusar", summary="Descarta a proposta; o plano não muda")

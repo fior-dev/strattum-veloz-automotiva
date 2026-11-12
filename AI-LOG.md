@@ -74,3 +74,15 @@ Cada achado do motor virou primeiro um teste vermelho (`test_rn09_reteste_nao_vo
 | 6 | Motivo errado para destrutivo no fim do horizonte; chave repetida no React; texto "Repetir … fora do" | Corrigidos |
 | 7 | `temperature=0` ainda vai a um fallback `anthropic/` atrás de um modelo do OpenRouter | Não corrigido: a configuração do `.env.example` não usa fallback da Anthropic |
 | 8 | Atraso que passa da semana 20 mantém a alocação até a 23 | Já estava em Esperando pelo José (achado 4 da primeira revisão) |
+
+### Terceira revisão independente, do diff `11763b7..5065c91`: tickets 07 e 08 (Opus 5.5, esforço high), 12/11 15h
+| # | Achado | O que foi feito |
+|---|---|---|
+| 1 | Grave: o copiloto aceitava atraso sem limite ("atrasou 100000 semanas"); com o estouro liberado, o Gantt desenhava 100.020 colunas e travava a tela de todos | Corrigido: o motor recusa atraso fora de 1 a 20 semanas, qualquer que seja a entrada; o Gantt para no dobro do horizonte. Teste `test_rn06_atraso_maior_que_o_horizonte_e_recusado_tambem_fora_da_api` |
+| 2 | Na demo publicada, um avaliador podia aceitar a proposta que outro criou | Corrigido: o aceite leva o evento que a tela mostrou e recusa se a proposta mudou. Teste `test_rn07_aceite_de_outra_proposta_e_recusado` |
+| 3 | Com o plano já estourado, toda proposta seguinte pedia a opção de estourar | Corrigido: bloqueia só a proposta que empurra o fim além do marco. Teste `test_rn06_proposta_que_nao_piora_um_plano_ja_estourado_nao_pede_a_opcao` |
+| 4 | Dois aceites ao mesmo tempo podiam dar erro 500 | Corrigido: trava em propor, aceitar e recusar |
+| 5 | Mapa dizia só `127.0.0.1` e a linha `GET /` ficava fora da tabela | Corrigido |
+| 6 | O `--env-file` do README leva todas as chaves para o contêiner | Corrigido no README: no host, só a chave do OpenRouter e o modelo |
+| 7 | O histograma de uso da frota para na semana 20 mesmo com o plano estourado | Não corrigido: vai para o ROADMAP |
+| 8 | Contêiner rodava como root | Corrigido: usuário `veloz`, conferido com `whoami` |
