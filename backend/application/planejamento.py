@@ -75,9 +75,9 @@ class Replanejamento:
             raise EventoInvalido(f"Status desconhecido: {status}")
         if teste_id not in self._testes():
             raise EventoInvalido(f"O teste {teste_id} não existe")
-        plano = self.planejamento.plano()
-        plano.status[teste_id] = status
-        self.repo.salvar(plano)
+        for plano in self._atual_e_pendente():
+            plano.status[teste_id] = status
+        self.repo.salvar(self.planejamento.plano())
         return None
 
     def registrar_avaria(self, avaria: Avaria) -> Proposta | None:
@@ -87,11 +87,15 @@ class Replanejamento:
         if avaria.tipo not in TIPOS_AVARIA or avaria.gravidade not in GRAVIDADES:
             raise EventoInvalido("Tipo ou gravidade de avaria desconhecidos")
         if avaria.gravidade == "leve":  # RN-09: leve só fica visível; não cria versão nem mexe na proposta pendente
-            plano = self.planejamento.plano()
-            plano.avarias.append(avaria)
-            self.repo.salvar(plano)
+            for plano in self._atual_e_pendente():
+                plano.avarias.append(avaria)
+            self.repo.salvar(self.planejamento.plano())
             return None
         return self.propor(RegistroAvaria(avaria))
+
+    def _atual_e_pendente(self) -> list[Plano]:
+        """O que não precisa de aceite vale no plano atual e na proposta pendente, para o aceite não apagar."""
+        return [self.planejamento.plano()] + ([self.pendente.plano] if self.pendente else [])
 
     def propor(self, evento) -> Proposta:
         atual = self.planejamento.plano()

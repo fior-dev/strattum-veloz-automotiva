@@ -88,3 +88,18 @@ def test_rn07_avaria_leve_nao_apaga_proposta_pendente():
     rep.registrar_avaria(Avaria(alvo.prototipo_id, "vidro", "leve", 1, "Aerodinâmica"))
     assert rep.pendente is pendente  # a proposta continua esperando o gerente
     assert caso.repo.versoes() == [1] and caso.plano().avarias  # leve fica no plano atual, sem versão nova
+
+
+def test_rn07_avaria_leve_e_status_sobrevivem_ao_aceite_da_proposta_pendente():
+    from application.planejamento import Replanejamento
+    from domain.modelo import Avaria
+    caso = uc()
+    rep = Replanejamento(caso.repo, caso)
+    alvo, outro = caso.plano().alocacoes[0], caso.plano().alocacoes[-1]
+    rep.mudar_status(alvo.teste_id, "atrasado", 1)
+    rep.registrar_avaria(Avaria(alvo.prototipo_id, "vidro", "leve", 1, "Aerodinâmica"))
+    rep.mudar_status(outro.teste_id, "concluido")
+    rep.aceitar()
+    assert caso.plano().versao == 2
+    assert caso.plano().avarias == [Avaria(alvo.prototipo_id, "vidro", "leve", 1, "Aerodinâmica")]
+    assert caso.plano().status[outro.teste_id] == "concluido"
