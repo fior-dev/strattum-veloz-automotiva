@@ -52,7 +52,7 @@ export function tabela(txt) {
 function tabelaHtml(linhas) {
   const g = linhas.filter(l => !ehSeparador(l)).map(celulas);
   if (!g.length) return '';
-  return `<div class="rolagem"><table><thead><tr>${g[0].map(c => `<th>${inline(c)}</th>`).join('')}</tr></thead><tbody>${
+  return `<div class="rolagem" tabindex="0" role="region" aria-label="Tabela"><table><thead><tr>${g[0].map(c => `<th>${inline(c)}</th>`).join('')}</tr></thead><tbody>${
     g.slice(1).map(r => `<tr>${r.map(c => `<td>${inline(c)}</td>`).join('')}</tr>`).join('')}</tbody></table></div>`;
 }
 export function blocos(txt) {
@@ -130,7 +130,7 @@ function dataLog(s, ano) {
 // ---------- git ----------
 export function gitLog(raiz) {
   try {
-    const txt = execFileSync('git', ['-C', raiz, 'log', '--format=%x1e%h%x1f%aI%x1f%s', '--name-only'], { encoding: 'utf8', stdio: ['ignore', 'pipe', 'ignore'] });
+    const txt = execFileSync('git', ['-C', raiz, 'log', '--format=%x1e%h%x1f%aI%x1f%s', '--name-only'], { encoding: 'utf8', stdio: ['ignore', 'pipe', 'ignore'], maxBuffer: 256 * 1024 * 1024 });
     return txt.split('\x1e').filter(Boolean).map(b => {
       const [cab, ...arq] = b.split('\n');
       const [hash, data, assunto] = cab.split('\x1f');
@@ -160,7 +160,7 @@ export function parseAdr(md, arquivo = '') {
   const temSecoes = Object.keys(s).length > 0;
   const corpo = md ? md.replace(/^#\s.+$/m, '').split(/\r?\n/).filter(l => !/^status:/i.test(l)).join('\n') : '';
   return {
-    numero, titulo: m?.[2] || t, arquivo, estado, statusTexto: c.status || '', data: c.data || '—', decidido,
+    numero, titulo: m?.[2] || t, arquivo, estado, pendente: estado === 'aprovado' && /aguardando/.test(st), statusTexto: c.status || '', data: c.data || '—', decidido,
     substituidoPor: vazio(c['substituido por']) ? null : c['substituido por'],
     contexto: secao(s, 'Contexto'), decisao: temSecoes ? secao(s, 'Decis') : corpo.trim(),
     alternativas: secao(s, 'Alternativas'), consequencias: secao(s, 'Consequ'),
@@ -182,13 +182,13 @@ export function parseTicket(md, arquivo = '') {
   const t = titulo(md);
   const m = t.match(/^(\w+)\s*·\s*(.+)$/);
   const ids = re => [...new Set((md || '').match(re) || [])].sort();
-  const caixas = (md || '').match(/^\s*- \[( |x)\]/gm) || [];
+  const caixas = ((md || '').match(/^\s*- \[( |x)\]/gim) || []).map(x => x.toLowerCase());
   return {
     numero: m?.[1] || (path.basename(arquivo).match(/^(\w+?)-/)?.[1] ?? ''),
     titulo: m?.[2] || t, arquivo,
     dores: (c.dor || '').match(/D\d+/g) || [],
     depende: vazio(c['depende de']) ? null : c['depende de'],
-    estimativa: minutos(c.estimativa), real: minutos(c.real),
+    estimativa: minutos(c.estimativa) ?? minutos(c.teto), real: minutos(c.real),
     estado: normEstado(c.estado), estadoDeclarado: !!normEstado(c.estado),
     commits: (c.commits || '').match(/\b[0-9a-f]{7,40}\b/g) || [],
     // Testes citados: campo Testes, mais todo `test_*` que o ticket menciona (função ou arquivo).
@@ -207,12 +207,16 @@ export function idsDoTeste(nome) {
 function testesNoCodigo(raiz) {
   const out = [];
   for (const f of listar(raiz, 'backend/tests', n => /^test_.*\.py$/.test(n))) {
-    for (const m of (ler(raiz, f) || '').matchAll(/^\s*(?:async\s+)?def\s+(test_\w+)/gm)) out.push({ nome: m[1], arquivo: f });
+    // Cada função vai até a próxima def no início da linha; RN-xx e RF-xx citados no corpo ligam o teste à regra.
+    for (const corpo of (ler(raiz, f) || '').split(/^(?=(?:async\s+)?def\s)/m)) {
+      const m = corpo.match(/^(?:async\s+)?def\s+(test_\w+)/);
+      if (m) out.push({ nome: m[1], arquivo: f, citados: corpo.match(/\bR[NF]-\d{2}\b/g) || [] });
+    }
   }
   for (const f of listar(raiz, 'frontend/src', n => /\.test\.[jt]sx?$/.test(n))) {
     for (const m of (ler(raiz, f) || '').matchAll(/\b(?:it|test)\(\s*['"`]([^'"`]+)/g)) out.push({ nome: m[1], arquivo: f });
   }
-  return out.map(t => ({ ...t, ids: idsDoTeste(t.nome) }));
+  return out.map(t => ({ ...t, ids: [...new Set([...idsDoTeste(t.nome), ...(t.citados || [])])] }));
 }
 
 // "1-3", "1 a 3", "1, 2" → números
@@ -269,7 +273,7 @@ export function montar(raiz = RAIZ, { agora = new Date(), git = gitLog(raiz), gi
   const versao = disc?.match(/Vers[aã]o\s+([\d.]+)/i)?.[1] || null;
   const regras = (tabela(secao(ds, '9.'))?.linhas || []).filter(r => /^RN-\d+/.test(r[0])).map(([id, texto, fonte]) => ({
     id, texto, fonte: fonte || '',
-    marca: /ca(iu|íram|iram)/i.test(texto) ? 'Premissa caiu' : /RN-09/.test(id) ? 'Nova' : /aprovad|José em/i.test(fonte || '') ? 'Aprovada pelo José' : null,
+    marca: /ca(iu|íram|iram)/i.test(texto) ? 'Premissa anterior caiu' : /RN-09/.test(id) ? 'Nova' : /aprovad|José em/i.test(fonte || '') ? 'Aprovada pelo José' : null,
   }));
   const requisitos = [...new Set((secao(ds, '11.').match(/\bRF-\d{2}\b/g) || []))].sort();
   const resolvidas = (tabela(secao(ds, '17.'))?.linhas || []).filter(r => /^\d+$/.test(r[0])).map(([n, pergunta, afeta, situacao]) => ({ n, pergunta, afeta, situacao }));
@@ -278,8 +282,8 @@ export function montar(raiz = RAIZ, { agora = new Date(), git = gitLog(raiz), gi
   // Dores
   const ctx = ler(raiz, 'CONTEXT.md');
   const dores = (tabela(secao(secoes(ctx), 'Dores'))?.linhas || []).filter(r => /^D\d+/.test(r[0])).map(([id, dor, fonte, fatia]) => {
-    const m = dor.match(/^\*\*(.+?)\*\*\s*(.*)$/);
-    return { id, nome: m ? m[1].replace(/\.$/, '') : dor, detalhe: m ? m[2] : '', fonte, fatia };
+    const m = (dor || '').match(/^\*\*(.+?)\*\*\s*(.*)$/);
+    return { id, nome: m ? m[1].replace(/\.$/, '') : (dor || ''), detalhe: m ? m[2] : '', fonte, fatia };
   });
 
   // ADRs
@@ -291,13 +295,14 @@ export function montar(raiz = RAIZ, { agora = new Date(), git = gitLog(raiz), gi
   const tickets = listar(raiz, 'docs/tickets', n => /\.md$/i.test(n) && !/^readme/i.test(n)).map(f => {
     const t = parseTicket(ler(raiz, f), f);
     if (!t.estado) {
-      const k = Object.keys(readmeEstado).find(k => k === t.numero || (t.numero.startsWith(k) && /^\d+$/.test(k) && t.numero.length > k.length));
+      const k = t.numero in readmeEstado ? t.numero : Object.keys(readmeEstado).find(k => (t.numero.startsWith(k) && /^\d+$/.test(k) && t.numero.length > k.length));
       t.estado = (k && readmeEstado[k]) || (t.aceite.total && t.aceite.feitos === t.aceite.total ? 'feito' : t.aceite.feitos ? 'em andamento' : 'a fazer');
     }
     let cs = t.commits.map(h => porHash(h) || { hash: h, data: null, assunto: '' });
     if (!cs.length && t.estado === 'feito') cs = git.filter(c => fatiasDoAssunto(c.assunto).has(t.numero));
     const datas = cs.map(c => c.data).filter(Boolean);
-    const ligados = testes.filter(x => t.testes.includes(x.nome) || t.testes.includes(path.basename(x.arquivo).replace(/\.\w+$/, '')) || x.ids.some(id => t.regras.includes(id) || t.requisitos.includes(id)));
+    const declarados = testes.filter(x => t.testes.includes(x.nome) || t.testes.includes(path.basename(x.arquivo).replace(/\.\w+$/, '')));
+    const ligados = declarados.length ? declarados : testes.filter(x => x.ids.some(id => t.regras.includes(id) || t.requisitos.includes(id)));
     return {
       ...t, link: link(f),
       commits: cs.map(c => ({ hash: c.hash, assunto: c.assunto, data: c.data, link: linkCommit(c.hash) })),
@@ -336,12 +341,16 @@ export function montar(raiz = RAIZ, { agora = new Date(), git = gitLog(raiz), gi
     const jose = g('José');
     return {
       data: g('Data'), quando: dataLog(g('Data'), ano), etapa: g('Etapa'),
-      ferramenta: fm ? (fm[1] + (fm[3] ? ' ' + fm[3] : '')).trim() : ferr, modelo: fm ? fm[2] : '',
+      ferramenta: fm ? (fm[1] + (fm[3] ? (/^[,;]/.test(fm[3]) ? '' : ' ') + fm[3] : '')).trim() : ferr, modelo: fm ? fm[2] : '',
       entrada: g('Entrada'), saida: g('Saída'),
-      jose: jose || (/josé|corrig|desvio|advisor|apontou|decid/i.test(g('Saída') + ' ' + g('Entrada')) ? 'destaque' : ''),
+      jose,
       joseTexto: jose,
     };
   });
+
+  const propostos = ['CONTEXT.md', 'PREMISSAS.md', 'SPEC.md', 'docs/tickets/README.md', ...adrs.map(a => a.arquivo)]
+    .filter(f => /^propost|aguardando/.test(semAcento(campos(ler(raiz, f)).status || '')))
+    .map(f => { const a = adrs.find(a => a.arquivo === f); return { arquivo: f, texto: `Revisar e aprovar ${a ? `o ADR ${a.numero}, ${a.titulo}` : f}`, link: link(f) }; });
 
   // Etapas
   const feitos = tickets.filter(t => t.estado === 'feito');
@@ -357,7 +366,7 @@ export function montar(raiz = RAIZ, { agora = new Date(), git = gitLog(raiz), gi
       marcas = ls.filter(l => l.quando).map(l => ({ data: l.quando, rotulo: `${l.data} ${l.etapa}` }));
       estado = ls.length ? 'em andamento' : 'não iniciado';
     } else if (e.id === 'entrega') estado = existe('ROADMAP.md') && ticket('06b')?.estado === 'feito' ? 'feito' : existe('ROADMAP.md') ? 'em andamento' : 'não iniciado';
-    else estado = (e.exige || e.caminhos).every(existe) ? 'feito' : (e.exige || e.caminhos).some(existe) ? 'em andamento' : 'não iniciado';
+    else estado = (e.exige || e.caminhos).every(existe) ? (e.caminhos.some(c => propostos.some(x => x.arquivo.startsWith(c))) ? 'aguardando aprovação' : 'feito') : (e.caminhos.some(existe) ? 'em andamento' : 'não iniciado');
     marcas.sort((a, b) => a.data - b.data);
     return { ...e, estado, marcas, ultima: marcas.at(-1)?.data || null, link: existe(e.artefato.replace(/\/$/, '')) ? link(e.artefato.replace(/\/$/, '')) : null };
   });
@@ -384,9 +393,6 @@ export function montar(raiz = RAIZ, { agora = new Date(), git = gitLog(raiz), gi
   // Esperando e riscos
   const tr = secoes(ler(raiz, 'docs/tickets/README.md'));
   const bullets = s => (s || '').split(/\r?\n/).filter(l => /^\s*[-*]\s/.test(l)).map(l => l.replace(/^\s*[-*]\s+/, ''));
-  const propostos = ['CONTEXT.md', 'PREMISSAS.md', 'SPEC.md', 'docs/tickets/README.md', ...adrs.map(a => a.arquivo)]
-    .filter(f => /^propost/.test(semAcento(campos(ler(raiz, f)).status || '')))
-    .map(f => ({ texto: `Revisar e aprovar ${f.startsWith('docs/adr/') ? `o ADR ${adrs.find(a => a.arquivo === f).numero}, ${adrs.find(a => a.arquivo === f).titulo}` : f}`, link: link(f) }));
   const esperando = [...propostos, ...bullets(secao(tr, 'Esperando')).map(texto => ({ texto }))];
   const riscos = [
     ...tickets.filter(t => t.real && t.estimativa && t.real > 2 * t.estimativa).map(t => ({ risco: `Ticket ${t.numero} levou ${fmtDur(t.real)}, mais que o dobro dos ${fmtDur(t.estimativa)} estimados`, mitigacao: 'Regra do projeto: cortar escopo e mandar o resto para o roadmap', fonte: 'Calculado' })),
@@ -404,7 +410,7 @@ export function montar(raiz = RAIZ, { agora = new Date(), git = gitLog(raiz), gi
 
 // ---------- render ----------
 const chip = (txt, cls) => `<span class="chip ${cls}">${esc(txt)}</span>`;
-const CLS = { 'feito': 'ok', 'em andamento': 'vai', 'a fazer': 'nada', 'cortado': 'corte', 'não iniciado': 'nada', aprovado: 'ok', proposto: 'atencao', substituido: 'corte', desconhecido: 'nada', cumprido: 'ok', vencido: 'erro', passou: 'nada', 'pela frente': 'vai' };
+const CLS = { 'feito': 'ok', 'em andamento': 'vai', 'a fazer': 'nada', 'cortado': 'corte', 'não iniciado': 'nada', 'aguardando aprovação': 'atencao', aprovado: 'ok', proposto: 'atencao', substituido: 'corte', desconhecido: 'nada', cumprido: 'ok', vencido: 'erro', passou: 'nada', 'pela frente': 'vai' };
 const ROT_ADR = { aprovado: 'Aprovado', proposto: 'Proposto', substituido: 'Substituído', desconhecido: 'Sem status' };
 const aLink = (href, txt) => href ? `<a href="${esc(href)}">${esc(txt)}</a>` : esc(txt);
 const vazioSecao = msg => `<p class="vazio">${esc(msg)}</p>`;
@@ -444,7 +450,7 @@ function gantt(d) {
     const ticks = ms.map(m => `<span class="tick" style="left:${x(m.data).toFixed(2)}%" title="${esc(fmtDiaHora(m.data) + ': ' + m.rotulo)}"></span>`).join('');
     return `<div class="g-linha"><div class="g-rot"><span class="g-num">${i + 1}</span><span class="g-nome">${esc(e.nome)}</span>${chip(e.estado, CLS[e.estado])}</div><div class="g-trilha">${barra}${ticks}</div></div>`;
   }).join('');
-  return `<div class="gantt-rolagem" tabindex="0" aria-label="Linha de produção no tempo"><div class="gantt">
+  return `<div class="gantt-rolagem" tabindex="0" role="region" aria-label="Linha de produção no tempo"><div class="gantt">
     <div class="g-eixo"><div class="g-rot"></div><div class="g-trilha">${horas.join('')}</div></div>
     <div class="g-corpo">${linhas}<div class="g-sobre">${noites}${marcos}${agora}</div></div>
   </div></div>
@@ -464,7 +470,7 @@ function decisoes(d) {
     <summary>
       <span class="adr-num">${esc(a.numero)}</span>
       <span class="adr-tit">${inline(a.titulo)}${a.substituidoPor ? `<span class="mudo"> Substituído pelo ${esc(a.substituidoPor)}</span>` : ''}</span>
-      <span class="adr-meta">${chip(ROT_ADR[a.estado], CLS[a.estado])}<span>${esc(a.data)}</span><span>${esc(a.decidido)}</span></span>
+      <span class="adr-meta">${chip(a.pendente ? 'Aprovado em parte' : ROT_ADR[a.estado], a.pendente ? 'atencao' : CLS[a.estado])}<span>${esc(a.data)}</span><span>${esc(a.decidido)}</span></span>
     </summary>
     <div class="adr-corpo">
       ${a.contexto ? `<section><h4>Contexto</h4>${blocos(a.contexto)}</section>` : ''}
@@ -498,6 +504,7 @@ function quadro(d) {
       <header><span class="c-num">${esc(t.numero)}</span><a href="${esc(t.link)}">${inline(t.titulo)}</a></header>
       <div class="c-dores">${t.dores.map(x => chip(x, 'dor')).join('') || '<span class="mudo">sem dor</span>'}${t.depende ? `<span class="mudo">depois do ${esc(t.depende)}</span>` : ''}</div>
       ${tempo}
+      ${t.aceite.total ? `<p class="c-aceite">Aceite marcado no ticket: ${t.aceite.feitos} de ${t.aceite.total}</p>` : ''}
       <div class="c-rodape">
         <span>${t.commits.length ? t.commits.map(c => c.link ? `<a class="hash" href="${esc(c.link)}" title="${esc(c.assunto)}">${esc(c.hash)}</a>` : `<code>${esc(c.hash)}</code>`).join(' ') : '<span class="mudo">sem commit</span>'}</span>
         ${t.testesLigados.length ? `<details><summary>${t.testesLigados.length} teste${t.testesLigados.length > 1 ? 's' : ''} no código</summary><ul>${t.testesLigados.map(x => `<li><code>${esc(x.nome)}</code></li>`).join('')}</ul></details>` : '<span class="mudo">sem teste ligado</span>'}
@@ -514,13 +521,13 @@ function quadro(d) {
 function rastreio(d) {
   if (!d.matriz.length) return vazioSecao('As dores ainda não estão no CONTEXT.md.');
   const ids = xs => xs.length ? xs.map(x => `<span class="id">${esc(x)}</span>`).join(' ') : '<span class="mudo">—</span>';
-  return `<div class="rolagem"><table class="matriz"><thead><tr><th>Dor</th><th>Regra</th><th>Requisito</th><th>Ticket</th><th>Teste no código</th></tr></thead><tbody>
+  return `<div class="rolagem" tabindex="0" role="region" aria-label="Matriz de rastreabilidade"><table class="matriz"><thead><tr><th>Dor</th><th>Regra (via ticket)</th><th>Requisito (via ticket)</th><th>Ticket</th><th>Teste no código</th></tr></thead><tbody>
     ${d.matriz.map(m => `<tr><td><span class="id forte">${esc(m.id)}</span> ${esc(m.nome)}</td><td>${ids(m.regras)}</td><td>${ids(m.requisitos)}</td>
-      <td>${m.tickets.length ? m.tickets.map(t => `<a class="tk tk-${CLS[t.estado]}" href="${esc(t.link)}" title="${esc(t.estado)}">${esc(t.numero)}</a>`).join(' ') : `<span class="mudo">${/roadmap/i.test(m.fatia) ? 'roadmap' : '—'}</span>`}</td>
+      <td>${m.tickets.length ? m.tickets.map(t => `<a class="tk tk-${CLS[t.estado]}" href="${esc(t.link)}" title="${esc(t.estado)}">${esc(t.numero)}<span class="sr">, ${esc(t.estado)}</span></a>`).join(' ') : `<span class="mudo">${/roadmap/i.test(m.fatia) ? 'roadmap' : '—'}</span>`}</td>
       <td>${m.testes.length ? `<details><summary>${m.testes.length}</summary><ul>${m.testes.map(x => `<li><code>${esc(x.nome)}</code></li>`).join('')}</ul></details>` : '<span class="mudo">0</span>'}</td></tr>`).join('')}
   </tbody></table></div>
-  ${d.semTeste.length ? `<p class="lacuna"><strong>Sem teste automatizado:</strong> ${ids(d.semTeste)}. Regra de tela, como a aprovação da RN-07, é conferida na demo.</p>` : '<p class="lacuna ok">Toda regra e todo requisito têm ao menos um teste no código.</p>'}
-  <p class="legenda">O painel lê o nome das funções de teste (${d.testes.length} no código) e liga <code>test_rn05_*</code> à RN-05. Ele não roda os testes: verde aqui quer dizer que o teste existe.</p>`;
+  ${d.semTeste.length ? `<p class="lacuna"><strong>Sem teste automatizado:</strong> ${ids(d.semTeste)}. O que não tem teste é conferido na demo.</p>` : '<p class="lacuna ok">Toda regra e todo requisito têm ao menos um teste no código.</p>'}
+  <p class="legenda">O painel lê o nome das funções de teste (${d.testes.length} no código) e liga à RN-05 todo teste que tem <code>rn05</code> no nome ou cita RN-05 no corpo. Ele não roda os testes: verde aqui quer dizer que o teste existe.</p>`;
 }
 
 function prazo(d) {
@@ -538,7 +545,7 @@ function premissas(d) {
   const ordem = ['Fato do discovery', 'E-mail da cliente', 'Aprovado pelo José', 'Suposição do FDE', 'Gerado por IA', 'Sem fonte'];
   const grupos = ordem.map(g => [g, d.premissas.filter(p => p.grupo === g)]).filter(([, ps]) => ps.length);
   return `<div class="fontes">${grupos.map(([g, ps]) => `<a href="#g-${esc(semAcento(g).replace(/\W+/g, '-'))}" class="fonte"><strong>${ps.length}</strong>${esc(g)}</a>`).join('')}</div>
-  ${grupos.map(([g, ps]) => `<h3 id="g-${esc(semAcento(g).replace(/\W+/g, '-'))}">${esc(g)}</h3><div class="rolagem"><table class="prem"><thead><tr><th>ID</th><th>Item</th><th>Valor</th><th>Justificativa</th></tr></thead><tbody>
+  ${grupos.map(([g, ps]) => `<h3 id="g-${esc(semAcento(g).replace(/\W+/g, '-'))}">${esc(g)}</h3><div class="rolagem" tabindex="0" role="region" aria-label="Premissas"><table class="prem"><thead><tr><th>ID</th><th>Item</th><th>Valor</th><th>Justificativa</th></tr></thead><tbody>
     ${ps.map(p => `<tr${p.desvio ? ' class="desvio"' : ''}><td><span class="id">${esc(p.id)}</span></td><td>${inline(p.item)}</td><td>${inline(p.valor)}</td><td>${p.desvio ? '<span class="r-flag">Desvio do discovery</span>' : ''}${inline(p.justificativa)}</td></tr>`).join('')}
   </tbody></table></div>`).join('')}
   <p class="legenda">${aLink(d.links.premissas, 'PREMISSAS.md')}: todo número que não veio da cliente tem um ID, que aparece na tela do protótipo.</p>`;
@@ -552,9 +559,9 @@ function usoIa(d) {
       <p class="ia-tit"><strong>${esc(l.etapa)}</strong><span>${esc(l.ferramenta)}</span>${l.modelo ? `<span class="mudo">${esc(l.modelo)}</span>` : ''}</p>
       <p class="ia-io"><span class="mudo">De</span> ${inline(l.entrada)}</p>
       <p class="ia-io"><span class="mudo">Saiu</span> ${inline(l.saida)}</p>
-      ${l.joseTexto ? `<p class="ia-nota">${inline(l.joseTexto)}</p>` : l.jose ? '<p class="ia-nota">Aqui houve correção ou decisão humana.</p>' : ''}
+      ${l.joseTexto ? `<p class="ia-nota">${inline(l.joseTexto)}</p>` : ''}
     </div></li>`).join('')}</ol>
-  <p class="legenda">Fonte: ${aLink(d.links.ailog, 'AI-LOG.md')}. A faixa amarela marca onde o José corrigiu, decidiu ou um revisor apontou algo.</p>`;
+  <p class="legenda">Fonte: ${aLink(d.links.ailog, 'AI-LOG.md')}. A faixa amarela marca as linhas em que a coluna José do log registra uma correção ou decisão dele.</p>`;
 }
 
 function riscos(d) {
@@ -568,7 +575,7 @@ export function render(d) {
   const feitos = d.tickets.filter(t => t.estado === 'feito').length;
   const ativos = d.tickets.filter(t => t.estado !== 'cortado').length;
   const prox = d.marcos.find(m => !m.passou && m.estado !== 'cumprido');
-  const aprovados = d.adrs.filter(a => a.estado === 'aprovado').length;
+  const aprovados = d.adrs.filter(a => a.estado === 'aprovado' && !a.pendente).length;
   const SEC = [['linha', 'Linha de produção'], ['decisoes', 'Decisões'], ['tickets', 'Tickets'], ['rastreio', 'Rastreabilidade'], ['prazo', 'Prazo'], ['premissas', 'Premissas'], ['ia', 'Uso de IA'], ['riscos', 'Riscos']];
   const sec = (id, tit, sub, corpo) => `<section id="${id}" class="secao"><header class="s-cab"><h2>${tit}</h2>${sub ? `<p>${sub}</p>` : ''}</header>${corpo}</section>`;
   return `<!doctype html>
@@ -593,7 +600,7 @@ export function render(d) {
 <main>
   <section class="abertura">
     <h1>O rastro do protótipo, da entrevista à entrega</h1>
-    <p class="lead">A Veloz Automotiva quer testar um SUV com menos que os 250 protótipos de R$ 1 milhão do plano atual, sem atrasar o lançamento. Esta página mostra como a solução foi decidida e construída: cada decisão, ticket e teste ligado à dor que resolve. Ela é gerada do repositório; nada aqui é escrito à mão.</p>
+    <p class="lead">A Veloz Automotiva quer testar um SUV com menos que os 250 protótipos do plano atual, de R$ 1 milhão a R$ 1,5 milhão cada, sem atrasar o lançamento. Esta página mostra como a solução foi decidida e construída: cada decisão, ticket e teste ligado à dor que resolve. Os dados são lidos do repositório e do git a cada geração. Os marcos do prazo vêm do ajuste 9 de <code>docs/prompt-execucao.md</code>.</p>
     <dl class="fatos">
       <div><dt>Decisões registradas</dt><dd>${d.adrs.length}</dd><span>${aprovados} aprovada${aprovados === 1 ? '' : 's'} pelo José</span></div>
       <div><dt>Tickets feitos</dt><dd>${feitos}<small> de ${ativos}</small></dd><span>${d.tickets.filter(t => t.estado === 'cortado').length} cortado(s) para o roadmap</span></div>
@@ -621,7 +628,7 @@ document.querySelector('.tema').addEventListener('click',function(){var r=docume
 
 const CSS = `
 :root{--papel:#F2F3F1;--sup:#FFFFFF;--sup-2:#E8EAE7;--tinta:#1B2026;--tinta-2:#525C67;--linha:#D6DADB;--alvo:#F2C12E;--alvo-txt:#6E5200;--alvo-fundo:#FBF1CF;
---ok:#2B7A4B;--ok-f:#DDEFE3;--vai:#2858B8;--vai-f:#DEE6F7;--erro:#B83A2E;--erro-f:#F7DEDA;--nada:#6B7480;--nada-f:#E9EBEC;--atencao:#8A6200;--atencao-f:#FBEFC8;
+--ok:#1F6A3E;--ok-f:#DDEFE3;--vai:#2858B8;--vai-f:#DEE6F7;--erro:#B83A2E;--erro-f:#F7DEDA;--nada:#545C66;--nada-f:#E9EBEC;--atencao:#8A6200;--atencao-f:#FBEFC8;
 --tit:"Bahnschrift","DIN Alternate","DIN Next","Barlow","Roboto Condensed","Arial Narrow",system-ui,sans-serif;--txt:"Segoe UI",-apple-system,BlinkMacSystemFont,"Helvetica Neue",system-ui,sans-serif;--mono:ui-monospace,"Cascadia Mono",Consolas,Menlo,monospace;color-scheme:light}
 @media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--papel:#14171B;--sup:#1C2026;--sup-2:#262B32;--tinta:#E6E8EA;--tinta-2:#9AA3AD;--linha:#2F353D;--alvo-txt:#F2C12E;--alvo-fundo:#3A3214;
 --ok:#5FC28A;--ok-f:#1C3226;--vai:#7FA6F0;--vai-f:#1F2A42;--erro:#EE8577;--erro-f:#3D2220;--nada:#98A1AB;--nada-f:#262B32;--atencao:#F2C12E;--atencao-f:#3A3214;color-scheme:dark}}
@@ -633,10 +640,11 @@ html{scroll-behavior:smooth;scroll-padding-top:108px;-webkit-text-size-adjust:10
 body{margin:0;background:var(--papel);color:var(--tinta);font:15px/1.55 var(--txt);overflow-x:hidden}
 a{color:inherit;text-decoration-color:color-mix(in srgb,currentColor 35%,transparent);text-underline-offset:3px}
 a:hover{text-decoration-color:var(--alvo)}
-:focus-visible{outline:3px solid var(--alvo);outline-offset:2px;border-radius:3px}
+:focus-visible{outline:3px solid var(--vai);outline-offset:2px;border-radius:3px}
 code{font:12.5px var(--mono);background:var(--sup-2);padding:1px 5px;border-radius:4px;overflow-wrap:anywhere}
 h1,h2,h3,h4{font-family:var(--tit);font-weight:600;line-height:1.15;margin:0}
 .mudo{color:var(--tinta-2)}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
 .marca{width:26px;height:26px;flex:none}
 .topo{position:sticky;top:0;z-index:5;background:color-mix(in srgb,var(--papel) 92%,transparent);backdrop-filter:blur(8px);border-bottom:1px solid var(--linha)}
 .topo-in{max-width:1180px;margin:0 auto;padding:10px 20px;display:flex;align-items:center;gap:16px}
@@ -766,6 +774,7 @@ td{padding:9px 10px;border-bottom:1px solid var(--linha);vertical-align:top}
 .hash{font:12px var(--mono)}
 .card details summary,.matriz details summary{cursor:pointer;color:var(--tinta-2)}
 .card details ul,.matriz details ul{margin:6px 0 0;padding-left:16px}
+.c-aceite{margin:0;font-size:12.5px;color:var(--tinta-2)}
 .c-aviso{margin:0;font-size:11.5px;color:var(--tinta-2);font-style:italic}
 /* matriz */
 .matriz td:first-child{min-width:240px;font-weight:500}

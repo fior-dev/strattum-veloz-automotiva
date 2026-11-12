@@ -105,10 +105,15 @@ test('estado do ticket cai para a tabela do README e o HTML escapa texto', () =>
   const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'painel-'));
   try {
     fs.mkdirSync(path.join(dir, 'docs/tickets'), { recursive: true });
-    fs.writeFileSync(path.join(dir, 'README.md'), '## Estado das fatias\n\n| Fatia | Estado |\n|---|---|\n| 01 Esqueleto | pronta |\n');
+    fs.writeFileSync(path.join(dir, 'README.md'), '## Estado das fatias\n\n| Fatia | Estado |\n|---|---|\n| 01 Esqueleto | pronta |\n| 04 Replanejar | pronta |\n| 04b Avarias | — |\n');
     fs.writeFileSync(path.join(dir, 'docs/tickets/01-esqueleto.md'), '# 01 · Esqueleto <script>\n\nDor: D2 · Estimativa: 1h\n');
+    fs.writeFileSync(path.join(dir, 'docs/tickets/04b-avarias.md'), '# 04b · Avarias\n\nDor: D6 · Estimativa: 1h\n\n- [ ] RN-09 leve\n');
+    fs.mkdirSync(path.join(dir, 'backend/tests'), { recursive: true });
+    fs.writeFileSync(path.join(dir, 'backend/tests/test_x.py'), 'def test_cenario():\n    # avaria leve (RN-09)\n    pass\n\ndef test_outro():\n    pass\n');
     const d = montar(dir, { agora: new Date('2026-11-12T01:00:00-03:00'), git: [], github: null });
-    assert.equal(d.tickets[0].estado, 'feito');
+    assert.equal(d.tickets.find(t => t.numero === '01').estado, 'feito');
+    assert.equal(d.tickets.find(t => t.numero === '04b').estado, 'a fazer'); // não herda o 04
+    assert.deepEqual(d.tickets.find(t => t.numero === '04b').testesLigados.map(t => t.nome), ['test_cenario']); // RN-09 citada no corpo
     assert.ok(!render(d).includes('Esqueleto <script>'));
   } finally { fs.rmSync(dir, { recursive: true, force: true }); }
 });
