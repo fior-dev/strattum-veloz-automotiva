@@ -48,7 +48,7 @@ export const COR_AREA: Record<string, string> = {
   'Elétrica/Eletrônica': 'var(--color-ele)',
   'Mecânica/Powertrain': 'var(--color-mec)',
   'Aerodinâmica': 'var(--color-aer)',
-  'Dinâmica veicular': 'var(--color-din)',
+  'Hidráulica': 'var(--color-hid)',
   'Segurança passiva': 'var(--color-seg)',
 }
 

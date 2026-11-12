@@ -23,8 +23,8 @@ A fonte do negócio é `docs/01-discovery.md` v0.3. Etiquetas de fonte: `[T]` en
 | Termo | Definição | Fonte |
 |---|---|---|
 | Protótipo | Carro físico da frota, com ID e estado: disponível, comprometido, destruído. Os protótipos são idênticos | `[E]` |
-| Área | Uma das 5 engenharias: Elétrica/Eletrônica, Mecânica/Powertrain, Aerodinâmica, Dinâmica veicular, Segurança passiva | `[H]` |
-| Pedido | O que a área pede hoje: N carros por S semanas. Só entra no cenário "como hoje" | `[T]` |
+| Área | Uma das 5 engenharias: Elétrica/Eletrônica, Mecânica/Powertrain, Aerodinâmica, Hidráulica, Segurança passiva | `[H]` |
+| Pedido | O que a área pede hoje, na planilha dela: N carros por S semanas, sem a lista de testes. Só entra no cenário dos pedidos por área (o processo atual) | `[T]` |
 | Teste | Trabalho de uma área sobre um protótipo: duração em semanas, destrutivo sim ou não, status | `[T]` |
 | Destrutivo | Teste que inutiliza o carro, como o crash. É sempre o último do carro | `[T]` `[P]` |
 | Semana | Unidade de tempo do plano, de 1 a 20 | `[T]` |
@@ -34,7 +34,7 @@ A fonte do negócio é `docs/01-discovery.md` v0.3. Etiquetas de fonte: `[T]` en
 | Sugestão de troca | Proposta do replanejamento: mover o teste B do protótipo P1 para P2. Pendente, aceita ou recusada | `[P]` |
 | Impactado | Teste que colidiu e não achou carro livre. Aparece com a área dona | `[P]` |
 | Avaria | Desgaste parcial: tipo (vidro, lataria, pneu, outro) e gravidade (leve, compromete reuso) | `[E]` `[P]` |
-| Gerente da coordenação | Quem aprova o plano e as trocas (RN-07) | `[P]` |
+| Gerente da coordenação | Quem aprova o plano e as trocas (RN-07). No protótipo não há login: o perfil é escolhido no topo da tela, só como simulação (ADR 0005) | `[P]` |
 | Folga de reteste | Carros reserva para repetir testes destrutivos que falham. É explícita e ajustável, ao contrário da gordura do pedido | `[H]` |
 
 ## Métricas
@@ -43,10 +43,10 @@ A fonte do negócio é `docs/01-discovery.md` v0.3. Etiquetas de fonte: `[T]` en
 |---|---|
 | Frota do plano | Número de protótipos distintos com pelo menos uma alocação |
 | Frota proposta | Frota do plano + folga de reteste |
-| Frota como hoje | Soma dos pedidos das áreas |
+| Frota dos pedidos por área | Soma dos pedidos das 5 áreas no processo atual. O discovery chama este cenário de "como hoje"; no código o campo é `como_hoje` |
 | Semana de fim | Maior `semana_fim` entre as alocações |
 | Taxa de reuso | Alocações por protótipo |
-| Não cabe | Testes sem alocação porque passariam da semana 20 (RN-06) |
+| Testes sem alocação | Testes que o motor não conseguiu pôr em nenhum carro até a semana 20 (RN-06). Aparecem numa lista, com o motivo. No código o campo é `nao_cabe` |
 | Folga de um teste | Fim do plano − fim da cadeia do carro dele (ADR 0007) |
 | Caminho crítico | Testes com folga 0 |
 | Folga do projeto | Semana do lançamento (20) − fim do plano. Verde acima de 2 semanas, amarelo de 1 a 2, vermelho 0 ou menos (MK-08) |

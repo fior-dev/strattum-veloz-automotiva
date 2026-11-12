@@ -41,7 +41,7 @@ def gestao(versao: int | None = None, uc: Planejamento = Depends(planejamento)):
     return uc.gestao(versao)
 
 
-@app.get("/api/comparativo", summary="Como hoje × plano compartilhado (RF-03)")
+@app.get("/api/comparativo", summary="Pedidos por área (processo atual) × plano compartilhado (RF-03)")
 def comparativo(uc: Planejamento = Depends(planejamento)):
     return uc.comparativo()
 

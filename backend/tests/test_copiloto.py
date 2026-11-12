@@ -26,8 +26,8 @@ def test_texto_vira_evento_e_o_numero_e_o_do_motor():
     r = copiloto().perguntar("O teste AER-99 de vedação na chuva atrasou 2 semanas")
     assert r["evento"] == {"tipo": "atraso", "teste_id": "AER-99", "semanas": 2}
     direto = replanejamento().pendente  # a proposta é a mesma que a tela geraria
-    assert [s.teste_id for s in direto.sugestoes] == ["DIN-02"]
-    assert "DIN-02" in r["explicacao"]
+    assert [s.teste_id for s in direto.sugestoes] == ["ELE-01"]
+    assert "ELE-01" in r["explicacao"]
 
 
 def test_texto_sem_evento_valido_volta_como_pergunta_e_nao_muda_nada():

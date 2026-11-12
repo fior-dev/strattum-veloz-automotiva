@@ -21,7 +21,7 @@ NOMES = {
     "Elétrica/Eletrônica": ["Chicote elétrico", "Bateria 12V", "Infotainment", "Compatibilidade eletromagnética", "Iluminação", "Sensores ADAS"],
     "Mecânica/Powertrain": ["Durabilidade do motor", "Câmbio", "Arrefecimento", "Consumo", "Emissões", "Durabilidade extrema"],
     "Aerodinâmica": ["Túnel de vento", "Ruído aerodinâmico", "Vedação na chuva", "Arrasto", "Refrigeração de freios"],
-    "Dinâmica veicular": ["Frenagem em pista seca", "Tração", "Estabilidade", "Suspensão", "Direção"],
+    "Hidráulica": ["Circuito de freio", "Direção hidráulica", "Estanqueidade do circuito", "Bomba e reservatório", "Mangueiras e conexões"],
     "Segurança passiva": ["Crash frontal", "Crash lateral", "Capotamento", "Airbags", "Cintos e fixações"],
 }
 DESTRUTIVOS_NOMES = {"Crash frontal", "Crash lateral", "Capotamento", "Durabilidade extrema"}

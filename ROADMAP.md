@@ -6,9 +6,15 @@ Cada etapa diz o valor para a Veloz, o risco que ela tira e como validar com a c
 
 ## Protótipo (hoje, 13/11)
 
-O que existe: plano compartilhado com folga à vista, Gantt, replanejamento com aceite do gerente, avarias, caminho crítico e marco, copiloto de texto livre. Dados mockados (PREMISSAS.md), local, sem login.
+O que existe: plano compartilhado com folga à vista, Gantt, replanejamento com aceite do gerente, avarias com a lista da versão, caminho crítico e marco, copiloto de texto livre, apresentação guiada em 5 passos e perfil simulado (gerente ou engenharia). Dados mockados (PREMISSAS.md), sem login. Banco: JSON, ou Supabase com `DATA_BACKEND=supabase`. Um contêiner serve tela e API (ticket 08).
 
-**Validar na apresentação:** a coordenação entende o plano sem ajuda? A regra de troca do RN-05 é a que ela usaria? O número de testes críticos (88%) é a conversa certa: o plano troca folga de prazo por carros?
+**Validar na apresentação.** São as três hipóteses do protótipo que só a cliente confirma:
+
+| Pergunta | Por que perguntar |
+|---|---|
+| A coordenação entende o plano sem ajuda? | A Maira disse que o processo importa mais que o número (ADR 0002). Se a coordenação não lê o Gantt sozinha, o plano compartilhado não substitui a planilha. O passo a passo da tela existe para testar isso |
+| A regra de troca do RN-05 é a que ela usaria? | A regra "procura outro carro livre nas mesmas semanas" é premissa aprovada pelo José `[P]`, não fala da cliente. Se a coordenação preferir empurrar o teste em vez de trocar de carro, o replanejamento muda |
+| 553 de 625 testes críticos (88%): é essa a conversa? | O plano de menor frota não tem folga de prazo. A tela mostra o preço (cerca de +5 carros por semana de folga). Falta saber se a Veloz prefere menos carros ou mais prazo |
 
 ## v2 · piloto com dado real (4 a 6 semanas)
 
@@ -22,12 +28,30 @@ O que existe: plano compartilhado com folga à vista, Gantt, replanejamento com 
 | Supabase Storage | Anexos de avaria (foto do dano) e laudo de teste | adapter novo de arquivos em `infrastructure/`; tela do painel do teste |
 | Login e perfis | Engenharia registra status e avaria só dos próprios testes; só o gerente da coordenação aceita proposta (RN-07). Supabase Auth com RLS por área | `presentation/` (dependência de usuário), políticas no schema |
 | Solver (OR-Tools CP-SAT) | Mesmo contrato `planejar(testes, frota, horizonte)`, com a gulosa como piso de comparação (ADR 0002) | `domain/` ganha uma segunda implementação atrás da mesma função |
-| CPM completo | Dependência entre testes de carros diferentes, além da cadeia do carro (ADR 0007) | `domain/gestao.py` |
+| CPM completo | CPM é o método do caminho crítico (*Critical Path Method*), da gestão de projetos: dadas as tarefas e quais dependem de quais, acha a sequência que define a data final. Hoje a única dependência é a fila de testes no mesmo carro; o completo inclui dependência técnica entre testes de carros diferentes (ADR 0007). Primeiro passo: levantar essas dependências com as áreas | `domain/gestao.py` |
+| Copiloto edita o plano | Frase vira evento de edição ("passa o ELE-01 para o P030"); o motor valida, o gerente aceita (ADR 0003) | evento novo em `domain/motor.py`; `application/copiloto.py` |
 | Piso barato ao lado do plano | max(⌈Σ duração ÷ 20⌉, nº de destrutivos): mostra a distância até o ótimo sem solver | `domain/folga.py`, comparativo na tela |
 | Guardrails no copiloto | O texto do usuário só vira evento validado; recusa pedido fora do escopo e dado pessoal na entrada e na saída | `infrastructure/llm_litellm.py` (antes e depois da chamada); `application/copiloto.py` já recusa evento inválido |
 | Streaming da explicação | A explicação do copiloto aparece enquanto o modelo escreve | `infrastructure/llm_litellm.py` (`stream=True`) e rota SSE em `presentation/api.py` |
 | Histograma de uso com o plano estourado | Hoje o histograma para na semana 20 mesmo quando o gerente aceitou passar do marco (revisão de 12/11, achado 7) | `domain/gestao.py` (`uso_por_semana` com o fim do plano) |
 | Simulação de reprovações (H-2) | Monte Carlo sobre o plano: quantos carros de folga seguram 90% dos cenários | `domain/` (função pura nova), sem tocar no motor |
+
+## O que antecipar para a avaliação (RICE)
+
+Nota = Alcance × Impacto × Confiança ÷ Esforço. Alcance: quantos dos critérios do case o item toca (1 a 3). Impacto: 1 a 3. Esforço em horas. As notas são estimativa do FDE.
+
+| Item | Alcance | Impacto | Confiança | Esforço | Nota | Situação |
+|---|---|---|---|---|---|---|
+| Perfil simulado na tela (fatia de "Login e perfis") | 3 | 2 | 90% | 0,5 h | 10,8 | feito em 12/11 |
+| Apresentação guiada em 5 passos | 3 | 3 | 80% | 1 h | 7,2 | feito em 12/11 |
+| Piso barato ao lado do plano | 2 | 2 | 80% | 0,5 h | 6,4 | próximo: responde "quão longe do ótimo?" (hoje só no ADR 0002) |
+| Supabase como banco | 2 | 2 | 90% | 1 h | 3,6 | feito (ticket 05b) |
+| Contêiner único (degrau da AWS) | 2 | 2 | 90% | 1 h | 3,6 | feito (ticket 08); publicar é do José |
+| Langfuse no copiloto | 1 | 2 | 70% | 1 h | 1,4 | depois: pede conta e chave |
+| Guardrails no copiloto | 2 | 1 | 70% | 2 h | 0,7 | parte existe: evento validado, texto limitado a 500 caracteres |
+| Login de verdade (Supabase Auth + RLS) | 2 | 3 | 60% | 6 h | 0,6 | piloto |
+| Solver CP-SAT | 2 | 2 | 50% | 8 h | 0,25 | v2 |
+| CPM completo | 2 | 3 | 30% | 8 h + dado | 0,2 | v2: falta o dado das dependências |
 
 ## v3 · produto (vários lançamentos)
 

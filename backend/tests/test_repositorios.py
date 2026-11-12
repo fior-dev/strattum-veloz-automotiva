@@ -49,7 +49,7 @@ def test_cenario_da_demo_igual_nos_dois(repo):
     assert repo.versoes() == [1] and repo.plano().reserva != v1.reserva
     rep = Replanejamento(repo, plan)
     proposta = rep.mudar_status("AER-99", "atrasado", 2)
-    assert [(s.teste_id, s.de, s.para) for s in proposta.sugestoes] == [("DIN-02", "P006", "P162")]
+    assert [(s.teste_id, s.de, s.para) for s in proposta.sugestoes] == [("ELE-01", "P006", "P162")]
     rep.aceitar()
     assert repo.versoes() == [1, 2] and repo.plano().versao == 2
     assert repo.plano(2) == proposta.plano

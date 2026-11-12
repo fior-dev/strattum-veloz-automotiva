@@ -80,7 +80,7 @@ export function PainelTeste({ plano, aloc, somenteLeitura, aoProposta, aoMudar, 
 }
 
 // RN-05 e RN-07: o sistema sugere; o gerente da coordenação aceita ou recusa
-export function PainelProposta({ proposta, plano, aoDecidir }: { proposta: Proposta; plano: Plano; aoDecidir: () => void }) {
+export function PainelProposta({ proposta, plano, aoDecidir, podeDecidir = true }: { proposta: Proposta; plano: Plano; aoDecidir: () => void; podeDecidir?: boolean }) {
   const [erro, setErro] = useState('')
   const decidir = (p: Promise<unknown>) => p.then(aoDecidir).catch((e) => setErro(e.message))
   const vazio = !proposta.sugestoes.length && !proposta.impactados.length
@@ -120,10 +120,12 @@ export function PainelProposta({ proposta, plano, aoDecidir }: { proposta: Propo
         <span>A proposta termina na semana <b>{proposta.marco!.fim_depois}</b>, depois do lançamento na semana {plano.horizonte}. Por padrão o aceite fica bloqueado. Marque para aceitar mesmo assim; o Gantt mostra as semanas a mais.</span>
       </label>}
       <div className="flex gap-2">
-        <button className={primario} disabled={estoura && !estourar} onClick={() => decidir(replan.aceitar(proposta.evento, estourar))}>Aceitar e criar a versão {proposta.versao_nova}</button>
-        <button className={botao} onClick={() => decidir(replan.recusar())}>Recusar</button>
+        <button className={`${primario} disabled:opacity-40`} disabled={!podeDecidir || (estoura && !estourar)} onClick={() => decidir(replan.aceitar(proposta.evento, estourar))}>Aceitar e criar a versão {proposta.versao_nova}</button>
+        <button className={botao} disabled={!podeDecidir} onClick={() => decidir(replan.recusar())}>Recusar</button>
       </div>
-      <p className="text-xs text-grafite">Quem aceita é o gerente da coordenação (RN-07). Até lá, o plano não muda.</p>
+      <p className="text-xs text-grafite">{podeDecidir
+        ? 'Você está como gerente da coordenação: só esse perfil aceita ou recusa (RN-07). Até lá, o plano não muda.'
+        : 'Você está como engenharia: só o gerente da coordenação aceita ou recusa (RN-07). Troque o perfil no topo da tela.'}</p>
       {erro && <p className="text-seg">{erro}</p>}
     </aside>
   )

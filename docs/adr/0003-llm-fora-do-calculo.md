@@ -13,8 +13,11 @@ O único uso de agente é o copiloto de replanejamento: a coordenação escreve 
 
 Sem framework de agente. Uma chamada de tool calling, via LiteLLM.
 
+**LiteLLM não é framework de agente.** É uma biblioteca que traduz a mesma chamada para vários provedores (OpenRouter, Anthropic e outros): troca-se o modelo no `.env` sem mudar código. No desenho de arquitetura ela é o Model Gateway. Framework de agente (LangGraph, CrewAI) é outra coisa: organiza vários passos, memória e várias ferramentas. Aqui há um passo e uma ferramenta.
+
 ## Alternativas descartadas
-- **LLM monta o plano.** Não é determinístico e não respeita as regras por construção.
+- **LLM monta o plano.** Não é determinístico e não respeita as regras por construção. Com MCP Gateway e framework de agente dá para obrigar o LLM a só agir por ferramentas que validam as regras. Mas aí quem garante a regra é a ferramenta, não o LLM, e essa ferramenta é o motor: é o desenho deste ADR. A alternativa "o LLM propõe e um validador recusa até acertar" cumpre as regras por conferência, com custo de tempo e um plano diferente a cada execução.
+- **LLM ajuda a editar o plano** ("passa o ELE-01 para o P030"). Faz sentido e usa o mesmo desenho: a frase vira um evento de edição, o motor valida e o gerente aceita. Não entrou por prazo; está no ROADMAP (v2).
 - **Framework de grafo de agentes** (LangGraph). Um agente com uma ferramenta não justifica. Vai para o roadmap com o Agent Dispatcher.
 
 ## Consequências

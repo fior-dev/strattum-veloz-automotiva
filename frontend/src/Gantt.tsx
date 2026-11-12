@@ -30,7 +30,7 @@ export function Gantt({ plano, aoClicar, destaque, folgas = {}, marco = 20 }: {
               {reserva && <span className="font-normal text-grafite">reserva</span>}
               {avarias.map((v, i) => (
                 <span key={i} title={`Avaria ${v.tipo}, ${v.gravidade === 'leve' ? 'leve' : 'compromete reuso'}, semana ${v.semana}`}
-                  className={v.gravidade === 'leve' ? 'text-faixa' : 'text-seg'}>⚠</span>
+                  className={v.gravidade === 'leve' ? 'text-[#8a6500]' : 'text-seg'}>⚠</span>
               ))}
             </div>
             <div aria-hidden className="border-r-4 border-seg pointer-events-none" style={{ gridColumn: marco + 1, gridRow: 1 }} />

@@ -26,4 +26,4 @@ def test_resposta_sem_json_vira_pergunta():
 
 
 def test_explicar_devolve_o_texto_do_modelo():
-    assert Simulado("Mover DIN-02 para o P162.").explicar({"evento": "x"}, CTX) == "Mover DIN-02 para o P162."
+    assert Simulado("Mover ELE-01 para o P162.").explicar({"evento": "x"}, CTX) == "Mover ELE-01 para o P162."

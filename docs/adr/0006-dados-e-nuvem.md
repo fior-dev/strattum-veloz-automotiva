@@ -9,7 +9,7 @@ A demo não pode falhar por rede ou banco. O dado é mockado. O plano tem versõ
 - Fatias 1 a 4: `JsonPlanoRepository` lê `backend/data/mock.json` e guarda as versões do plano em memória. Reiniciar o backend volta ao mock, o que deixa a demo reproduzível.
 - Fatia 5b: `SupabasePlanoRepository`, escolhido por `DATA_BACKEND` no `container.py`. Fala com o PostgREST só com a stdlib (urllib), sem dependência nova. O plano é gravado inteiro como documento `jsonb` por versão, porque o motor lê e grava o plano inteiro. RLS ligado e nenhuma política: só a chave secreta, no `backend/.env`, acessa. Projeto numa organização Free do José, porque a organização da Fiortech é Pro e cobraria o projeto (decidido pelo José, 12/11).
 - O mock é gerado por `backend/scripts/gerar_mock.py`, com semente fixa (MK-07). O script calibra só as entradas; o número do plano compartilhado sai do motor (PREMISSAS.md, MK-03).
-- Nuvem-alvo: AWS. Backend em contêiner (ECS Fargate), SPA estática (S3 + CloudFront), Postgres gerenciado (Supabase ou RDS), segredos no Secrets Manager. Nada disso roda no protótipo.
+- Nuvem-alvo: AWS. Backend em contêiner (ECS Fargate), SPA estática (S3 + CloudFront), Postgres gerenciado (Supabase ou RDS), segredos no Secrets Manager. Nada disso roda no protótipo: a entrevista pediu "nada em produção" `[T]`, o prazo era de um dia e cada serviço tem custo e configuração. O que roda é o primeiro degrau: um contêiner único (ticket 08, abaixo). A mesma imagem sobe no Fargate sem mudar código.
 
 ## Alternativas descartadas
 - **SQLite local.** Um passo a mais sem ganho sobre o JSON na demo, e não é o banco-alvo.
@@ -25,6 +25,6 @@ status: proposto, aguardando revisão do José · 12/11/2026
 
 RNF-01 pedia "sem backend". O protótipo tem FastAPI (ADR 0001), então a saída é publicar um contêiner único (tela e API na mesma porta) numa URL do José. A Strattum testa sem instalar nada.
 - Uma instância, um worker: a proposta pendente fica na memória. Por isso não serve serverless para a API.
-- `DATA_BACKEND=json` no host: nenhuma chave do Supabase fora da máquina do José, e reiniciar volta a demo ao início.
+- `DATA_BACKEND=json` no host. `DATA_BACKEND` é a variável que escolhe onde o backend guarda o plano: `json` (arquivo do mock, versões na memória) ou `supabase` (Postgres). O adapter do Supabase existe, foi carregado e passa nos mesmos testes do JSON. Para a URL pública da avaliação a recomendação é `json`, por dois motivos: sem login, qualquer pessoa com a URL grava no plano, e com `json` basta reiniciar o contêiner para voltar à versão 1; e a chave secreta do Supabase não sai da máquina do José. Quem quiser mostrar o plano persistindo no banco roda local com `DATA_BACKEND=supabase`.
 - Descartado: Vercel com a API como função. Cada chamada pode cair numa instância diferente e perder a proposta; resolver isso pediria gravar a proposta pendente no banco, mudança de `application/` sem ganho para a demo.
 - Perde-se: login e limite de chamadas. Fica no ROADMAP (v2, login e perfis).

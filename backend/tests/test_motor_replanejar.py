@@ -7,7 +7,7 @@ def t(id, dur, destrutivo=False, area="Aerodinâmica"):
     return Teste(id=id, area=area, nome=id, duracao=dur, destrutivo=destrutivo)
 
 
-TESTES = {x.id: x for x in [t("A", 5), t("B", 2, area="Dinâmica veicular"), t("C", 3), t("D", 2, True, "Segurança passiva")]}
+TESTES = {x.id: x for x in [t("A", 5), t("B", 2, area="Hidráulica"), t("C", 3), t("D", 2, True, "Segurança passiva")]}
 
 
 def plano(*alocs, reserva=()):
@@ -31,7 +31,7 @@ def test_rn05_sem_troca_lista_impactado_com_area():
     p = plano(Alocacao("P001", "A", 1, 5), Alocacao("P001", "B", 6, 7))
     prop = replanejar(p, Atraso("A", 1), TESTES)
     assert prop.sugestoes == []
-    assert [(i.teste_id, i.area) for i in prop.impactados] == [("B", "Dinâmica veicular")]
+    assert [(i.teste_id, i.area) for i in prop.impactados] == [("B", "Hidráulica")]
     assert all(a.teste_id != "B" for a in prop.plano.alocacoes)
 
 

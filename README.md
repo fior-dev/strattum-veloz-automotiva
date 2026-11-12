@@ -59,9 +59,11 @@ Testes: `cd backend; uv run pytest`. Build da tela: `cd frontend; npm run build`
 
 ## Roteiro da demo (10 min)
 
-1. **O número.** Topo da tela: como hoje, 245 carros até a semana 14; plano compartilhado, 168 carros até a semana 20 (−31%). A folga de reteste está à vista e o controle deslizante muda só a reserva.
+O roteiro completo, com o que clicar, o que deve aparecer e o que dizer, está em [docs/roteiro-de-teste.md](docs/roteiro-de-teste.md). Resumo:
+
+1. **O número.** Passos 1 a 3 da tela: pedidos por área, 245 carros até a semana 14; plano compartilhado, 168 carros até a semana 20 (−31%). A folga de reteste está à vista e o controle deslizante muda só a reserva.
 2. **O que segura o lançamento.** Bloco do marco: 553 de 625 testes estão no caminho crítico; o plano troca folga de prazo por carros. A tabela meta × carros mostra o preço de adiantar o fim.
-3. **O imprevisto.** Busque `AER-99` → "Atrasou" → +2 semanas. O sistema propõe mover o DIN-02 do P006 para o P162, da folga, e diz que o marco não se move. Clique em **Recusar**: o plano fica na versão 1. (A decisão é do gerente da coordenação, RN-07.)
+3. **O imprevisto.** Busque `AER-99` → "Atrasou" → +2 semanas. O sistema propõe mover o ELE-01 do P006 para o P162, da folga, e diz que o marco não se move. Clique em **Recusar**: o plano fica na versão 1. (A decisão é do gerente da coordenação, RN-07.)
 4. **O copiloto.** Na caixa de texto, escreva "o AER-99 atrasou duas semanas por causa da chuva". A proposta é a mesma do passo 3: o LLM só traduz a frase, quem calcula é o motor. Agora clique em **Aceitar**: nasce a versão 2, e a versão 1 continua para consulta no seletor de versão.
 5. **A avaria.** Abra um teste, registre uma avaria "compromete reuso": o carro sai do pool e os testes seguintes viram troca ou impactado.
 6. **O uso da frota.** Histograma: carro-semana parado hoje (1.716) × no plano (140).

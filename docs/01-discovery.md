@@ -59,7 +59,7 @@ Na v0.3 não há mais item `[A ESCLARECER]`: a Maira e o José responderam todos
 | Engenharias (5 áreas) | Pedem carros e semanas em Excel livre e controlam os próprios testes | Carro garantido quando o teste falha, sem precisar pedir folga |
 | Diretoria | Quer frota menor sem atraso | Número de protótipos e risco de prazo à vista |
 
-As 5 áreas não foram nomeadas: a Maira deixou o José nomear. Os exemplos dela foram elétrica, mecânica e aerodinâmica. `[T]` Para o mock, os nomes são **Elétrica/Eletrônica, Mecânica/Powertrain, Aerodinâmica, Dinâmica veicular (tração, frenagem) e Segurança passiva (crash)**. `[H]`
+As 5 áreas não foram nomeadas: a Maira deixou o José nomear. Os exemplos dela foram elétrica, mecânica e aerodinâmica. `[T]` Para o mock, os nomes são **Elétrica/Eletrônica, Mecânica/Powertrain, Aerodinâmica, Hidráulica (freio, direção) e Segurança passiva (crash)**. `[H]`
 
 ## 5. Processo de hoje (as-is) `[T]`
 
@@ -223,7 +223,7 @@ O mock do José previa 4 colunas nos Testes e 2 nos Carros `[P]`. A variante cai
 
 1. O "como hoje", com os pedidos somados por área, contra o plano compartilhado: a frota cai de N para M, com os números do mock.
 2. Ao vivo: o teste de aerodinâmica é marcado "Atrasado (+1 semana)", porque precisava de chuva. `[T]`
-3. O sistema mostra que o protótipo estava prometido a um teste da Dinâmica veicular e sugere outro carro livre.
+3. O sistema mostra que o protótipo estava prometido a um teste da Hidráulica e sugere outro carro livre.
 4. A coordenação aceita, e o plano ganha a versão 2.
 
 ## 15. Roadmap `[H]`

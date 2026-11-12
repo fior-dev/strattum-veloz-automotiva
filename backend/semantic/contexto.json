@@ -2,7 +2,7 @@
  "_fonte": "Semantic Layer do protótipo: repete o glossário e as métricas do CONTEXT.md e as regras do discovery §9. Na arquitetura-alvo, quem serve isto é o Context Manager (Strattum).",
  "glossario": [
   {"termo": "Protótipo", "definicao": "Carro físico da frota, idêntico aos outros, com ID como P006"},
-  {"termo": "Área", "definicao": "Uma das 5 engenharias: Elétrica/Eletrônica (ELE), Mecânica/Powertrain (MEC), Aerodinâmica (AER), Dinâmica veicular (DIN), Segurança passiva (SEG)"},
+  {"termo": "Área", "definicao": "Uma das 5 engenharias: Elétrica/Eletrônica (ELE), Mecânica/Powertrain (MEC), Aerodinâmica (AER), Hidráulica (HID), Segurança passiva (SEG)"},
   {"termo": "Teste", "definicao": "Trabalho de uma área sobre um protótipo, com ID como AER-99, duração em semanas e destrutivo sim ou não"},
   {"termo": "Atraso", "definicao": "O teste vai terminar N semanas depois do previsto"},
   {"termo": "Falha", "definicao": "O teste reprovou e precisa repetir"},

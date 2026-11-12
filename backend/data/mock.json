@@ -272,7 +272,7 @@
    "gordura": 0.18
   },
   {
-   "area": "Dinâmica veicular",
+   "area": "Hidráulica",
    "carros": 35,
    "semanas": 14,
    "gordura": 0.176
@@ -2911,877 +2911,877 @@
    "destrutivo": false
   },
   {
-   "id": "DIN-01",
-   "area": "Dinâmica veicular",
-   "nome": "Tração #1",
+   "id": "HID-01",
+   "area": "Hidráulica",
+   "nome": "Direção hidráulica #1",
    "duracao": 5,
    "destrutivo": false
   },
   {
-   "id": "DIN-02",
-   "area": "Dinâmica veicular",
-   "nome": "Tração #2",
+   "id": "HID-02",
+   "area": "Hidráulica",
+   "nome": "Direção hidráulica #2",
    "duracao": 6,
    "destrutivo": false
   },
   {
-   "id": "DIN-03",
-   "area": "Dinâmica veicular",
-   "nome": "Frenagem em pista seca #3",
+   "id": "HID-03",
+   "area": "Hidráulica",
+   "nome": "Circuito de freio #3",
    "duracao": 3,
    "destrutivo": false
   },
   {
-   "id": "DIN-04",
-   "area": "Dinâmica veicular",
-   "nome": "Frenagem em pista seca #4",
+   "id": "HID-04",
+   "area": "Hidráulica",
+   "nome": "Circuito de freio #4",
    "duracao": 5,
    "destrutivo": false
   },
   {
-   "id": "DIN-05",
-   "area": "Dinâmica veicular",
-   "nome": "Tração #5",
+   "id": "HID-05",
+   "area": "Hidráulica",
+   "nome": "Direção hidráulica #5",
    "duracao": 1,
    "destrutivo": false
   },
   {
-   "id": "DIN-06",
-   "area": "Dinâmica veicular",
-   "nome": "Estabilidade #6",
+   "id": "HID-06",
+   "area": "Hidráulica",
+   "nome": "Estanqueidade do circuito #6",
    "duracao": 6,
    "destrutivo": false
   },
   {
-   "id": "DIN-07",
-   "area": "Dinâmica veicular",
-   "nome": "Tração #7",
+   "id": "HID-07",
+   "area": "Hidráulica",
+   "nome": "Direção hidráulica #7",
    "duracao": 2,
    "destrutivo": false
   },
   {
-   "id": "DIN-08",
-   "area": "Dinâmica veicular",
-   "nome": "Estabilidade #8",
+   "id": "HID-08",
+   "area": "Hidráulica",
+   "nome": "Estanqueidade do circuito #8",
    "duracao": 5,
    "destrutivo": false
   },
   {
-   "id": "DIN-09",
-   "area": "Dinâmica veicular",
-   "nome": "Estabilidade #9",
+   "id": "HID-09",
+   "area": "Hidráulica",
+   "nome": "Estanqueidade do circuito #9",
    "duracao": 2,
    "destrutivo": false
   },
   {
-   "id": "DIN-10",
-   "area": "Dinâmica veicular",
-   "nome": "Suspensão #10",
+   "id": "HID-10",
+   "area": "Hidráulica",
+   "nome": "Bomba e reservatório #10",
    "duracao": 3,
    "destrutivo": false
   },
   {
-   "id": "DIN-11",
-   "area": "Dinâmica veicular",
-   "nome": "Estabilidade #11",
+   "id": "HID-11",
+   "area": "Hidráulica",
+   "nome": "Estanqueidade do circuito #11",
    "duracao": 1,
    "destrutivo": false
   },
   {
-   "id": "DIN-12",
-   "area": "Dinâmica veicular",
-   "nome": "Frenagem em pista seca #12",
+   "id": "HID-12",
+   "area": "Hidráulica",
+   "nome": "Circuito de freio #12",
    "duracao": 2,
    "destrutivo": false
   },
   {
-   "id": "DIN-13",
-   "area": "Dinâmica veicular",
-   "nome": "Tração #13",
+   "id": "HID-13",
+   "area": "Hidráulica",
+   "nome": "Direção hidráulica #13",
    "duracao": 6,
    "destrutivo": false
   },
   {
-   "id": "DIN-14",
-   "area": "Dinâmica veicular",
-   "nome": "Suspensão #14",
+   "id": "HID-14",
+   "area": "Hidráulica",
+   "nome": "Bomba e reservatório #14",
    "duracao": 5,
    "destrutivo": false
   },
   {
-   "id": "DIN-15",
-   "area": "Dinâmica veicular",
-   "nome": "Suspensão #15",
+   "id": "HID-15",
+   "area": "Hidráulica",
+   "nome": "Bomba e reservatório #15",
    "duracao": 1,
    "destrutivo": false
   },
   {
-   "id": "DIN-16",
-   "area": "Dinâmica veicular",
-   "nome": "Frenagem em pista seca #16",
+   "id": "HID-16",
+   "area": "Hidráulica",
+   "nome": "Circuito de freio #16",
    "duracao": 4,
    "destrutivo": false
   },
   {
-   "id": "DIN-17",
-   "area": "Dinâmica veicular",
-   "nome": "Estabilidade #17",
+   "id": "HID-17",
+   "area": "Hidráulica",
+   "nome": "Estanqueidade do circuito #17",
    "duracao": 5,
    "destrutivo": false
   },
   {
-   "id": "DIN-18",
-   "area": "Dinâmica veicular",
-   "nome": "Estabilidade #18",
+   "id": "HID-18",
+   "area": "Hidráulica",
+   "nome": "Estanqueidade do circuito #18",
    "duracao": 1,
    "destrutivo": false
   },
   {
-   "id": "DIN-19",
-   "area": "Dinâmica veicular",
-   "nome": "Suspensão #19",
+   "id": "HID-19",
+   "area": "Hidráulica",
+   "nome": "Bomba e reservatório #19",
    "duracao": 1,
    "destrutivo": false
   },
   {
-   "id": "DIN-20",
-   "area": "Dinâmica veicular",
-   "nome": "Direção #20",
+   "id": "HID-20",
+   "area": "Hidráulica",
+   "nome": "Mangueiras e conexões #20",
    "duracao": 3,
    "destrutivo": false
   },
   {
-   "id": "DIN-21",
-   "area": "Dinâmica veicular",
-   "nome": "Tração #21",
+   "id": "HID-21",
+   "area": "Hidráulica",
+   "nome": "Direção hidráulica #21",
    "duracao": 6,
    "destrutivo": false
   },
   {
-   "id": "DIN-22",
-   "area": "Dinâmica veicular",
-   "nome": "Suspensão #22",
+   "id": "HID-22",
+   "area": "Hidráulica",
+   "nome": "Bomba e reservatório #22",
    "duracao": 6,
    "destrutivo": false
   },
   {
-   "id": "DIN-23",
-   "area": "Dinâmica veicular",
-   "nome": "Suspensão #23",
+   "id": "HID-23",
+   "area": "Hidráulica",
+   "nome": "Bomba e reservatório #23",
    "duracao": 1,
    "destrutivo": false
   },
   {
-   "id": "DIN-24",
-   "area": "Dinâmica veicular",
-   "nome": "Frenagem em pista seca #24",
+   "id": "HID-24",
+   "area": "Hidráulica",
+   "nome": "Circuito de freio #24",
    "duracao": 3,
    "destrutivo": false
   },
   {
-   "id": "DIN-25",
-   "area": "Dinâmica veicular",
-   "nome": "Frenagem em pista seca #25",
+   "id": "HID-25",
+   "area": "Hidráulica",
+   "nome": "Circuito de freio #25",
    "duracao": 1,
    "destrutivo": false
   },
   {
-   "id": "DIN-26",
-   "area": "Dinâmica veicular",
-   "nome": "Direção #26",
+   "id": "HID-26",
+   "area": "Hidráulica",
+   "nome": "Mangueiras e conexões #26",
    "duracao": 2,
    "destrutivo": false
   },
   {
-   "id": "DIN-27",
-   "area": "Dinâmica veicular",
-   "nome": "Estabilidade #27",
+   "id": "HID-27",
+   "area": "Hidráulica",
+   "nome": "Estanqueidade do circuito #27",
    "duracao": 6,
    "destrutivo": false
   },
   {
-   "id": "DIN-28",
-   "area": "Dinâmica veicular",
-   "nome": "Direção #28",
+   "id": "HID-28",
+   "area": "Hidráulica",
+   "nome": "Mangueiras e conexões #28",
    "duracao": 4,
    "destrutivo": false
   },
   {
-   "id": "DIN-29",
-   "area": "Dinâmica veicular",
-   "nome": "Tração #29",
+   "id": "HID-29",
+   "area": "Hidráulica",
+   "nome": "Direção hidráulica #29",
    "duracao": 4,
    "destrutivo": false
   },
   {
-   "id": "DIN-30",
-   "area": "Dinâmica veicular",
-   "nome": "Suspensão #30",
+   "id": "HID-30",
+   "area": "Hidráulica",
+   "nome": "Bomba e reservatório #30",
    "duracao": 5,
    "destrutivo": false
   },
   {
-   "id": "DIN-31",
-   "area": "Dinâmica veicular",
-   "nome": "Estabilidade #31",
+   "id": "HID-31",
+   "area": "Hidráulica",
+   "nome": "Estanqueidade do circuito #31",
    "duracao": 1,
    "destrutivo": false
   },
   {
-   "id": "DIN-32",
-   "area": "Dinâmica veicular",
-   "nome": "Tração #32",
+   "id": "HID-32",
+   "area": "Hidráulica",
+   "nome": "Direção hidráulica #32",
    "duracao": 4,
    "destrutivo": false
   },
   {
-   "id": "DIN-33",
-   "area": "Dinâmica veicular",
-   "nome": "Tração #33",
+   "id": "HID-33",
+   "area": "Hidráulica",
+   "nome": "Direção hidráulica #33",
    "duracao": 3,
    "destrutivo": false
   },
   {
-   "id": "DIN-34",
-   "area": "Dinâmica veicular",
-   "nome": "Estabilidade #34",
+   "id": "HID-34",
+   "area": "Hidráulica",
+   "nome": "Estanqueidade do circuito #34",
    "duracao": 5,
    "destrutivo": false
   },
   {
-   "id": "DIN-35",
-   "area": "Dinâmica veicular",
-   "nome": "Estabilidade #35",
+   "id": "HID-35",
+   "area": "Hidráulica",
+   "nome": "Estanqueidade do circuito #35",
    "duracao": 1,
    "destrutivo": false
   },
   {
-   "id": "DIN-36",
-   "area": "Dinâmica veicular",
-   "nome": "Tração #36",
+   "id": "HID-36",
+   "area": "Hidráulica",
+   "nome": "Direção hidráulica #36",
    "duracao": 1,
    "destrutivo": false
   },
   {
-   "id": "DIN-37",
-   "area": "Dinâmica veicular",
-   "nome": "Suspensão #37",
+   "id": "HID-37",
+   "area": "Hidráulica",
+   "nome": "Bomba e reservatório #37",
    "duracao": 1,
    "destrutivo": false
   },
   {
-   "id": "DIN-38",
-   "area": "Dinâmica veicular",
-   "nome": "Direção #38",
+   "id": "HID-38",
+   "area": "Hidráulica",
+   "nome": "Mangueiras e conexões #38",
    "duracao": 1,
    "destrutivo": false
   },
   {
-   "id": "DIN-39",
-   "area": "Dinâmica veicular",
-   "nome": "Estabilidade #39",
+   "id": "HID-39",
+   "area": "Hidráulica",
+   "nome": "Estanqueidade do circuito #39",
    "duracao": 2,
    "destrutivo": false
   },
   {
-   "id": "DIN-40",
-   "area": "Dinâmica veicular",
-   "nome": "Direção #40",
+   "id": "HID-40",
+   "area": "Hidráulica",
+   "nome": "Mangueiras e conexões #40",
    "duracao": 2,
    "destrutivo": false
   },
   {
-   "id": "DIN-41",
-   "area": "Dinâmica veicular",
-   "nome": "Direção #41",
+   "id": "HID-41",
+   "area": "Hidráulica",
+   "nome": "Mangueiras e conexões #41",
    "duracao": 2,
    "destrutivo": false
   },
   {
-   "id": "DIN-42",
-   "area": "Dinâmica veicular",
-   "nome": "Tração #42",
+   "id": "HID-42",
+   "area": "Hidráulica",
+   "nome": "Direção hidráulica #42",
    "duracao": 3,
    "destrutivo": false
   },
   {
-   "id": "DIN-43",
-   "area": "Dinâmica veicular",
-   "nome": "Direção #43",
+   "id": "HID-43",
+   "area": "Hidráulica",
+   "nome": "Mangueiras e conexões #43",
    "duracao": 1,
    "destrutivo": false
   },
   {
-   "id": "DIN-44",
-   "area": "Dinâmica veicular",
-   "nome": "Tração #44",
+   "id": "HID-44",
+   "area": "Hidráulica",
+   "nome": "Direção hidráulica #44",
    "duracao": 2,
    "destrutivo": false
   },
   {
-   "id": "DIN-45",
-   "area": "Dinâmica veicular",
-   "nome": "Tração #45",
+   "id": "HID-45",
+   "area": "Hidráulica",
+   "nome": "Direção hidráulica #45",
    "duracao": 1,
    "destrutivo": false
   },
   {
-   "id": "DIN-46",
-   "area": "Dinâmica veicular",
-   "nome": "Frenagem em pista seca #46",
+   "id": "HID-46",
+   "area": "Hidráulica",
+   "nome": "Circuito de freio #46",
    "duracao": 2,
    "destrutivo": false
   },
   {
-   "id": "DIN-47",
-   "area": "Dinâmica veicular",
-   "nome": "Tração #47",
+   "id": "HID-47",
+   "area": "Hidráulica",
+   "nome": "Direção hidráulica #47",
    "duracao": 5,
    "destrutivo": false
   },
   {
-   "id": "DIN-48",
-   "area": "Dinâmica veicular",
-   "nome": "Tração #48",
+   "id": "HID-48",
+   "area": "Hidráulica",
+   "nome": "Direção hidráulica #48",
    "duracao": 3,
    "destrutivo": false
   },
   {
-   "id": "DIN-49",
-   "area": "Dinâmica veicular",
-   "nome": "Suspensão #49",
+   "id": "HID-49",
+   "area": "Hidráulica",
+   "nome": "Bomba e reservatório #49",
    "duracao": 5,
    "destrutivo": false
   },
   {
-   "id": "DIN-50",
-   "area": "Dinâmica veicular",
-   "nome": "Frenagem em pista seca #50",
+   "id": "HID-50",
+   "area": "Hidráulica",
+   "nome": "Circuito de freio #50",
    "duracao": 4,
    "destrutivo": false
   },
   {
-   "id": "DIN-51",
-   "area": "Dinâmica veicular",
-   "nome": "Estabilidade #51",
+   "id": "HID-51",
+   "area": "Hidráulica",
+   "nome": "Estanqueidade do circuito #51",
    "duracao": 5,
    "destrutivo": false
   },
   {
-   "id": "DIN-52",
-   "area": "Dinâmica veicular",
-   "nome": "Suspensão #52",
+   "id": "HID-52",
+   "area": "Hidráulica",
+   "nome": "Bomba e reservatório #52",
    "duracao": 5,
    "destrutivo": false
   },
   {
-   "id": "DIN-53",
-   "area": "Dinâmica veicular",
-   "nome": "Direção #53",
+   "id": "HID-53",
+   "area": "Hidráulica",
+   "nome": "Mangueiras e conexões #53",
    "duracao": 1,
    "destrutivo": false
   },
   {
-   "id": "DIN-54",
-   "area": "Dinâmica veicular",
-   "nome": "Direção #54",
+   "id": "HID-54",
+   "area": "Hidráulica",
+   "nome": "Mangueiras e conexões #54",
    "duracao": 3,
    "destrutivo": false
   },
   {
-   "id": "DIN-55",
-   "area": "Dinâmica veicular",
-   "nome": "Frenagem em pista seca #55",
+   "id": "HID-55",
+   "area": "Hidráulica",
+   "nome": "Circuito de freio #55",
    "duracao": 1,
    "destrutivo": false
   },
   {
-   "id": "DIN-56",
-   "area": "Dinâmica veicular",
-   "nome": "Suspensão #56",
+   "id": "HID-56",
+   "area": "Hidráulica",
+   "nome": "Bomba e reservatório #56",
    "duracao": 4,
    "destrutivo": false
   },
   {
-   "id": "DIN-57",
-   "area": "Dinâmica veicular",
-   "nome": "Suspensão #57",
+   "id": "HID-57",
+   "area": "Hidráulica",
+   "nome": "Bomba e reservatório #57",
    "duracao": 6,
    "destrutivo": false
   },
   {
-   "id": "DIN-58",
-   "area": "Dinâmica veicular",
-   "nome": "Frenagem em pista seca #58",
+   "id": "HID-58",
+   "area": "Hidráulica",
+   "nome": "Circuito de freio #58",
    "duracao": 1,
    "destrutivo": false
   },
   {
-   "id": "DIN-59",
-   "area": "Dinâmica veicular",
-   "nome": "Tração #59",
+   "id": "HID-59",
+   "area": "Hidráulica",
+   "nome": "Direção hidráulica #59",
    "duracao": 1,
    "destrutivo": false
   },
   {
-   "id": "DIN-60",
-   "area": "Dinâmica veicular",
-   "nome": "Direção #60",
+   "id": "HID-60",
+   "area": "Hidráulica",
+   "nome": "Mangueiras e conexões #60",
    "duracao": 6,
    "destrutivo": false
   },
   {
-   "id": "DIN-61",
-   "area": "Dinâmica veicular",
-   "nome": "Estabilidade #61",
+   "id": "HID-61",
+   "area": "Hidráulica",
+   "nome": "Estanqueidade do circuito #61",
    "duracao": 4,
    "destrutivo": false
   },
   {
-   "id": "DIN-62",
-   "area": "Dinâmica veicular",
-   "nome": "Direção #62",
+   "id": "HID-62",
+   "area": "Hidráulica",
+   "nome": "Mangueiras e conexões #62",
    "duracao": 3,
    "destrutivo": false
   },
   {
-   "id": "DIN-63",
-   "area": "Dinâmica veicular",
-   "nome": "Direção #63",
+   "id": "HID-63",
+   "area": "Hidráulica",
+   "nome": "Mangueiras e conexões #63",
    "duracao": 4,
    "destrutivo": false
   },
   {
-   "id": "DIN-64",
-   "area": "Dinâmica veicular",
-   "nome": "Frenagem em pista seca #64",
+   "id": "HID-64",
+   "area": "Hidráulica",
+   "nome": "Circuito de freio #64",
    "duracao": 6,
    "destrutivo": false
   },
   {
-   "id": "DIN-65",
-   "area": "Dinâmica veicular",
-   "nome": "Direção #65",
+   "id": "HID-65",
+   "area": "Hidráulica",
+   "nome": "Mangueiras e conexões #65",
    "duracao": 6,
    "destrutivo": false
   },
   {
-   "id": "DIN-66",
-   "area": "Dinâmica veicular",
-   "nome": "Suspensão #66",
+   "id": "HID-66",
+   "area": "Hidráulica",
+   "nome": "Bomba e reservatório #66",
    "duracao": 4,
    "destrutivo": false
   },
   {
-   "id": "DIN-67",
-   "area": "Dinâmica veicular",
-   "nome": "Suspensão #67",
+   "id": "HID-67",
+   "area": "Hidráulica",
+   "nome": "Bomba e reservatório #67",
    "duracao": 3,
    "destrutivo": false
   },
   {
-   "id": "DIN-68",
-   "area": "Dinâmica veicular",
-   "nome": "Suspensão #68",
+   "id": "HID-68",
+   "area": "Hidráulica",
+   "nome": "Bomba e reservatório #68",
    "duracao": 4,
    "destrutivo": false
   },
   {
-   "id": "DIN-69",
-   "area": "Dinâmica veicular",
-   "nome": "Estabilidade #69",
+   "id": "HID-69",
+   "area": "Hidráulica",
+   "nome": "Estanqueidade do circuito #69",
    "duracao": 4,
    "destrutivo": false
   },
   {
-   "id": "DIN-70",
-   "area": "Dinâmica veicular",
-   "nome": "Estabilidade #70",
+   "id": "HID-70",
+   "area": "Hidráulica",
+   "nome": "Estanqueidade do circuito #70",
    "duracao": 3,
    "destrutivo": false
   },
   {
-   "id": "DIN-71",
-   "area": "Dinâmica veicular",
-   "nome": "Suspensão #71",
+   "id": "HID-71",
+   "area": "Hidráulica",
+   "nome": "Bomba e reservatório #71",
    "duracao": 1,
    "destrutivo": false
   },
   {
-   "id": "DIN-72",
-   "area": "Dinâmica veicular",
-   "nome": "Frenagem em pista seca #72",
+   "id": "HID-72",
+   "area": "Hidráulica",
+   "nome": "Circuito de freio #72",
    "duracao": 1,
    "destrutivo": false
   },
   {
-   "id": "DIN-73",
-   "area": "Dinâmica veicular",
-   "nome": "Estabilidade #73",
+   "id": "HID-73",
+   "area": "Hidráulica",
+   "nome": "Estanqueidade do circuito #73",
    "duracao": 2,
    "destrutivo": false
   },
   {
-   "id": "DIN-74",
-   "area": "Dinâmica veicular",
-   "nome": "Direção #74",
+   "id": "HID-74",
+   "area": "Hidráulica",
+   "nome": "Mangueiras e conexões #74",
    "duracao": 5,
    "destrutivo": false
   },
   {
-   "id": "DIN-75",
-   "area": "Dinâmica veicular",
-   "nome": "Frenagem em pista seca #75",
+   "id": "HID-75",
+   "area": "Hidráulica",
+   "nome": "Circuito de freio #75",
    "duracao": 4,
    "destrutivo": false
   },
   {
-   "id": "DIN-76",
-   "area": "Dinâmica veicular",
-   "nome": "Suspensão #76",
+   "id": "HID-76",
+   "area": "Hidráulica",
+   "nome": "Bomba e reservatório #76",
    "duracao": 6,
    "destrutivo": false
   },
   {
-   "id": "DIN-77",
-   "area": "Dinâmica veicular",
-   "nome": "Estabilidade #77",
+   "id": "HID-77",
+   "area": "Hidráulica",
+   "nome": "Estanqueidade do circuito #77",
    "duracao": 5,
    "destrutivo": false
   },
   {
-   "id": "DIN-78",
-   "area": "Dinâmica veicular",
-   "nome": "Frenagem em pista seca #78",
+   "id": "HID-78",
+   "area": "Hidráulica",
+   "nome": "Circuito de freio #78",
    "duracao": 5,
    "destrutivo": false
   },
   {
-   "id": "DIN-79",
-   "area": "Dinâmica veicular",
-   "nome": "Tração #79",
+   "id": "HID-79",
+   "area": "Hidráulica",
+   "nome": "Direção hidráulica #79",
    "duracao": 6,
    "destrutivo": false
   },
   {
-   "id": "DIN-80",
-   "area": "Dinâmica veicular",
-   "nome": "Frenagem em pista seca #80",
+   "id": "HID-80",
+   "area": "Hidráulica",
+   "nome": "Circuito de freio #80",
    "duracao": 3,
    "destrutivo": false
   },
   {
-   "id": "DIN-81",
-   "area": "Dinâmica veicular",
-   "nome": "Estabilidade #81",
+   "id": "HID-81",
+   "area": "Hidráulica",
+   "nome": "Estanqueidade do circuito #81",
    "duracao": 1,
    "destrutivo": false
   },
   {
-   "id": "DIN-82",
-   "area": "Dinâmica veicular",
-   "nome": "Direção #82",
+   "id": "HID-82",
+   "area": "Hidráulica",
+   "nome": "Mangueiras e conexões #82",
    "duracao": 2,
    "destrutivo": false
   },
   {
-   "id": "DIN-83",
-   "area": "Dinâmica veicular",
-   "nome": "Direção #83",
+   "id": "HID-83",
+   "area": "Hidráulica",
+   "nome": "Mangueiras e conexões #83",
    "duracao": 5,
    "destrutivo": false
   },
   {
-   "id": "DIN-84",
-   "area": "Dinâmica veicular",
-   "nome": "Direção #84",
+   "id": "HID-84",
+   "area": "Hidráulica",
+   "nome": "Mangueiras e conexões #84",
    "duracao": 1,
    "destrutivo": false
   },
   {
-   "id": "DIN-85",
-   "area": "Dinâmica veicular",
-   "nome": "Estabilidade #85",
+   "id": "HID-85",
+   "area": "Hidráulica",
+   "nome": "Estanqueidade do circuito #85",
    "duracao": 1,
    "destrutivo": false
   },
   {
-   "id": "DIN-86",
-   "area": "Dinâmica veicular",
-   "nome": "Estabilidade #86",
+   "id": "HID-86",
+   "area": "Hidráulica",
+   "nome": "Estanqueidade do circuito #86",
    "duracao": 3,
    "destrutivo": false
   },
   {
-   "id": "DIN-87",
-   "area": "Dinâmica veicular",
-   "nome": "Tração #87",
+   "id": "HID-87",
+   "area": "Hidráulica",
+   "nome": "Direção hidráulica #87",
    "duracao": 2,
    "destrutivo": false
   },
   {
-   "id": "DIN-88",
-   "area": "Dinâmica veicular",
-   "nome": "Suspensão #88",
+   "id": "HID-88",
+   "area": "Hidráulica",
+   "nome": "Bomba e reservatório #88",
    "duracao": 1,
    "destrutivo": false
   },
   {
-   "id": "DIN-89",
-   "area": "Dinâmica veicular",
-   "nome": "Frenagem em pista seca #89",
+   "id": "HID-89",
+   "area": "Hidráulica",
+   "nome": "Circuito de freio #89",
    "duracao": 1,
    "destrutivo": false
   },
   {
-   "id": "DIN-90",
-   "area": "Dinâmica veicular",
-   "nome": "Tração #90",
+   "id": "HID-90",
+   "area": "Hidráulica",
+   "nome": "Direção hidráulica #90",
    "duracao": 4,
    "destrutivo": false
   },
   {
-   "id": "DIN-91",
-   "area": "Dinâmica veicular",
-   "nome": "Estabilidade #91",
+   "id": "HID-91",
+   "area": "Hidráulica",
+   "nome": "Estanqueidade do circuito #91",
    "duracao": 2,
    "destrutivo": false
   },
   {
-   "id": "DIN-92",
-   "area": "Dinâmica veicular",
-   "nome": "Estabilidade #92",
+   "id": "HID-92",
+   "area": "Hidráulica",
+   "nome": "Estanqueidade do circuito #92",
    "duracao": 5,
    "destrutivo": false
   },
   {
-   "id": "DIN-93",
-   "area": "Dinâmica veicular",
-   "nome": "Frenagem em pista seca #93",
+   "id": "HID-93",
+   "area": "Hidráulica",
+   "nome": "Circuito de freio #93",
    "duracao": 2,
    "destrutivo": false
   },
   {
-   "id": "DIN-94",
-   "area": "Dinâmica veicular",
-   "nome": "Direção #94",
+   "id": "HID-94",
+   "area": "Hidráulica",
+   "nome": "Mangueiras e conexões #94",
    "duracao": 1,
    "destrutivo": false
   },
   {
-   "id": "DIN-95",
-   "area": "Dinâmica veicular",
-   "nome": "Estabilidade #95",
+   "id": "HID-95",
+   "area": "Hidráulica",
+   "nome": "Estanqueidade do circuito #95",
    "duracao": 4,
    "destrutivo": false
   },
   {
-   "id": "DIN-96",
-   "area": "Dinâmica veicular",
-   "nome": "Suspensão #96",
+   "id": "HID-96",
+   "area": "Hidráulica",
+   "nome": "Bomba e reservatório #96",
    "duracao": 5,
    "destrutivo": false
   },
   {
-   "id": "DIN-97",
-   "area": "Dinâmica veicular",
-   "nome": "Estabilidade #97",
+   "id": "HID-97",
+   "area": "Hidráulica",
+   "nome": "Estanqueidade do circuito #97",
    "duracao": 2,
    "destrutivo": false
   },
   {
-   "id": "DIN-98",
-   "area": "Dinâmica veicular",
-   "nome": "Frenagem em pista seca #98",
+   "id": "HID-98",
+   "area": "Hidráulica",
+   "nome": "Circuito de freio #98",
    "duracao": 3,
    "destrutivo": false
   },
   {
-   "id": "DIN-99",
-   "area": "Dinâmica veicular",
-   "nome": "Estabilidade #99",
+   "id": "HID-99",
+   "area": "Hidráulica",
+   "nome": "Estanqueidade do circuito #99",
    "duracao": 6,
    "destrutivo": false
   },
   {
-   "id": "DIN-100",
-   "area": "Dinâmica veicular",
-   "nome": "Suspensão #100",
+   "id": "HID-100",
+   "area": "Hidráulica",
+   "nome": "Bomba e reservatório #100",
    "duracao": 5,
    "destrutivo": false
   },
   {
-   "id": "DIN-101",
-   "area": "Dinâmica veicular",
-   "nome": "Frenagem em pista seca #101",
+   "id": "HID-101",
+   "area": "Hidráulica",
+   "nome": "Circuito de freio #101",
    "duracao": 2,
    "destrutivo": false
   },
   {
-   "id": "DIN-102",
-   "area": "Dinâmica veicular",
-   "nome": "Direção #102",
+   "id": "HID-102",
+   "area": "Hidráulica",
+   "nome": "Mangueiras e conexões #102",
    "duracao": 1,
    "destrutivo": false
   },
   {
-   "id": "DIN-103",
-   "area": "Dinâmica veicular",
-   "nome": "Estabilidade #103",
+   "id": "HID-103",
+   "area": "Hidráulica",
+   "nome": "Estanqueidade do circuito #103",
    "duracao": 2,
    "destrutivo": false
   },
   {
-   "id": "DIN-104",
-   "area": "Dinâmica veicular",
-   "nome": "Estabilidade #104",
+   "id": "HID-104",
+   "area": "Hidráulica",
+   "nome": "Estanqueidade do circuito #104",
    "duracao": 3,
    "destrutivo": false
   },
   {
-   "id": "DIN-105",
-   "area": "Dinâmica veicular",
-   "nome": "Frenagem em pista seca #105",
+   "id": "HID-105",
+   "area": "Hidráulica",
+   "nome": "Circuito de freio #105",
    "duracao": 4,
    "destrutivo": false
   },
   {
-   "id": "DIN-106",
-   "area": "Dinâmica veicular",
-   "nome": "Tração #106",
+   "id": "HID-106",
+   "area": "Hidráulica",
+   "nome": "Direção hidráulica #106",
    "duracao": 2,
    "destrutivo": false
   },
   {
-   "id": "DIN-107",
-   "area": "Dinâmica veicular",
-   "nome": "Tração #107",
+   "id": "HID-107",
+   "area": "Hidráulica",
+   "nome": "Direção hidráulica #107",
    "duracao": 5,
    "destrutivo": false
   },
   {
-   "id": "DIN-108",
-   "area": "Dinâmica veicular",
-   "nome": "Estabilidade #108",
+   "id": "HID-108",
+   "area": "Hidráulica",
+   "nome": "Estanqueidade do circuito #108",
    "duracao": 1,
    "destrutivo": false
   },
   {
-   "id": "DIN-109",
-   "area": "Dinâmica veicular",
-   "nome": "Frenagem em pista seca #109",
+   "id": "HID-109",
+   "area": "Hidráulica",
+   "nome": "Circuito de freio #109",
    "duracao": 4,
    "destrutivo": false
   },
   {
-   "id": "DIN-110",
-   "area": "Dinâmica veicular",
-   "nome": "Frenagem em pista seca #110",
+   "id": "HID-110",
+   "area": "Hidráulica",
+   "nome": "Circuito de freio #110",
    "duracao": 3,
    "destrutivo": false
   },
   {
-   "id": "DIN-111",
-   "area": "Dinâmica veicular",
-   "nome": "Direção #111",
+   "id": "HID-111",
+   "area": "Hidráulica",
+   "nome": "Mangueiras e conexões #111",
    "duracao": 4,
    "destrutivo": false
   },
   {
-   "id": "DIN-112",
-   "area": "Dinâmica veicular",
-   "nome": "Suspensão #112",
+   "id": "HID-112",
+   "area": "Hidráulica",
+   "nome": "Bomba e reservatório #112",
    "duracao": 3,
    "destrutivo": false
   },
   {
-   "id": "DIN-113",
-   "area": "Dinâmica veicular",
-   "nome": "Frenagem em pista seca #113",
+   "id": "HID-113",
+   "area": "Hidráulica",
+   "nome": "Circuito de freio #113",
    "duracao": 3,
    "destrutivo": false
   },
   {
-   "id": "DIN-114",
-   "area": "Dinâmica veicular",
-   "nome": "Direção #114",
+   "id": "HID-114",
+   "area": "Hidráulica",
+   "nome": "Mangueiras e conexões #114",
    "duracao": 4,
    "destrutivo": false
   },
   {
-   "id": "DIN-115",
-   "area": "Dinâmica veicular",
-   "nome": "Estabilidade #115",
+   "id": "HID-115",
+   "area": "Hidráulica",
+   "nome": "Estanqueidade do circuito #115",
    "duracao": 1,
    "destrutivo": false
   },
   {
-   "id": "DIN-116",
-   "area": "Dinâmica veicular",
-   "nome": "Frenagem em pista seca #116",
+   "id": "HID-116",
+   "area": "Hidráulica",
+   "nome": "Circuito de freio #116",
    "duracao": 2,
    "destrutivo": false
   },
   {
-   "id": "DIN-117",
-   "area": "Dinâmica veicular",
-   "nome": "Suspensão #117",
+   "id": "HID-117",
+   "area": "Hidráulica",
+   "nome": "Bomba e reservatório #117",
    "duracao": 5,
    "destrutivo": false
   },
   {
-   "id": "DIN-118",
-   "area": "Dinâmica veicular",
-   "nome": "Estabilidade #118",
+   "id": "HID-118",
+   "area": "Hidráulica",
+   "nome": "Estanqueidade do circuito #118",
    "duracao": 6,
    "destrutivo": false
   },
   {
-   "id": "DIN-119",
-   "area": "Dinâmica veicular",
-   "nome": "Estabilidade #119",
+   "id": "HID-119",
+   "area": "Hidráulica",
+   "nome": "Estanqueidade do circuito #119",
    "duracao": 2,
    "destrutivo": false
   },
   {
-   "id": "DIN-120",
-   "area": "Dinâmica veicular",
-   "nome": "Frenagem em pista seca #120",
+   "id": "HID-120",
+   "area": "Hidráulica",
+   "nome": "Circuito de freio #120",
    "duracao": 5,
    "destrutivo": false
   },
   {
-   "id": "DIN-121",
-   "area": "Dinâmica veicular",
-   "nome": "Estabilidade #121",
+   "id": "HID-121",
+   "area": "Hidráulica",
+   "nome": "Estanqueidade do circuito #121",
    "duracao": 3,
    "destrutivo": false
   },
   {
-   "id": "DIN-122",
-   "area": "Dinâmica veicular",
-   "nome": "Tração #122",
+   "id": "HID-122",
+   "area": "Hidráulica",
+   "nome": "Direção hidráulica #122",
    "duracao": 2,
    "destrutivo": false
   },
   {
-   "id": "DIN-123",
-   "area": "Dinâmica veicular",
-   "nome": "Estabilidade #123",
+   "id": "HID-123",
+   "area": "Hidráulica",
+   "nome": "Estanqueidade do circuito #123",
    "duracao": 2,
    "destrutivo": false
   },
   {
-   "id": "DIN-124",
-   "area": "Dinâmica veicular",
-   "nome": "Tração #124",
+   "id": "HID-124",
+   "area": "Hidráulica",
+   "nome": "Direção hidráulica #124",
    "duracao": 6,
    "destrutivo": false
   },
   {
-   "id": "DIN-125",
-   "area": "Dinâmica veicular",
-   "nome": "Suspensão #125",
+   "id": "HID-125",
+   "area": "Hidráulica",
+   "nome": "Bomba e reservatório #125",
    "duracao": 4,
    "destrutivo": false
   },

@@ -19,6 +19,9 @@ from infrastructure.supabase_repo import SupabasePlanoRepository  # noqa: E402
 mock = json.loads((RAIZ / "data" / "mock.json").read_text(encoding="utf-8"))
 repo = SupabasePlanoRepository(os.environ["SUPABASE_URL"], os.environ["SUPABASE_SECRET_KEY"], timeout=60, ler_tabelas=False)
 upsert = "resolution=merge-duplicates,return=minimal"
+# o mock é a fonte: apaga testes e pedidos antigos para não sobrar linha de um mock anterior
+repo._req("DELETE", "testes?id=neq.-", prefer="return=minimal")
+repo._req("DELETE", "pedidos?area=neq.-", prefer="return=minimal")
 repo._req("POST", "prototipos", [{"id": p} for p in mock["prototipos"]], prefer=upsert)
 repo._req("POST", "testes", [{k: t[k] for k in ("id", "area", "nome", "duracao", "destrutivo")} for t in mock["testes"]], prefer=upsert)
 repo._req("POST", "pedidos", [{k: p[k] for k in ("area", "carros", "semanas")} for p in mock["pedidos"]], prefer=upsert)

@@ -37,7 +37,7 @@ export function Marco({ g }: { g: Gestao }) {
   )
 }
 
-// Histograma de recursos: carros em uso × parados por semana, como hoje e no plano
+// Histograma de recursos: carros em uso × parados por semana, nos pedidos por área e no plano
 export function UsoFrota({ g }: { g: Gestao }) {
   const max = Math.max(...g.uso.como_hoje.map(total), ...g.uso.plano.map(total))
   const Barra = ({ u, rotulo }: { u: UsoSemana; rotulo: string }) => (
@@ -58,12 +58,12 @@ export function UsoFrota({ g }: { g: Gestao }) {
           <li className="flex items-center gap-1.5"><span className="w-3 h-3 destruido border border-linha" />destruído</li>
         </ul>
       </div>
-      <p className="text-sm mt-1">Em cada semana, a barra da esquerda é o como hoje e a da direita, o plano compartilhado.
-        Somando as 20 semanas: <b>{parados(g.uso.como_hoje)}</b> carros-semana parados como hoje, contra <b>{parados(g.uso.plano)}</b> no plano.</p>
+      <p className="text-sm mt-1">Em cada semana, a barra da esquerda são os pedidos por área (processo atual) e a da direita, o plano compartilhado.
+        Somando as 20 semanas: <b>{parados(g.uso.como_hoje).toLocaleString('pt-BR')}</b> carros-semana parados nos pedidos por área, contra <b>{parados(g.uso.plano).toLocaleString('pt-BR')}</b> no plano.</p>
       <div className="mt-3 grid gap-1 items-end" style={{ gridTemplateColumns: `repeat(${g.uso.plano.length}, 1fr)` }}>
         {g.uso.plano.map((u, i) => (
           <div key={u.semana} className="flex flex-col items-center">
-            <div className="flex gap-px w-full"><Barra u={g.uso.como_hoje[i]} rotulo="Como hoje" /><Barra u={u} rotulo="Plano" /></div>
+            <div className="flex gap-px w-full"><Barra u={g.uso.como_hoje[i]} rotulo="Pedidos por área" /><Barra u={u} rotulo="Plano" /></div>
             <span className="text-xs font-cond mt-1">S{u.semana}</span>
           </div>
         ))}

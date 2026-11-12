@@ -10,7 +10,7 @@ AREAS = [
     "Elétrica/Eletrônica",
     "Mecânica/Powertrain",
     "Aerodinâmica",
-    "Dinâmica veicular",
+    "Hidráulica",
     "Segurança passiva",
 ]
 

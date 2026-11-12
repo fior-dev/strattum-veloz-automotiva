@@ -60,7 +60,7 @@ def test_api_cenario_da_demo_atraso_aceite_e_versao_antiga():
     planejamento.cache_clear(); replanejamento.cache_clear()
     c = TestClient(app)
     r = c.post("/api/status", json={"teste_id": "AER-99", "status": "atrasado", "semanas": 2}).json()["proposta"]
-    assert [(s["teste_id"], s["de"]) for s in r["sugestoes"]] == [("DIN-02", "P006")]
+    assert [(s["teste_id"], s["de"]) for s in r["sugestoes"]] == [("ELE-01", "P006")]
     assert r["marco"]["estava_no_caminho_critico"] and r["marco"]["semanas_consumidas"] == 0
     g = c.get("/api/gestao").json()
     assert g["fim_plano"] == 20 and g["sinal"] == "vermelho" and len(g["uso"]["plano"]) == 20
@@ -70,7 +70,7 @@ def test_api_cenario_da_demo_atraso_aceite_e_versao_antiga():
     v2 = c.get("/api/plano").json()
     assert v2["status"]["AER-99"] == "atrasado"
     v1 = c.get("/api/plano?versao=1").json()  # RF-06: a versão 1 continua consultável
-    assert {"prototipo_id": "P006", "teste_id": "DIN-02", "inicio": 13, "fim": 18, "reteste": False} in v1["alocacoes"]
+    assert {"prototipo_id": "P006", "teste_id": "ELE-01", "inicio": 13, "fim": 18, "reteste": False} in v1["alocacoes"]
     assert c.post("/api/proposta/aceitar").status_code == 422  # sem proposta pendente
     assert c.post("/api/status", json={"teste_id": "NAO-EXISTE", "status": "falhou"}).status_code == 422
     leve = c.post("/api/avarias", json={"prototipo_id": "P001", "tipo": "vidro", "gravidade": "leve", "semana": 3, "area": "Aerodinâmica"})
