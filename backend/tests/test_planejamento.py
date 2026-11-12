@@ -141,3 +141,19 @@ def test_rn07_nao_muda_folga_nem_aceita_outro_evento_com_proposta_pendente():
     with pytest.raises(EventoInvalido):
         rep.mudar_status(b.teste_id, "falhou")
     assert rep.pendente.evento.startswith(a.teste_id)
+
+
+def test_rn06_proposta_que_passa_do_marco_so_e_aceita_se_o_gerente_permitir():
+    """Decisão do José em 12/11: bloquear por padrão; o gerente pode escolher passar do marco."""
+    import pytest
+    from application.planejamento import Replanejamento
+    from domain.motor import EventoInvalido
+    caso = uc()
+    rep = Replanejamento(caso.repo, caso)
+    alvo = max(caso.plano().alocacoes, key=lambda a: a.fim)
+    rep.mudar_status(alvo.teste_id, "atrasado", 20)
+    assert rep.pendente.plano.semana_fim() > 20
+    with pytest.raises(EventoInvalido, match="marco"):
+        rep.aceitar()
+    assert rep.pendente is not None and caso.repo.versoes() == [1]  # bloqueado: nada gravado
+    assert rep.aceitar(estourar=True).versao == 2

@@ -4,17 +4,18 @@
 export function Gantt({ plano, aoClicar, destaque, folgas = {}, marco = 20 }: {
   plano: Plano; aoClicar?: (a: Alocacao) => void; destaque?: Set<string>; folgas?: Record<string, number>; marco?: number
 }) {
-  const semanas = Array.from({ length: plano.horizonte }, (_, i) => i + 1)
+  const n = Math.max(plano.horizonte, plano.semana_fim) // o gerente pode aceitar um plano que passa do marco (RN-06)
+  const semanas = Array.from({ length: n }, (_, i) => i + 1)
   const porCarro = new Map<string, Alocacao[]>()
   for (const a of plano.alocacoes) porCarro.set(a.prototipo_id, [...(porCarro.get(a.prototipo_id) ?? []), a])
   const linhas = [...plano.prototipos, ...plano.reserva]
-  const colunas = `5.5rem repeat(${plano.horizonte}, minmax(2.6rem, 1fr))`
+  const colunas = `5.5rem repeat(${n}, minmax(2.6rem, 1fr))`
 
   return (
     <div className="overflow-auto max-h-[70vh] border border-linha rounded-md bg-pista">
       <div className="grid sticky top-0 z-10 bg-tinta text-pista text-xs font-cond" style={{ gridTemplateColumns: colunas }}>
         <div className="px-2 py-1.5 sticky left-0 bg-tinta">Protótipo</div>
-        {semanas.map((s) => <div key={s} className={`py-1.5 text-center ${s === marco ? 'border-r-4 border-seg' : ''}`}><span className={s === marco ? 'font-bold text-faixa' : ''} title={s === marco ? 'Lançamento' : undefined}>S{s}</span></div>)}
+        {semanas.map((s) => <div key={s} className={`py-1.5 text-center ${s === marco ? 'border-r-4 border-seg' : ''} ${s > marco ? 'bg-seg' : ''}`}><span className={s === marco ? 'font-bold text-faixa' : ''} title={s === marco ? 'Lançamento' : s > marco ? 'Depois do lançamento' : undefined}>S{s}</span></div>)}
       </div>
       {linhas.map((pid) => {
         const alocs = porCarro.get(pid) ?? []
@@ -32,9 +33,9 @@ export function Gantt({ plano, aoClicar, destaque, folgas = {}, marco = 20 }: {
               ))}
             </div>
             <div aria-hidden className="border-r-4 border-seg pointer-events-none" style={{ gridColumn: marco + 1, gridRow: 1 }} />
-            {destrutivo && destrutivo.fim < plano.horizonte && (
+            {destrutivo && destrutivo.fim < n && (
               <div className="destruido" title="Destruído pelo teste destrutivo"
-                style={{ gridColumn: `${destrutivo.fim + 2} / ${plano.horizonte + 2}`, gridRow: 1 }} />
+                style={{ gridColumn: `${destrutivo.fim + 2} / ${n + 2}`, gridRow: 1 }} />
             )}
             {alocs.map((a) => {
               const t = plano.testes[a.teste_id]
@@ -44,7 +45,7 @@ export function Gantt({ plano, aoClicar, destaque, folgas = {}, marco = 20 }: {
                 <button key={`${a.teste_id}-${a.inicio}`} onClick={() => aoClicar?.(a)}
                   title={`${a.teste_id} · ${t.nome}\n${t.area}\nSemanas ${a.inicio} a ${a.fim}${t.destrutivo ? '\nDestrutivo: o carro sai da frota' : ''}${a.reteste ? '\nReteste' : ''}\nStatus: ${status}`}
                   className={`m-0.5 rounded-sm px-1 text-left text-white truncate font-cond font-medium cursor-pointer hover:brightness-110 ${a.reteste ? 'border-2 border-dashed border-white/80' : ''} ${status === 'atrasado' || status === 'falhou' ? 'ring-2 ring-faixa' : ''} ${destaque?.has(a.teste_id) ? 'outline-3 outline-tinta outline-offset-1' : ''} ${folga === 0 ? 'shadow-[inset_0_3px_0_var(--color-faixa)]' : ''}`}
-                  style={{ gridColumn: `${Math.min(a.inicio, plano.horizonte) + 1} / ${Math.min(a.fim, plano.horizonte) + 2}`, gridRow: 1, background: COR_AREA[t.area] }}>
+                  style={{ gridColumn: `${Math.min(a.inicio, n) + 1} / ${Math.min(a.fim, n) + 2}`, gridRow: 1, background: COR_AREA[t.area] }}>
                   {t.destrutivo ? '✕ ' : ''}{a.teste_id}
                 </button>
               )

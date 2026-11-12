@@ -74,7 +74,7 @@ export const replan = {
     pedir<ComProposta>('/status', { method: 'POST', body: JSON.stringify({ teste_id, status, semanas }) }),
   avaria: (a: Avaria) =>
     pedir<ComProposta>('/avarias', { method: 'POST', body: JSON.stringify(a) }),
-  aceitar: () => pedir<{ versao: number }>('/proposta/aceitar', { method: 'POST' }),
+  aceitar: (estourar = false) => pedir<{ versao: number }>(`/proposta/aceitar${estourar ? '?estourar=true' : ''}`, { method: 'POST' }),
   recusar: () => pedir<ComProposta>('/proposta/recusar', { method: 'POST' }),
 }
 

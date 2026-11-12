@@ -4,7 +4,7 @@ from dataclasses import replace
 from functools import cache
 
 from domain.folga import FOLGA_PADRAO, carros_de_reserva, comparar
-from domain.gestao import curva_meta, folgas, impacto_no_marco, resumo_marco, uso_como_hoje, uso_por_semana
+from domain.gestao import MARCO, curva_meta, folgas, impacto_no_marco, resumo_marco, uso_como_hoje, uso_por_semana
 from domain.modelo import GRAVIDADES, STATUS, TIPOS_AVARIA, Avaria, Plano
 from domain.motor import Atraso, EventoInvalido, Falha, Proposta, RegistroAvaria, planejar, replanejar
 from domain.ports import PlanoRepository
@@ -115,10 +115,15 @@ class Replanejamento:
         self.pendente.marco = impacto_no_marco(atual, self.pendente.plano, getattr(evento, "teste_id", None))
         return self.pendente
 
-    def aceitar(self) -> Plano:
-        """RF-06: cria a versão N+1; a versão N continua consultável."""
+    def aceitar(self, estourar: bool = False) -> Plano:
+        """RF-06: cria a versão N+1; a versão N continua consultável.
+        RN-06: proposta que passa do marco só entra se o gerente escolher estourar (decisão do José, 12/11)."""
         if self.pendente is None:
             raise EventoInvalido("Não há proposta pendente")
+        fim = self.pendente.plano.semana_fim()
+        if fim > MARCO and not estourar:
+            raise EventoInvalido(f"A proposta termina na semana {fim}, depois do marco na semana {MARCO}. "
+                                 "Recuse, ou marque a opção de passar do marco")
         plano, self.pendente = self.pendente.plano, None
         self.repo.salvar(plano)
         return plano
