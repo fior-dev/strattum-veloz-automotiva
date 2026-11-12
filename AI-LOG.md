@@ -19,6 +19,7 @@ A Strattum pediu este registro como entrega do case. Cada linha diz o que foi fe
 | 12/11 00h36–00h42 | Fatia 5, copiloto | Claude Code (Opus 5.5) | Ticket 05, ADR 0003 | Ports `ContextProvider` e `InterpretadorDeImprevisto`, Semantic Layer em `backend/semantic/contexto.json`, adapter LiteLLM → OpenRouter (`gemma-4-31b-it:free` com fallback `nemotron-3-ultra:free`, escolhidos na lista pública de modelos free com tool calling) e intérprete offline. A chave foi pedida pelo `request_secret` e não chegou; o copiloto roda offline até o José preencher o `.env` |  |
 | 12/11 10h45 | Supabase (05b) | Claude Code (Opus 5.5) + MCP do Supabase | Ajuste 14 | A organização está no plano Pro: todo projeto novo é pago. Nada foi criado (conferido no `list_projects`) | Vetou projeto pago; a 05b espera a decisão dele |
 | 12/11 10h50 | Formato do painel | Claude Code (Opus 5.5) | `painel/README.md`, pedido da thread do painel | Tickets com Estado, Real e Commits; coluna José no AI-LOG; linha duplicada da RN-09 tirada do §17 do discovery |  |
+| 12/11 11h | Fatias 5b, 6a e 6b | Claude Code (Opus 5.5) | Tickets 05b, 06a, 06b | Adapter Supabase só com a stdlib, schema com RLS sem política e teste de contrato que roda o cenário da demo nos dois repositórios (o Supabase espera a chave). Acabamento da tela. `ROADMAP.md`, `docs/mapa-arquitetura.md` com SIPOC por rota, README com roteiro da demo; os números do roteiro conferidos na API | Criou o projeto Supabase numa organização Free |
 
 ## Revisões
 

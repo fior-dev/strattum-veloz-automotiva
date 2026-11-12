@@ -71,7 +71,7 @@ flowchart LR
   classDef u fill:#fff
 ```
 
-Tracejado é roadmap. No protótipo, a API chama o copiloto direto (sem Dispatcher nem MCP), o `ContextProvider` lê arquivos locais e o banco é JSON em memória.
+Tracejado é roadmap. No protótipo, a API chama o copiloto direto (sem Dispatcher nem MCP), o `ContextProvider` lê arquivos locais e o banco é JSON em memória, ou o Supabase com `DATA_BACKEND=supabase` (ticket 05b). Cada caixa tem a sua linha em `docs/mapa-arquitetura.md`; o que é tracejado está no `ROADMAP.md`.
 
 ## Critérios de aceite
 Os do §13 do discovery, um teste automatizado por critério de regra. Mais:
