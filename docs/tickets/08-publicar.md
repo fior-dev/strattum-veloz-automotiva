@@ -1,6 +1,6 @@
 # 08 · Publicar para a Strattum testar
 
-Dor: — · Depende de: 06b · Estimativa: 1h · Estado: em andamento · Real: 15 min · Commits: (este)
+Dor: — · Depende de: 06b · Estimativa: 1h · Estado: em andamento · Real: 15 min · Commits: 5065c91
 
 Pedido do José em 12/11: publicar num subdomínio dele para a Strattum testar sem instalar nada. Responde ao conflito RNF-01 "sem backend" × FastAPI (ADR 0001): o protótipo segue com backend, mas a avaliação não precisa rodar nada local.
 
