@@ -103,3 +103,41 @@ def test_rn07_avaria_leve_e_status_sobrevivem_ao_aceite_da_proposta_pendente():
     assert caso.plano().versao == 2
     assert caso.plano().avarias == [Avaria(alvo.prototipo_id, "vidro", "leve", 1, "Aerodinâmica")]
     assert caso.plano().status[outro.teste_id] == "concluido"
+
+
+# Segunda revisão independente (12/11): estado entre plano atual e proposta pendente
+
+class RepoQueCopia(RepoFalso):
+    """Como o Supabase: cada leitura devolve um objeto novo."""
+    def plano(self, versao=None):
+        import copy
+        return copy.deepcopy(super().plano(versao))
+
+
+def _caso_copia():
+    base = uc()
+    caso = Planejamento(RepoQueCopia(base.repo._t, base.repo._p, base.repo._ped))
+    from application.planejamento import Replanejamento
+    return caso, Replanejamento(caso.repo, caso)
+
+
+def test_status_e_avaria_leve_gravam_num_repo_que_copia():
+    from domain.modelo import Avaria
+    caso, rep = _caso_copia()
+    alvo = caso.plano().alocacoes[0]
+    rep.mudar_status(alvo.teste_id, "concluido")
+    rep.registrar_avaria(Avaria(alvo.prototipo_id, "vidro", "leve", 1, "Aerodinâmica"))
+    assert caso.plano().status[alvo.teste_id] == "concluido" and caso.plano().avarias
+
+
+def test_rn07_nao_muda_folga_nem_aceita_outro_evento_com_proposta_pendente():
+    import pytest
+    from domain.motor import EventoInvalido
+    caso, rep = _caso_copia()
+    a, b = caso.plano().alocacoes[0], caso.plano().alocacoes[-1]
+    rep.mudar_status(a.teste_id, "atrasado", 1)
+    with pytest.raises(EventoInvalido):
+        rep.ajustar_folga(0.3)
+    with pytest.raises(EventoInvalido):
+        rep.mudar_status(b.teste_id, "falhou")
+    assert rep.pendente.evento.startswith(a.teste_id)

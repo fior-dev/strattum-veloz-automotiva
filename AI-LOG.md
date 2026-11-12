@@ -21,6 +21,7 @@ A Strattum pediu este registro como entrega do case. Cada linha diz o que foi fe
 | 12/11 10h50 | Formato do painel | Claude Code (Opus 5.5) | `painel/README.md`, pedido da thread do painel | Tickets com Estado, Real e Commits; coluna José no AI-LOG; linha duplicada da RN-09 tirada do §17 do discovery |  |
 | 12/11 11h | Fatias 5b, 6a e 6b | Claude Code (Opus 5.5) | Tickets 05b, 06a, 06b | Adapter Supabase só com a stdlib, schema com RLS sem política e teste de contrato que roda o cenário da demo nos dois repositórios (o Supabase espera a chave). Acabamento da tela. `ROADMAP.md`, `docs/mapa-arquitetura.md` com SIPOC por rota, README com roteiro da demo; os números do roteiro conferidos na API | Criou o projeto Supabase numa organização Free |
 | 12/11 11h30 | Revisão independente do código (code review) | Claude Code (Opus 5.5, esforço high), subagente sem o contexto da sessão | `git diff 8a7b3d0..HEAD` sem o painel | 1 bloqueante, 7 importantes, 6 menores; ver Revisões. Correções no commit 609794b | |
+| 12/11 12h | Segunda revisão independente (code review) do diff das correções | Claude Code (Opus 5.5, esforço high), subagente novo | `git diff dad8aa6..HEAD -- backend frontend` | 1 regressão (status e avaria leve se perdiam no repo que copia, como o Supabase), 4 importantes, 4 menores; ver Revisões | |
 
 ## Revisões
 
@@ -61,3 +62,15 @@ Cada achado do motor virou primeiro um teste vermelho (`test_rn09_reteste_nao_vo
 | 11 | `CONTEXT.md` citava `glossario.json` | Corrigido para `contexto.json` |
 | 12 | Linha tirada do §17 do discovery sem subir versão | Mantido: só tirou uma duplicata; registrado acima |
 | 13 | Caminho local, nome da organização Supabase e ref do projeto no repo | Aberto: antes de tornar o repo público (Esperando pelo José) |
+
+### Segunda revisão independente, só do diff das correções (Opus 5.5, esforço high), 12/11 12h
+| # | Achado | O que foi feito |
+|---|---|---|
+| 1 | Regressão: status e avaria leve gravavam numa cópia e se perdiam no Supabase | Corrigido; teste `test_status_e_avaria_leve_gravam_num_repo_que_copia` com um repositório que copia o plano a cada leitura |
+| 2 | Folga mudada com proposta pendente sumia no aceite | Corrigido: com proposta aberta, a folga é recusada (422) e o controle fica desabilitado |
+| 3 | O copiloto descrevia o reteste como se o teste estivesse prometido ao carro | Corrigido na explicação padrão e no prompt do LLM |
+| 4 | Reteste que não cabe duplicava a linha em "não cabe" | Corrigido; o título da lista diz "testes ou retestes" |
+| 5 | Evento novo apagava a proposta pendente sem aviso | Corrigido: uma decisão por vez (RN-07); o evento novo volta com "aceite ou recuse antes" |
+| 6 | Motivo errado para destrutivo no fim do horizonte; chave repetida no React; texto "Repetir … fora do" | Corrigidos |
+| 7 | `temperature=0` ainda vai a um fallback `anthropic/` atrás de um modelo do OpenRouter | Não corrigido: a configuração do `.env.example` não usa fallback da Anthropic |
+| 8 | Atraso que passa da semana 20 mantém a alocação até a 23 | Já estava em Esperando pelo José (achado 4 da primeira revisão) |

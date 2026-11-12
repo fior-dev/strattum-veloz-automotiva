@@ -33,7 +33,8 @@ class Copiloto:
             status = "atrasado" if tipo == "atraso" else "falhou"
             proposta = self.replanejamento.mudar_status(evento["teste_id"], status, evento.get("semanas", 1))
         except (EventoInvalido, ValueError) as e:
-            return _pergunta(f"{e}. Confira o ID do teste e tente de novo.")
+            dica = "" if self.replanejamento.pendente else " Confira o ID do teste e tente de novo."
+            return _pergunta(f"{e}.{dica}")
         resumo = {"evento": proposta.evento, "sugestoes": [asdict(s) for s in proposta.sugestoes],
                   "impactados": [asdict(i) for i in proposta.impactados], "marco": proposta.marco}
         try:
@@ -51,8 +52,11 @@ def explicacao_padrao(resumo: dict) -> str:
     """Explicação sem LLM, montada só com os números do motor."""
     partes = [f"{resumo['evento']}."]
     for s in resumo["sugestoes"]:
-        partes.append(f"O {s['teste_id']} estava prometido ao {s['de']} nas semanas {s['inicio']} a {s['fim']}; "
-                      f"a sugestão é usar o {s['para']}, que está livre.")
+        if s.get("reteste"):
+            partes.append(f"O {s['teste_id']} repete no {s['para']}, semanas {s['inicio']} a {s['fim']}, porque o {s['de']} não pode receber o reteste.")
+        else:
+            partes.append(f"O {s['teste_id']} estava prometido ao {s['de']} nas semanas {s['inicio']} a {s['fim']}; "
+                          f"a sugestão é usar o {s['para']}, que está livre.")
     for i in resumo["impactados"]:
         partes.append(f"O {i['teste_id']} ({i['area']}) fica sem carro: {i['motivo']}.")
     m = resumo.get("marco")

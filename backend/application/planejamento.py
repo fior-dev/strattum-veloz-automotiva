@@ -75,9 +75,10 @@ class Replanejamento:
             raise EventoInvalido(f"Status desconhecido: {status}")
         if teste_id not in self._testes():
             raise EventoInvalido(f"O teste {teste_id} não existe")
-        for plano in self._atual_e_pendente():
+        atual = self._atual_e_pendente()
+        for plano in atual:
             plano.status[teste_id] = status
-        self.repo.salvar(self.planejamento.plano())
+        self.repo.salvar(atual[0])
         return None
 
     def registrar_avaria(self, avaria: Avaria) -> Proposta | None:
@@ -87,9 +88,10 @@ class Replanejamento:
         if avaria.tipo not in TIPOS_AVARIA or avaria.gravidade not in GRAVIDADES:
             raise EventoInvalido("Tipo ou gravidade de avaria desconhecidos")
         if avaria.gravidade == "leve":  # RN-09: leve só fica visível; não cria versão nem mexe na proposta pendente
-            for plano in self._atual_e_pendente():
+            atual = self._atual_e_pendente()
+            for plano in atual:
                 plano.avarias.append(avaria)
-            self.repo.salvar(self.planejamento.plano())
+            self.repo.salvar(atual[0])
             return None
         return self.propor(RegistroAvaria(avaria))
 
@@ -97,7 +99,17 @@ class Replanejamento:
         """O que não precisa de aceite vale no plano atual e na proposta pendente, para o aceite não apagar."""
         return [self.planejamento.plano()] + ([self.pendente.plano] if self.pendente else [])
 
+    def _sem_pendente(self):
+        """RN-07: uma decisão por vez. Evento novo ou folga nova com proposta aberta apagariam a proposta."""
+        if self.pendente is not None:
+            raise EventoInvalido("Há uma proposta esperando o gerente da coordenação: aceite ou recuse antes")
+
+    def ajustar_folga(self, folga: float) -> Plano:
+        self._sem_pendente()
+        return self.planejamento.ajustar_folga(folga)
+
     def propor(self, evento) -> Proposta:
+        self._sem_pendente()
         atual = self.planejamento.plano()
         self.pendente = replanejar(atual, evento, self._testes())
         self.pendente.marco = impacto_no_marco(atual, self.pendente.plano, getattr(evento, "teste_id", None))

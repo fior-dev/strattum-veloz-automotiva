@@ -98,8 +98,10 @@ export function PainelProposta({ proposta, plano, aoDecidir }: { proposta: Propo
       {proposta.sugestoes.length > 0 && <div>
         <p className="font-medium">Mudanças sugeridas</p>
         <ul className="list-disc pl-5">
-          {proposta.sugestoes.map((s) => (
-            <li key={s.teste_id}>{s.reteste ? 'Repetir' : 'Mover'} <b>{s.teste_id}</b> ({plano.testes[s.teste_id]?.area}) {s.reteste ? 'fora do' : 'do'} {s.de} {s.reteste ? 'no' : 'para o'} <b>{s.para}</b>, semanas {s.inicio} a {s.fim}
+          {proposta.sugestoes.map((s, i) => (
+            <li key={i}>{s.reteste
+              ? <>Repetir <b>{s.teste_id}</b> ({plano.testes[s.teste_id]?.area}) no <b>{s.para}</b>, semanas {s.inicio} a {s.fim} (o {s.de} não pode recebê-lo)</>
+              : <>Mover <b>{s.teste_id}</b> ({plano.testes[s.teste_id]?.area}) do {s.de} para o <b>{s.para}</b>, semanas {s.inicio} a {s.fim}</>}
               {plano.reserva.includes(s.para) && ' — usa um carro da folga de reteste'}</li>
           ))}
         </ul>

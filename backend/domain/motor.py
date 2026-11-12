@@ -181,10 +181,13 @@ def replanejar(plano: Plano, evento, testes: dict[str, Teste], horizonte: int = 
                 alocs.append(Alocacao(melhor[0], a.teste_id, melhor[1], melhor[1] + t.duracao - 1, reteste=True))
                 reteste_movido = SugestaoTroca(a.teste_id, origem, melhor[0], melhor[1], melhor[1] + t.duracao - 1, reteste=True)
             else:
-                sem_reteste = "Não há carro livre para repetir o teste"
+                ultima = horizonte - t.duracao + 1
+                sem_reteste = (f"O reteste precisa de {t.duracao} semana(s) depois da semana {a.fim}; o plano acaba na semana {horizonte} (RN-06)"
+                               if a.fim + 1 > ultima else "Não há carro livre para repetir o teste")
         if sem_reteste:
             impactados.append(Impactado(a.teste_id, t.area, sem_reteste))
-            nao_cabe_extra.append(NaoCabe(a.teste_id, sem_reteste))
+            if all(n.teste_id != a.teste_id for n in plano.nao_cabe):  # falhou de novo: não repete a linha
+                nao_cabe_extra.append(NaoCabe(a.teste_id, sem_reteste))
 
     elif isinstance(evento, RegistroAvaria):
         v = evento.avaria

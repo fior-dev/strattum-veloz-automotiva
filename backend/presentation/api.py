@@ -48,8 +48,8 @@ class Folga(BaseModel):
 
 
 @app.put("/api/folga", summary="Ajusta a folga de reteste; o plano não muda, só a reserva")
-def ajustar_folga(corpo: Folga, uc: Planejamento = Depends(planejamento)):
-    uc.ajustar_folga(corpo.folga)
+def ajustar_folga(corpo: Folga, uc: Planejamento = Depends(planejamento), rp: Replanejamento = Depends(replanejamento)):
+    _sem_erro(lambda: rp.ajustar_folga(corpo.folga))
     return uc.comparativo()
 
 

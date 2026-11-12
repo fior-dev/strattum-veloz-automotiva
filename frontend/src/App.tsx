@@ -87,7 +87,7 @@ export default function App() {
             Folga de reteste: {folga}% dos {comp.destrutivos} testes destrutivos = {comp.proposto.carros_reserva} carros<Selo id="MK-06" />
           </label>
           <input id="folga" type="range" min={0} max={30} step={5} value={folga} onChange={(e) => mudarFolga(Number(e.target.value))}
-            disabled={!atual} className="w-full accent-[var(--color-tinta)]" />
+            disabled={!atual || !!proposta} title={proposta ? 'Aceite ou recuse a proposta antes de mudar a folga' : undefined} className="w-full accent-[var(--color-tinta)]" />
           <p className="text-xs text-grafite">Só o teste destrutivo que falha precisa de carro novo. O não destrutivo repete no mesmo carro (RN-08).</p>
         </div>
       </section>
@@ -128,8 +128,8 @@ export default function App() {
               Abra um teste para registrar que começou, terminou, atrasou ou falhou, ou para registrar uma avaria no carro.
               Se outro teste for afetado, o sistema propõe a troca e o gerente da coordenação decide.</p>}
             {plano.nao_cabe.length > 0 && <div className="bg-pista border border-seg rounded-md p-4 text-sm">
-              <p className="font-medium text-seg">Testes sem carro no plano</p>
-              <ul className="list-disc pl-5">{plano.nao_cabe.map((n) => <li key={n.teste_id}><b>{n.teste_id}</b>: {n.motivo}</li>)}</ul>
+              <p className="font-medium text-seg">Testes ou retestes que não cabem no plano</p>
+              <ul className="list-disc pl-5">{plano.nao_cabe.map((n, i) => <li key={i}><b>{n.teste_id}</b>: {n.motivo}</li>)}</ul>
             </div>}
           </div>
         </div>

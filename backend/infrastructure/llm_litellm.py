@@ -67,7 +67,8 @@ class InterpretadorLiteLLM:
     def explicar(self, resumo: dict, contexto: dict) -> str:
         r = self._chamar(messages=[
             {"role": "system", "content": "Explique à coordenação de projetos, em português e em até 4 frases curtas, o que o "
-                                          "replanejamento propõe. Use só os números do resumo; não invente nenhum. Termine dizendo "
+                                          "replanejamento propõe. Use só os números do resumo; não invente nenhum. Sugestão com reteste=true é a repetição "
+                                          "do teste que falhou, em outro carro. Termine dizendo "
                                           "que nada muda até o gerente da coordenação aceitar. Vocabulário: "
                                           + json.dumps(contexto["glossario"], ensure_ascii=False)},
             {"role": "user", "content": json.dumps(resumo, ensure_ascii=False)},

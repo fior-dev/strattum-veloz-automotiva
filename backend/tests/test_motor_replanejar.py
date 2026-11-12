@@ -120,3 +120,15 @@ def test_rn08_reteste_destrutivo_aparece_na_proposta():
     p = plano(Alocacao("P001", "D", 1, 2), reserva=["P009"])
     prop = replanejar(p, Falha("D"), TESTES)
     assert [(s.teste_id, s.de, s.para, s.inicio) for s in prop.sugestoes] == [("D", "P001", "P009", 3)]
+
+
+def test_rn06_reteste_que_nao_cabe_de_novo_nao_duplica_nao_cabe():
+    p = plano(Alocacao("P001", "A", 15, 19))
+    p.nao_cabe = replanejar(p, Falha("A"), TESTES).plano.nao_cabe
+    assert [n.teste_id for n in replanejar(p, Falha("A"), TESTES).plano.nao_cabe] == ["A"]
+
+
+def test_rn06_destrutivo_no_fim_do_horizonte_diz_o_motivo_certo():
+    p = plano(Alocacao("P001", "D", 18, 19), reserva=["P009"])
+    prop = replanejar(p, Falha("D"), TESTES)
+    assert "semana 20" in prop.impactados[0].motivo
