@@ -1,6 +1,6 @@
 # 05b · Adapter Supabase (Postgres) para o `PlanoRepository`
 
-Depende de: 04 · Teto: 45 min · Só entra se 01 a 04 estiverem prontas às 13h (ajuste 14).
+Dor: — · Depende de: 04 · Teto: 45 min · Só entra se 01 a 04 estiverem prontas às 13h (ajuste 14). · Estado: a fazer
 
 ## O quê
 - Projeto Supabase novo, free, na organização do José.

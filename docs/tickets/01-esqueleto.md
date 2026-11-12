@@ -1,6 +1,6 @@
 # 01 · Esqueleto andando pelas quatro camadas
 
-Dor: D2 · Depende de: — · Estimativa: 1h
+Dor: D2 · Depende de: — · Estimativa: 1h · Estado: feito · Commits: ed2a939
 
 ## O quê
 Um caso de uso `ver_plano` devolve um plano fixo lido por um `JsonPlanoRepository` injetado no `container.py`. A rota `GET /plano` o expõe. A SPA mostra a tabela.

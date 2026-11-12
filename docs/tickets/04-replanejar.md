@@ -1,6 +1,6 @@
 # 04 · Replanejar: atraso de +N semanas, falha e aceite
 
-Dor: D4, D5 · Depende de: 03 · Estimativa: 2h
+Dor: D4, D5 · Depende de: 03 · Estimativa: 2h · Estado: feito · Commits: f8b28e9
 
 ## O quê
 - `domain/motor.py`: `replanejar(plano, evento) → proposta` (sugestões de troca, impactados, plano novo), regras do SPEC.

@@ -1,6 +1,6 @@
 # 04b · Avarias (RN-09)
 
-Dor: D6 · Depende de: 04 · Estimativa: 1h
+Dor: D6 · Depende de: 04 · Estimativa: 1h · Estado: feito · Commits: f8b28e9
 
 ## O quê
 - A engenharia registra a avaria: protótipo, tipo (vidro, lataria, pneu, outro), gravidade (leve, compromete reuso), semana, área.

@@ -1,6 +1,6 @@
 # 05 · Copiloto de replanejamento
 
-Dor: D4 · Depende de: 04 · Estimativa: 2h · Só entra se 01 a 04 estiverem prontas às 13h.
+Dor: D4 · Depende de: 04 · Estimativa: 2h · Só entra se 01 a 04 estiverem prontas às 13h. · Estado: em andamento · Commits: 482bce0
 
 ## O quê
 - Port `InterpretadorDeImprevisto`; adapter LiteLLM → OpenRouter, modelo free, chave no `.env`.

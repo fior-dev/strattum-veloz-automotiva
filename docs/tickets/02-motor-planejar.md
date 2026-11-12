@@ -1,6 +1,6 @@
 # 02 · Motor `planejar` e baseline "como hoje"
 
-Dor: D1 · Depende de: 01 · Estimativa: 2h
+Dor: D1 · Depende de: 01 · Estimativa: 2h · Estado: feito · Commits: ed2a939
 
 ## O quê
 - `domain/motor.py`: `planejar(testes, prototipos, horizonte=20)`, a heurística do ADR 0002.

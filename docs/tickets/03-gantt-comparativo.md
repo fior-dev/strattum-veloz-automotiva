@@ -1,6 +1,6 @@
 # 03 · Gantt por protótipo e comparativo com folga ajustável
 
-Dor: D2, D3 · Depende de: 02 · Estimativa: 1h30
+Dor: D2, D3 · Depende de: 02 · Estimativa: 1h30 · Estado: feito · Commits: ed2a939
 
 ## O quê
 - Tela com o Gantt: linha por protótipo, coluna por semana (1 a 20), célula com área (cor) e ID do teste. Carro destruído marcado.

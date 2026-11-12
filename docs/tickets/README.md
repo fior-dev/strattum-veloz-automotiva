@@ -17,3 +17,13 @@ status: proposto, aguardando revisão do José · 12/11/2026
 | 06b | [README, ROADMAP, diagrama](06b-docs-finais.md) | — | 1h30 | — | começa até 15h; tudo pronto 17h |
 
 Regra: ticket que passar do dobro da estimativa corta escopo e manda o resto para o `ROADMAP.md`.
+
+## Esperando pelo José
+- Supabase (05b): a organização `fiortech's Org` está no plano Pro, então todo projeto novo é pago. Ou o José cria uma organização Free com o projeto e passa o id, ou a 05b vai para o roadmap (recomendado)
+- Chave do OpenRouter em `backend/.env`: sem ela o copiloto roda offline e a 05 fica em andamento
+- Adotar meta de 18 semanas (+11 carros, 2 semanas de folga no marco)?
+- Conflito RNF-01 "sem backend" × FastAPI (ADR 0001)
+
+## Riscos
+- Copiloto depende do OpenRouter free: fora do ar ou sem chave, a demo usa o intérprete offline (só entende "<ID> atrasou N semanas" e "<ID> falhou")
+- MK-01 é a premissa mais sensível: 125 testes por área foram calibrados para os pedidos somarem perto de 250
