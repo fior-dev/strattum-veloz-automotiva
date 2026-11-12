@@ -91,7 +91,7 @@ def mudar_status(corpo: MudancaStatus, rp: Replanejamento = Depends(replanejamen
 @app.post("/api/avarias", summary="Registra avaria; compromete reuso devolve uma proposta (RF-08, RN-09)")
 def registrar_avaria(corpo: NovaAvaria, rp: Replanejamento = Depends(replanejamento)):
     p = _sem_erro(lambda: rp.registrar_avaria(Avaria(**corpo.model_dump())))
-    return {"proposta": None if corpo.gravidade == "leve" else _proposta_json(p)}
+    return {"proposta": _proposta_json(p)}
 
 
 @app.get("/api/proposta", summary="Proposta pendente de aceite, se houver")

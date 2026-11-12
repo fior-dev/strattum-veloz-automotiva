@@ -54,11 +54,11 @@ export const COR_AREA: Record<string, string> = {
 
 export type Proposta = {
   evento: string
-  sugestoes: { teste_id: string; de: string; para: string; inicio: number; fim: number }[]
+  sugestoes: { teste_id: string; de: string; para: string; inicio: number; fim: number; reteste: boolean }[]
   impactados: { teste_id: string; area: string; motivo: string }[]
   versao_nova: number
   marco: { fim_antes: number; fim_depois: number; semanas_consumidas: number; folga_projeto_antes: number;
-    folga_projeto_depois: number; estava_no_caminho_critico: boolean } | null
+    folga_projeto_depois: number; estava_no_caminho_critico: boolean | null } | null
 }
 export type UsoSemana = { semana: number; em_uso: number; parados: number; fora: number }
 export type Gestao = {

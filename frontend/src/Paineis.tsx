@@ -89,17 +89,17 @@ export function PainelProposta({ proposta, plano, aoDecidir }: { proposta: Propo
       <p className="font-cond text-xl font-semibold">Proposta de replanejamento</p>
       <p>{proposta.evento}.</p>
       {proposta.marco && <p className="bg-asfalto rounded-sm p-2">
-        {proposta.marco.estava_no_caminho_critico ? 'O teste estava no caminho crítico. ' : 'O teste não estava no caminho crítico. '}
+        {proposta.marco.estava_no_caminho_critico === null ? '' : proposta.marco.estava_no_caminho_critico ? 'O teste estava no caminho crítico. ' : 'O teste não estava no caminho crítico. '}
         {proposta.marco.semanas_consumidas > 0
           ? <>Este evento move o fim do plano da semana {proposta.marco.fim_antes} para a <b>{proposta.marco.fim_depois}</b> e consome {proposta.marco.semanas_consumidas} das {Math.max(proposta.marco.folga_projeto_antes, 0)} semanas de folga do projeto.</>
           : <>Com a proposta, o fim do plano continua na semana <b>{proposta.marco.fim_depois}</b>: o lançamento não se move.</>}
       </p>}
       {vazio && <p>Nenhum outro teste é afetado.</p>}
       {proposta.sugestoes.length > 0 && <div>
-        <p className="font-medium">Trocas sugeridas</p>
+        <p className="font-medium">Mudanças sugeridas</p>
         <ul className="list-disc pl-5">
           {proposta.sugestoes.map((s) => (
-            <li key={s.teste_id}>Mover <b>{s.teste_id}</b> ({plano.testes[s.teste_id]?.area}) do {s.de} para o <b>{s.para}</b>, semanas {s.inicio} a {s.fim}
+            <li key={s.teste_id}>{s.reteste ? 'Repetir' : 'Mover'} <b>{s.teste_id}</b> ({plano.testes[s.teste_id]?.area}) {s.reteste ? 'fora do' : 'do'} {s.de} {s.reteste ? 'no' : 'para o'} <b>{s.para}</b>, semanas {s.inicio} a {s.fim}
               {plano.reserva.includes(s.para) && ' — usa um carro da folga de reteste'}</li>
           ))}
         </ul>

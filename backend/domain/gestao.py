@@ -44,7 +44,7 @@ def impacto_no_marco(antes: Plano, depois: Plano, teste_id: str, marco: int = MA
     fa, fd = antes.semana_fim(), depois.semana_fim()
     return {"fim_antes": fa, "fim_depois": fd, "semanas_consumidas": max(0, fd - fa),
             "folga_projeto_antes": marco - fa, "folga_projeto_depois": marco - fd,
-            "estava_no_caminho_critico": folgas(antes).get(teste_id) == 0}
+            "estava_no_caminho_critico": None if teste_id is None else folgas(antes).get(teste_id) == 0}  # avaria não tem teste
 
 
 def uso_por_semana(plano: Plano, testes: dict[str, Teste], frota: int, horizonte: int = HORIZONTE) -> list[dict]:

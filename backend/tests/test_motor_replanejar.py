@@ -96,3 +96,27 @@ def test_rn09_carro_comprometido_nao_recebe_alocacao_nova():
     p.avarias = [Avaria("P001", "pneu", "compromete_reuso", 5, "Aerodinâmica")]
     prop = replanejar(p, Atraso("C", 1), TESTES)  # B colide em P2; P1 está fora do pool
     assert prop.sugestoes == [] and [i.teste_id for i in prop.impactados] == ["B"]
+
+
+# Achados da revisão independente de 12/11 (Opus 5.5, esforço high)
+
+def test_rn09_reteste_nao_volta_a_carro_fora_do_pool():
+    # P001 saiu do pool por avaria; A falha: o reteste não pode ficar em P001 (RN-08, RN-09)
+    p = plano(Alocacao("P001", "A", 1, 5), Alocacao("P002", "C", 1, 3))
+    p.avarias = [Avaria("P001", "lataria", "compromete_reuso", 5, "Aerodinâmica")]
+    prop = replanejar(p, Falha("A"), TESTES)
+    assert all(a.prototipo_id != "P001" for a in prop.plano.alocacoes if a.reteste)
+    assert [(s.teste_id, s.de, s.para) for s in prop.sugestoes] == [("A", "P001", "P002")]
+
+
+def test_rn06_reteste_que_nao_cabe_fica_em_nao_cabe():
+    p = plano(Alocacao("P001", "A", 15, 19))
+    prop = replanejar(p, Falha("A"), TESTES)
+    assert [i.teste_id for i in prop.impactados] == ["A"]
+    assert [n.teste_id for n in prop.plano.nao_cabe] == ["A"]
+
+
+def test_rn08_reteste_destrutivo_aparece_na_proposta():
+    p = plano(Alocacao("P001", "D", 1, 2), reserva=["P009"])
+    prop = replanejar(p, Falha("D"), TESTES)
+    assert [(s.teste_id, s.de, s.para, s.inicio) for s in prop.sugestoes] == [("D", "P001", "P009", 3)]

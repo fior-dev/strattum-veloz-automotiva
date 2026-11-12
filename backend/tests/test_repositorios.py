@@ -35,7 +35,10 @@ def repo(request):
 
 def test_mesmos_dados_de_entrada(repo):
     ref = _json()
-    assert repo.testes() == ref.testes() and repo.prototipos() == ref.prototipos() and repo.pedidos() == ref.pedidos()
+    def ord(xs, k): return sorted(xs, key=k)  # o Supabase devolve em ordem de chave; o mock não
+    assert ord(repo.testes(), lambda t: t.id) == ord(ref.testes(), lambda t: t.id)
+    assert sorted(repo.prototipos()) == sorted(ref.prototipos())
+    assert ord(repo.pedidos(), lambda p: p.area) == ord(ref.pedidos(), lambda p: p.area)
 
 
 def test_cenario_da_demo_igual_nos_dois(repo):

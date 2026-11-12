@@ -75,3 +75,16 @@ def test_api_cenario_da_demo_atraso_aceite_e_versao_antiga():
     assert c.post("/api/status", json={"teste_id": "NAO-EXISTE", "status": "falhou"}).status_code == 422
     leve = c.post("/api/avarias", json={"prototipo_id": "P001", "tipo": "vidro", "gravidade": "leve", "semana": 3, "area": "Aerodinâmica"})
     assert leve.json()["proposta"] is None and c.get("/api/plano").json()["avarias"]
+
+
+def test_rn07_avaria_leve_nao_apaga_proposta_pendente():
+    from application.planejamento import Replanejamento
+    from domain.modelo import Avaria
+    caso = uc()
+    rep = Replanejamento(caso.repo, caso)
+    alvo = caso.plano().alocacoes[0]
+    rep.mudar_status(alvo.teste_id, "atrasado", 1)
+    pendente = rep.pendente
+    rep.registrar_avaria(Avaria(alvo.prototipo_id, "vidro", "leve", 1, "Aerodinâmica"))
+    assert rep.pendente is pendente  # a proposta continua esperando o gerente
+    assert caso.repo.versoes() == [1] and caso.plano().avarias  # leve fica no plano atual, sem versão nova

@@ -41,7 +41,9 @@ class InterpretadorLiteLLM:
         self.modelo, self.fallbacks, self.timeout = modelo, fallbacks or [], timeout
 
     def _chamar(self, **kw):
-        return litellm.completion(model=self.modelo, fallbacks=self.fallbacks, timeout=self.timeout, temperature=0, **kw)
+        # os modelos novos da Anthropic recusam temperature fora do padrão; nos outros, 0 deixa a tradução estável
+        extra = {} if self.modelo.startswith("anthropic/") else {"temperature": 0}
+        return litellm.completion(model=self.modelo, fallbacks=self.fallbacks, timeout=self.timeout, **extra, **kw)
 
     def interpretar(self, texto: str, contexto: dict, testes: list[dict]) -> dict:
         catalogo = "\n".join(f"{t['id']}: {t['nome']} ({t['area']})" for t in testes)

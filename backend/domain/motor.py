@@ -98,6 +98,7 @@ class SugestaoTroca:
     para: str
     inicio: int
     fim: int
+    reteste: bool = False  # True: é a repetição do teste que falhou, em outro carro
 
 
 @dataclass(frozen=True)
@@ -135,6 +136,8 @@ def replanejar(plano: Plano, evento, testes: dict[str, Teste], horizonte: int = 
     impactados: list[Impactado] = []
     colididos: list[Alocacao] = []
     origem = None  # carro de onde saem os testes que colidiram
+    reteste_movido = None  # reteste que foi para outro carro: entra na proposta
+    nao_cabe_extra: list[NaoCabe] = []  # reteste sem lugar: o teste original fica, o reteste não cabe
 
     def no_carro(pid):
         return [a for a in alocs if a.prototipo_id == pid]
@@ -159,24 +162,29 @@ def replanejar(plano: Plano, evento, testes: dict[str, Teste], horizonte: int = 
         status[a.teste_id] = "falhou"
         origem = a.prototipo_id
         descricao = f"{a.teste_id} falhou e precisa repetir"
-        if not t.destrutivo:  # RN-08: repete inteiro, logo em seguida, no mesmo carro
+        sem_reteste = None  # motivo, se o reteste não couber (RN-06)
+        if not t.destrutivo and origem not in _fora_do_pool(avarias):  # RN-08: repete logo em seguida, no mesmo carro
             reteste = Alocacao(a.prototipo_id, a.teste_id, a.fim + 1, a.fim + t.duracao, reteste=True)
             if reteste.fim > horizonte:
-                impactados.append(Impactado(a.teste_id, t.area, f"O reteste terminaria na semana {reteste.fim}; o plano acaba na semana {horizonte} (RN-06)"))
+                sem_reteste = f"O reteste terminaria na semana {reteste.fim}; o plano acaba na semana {horizonte} (RN-06)"
             else:
                 colididos = [x for x in no_carro(origem) if a.inicio < x.inicio <= reteste.fim]
                 alocs.append(reteste)
-        else:  # RN-08: o carro foi destruído; o reteste vai para um carro livre
+        else:  # destrutivo (o carro foi destruído) ou carro fora do pool (RN-09): o reteste vai para um carro livre
             fora = _fora_do_pool(avarias) | {origem}
             melhor = None
             for pid in _candidatos(plano, fora):
-                s = primeira_semana(no_carro(pid), t.duracao, True, testes, horizonte, a_partir=a.fim + 1)
+                s = primeira_semana(no_carro(pid), t.duracao, t.destrutivo, testes, horizonte, a_partir=a.fim + 1)
                 if s is not None and (melhor is None or s < melhor[1]):
                     melhor = (pid, s)
             if melhor:
                 alocs.append(Alocacao(melhor[0], a.teste_id, melhor[1], melhor[1] + t.duracao - 1, reteste=True))
+                reteste_movido = SugestaoTroca(a.teste_id, origem, melhor[0], melhor[1], melhor[1] + t.duracao - 1, reteste=True)
             else:
-                impactados.append(Impactado(a.teste_id, t.area, "Não há carro livre para repetir o teste destrutivo"))
+                sem_reteste = "Não há carro livre para repetir o teste"
+        if sem_reteste:
+            impactados.append(Impactado(a.teste_id, t.area, sem_reteste))
+            nao_cabe_extra.append(NaoCabe(a.teste_id, sem_reteste))
 
     elif isinstance(evento, RegistroAvaria):
         v = evento.avaria
@@ -191,7 +199,7 @@ def replanejar(plano: Plano, evento, testes: dict[str, Teste], horizonte: int = 
     # RN-05: cada teste que colidiu procura outro carro livre nas mesmas semanas
     for x in colididos:
         alocs.remove(x)
-    sugestoes = []
+    sugestoes = [reteste_movido] if reteste_movido else []
     fora = _fora_do_pool(avarias) | ({origem} if origem else set())
     for x in sorted(colididos, key=lambda x: (x.inicio, x.teste_id)):
         destrutivo = testes[x.teste_id].destrutivo
@@ -208,7 +216,7 @@ def replanejar(plano: Plano, evento, testes: dict[str, Teste], horizonte: int = 
     novo = Plano(
         versao=plano.versao + 1,
         alocacoes=sorted(alocs, key=lambda a: (a.prototipo_id, a.inicio)),
-        nao_cabe=plano.nao_cabe + [NaoCabe(i.teste_id, i.motivo) for i in impactados if i.teste_id in removidos],
+        nao_cabe=plano.nao_cabe + [NaoCabe(i.teste_id, i.motivo) for i in impactados if i.teste_id in removidos] + nao_cabe_extra,
         reserva=[p for p in plano.reserva if p not in usados],
         status=status,
         avarias=avarias,

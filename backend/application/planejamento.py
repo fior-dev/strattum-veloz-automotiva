@@ -80,16 +80,18 @@ class Replanejamento:
         self.repo.salvar(plano)
         return None
 
-    def registrar_avaria(self, avaria: Avaria) -> Proposta:
+    def registrar_avaria(self, avaria: Avaria) -> Proposta | None:
         """RF-08: registrar dispara o RN-09 na mesma ação."""
         if avaria.prototipo_id not in self.planejamento.plano().prototipos():
             raise EventoInvalido(f"O protótipo {avaria.prototipo_id} não está no plano")
         if avaria.tipo not in TIPOS_AVARIA or avaria.gravidade not in GRAVIDADES:
             raise EventoInvalido("Tipo ou gravidade de avaria desconhecidos")
-        proposta = self.propor(RegistroAvaria(avaria))
-        if avaria.gravidade == "leve":  # leve não muda o plano: registra direto, sem aceite
-            self.aceitar()
-        return proposta
+        if avaria.gravidade == "leve":  # RN-09: leve só fica visível; não cria versão nem mexe na proposta pendente
+            plano = self.planejamento.plano()
+            plano.avarias.append(avaria)
+            self.repo.salvar(plano)
+            return None
+        return self.propor(RegistroAvaria(avaria))
 
     def propor(self, evento) -> Proposta:
         atual = self.planejamento.plano()
