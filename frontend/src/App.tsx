@@ -36,6 +36,7 @@ export default function App() {
   const [aberto, setAberto] = useState<Alocacao>()
   const [proposta, setProposta] = useState<Proposta>()
   const [busca, setBusca] = useState('')
+  const [naoAchei, setNaoAchei] = useState('')
 
   const carregar = (v?: number) =>
     Promise.all([api.plano(v), api.comparativo(), api.proposta(), api.gestao(v)])
@@ -46,7 +47,8 @@ export default function App() {
   const verVersao = (v?: number) => { setVersao(v); setAberto(undefined); carregar(v) }
   const abrirTeste = (id: string) => {
     const doTeste = plano?.alocacoes.filter((a) => a.teste_id === id.trim().toUpperCase()) ?? []
-    if (doTeste.length) setAberto(doTeste[doTeste.length - 1])
+    if (doTeste.length) { setAberto(doTeste[doTeste.length - 1]); setNaoAchei('') }
+    else setNaoAchei(id.trim() ? `Não achei o teste ${id.trim().toUpperCase()} neste plano.` : 'Digite o ID de um teste.')
   }
   const atual = versao === undefined
   const destaque = new Set([...(proposta?.sugestoes.map((s) => s.teste_id) ?? []), ...(proposta?.impactados.map((i) => i.teste_id) ?? [])])
@@ -104,7 +106,7 @@ export default function App() {
             <datalist id="ids">{Object.keys(plano.testes).map((id) => <option key={id} value={id} />)}</datalist>
             <button className="px-3 py-1 rounded-sm bg-tinta text-pista cursor-pointer">Abrir teste</button>
           </form>
-          <span className="text-grafite">ou clique numa barra.</span>
+          <span className={naoAchei ? 'text-seg font-medium' : 'text-grafite'} role="status">{naoAchei || 'ou clique numa barra.'}</span>
           <label className="ml-auto">Versão do plano{' '}
             <select className="border border-linha rounded-sm px-2 py-1 bg-pista" value={versao ?? ''}
               onChange={(e) => verVersao(e.target.value ? Number(e.target.value) : undefined)}>

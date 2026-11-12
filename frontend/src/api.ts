@@ -28,6 +28,7 @@ export type Comparativo = {
 
 async function pedir<T>(caminho: string, init?: RequestInit): Promise<T> {
   const r = await fetch(`/api${caminho}`, { headers: { 'Content-Type': 'application/json' }, ...init })
+    .catch(() => { throw new Error('A API não respondeu') })
   if (!r.ok) {
     const corpo = await r.json().catch(() => ({}))
     throw new Error(typeof corpo.detail === 'string' ? corpo.detail : `A API respondeu ${r.status}`)
