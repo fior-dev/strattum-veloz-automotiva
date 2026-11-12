@@ -10,7 +10,7 @@ export function Gantt({ plano, aoClicar, destaque, folgas = {}, marco = 20 }: {
   const porCarro = new Map<string, Alocacao[]>()
   for (const a of plano.alocacoes) porCarro.set(a.prototipo_id, [...(porCarro.get(a.prototipo_id) ?? []), a])
   const linhas = [...plano.prototipos, ...plano.reserva]
-  const colunas = `5.5rem repeat(${n}, minmax(2.6rem, 1fr))`
+  const colunas = `5.5rem repeat(${n}, minmax(1.9rem, 1fr))`
 
   return (
     <div className="overflow-auto max-h-[70vh] border border-linha rounded-md bg-pista">

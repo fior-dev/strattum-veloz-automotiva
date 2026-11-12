@@ -1,4 +1,11 @@
-import { useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
+
+// o painel abre na coluna ao lado do Gantt: rola até ele para o resultado do clique aparecer
+function useAparecer() {
+  const r = useRef<HTMLElement>(null)
+  useEffect(() => { r.current?.scrollIntoView({ behavior: 'smooth', block: 'nearest' }) }, [])
+  return r
+}
 import { COR_AREA, replan, type Alocacao, type Plano, type Proposta } from './api'
 
 const botao = 'px-3 py-1.5 rounded-sm border border-tinta/30 hover:bg-asfalto cursor-pointer disabled:opacity-40'
@@ -17,12 +24,13 @@ export function PainelTeste({ plano, aloc, somenteLeitura, aoProposta, aoMudar, 
   const [semanas, setSemanas] = useState(1)
   const [avaria, setAvaria] = useState({ tipo: 'lataria', gravidade: 'leve', semana: aloc.fim })
   const [erro, setErro] = useState('')
+  const ref = useAparecer()
 
   const enviar = (p: Promise<{ proposta: Proposta | null }>) =>
     p.then((r) => (r.proposta ? aoProposta(r.proposta) : aoMudar())).catch((e) => setErro(e.message))
 
   return (
-    <aside className="bg-pista border border-linha rounded-md p-4 text-sm space-y-3">
+    <aside ref={ref} className="bg-pista border border-linha rounded-md p-4 text-sm space-y-3">
       <div className="flex justify-between items-start gap-2">
         <div>
           <p className="font-cond text-xl font-semibold">
@@ -87,15 +95,21 @@ export function PainelProposta({ proposta, plano, aoDecidir, podeDecidir = true 
   // RN-06: bloqueado por padrão quando a proposta empurra o fim além do marco
   const estoura = !!proposta.marco && proposta.marco.fim_depois > Math.max(plano.horizonte, proposta.marco.fim_antes)
   const [estourar, setEstourar] = useState(false)
+  const ref = useAparecer()
+  const m = proposta.marco
   return (
-    <aside className="bg-pista border-2 border-faixa rounded-md p-4 text-sm space-y-3">
+    <aside ref={ref} className="bg-pista border-2 border-faixa rounded-md p-4 text-sm space-y-3">
       <p className="font-cond text-xl font-semibold">Proposta de replanejamento</p>
       <p>{proposta.evento}.</p>
       {proposta.marco && <p className="bg-asfalto rounded-sm p-2">
         {proposta.marco.estava_no_caminho_critico === null ? '' : proposta.marco.estava_no_caminho_critico ? 'O teste estava no caminho crítico. ' : 'O teste não estava no caminho crítico. '}
         {proposta.marco.semanas_consumidas > 0
-          ? <>Este evento move o fim do plano da semana {proposta.marco.fim_antes} para a <b>{proposta.marco.fim_depois}</b> e consome {proposta.marco.semanas_consumidas} das {Math.max(proposta.marco.folga_projeto_antes, 0)} semanas de folga do projeto.</>
-          : <>Com a proposta, o fim do plano continua na semana <b>{proposta.marco.fim_depois}</b>: o lançamento não se move.</>}
+          ? <>Este evento move o fim do plano da semana {m!.fim_antes} para a <b>{m!.fim_depois}</b>{m!.folga_projeto_antes > 0
+            ? <> e consome {m!.semanas_consumidas} das {m!.folga_projeto_antes} semanas de folga do projeto.</>
+            : <>. Não havia folga: o lançamento atrasa {m!.fim_depois - Math.max(m!.fim_antes, plano.horizonte)} semana(s).</>}</>
+          : m!.fim_depois > plano.horizonte
+            ? <>Com a proposta, o fim do plano continua na semana <b>{m!.fim_depois}</b>, que já é depois do lançamento: este evento não piora o atraso.</>
+            : <>Com a proposta, o fim do plano continua na semana <b>{m!.fim_depois}</b>: o lançamento não se move.</>}
       </p>}
       {vazio && <p>Nenhum outro teste é afetado.</p>}
       {proposta.sugestoes.length > 0 && <div>

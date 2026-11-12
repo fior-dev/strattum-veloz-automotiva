@@ -27,6 +27,7 @@ function Numero({ titulo, carros, semana, selo, detalhe }: { titulo: string; car
 }
 
 const TUDO = 6
+const parados = (us: { parados: number }[]) => us.reduce((s, u) => s + u.parados, 0)
 const PASSOS = ['Como é hoje', 'O plano compartilhado', 'A conta da frota', 'O que segura o lançamento', 'O imprevisto']
 
 // Apresentação guiada: a tela se monta em 5 passos, cada um com a explicação do que apareceu
@@ -47,7 +48,7 @@ function Guia({ passo, ir, comp, g }: { passo: number; ir: (p: number) => void; 
     <>A gordura escondida vira uma folga à vista: <b>{p.carros_reserva} carros de reserva</b>, para repetir teste destrutivo que
       falha. {p.carros_plano} + {p.carros_reserva} = <b>{p.carros}</b>, contra {comp.como_hoje.carros} dos pedidos:
       {' '}<b>{comp.como_hoje.carros - p.carros} carros a menos</b>. Mexa no controle da folga para ver quanto custa cada ponto.
-      O gráfico de baixo mostra o motivo: nos pedidos por área, os carros passam a maior parte do tempo parados.</>,
+      O gráfico de baixo mostra o motivo: nos pedidos por área, os carros ficam parados {parados(g.uso.como_hoje).toLocaleString('pt-BR')} carros-semana, contra {parados(g.uso.plano).toLocaleString('pt-BR')} no plano.</>,
     <>O preço da frota menor é o prazo. O plano enche cada carro até a semana {g.fim_plano}, então <b>{g.criticos} de {g.testes_no_plano} testes</b>{' '}
       estão no caminho crítico: se um deles atrasa e não há troca de carro, o lançamento atrasa. A tabela mostra quanto custa
       comprar prazo. Escolher a meta é decisão da coordenação, não do sistema.</>,
@@ -142,7 +143,7 @@ export default function App() {
     <main className="px-4 md:px-8 py-6 max-w-[1500px] mx-auto">
       <header className="flex flex-wrap items-baseline justify-between gap-2">
         <h1 className="font-cond text-3xl font-bold">Frota de protótipos do SUV</h1>
-        <p className="text-grafite">Veloz Automotiva · plano versão {plano.versao} ({plano.estado}) · {comp.testes} testes das 5 engenharias<Selo id="MK-01" /></p>
+        <p className="text-grafite">Veloz Automotiva · plano versão {plano.versao} ({atual ? 'em vigor' : 'consulta'}) · {comp.testes} testes das 5 engenharias<Selo id="MK-01" /></p>
         <label className="text-sm w-full md:w-auto">Você está como{' '}
           <select className="border border-linha rounded-sm px-2 py-1 bg-pista" value={perfil} onChange={(e) => setPerfil(e.target.value as typeof perfil)}>
             <option value="gerente">Gerente da coordenação: aceita e recusa propostas</option>
@@ -165,7 +166,7 @@ export default function App() {
         <div className="md:border-l border-linha md:pl-6">
           <p className="font-cond text-4xl font-bold">{Math.abs(menos)} carros a {menos >= 0 ? 'menos' : 'mais'} ({menos >= 0 ? '−' : '+'}{Math.abs(comp.reducao_pct).toLocaleString('pt-BR')}%)</p>
           <p className="text-sm mt-1">A frota cai porque um carro que uma área libera passa a servir a outra, e a gordura de cada pedido vira uma folga única e à vista.
-            O preço é terminar mais perto da semana 20, que ainda é o limite.</p>
+            O preço é o prazo: o plano compartilhado usa as 20 semanas até o lançamento.</p>
           <label className="block mt-3 text-sm font-medium" htmlFor="folga">
             Folga de reteste: {folga}% dos {comp.destrutivos} testes destrutivos = {comp.proposto.carros_reserva} carros<Selo id="MK-06" />
           </label>
@@ -198,15 +199,15 @@ export default function App() {
             </select>
           </label>
         </div>
-        <div className="grid lg:grid-cols-[1fr_24rem] gap-4 items-start">
+        <div className="grid lg:grid-cols-[1fr_21rem] gap-4 items-start">
           <Gantt plano={plano} aoClicar={setAberto} destaque={destaque} folgas={gestao.folgas} marco={gestao.marco} />
           <div className="space-y-4 lg:sticky lg:top-4">
-            {atual && p >= 5 && <Copiloto aoProposta={() => carregar()} />}
             {proposta && <PainelProposta proposta={proposta} plano={plano} podeDecidir={perfil === 'gerente'}
               aoDecidir={() => { setProposta(undefined); setAberto(undefined); carregar() }} />}
             {aberto && <PainelTeste plano={plano} aloc={aberto} somenteLeitura={!atual} key={`${aberto.teste_id}-${aberto.inicio}`}
               aoProposta={(pr) => { setProposta(pr); setAberto(undefined) }} aoMudar={() => { setAberto(undefined); carregar() }}
               aoFechar={() => setAberto(undefined)} />}
+            {atual && p >= 5 && <Copiloto key={plano.versao} aoProposta={() => carregar()} />}
             {!proposta && !aberto && <p className="text-sm text-grafite bg-pista border border-linha rounded-md p-4">
               Abra um teste para registrar que começou, terminou, atrasou ou falhou, ou para registrar uma avaria no carro.
               Se outro teste for afetado, o sistema propõe a troca e o gerente da coordenação decide.</p>}
