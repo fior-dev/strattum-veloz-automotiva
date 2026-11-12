@@ -1,6 +1,6 @@
 # Discovery · Veloz Automotiva, alocação da frota de protótipos
 
-Versão 0.2, 11/11/2026. Este é o documento de descobertas da entrevista de discovery do case de FDE da Strattum.
+Versão 0.3, 12/11/2026. A v0.2 foi aprovada pelo José em 12/11. A v0.3 aplica a resposta da Maira por e-mail: os protótipos são idênticos, e existe desgaste parcial. Também aprova a RN-07 e a RN-08 e cria a RN-09 (avarias). Este é o documento de descobertas da entrevista de discovery do case de FDE da Strattum.
 O método é o *Fiortech's FDE Playbook*, Fase 1. O documento é a base para escrever o PRD e as specs (SDD). Ele não substitui nenhum dos dois.
 
 **Etiqueta de fonte em cada afirmação:**
@@ -9,10 +9,11 @@ O método é o *Fiortech's FDE Playbook*, Fase 1. O documento é a base para esc
 |---|---|
 | `[T]` | Transcrição da entrevista de 11/11, 11:30, com a Maira Neves no papel da cliente |
 | `[N]` | Notas privadas do José na mesma entrevista. `[N-G]` é o resumo do Gemini colado nas notas: é material de IA, não fala da cliente |
-| `[P]` | Premissa adotada pelo José em 11/11 para o mock. Vale até a Maira responder o e-mail de 11/11, 15:37. A resposta dela substitui a premissa |
+| `[E]` | E-mail da Maira ao José, 11/11, à tarde |
+| `[P]` | Premissa adotada ou aprovada pelo José para o mock |
 | `[H]` | Hipótese ou proposta do FDE, a provar no protótipo ou a confirmar pelo José |
 
-`[A ESCLARECER]` marca o que depende da resposta da Maira.
+Na v0.3 não há mais item `[A ESCLARECER]`: a Maira e o José responderam todos.
 
 ---
 
@@ -93,11 +94,11 @@ Escala: com dois lançamentos ao mesmo tempo, o gargalo é a capacidade de teste
 
 | Termo | Definição para o sistema |
 |---|---|
-| **Protótipo** | Um carro físico da frota, com ID, variante e estado (disponível, alocado, destruído) |
-| **Variante** | Configuração do protótipo: Base, Intermediária ou Topo (RN-01) |
+| **Protótipo** | Um carro físico da frota, com ID e estado (disponível, comprometido, destruído). Os 250 são idênticos `[E]` |
+| **Avaria** | Desgaste parcial registrado pela engenharia: tipo (vidro, lataria, pneu, outro) e gravidade (leve, compromete reuso) (RN-09) |
 | **Área** | Uma das 5 engenharias, dona dos testes |
 | **Pedido** | O que a área pede hoje: N carros por S semanas. É a base do cenário "como hoje" |
-| **Teste** | Trabalho de uma área sobre um protótipo. Tem variante exigida, duração em semanas, a marca destrutivo sim/não e um status |
+| **Teste** | Trabalho de uma área sobre um protótipo. Tem duração em semanas, a marca destrutivo sim/não e um status |
 | **Semana** | Unidade de tempo do plano, de 1 a 20 |
 | **Alocação** | Um protótipo atribuído a um teste num intervalo de semanas. É a unidade do plano |
 | **Plano** | O conjunto das alocações. Tem versão e estado (rascunho, aprovado) |
@@ -107,11 +108,12 @@ Escala: com dois lançamentos ao mesmo tempo, o gargalo é a capacidade de teste
 |---|---|---|---|
 | Pedir teste | Área | Entra um teste na fila | `[T]` |
 | Gerar plano | Sistema | Cria as alocações (RF-02) | `[H]` |
-| Aprovar plano ou troca | Coordenação | Plano ou sugestão aprovados | `[H]` `[A ESCLARECER]` |
+| Aprovar plano ou troca | Gerente da coordenação | Plano ou sugestão aprovados | `[P]` |
 | Iniciar teste | Área | Status: em andamento | `[H]` |
 | Concluir teste | Área | Libera o protótipo (RN-03), ou o destrói, se o teste for destrutivo | `[P]` |
 | Atrasar (+1 semana) | Área | Dispara o replanejamento (RN-05) | `[P]` |
 | Falhar (repetir) | Área | Dispara o replanejamento (RN-05 e RN-08) | `[P]` |
+| Registrar avaria | Área | Avaria leve: só fica visível. Avaria que compromete reuso: o protótipo sai do pool e dispara o replanejamento (RN-09) | `[P]` |
 
 Hoje a tradução entre áreas mora no Excel de formato livre. O sistema troca esse Excel pelo vocabulário acima. `[H]`
 
@@ -119,39 +121,40 @@ Hoje a tradução entre áreas mora no Excel de formato livre. O sistema troca e
 
 | ID | Regra | Fonte |
 |---|---|---|
-| RN-01 | A frota tem 3 variantes: **Base** (ex.: 1.0 Turbo), **Intermediária** (ex.: 1.4 Híbrido) e **Topo** (ex.: 2.0 4x4 com ADAS e sensores). Cada teste exige uma variante ou aceita **Qualquer**. Um protótipo serve a um teste se a variante dele é a exigida, ou se o teste aceita Qualquer | `[P]` `[A ESCLARECER]` |
+| RN-01 | Os 250 protótipos são idênticos: qualquer protótipo livre serve a qualquer teste. A premissa das 3 variantes caiu em 11/11 | `[E]` |
 | RN-02 | Exclusividade no tempo: um protótipo está em no máximo 1 teste por semana | `[P]`; que um teste bloqueia o carro é `[T]` |
 | RN-03 | Teste não destrutivo: ao terminar, o protótipo fica disponível para reuso por qualquer área | `[P]`; reaproveitar carro entre testes é `[T]` |
 | RN-04 | Teste destrutivo (crash, durabilidade extrema) é sempre o **último** do protótipo e o destrói. Um protótipo tem no máximo 1 teste destrutivo | `[P]`; o crash test como destrutivo é `[T]` |
-| RN-05 | Replanejamento. Quando um teste A vira "Atrasado (+1 semana)" ou "Falhou", o sistema recalcula o fim de A. Se o protótipo de A estava prometido a outro teste B que agora colide, o sistema sugere mover B para outro protótipo livre e compatível com B (RN-01). Se não houver, lista B e a área dele como impactados | `[P]`; a dor de replanejar com chuva ou reprovação é `[T]` |
+| RN-05 | Replanejamento. Quando um teste A vira "Atrasado (+1 semana)" ou "Falhou", o sistema recalcula o fim de A. Se o protótipo de A estava prometido a outro teste B que agora colide, o sistema sugere mover B para outro protótipo livre. Se não houver, lista B e a área dele como impactados | `[P]`; a dor de replanejar com chuva ou reprovação é `[T]` |
 | RN-06 | O plano não passa da semana 20. O que não cabe aparece como "não cabe", com o motivo | `[T]` |
-| RN-07 | A coordenação aprova o plano e as trocas. O sistema sugere, não decide sozinho | `[H]` `[A ESCLARECER]`: quem aprova a alocação não foi perguntado |
-| RN-08 | Repetição. Teste não destrutivo que falha repete inteiro, logo em seguida, no mesmo protótipo. Teste destrutivo que falha repete num protótipo novo ou livre e compatível | `[H]`, a confirmar pelo José; a Maira deixou em aberto se repete no mesmo carro ou num novo `[T]` |
+| RN-07 | A coordenação aprova o plano e as trocas, na figura do gerente dela. O sistema sugere, não decide sozinho | `[P]`, José em 12/11 |
+| RN-08 | Repetição. Teste não destrutivo que falha repete inteiro, logo em seguida, no mesmo protótipo. Teste destrutivo que falha repete num protótipo novo ou livre e compatível | `[P]`, aprovada pelo José em 12/11 |
+| RN-09 | Avaria. A engenharia registra o desgaste parcial no protótipo, com tipo e gravidade, e é ela quem classifica a gravidade. Avaria **leve** fica visível ao planejamento e não muda o plano. Avaria que **compromete reuso** tira o protótipo do pool. As alocações futuras dele são tratadas como colisão pelo RN-05 | existência do desgaste `[E]`; a regra é `[P]`, José em 12/11 |
 
-**Livre**: um protótipo não destruído, sem alocação nas semanas pedidas e sem destrutivo agendado antes do fim delas.
+**Livre**: um protótipo não destruído nem comprometido, sem alocação nas semanas pedidas e sem destrutivo agendado antes do fim delas.
 
 ## 10. Hipóteses e como o protótipo testa (Playbook, perguntas 4 e 5)
 
 | ID | Hipótese | Teste no protótipo, com dado mockado |
 |---|---|---|
-| H-1 | A frota sobra porque cada área reserva carros dedicados: um por teste em paralelo, mais a folga. Compartilhar os carros entre áreas, respeitando variante e destrutivo, reduz a frota sem passar da semana 20 | Comparar o "como hoje" (§11, RF-03) com o plano compartilhado: número de protótipos e semana de fim |
+| H-1 | A frota sobra porque cada área reserva carros dedicados: um por teste em paralelo, mais a folga. Compartilhar os carros entre áreas, respeitando a regra do destrutivo, reduz a frota sem passar da semana 20 | Comparar o "como hoje" (§11, RF-03) com o plano compartilhado: número de protótipos e semana de fim |
 | H-2 | A folga contra reprovação pode cair se o replanejamento achar um carro livre na hora | Simular reprovações e atrasos com a taxa do mock (MK-04) e contar quantas o RN-05 resolve sem carro novo |
 | H-3 | O gargalo da coordenação é a falta de visibilidade, não a falta de carro | Mostrar a visão por protótipo e semana, com os conflitos. É um julgamento qualitativo da Maira na demo |
 
 ## 11. Escopo do protótipo (sexta 13/11)
 
 **Dentro**
-- RF-01: Carga de CSV mockado com os protótipos (ID, variante), os pedidos por área e os testes (área, variante exigida, duração em semanas, destrutivo).
+- RF-01: Carga do mock: protótipos (ID), pedidos por área e testes (área, duração em semanas, destrutivo).
 - RF-02: Geração de um plano que respeita RN-01 a RN-04 e RN-06. O objetivo é, primeiro, o menor número de protótipos e, depois, a menor semana de fim. A heurística é gulosa, nesta ordem:
-  1. testes que exigem variante específica antes dos que aceitam Qualquer;
-  2. dentro disso, duração maior primeiro;
-  3. destrutivos por último em cada protótipo.
+  1. duração maior primeiro;
+  2. destrutivos por último em cada protótipo.
 
   O teste vai para o protótipo já aberto que o comporta mais cedo, e só abre protótipo novo se nenhum serve. O desempate é pelo menor ID.
 - RF-03: Comparação "como hoje" × "plano compartilhado". **Como hoje** é a soma dos pedidos por área, ou seja, carros dedicados, sem reuso entre áreas e já com a gordura (MK-03). A comparação mostra o número de protótipos e a semana de fim dos dois.
 - RF-04: Visão do plano por protótipo × semana, com a área e o teste em cada célula.
 - RF-05: Mudança de status de um teste: em andamento, atrasado, falhou, concluído.
 - RF-06: Replanejamento do RN-05: lista de sugestões de troca ou de impactados, e o aceite pela coordenação, que gera uma nova versão do plano.
+- RF-08: Registro de avaria (RN-09) e visão das avarias por protótipo.
 - RF-07: Selo "mock" em todo dado suposto, na tela e na apresentação, com o ID da premissa.
 
 **Fora** (vai para o roadmap)
@@ -177,13 +180,14 @@ Hoje a tradução entre áreas mora no Excel de formato livre. O sistema troca e
 
 ## 12. Modelo de dados mínimo
 
-O mock do José pede 4 colunas nos Testes e 2 nos Carros `[P]`. As specs precisam de mais:
+O mock do José previa 4 colunas nos Testes e 2 nos Carros `[P]`. A variante caiu com o e-mail da Maira, e as specs precisam de mais:
 
 | Entidade | Campos |
 |---|---|
-| Prototipo | `id`, `variante` (Base, Intermediaria, Topo), `estado` (disponivel, alocado, destruido) |
+| Prototipo | `id`, `estado` (disponivel, comprometido, destruido) |
+| Avaria | `prototipo_id`, `tipo` (vidro, lataria, pneu, outro), `gravidade` (leve, compromete_reuso), `semana`, `area` |
 | Pedido | `area`, `carros`, `semanas`: entra só no "como hoje" |
-| Teste | `id`, `area`, `variante_exigida` (Base, Intermediaria, Topo ou Qualquer), `duracao_semanas`, `destrutivo` (bool), `status` (planejado, em_andamento, atrasado, falhou, concluido) |
+| Teste | `id`, `area`, `duracao_semanas`, `destrutivo` (bool), `status` (planejado, em_andamento, atrasado, falhou, concluido) |
 | Alocacao | `prototipo_id`, `teste_id`, `semana_inicio`, `semana_fim`, `plano_versao` |
 | Plano | `versao`, `estado` (rascunho, aprovado), `criado_em` |
 | SugestaoTroca | `teste_id`, `de_prototipo`, `para_prototipo` (vazio quando só há impacto), `estado` (pendente, aceita, recusada) |
@@ -191,21 +195,23 @@ O mock do José pede 4 colunas nos Testes e 2 nos Carros `[P]`. As specs precisa
 ## 13. Critérios de aceite (base das specs)
 
 **Regras**
-- **RN-01.** Um teste que exige Topo só recebe protótipo Topo. Um teste com Qualquer aceita as três variantes.
+- **RN-01.** Qualquer protótipo livre pode receber qualquer teste.
 - **RN-02.** Com P1 alocado ao teste A nas semanas 3 a 5, uma alocação de P1 a outro teste na semana 4 é recusada.
-- **RN-03.** Com o teste não destrutivo A concluído em P1 na semana 6, o plano aloca a P1 um teste de outra área, compatível, a partir da semana 7.
+- **RN-03.** Com o teste não destrutivo A concluído em P1 na semana 6, o plano aloca a P1 um teste de outra área a partir da semana 7.
 - **RN-04.** Com P1 tendo um destrutivo nas semanas 8 a 9:
   - qualquer alocação de P1 depois da semana 9 é recusada;
   - um segundo destrutivo em P1 é recusado;
   - um não destrutivo em P1 só entra até a semana 7.
-- **RN-05, com troca.** O teste A está em P1 até a semana 5, e o teste B está prometido a P1 na semana 6. Quando A vira "Atrasado (+1 semana)" e P2 está livre e é compatível com B, aparece a sugestão "mover B de P1 para P2".
-- **RN-05, sem troca.** No mesmo cenário, sem protótipo livre e compatível, B e a área dele aparecem como impactados.
+- **RN-05, com troca.** O teste A está em P1 até a semana 5, e o teste B está prometido a P1 na semana 6. Quando A vira "Atrasado (+1 semana)" e P2 está livre, aparece a sugestão "mover B de P1 para P2".
+- **RN-05, sem troca.** No mesmo cenário, sem protótipo livre, B e a área dele aparecem como impactados.
 - **RN-05, sem colisão.** Se B só começa na semana 8, o atraso de A não gera sugestão.
 - **RN-06.** Um teste que só caberia depois da semana 20 aparece como "não cabe", com o motivo, e não gera alocação.
-- **RN-08.** Um teste não destrutivo que falha ganha uma nova alocação, com a mesma duração, no mesmo protótipo, logo depois da original, e o RN-05 trata a colisão. Um destrutivo que falha ganha a alocação num protótipo livre e compatível.
+- **RN-08.** Um teste não destrutivo que falha ganha uma nova alocação, com a mesma duração, no mesmo protótipo, logo depois da original, e o RN-05 trata a colisão. Um destrutivo que falha ganha a alocação num protótipo livre.
+- **RN-09.** Avaria leve em P1: o plano não muda, e a avaria aparece na visão de P1. Avaria que compromete reuso em P1 na semana 6: P1 não recebe alocação nova, e cada teste prometido a P1 depois da semana 6 gera sugestão de troca ou aparece como impactado.
 
 **Requisitos**
-- **RF-01.** Um CSV com coluna faltando ou com variante inválida é recusado, com a linha do erro.
+- **RF-01.** Um mock com campo faltando ou com duração inválida é recusado, com o item do erro.
+- **RF-08.** Registrar uma avaria a mostra na visão do protótipo. Se a gravidade for "compromete reuso", o RN-09 dispara na mesma ação.
 - **RF-02.** Rodar duas vezes com o mesmo CSV dá o mesmo plano, alocação por alocação. Nenhuma alocação viola RN-01 a RN-04 nem RN-06.
 - **RF-03.** A tela mostra os dois números de protótipos e as duas semanas de fim. O "como hoje" é igual à soma dos pedidos.
 - **RF-04.** Cada célula ocupada mostra a área e o ID do teste. A célula de protótipo destruído aparece marcada.
@@ -217,7 +223,7 @@ O mock do José pede 4 colunas nos Testes e 2 nos Carros `[P]`. As specs precisa
 
 1. O "como hoje", com os pedidos somados por área, contra o plano compartilhado: a frota cai de N para M, com os números do mock.
 2. Ao vivo: o teste de aerodinâmica é marcado "Atrasado (+1 semana)", porque precisava de chuva. `[T]`
-3. O sistema mostra que o protótipo estava prometido a um teste da Dinâmica veicular e sugere outro carro livre e compatível.
+3. O sistema mostra que o protótipo estava prometido a um teste da Dinâmica veicular e sugere outro carro livre.
 4. A coordenação aceita, e o plano ganha a versão 2.
 
 ## 15. Roadmap `[H]`
@@ -234,16 +240,17 @@ O mock do José pede 4 colunas nos Testes e 2 nos Carros `[P]`. As specs precisa
 | Risco | Mitigação |
 |---|---|
 | A engenharia não registra o status, e o plano fica cego | O ganho dela precisa ser visível: carro garantido na reprovação sem pedir folga. Na demo, o RN-05 mostra isso |
-| A resposta da Maira muda as premissas `[P]` | As regras estão isoladas no §9. Trocar a regra de variante ou de destrutivo muda o código das regras e os testes, não a interface |
+| A resposta da Maira muda as premissas `[P]` | As regras estão isoladas no §9. Trocar a regra de destrutivo ou de avaria muda o código das regras e os testes, não a interface |
 | A demo com números do mock parece prometer redução real | Declarar o Y e o mock na abertura (RF-07) |
 
 ## 17. Em aberto
 
 | # | Pergunta | Afeta | Situação |
 |---|---|---|---|
-| 1 | Quem aprova a alocação dos veículos? | RN-07 | `[A ESCLARECER]`, no e-mail à Maira de 11/11, 15:37 |
-| 2 | As variantes e a regra destrutivo/não destrutivo valem? | RN-01, RN-03, RN-04 | `[A ESCLARECER]`, no mesmo e-mail |
-| 3 | O teste que falha repete no mesmo carro ou num novo, e com qual duração? | RN-08 | Premissa `[H]` até o José confirmar. Não está no e-mail |
+| 1 | Quem aprova a alocação dos veículos? | RN-07 | Resolvida em 12/11: o gerente da coordenação (José) |
+| 2 | As variantes valem? Há outra restrição entre testes? | RN-01, RN-09 | Resolvida em 11/11 `[E]`: os carros são idênticos, e existe desgaste parcial invisível ao planejamento |
+| 3 | O teste que falha repete no mesmo carro ou num novo? | RN-08 | Resolvida em 12/11: aprovada como está (José) |
+| RN-09 | Avaria. A engenharia registra o desgaste parcial no protótipo, com tipo e gravidade, e é ela quem classifica a gravidade. Avaria **leve** fica visível ao planejamento e não muda o plano. Avaria que **compromete reuso** tira o protótipo do pool. As alocações futuras dele são tratadas como colisão pelo RN-05 | existência do desgaste `[E]`; a regra é `[P]`, José em 12/11 |
 | 4 | Lista e quantidade de testes por área | mock | A Maira disse que não daria `[T]`. Fica no MK-01 |
 
 ## 18. Rastreabilidade: daqui para o PRD e para as specs

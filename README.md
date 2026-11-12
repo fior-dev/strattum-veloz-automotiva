@@ -6,6 +6,6 @@ O cliente é fictício: a Veloz Automotiva quer reduzir a frota de 250 protótip
 | Arquivo | O que é |
 |---|---|
 | `docs/01-discovery.md` | Descobertas da entrevista, base do PRD e das specs |
-| `docs/registro-ia.md` | Registro do uso de IA. É uma das entregas do case |
+| `AI-LOG.md` | Registro do uso de IA. É uma das entregas do case |
 
 Os próximos arquivos virão nesta ordem: PRD, specs, dado mockado, protótipo e apresentação.
