@@ -20,6 +20,7 @@ A Strattum pediu este registro como entrega do case. Cada linha diz o que foi fe
 | 12/11 10h45 | Supabase (05b) | Claude Code (Opus 5.5) + MCP do Supabase | Ajuste 14 | A organização está no plano Pro: todo projeto novo é pago. Nada foi criado (conferido no `list_projects`) | Vetou projeto pago; a 05b espera a decisão dele |
 | 12/11 10h50 | Formato do painel | Claude Code (Opus 5.5) | `painel/README.md`, pedido da thread do painel | Tickets com Estado, Real e Commits; coluna José no AI-LOG; linha duplicada da RN-09 tirada do §17 do discovery |  |
 | 12/11 11h | Fatias 5b, 6a e 6b | Claude Code (Opus 5.5) | Tickets 05b, 06a, 06b | Adapter Supabase só com a stdlib, schema com RLS sem política e teste de contrato que roda o cenário da demo nos dois repositórios (o Supabase espera a chave). Acabamento da tela. `ROADMAP.md`, `docs/mapa-arquitetura.md` com SIPOC por rota, README com roteiro da demo; os números do roteiro conferidos na API | Criou o projeto Supabase numa organização Free |
+| 12/11 11h30 | Revisão independente do código (code review) | Claude Code (Opus 5.5, esforço high), subagente sem o contexto da sessão | `git diff 8a7b3d0..HEAD` sem o painel | 1 bloqueante, 7 importantes, 6 menores; ver Revisões. Correções no commit 609794b | |
 
 ## Revisões
 
@@ -41,3 +42,22 @@ A revisão leu os rascunhos das 00h21, antes do mock existir. Parte dos achados 
 | 11 | Piso barato ao lado do plano | Não feito: vai para o roadmap |
 | 12 | Teste em andamento na avaria | Declarado no SPEC: fica no carro até o fim |
 | 13 | Redação do ADR 0001 sobre a stdlib | Corrigida |
+
+### Revisão independente do código (Opus 5.5, esforço high, só leitura), 12/11 11h30
+Cada achado do motor virou primeiro um teste vermelho (`test_rn09_reteste_nao_volta_a_carro_fora_do_pool`, `test_rn06_reteste_que_nao_cabe_fica_em_nao_cabe`, `test_rn08_reteste_destrutivo_aparece_na_proposta`, `test_rn07_avaria_leve_nao_apaga_proposta_pendente`).
+
+| # | Achado | O que foi feito |
+|---|---|---|
+| 1 | Bloqueante: no roteiro do README, o passo 4 (copiloto) não repetia a proposta do passo 3, porque o passo 3 já tinha aceitado | Roteiro corrigido: recusar no passo 3, aceitar no passo 4. Conferido na API |
+| 2 | Reteste voltava para carro fora do pool (RN-09) | Corrigido: carro fora do pool trata o reteste como o destrutivo, em outro carro |
+| 3 | Reteste que não cabe sumia depois do aceite (RN-06) | Corrigido: vira "não cabe" no plano novo |
+| 4 | Atraso que passa da semana 20 deixa o plano aceito terminando depois do marco, e o Gantt corta a barra | Aberto: decisão do José (Esperando pelo José) |
+| 5 | Avaria leve apagava a proposta pendente e criava versão sem o gerente (RN-07) | Corrigido: leve grava no plano atual, sem versão nova e sem tocar na proposta |
+| 6 | Falha de destrutivo gastava carro da reserva sem aparecer na proposta | Corrigido: a proposta mostra "Repetir X fora do P1 no P2" |
+| 7 | Anthropic recusa `temperature=0` nos modelos novos: "só o `.env`" seria falso | Corrigido: `temperature` só vai para modelos fora da Anthropic. Não testado ao vivo (sem chave) |
+| 8 | Teste de contrato do Supabase falharia pela ordem das listas | Corrigido: compara ordenado |
+| 9 | Proposta de avaria dizia "o teste não estava no caminho crítico" | Corrigido: a frase some quando o evento não tem teste |
+| 10 | Controle da folga volta a 10% ao recarregar a página | Não corrigido: cosmético; o número de carros ao lado está certo |
+| 11 | `CONTEXT.md` citava `glossario.json` | Corrigido para `contexto.json` |
+| 12 | Linha tirada do §17 do discovery sem subir versão | Mantido: só tirou uma duplicata; registrado acima |
+| 13 | Caminho local, nome da organização Supabase e ref do projeto no repo | Aberto: antes de tornar o repo público (Esperando pelo José) |

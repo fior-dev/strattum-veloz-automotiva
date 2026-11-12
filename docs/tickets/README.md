@@ -24,6 +24,8 @@ Regra: ticket que passar do dobro da estimativa corta escopo e manda o resto par
 - Chave do OpenRouter em `backend/.env`: sem ela o copiloto roda offline e a 05 fica em andamento
 - Adotar meta de 18 semanas (+11 carros, 2 semanas de folga no marco)?
 - Conflito RNF-01 "sem backend" × FastAPI (ADR 0001)
+- Atraso que passa da semana 20: hoje a proposta lista o teste como impactado, mas o plano aceito termina depois do marco e o Gantt corta a barra na semana 20. Bloquear o aceite, ou mostrar o estouro no Gantt? (revisão do código, achado 4)
+- Antes de tornar o repo público: tirar do README o caminho local da máquina do José e decidir se o ref do projeto Supabase e o nome da organização ficam (revisão do código, achado 13)
 
 ## Riscos
 - Copiloto depende do OpenRouter free: fora do ar ou sem chave, a demo usa o intérprete offline (só entende "<ID> atrasou N semanas" e "<ID> falhou")
