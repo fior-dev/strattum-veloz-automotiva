@@ -1,7 +1,7 @@
 import { COR_AREA, type Alocacao, type Plano } from './api'
 
 // RF-04: uma linha por protótipo, uma coluna por semana. Cada barra mostra a área (cor) e o ID do teste.
-export function Gantt({ plano, aoClicar }: { plano: Plano; aoClicar?: (a: Alocacao) => void }) {
+export function Gantt({ plano, aoClicar, destaque }: { plano: Plano; aoClicar?: (a: Alocacao) => void; destaque?: Set<string> }) {
   const semanas = Array.from({ length: plano.horizonte }, (_, i) => i + 1)
   const porCarro = new Map<string, Alocacao[]>()
   for (const a of plano.alocacoes) porCarro.set(a.prototipo_id, [...(porCarro.get(a.prototipo_id) ?? []), a])
@@ -39,7 +39,7 @@ export function Gantt({ plano, aoClicar }: { plano: Plano; aoClicar?: (a: Alocac
               return (
                 <button key={`${a.teste_id}-${a.inicio}`} onClick={() => aoClicar?.(a)}
                   title={`${a.teste_id} · ${t.nome}\n${t.area}\nSemanas ${a.inicio} a ${a.fim}${t.destrutivo ? '\nDestrutivo: o carro sai da frota' : ''}${a.reteste ? '\nReteste' : ''}\nStatus: ${status}`}
-                  className={`m-0.5 rounded-sm px-1 text-left text-white truncate font-cond font-medium cursor-pointer hover:brightness-110 ${a.reteste ? 'border-2 border-dashed border-white/80' : ''} ${status === 'atrasado' || status === 'falhou' ? 'ring-2 ring-faixa' : ''}`}
+                  className={`m-0.5 rounded-sm px-1 text-left text-white truncate font-cond font-medium cursor-pointer hover:brightness-110 ${a.reteste ? 'border-2 border-dashed border-white/80' : ''} ${status === 'atrasado' || status === 'falhou' ? 'ring-2 ring-faixa' : ''} ${destaque?.has(a.teste_id) ? 'outline-3 outline-tinta outline-offset-1' : ''}`}
                   style={{ gridColumn: `${Math.min(a.inicio, plano.horizonte) + 1} / ${Math.min(a.fim, plano.horizonte) + 2}`, gridRow: 1, background: COR_AREA[t.area] }}>
                   {t.destrutivo ? '✕ ' : ''}{a.teste_id}
                 </button>

@@ -38,8 +38,8 @@ Testes: `cd backend; uv run pytest`. Build da tela: `cd frontend; npm run build`
 | 01 Esqueleto | pronta |
 | 02 Motor e baseline | pronta |
 | 03 Gantt e comparativo | pronta |
-| 04 Replanejar | — |
-| 04b Avarias | — |
+| 04 Replanejar | pronta |
+| 04b Avarias | pronta |
 | 05 Copiloto | — |
 | 05b Supabase | — |
 | 06 Acabamento e docs | — |

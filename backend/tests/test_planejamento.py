@@ -52,3 +52,22 @@ def test_api_sobre_o_mock():
     assert comp["como_hoje"]["carros"] == 245  # soma dos pedidos do mock (MK-03)
     assert comp["proposto"]["carros"] < comp["como_hoje"]["carros"]
     assert cliente.put("/api/folga", json={"folga": 0.5}).status_code == 422
+
+
+def test_api_cenario_da_demo_atraso_aceite_e_versao_antiga():
+    from presentation.api import app
+    from presentation.container import planejamento, replanejamento
+    planejamento.cache_clear(); replanejamento.cache_clear()
+    c = TestClient(app)
+    r = c.post("/api/status", json={"teste_id": "AER-99", "status": "atrasado", "semanas": 2}).json()["proposta"]
+    assert [(s["teste_id"], s["de"]) for s in r["sugestoes"]] == [("DIN-02", "P006")]
+    assert c.get("/api/plano").json()["versao"] == 1  # nada muda antes do aceite (RN-07)
+    assert c.post("/api/proposta/aceitar").json()["versao"] == 2
+    v2 = c.get("/api/plano").json()
+    assert v2["status"]["AER-99"] == "atrasado"
+    v1 = c.get("/api/plano?versao=1").json()  # RF-06: a versão 1 continua consultável
+    assert {"prototipo_id": "P006", "teste_id": "DIN-02", "inicio": 13, "fim": 18, "reteste": False} in v1["alocacoes"]
+    assert c.post("/api/proposta/aceitar").status_code == 422  # sem proposta pendente
+    assert c.post("/api/status", json={"teste_id": "NAO-EXISTE", "status": "falhou"}).status_code == 422
+    leve = c.post("/api/avarias", json={"prototipo_id": "P001", "tipo": "vidro", "gravidade": "leve", "semana": 3, "area": "Aerodinâmica"})
+    assert leve.json()["proposta"] is None and c.get("/api/plano").json()["avarias"]

@@ -38,6 +38,7 @@ async function pedir<T>(caminho: string, init?: RequestInit): Promise<T> {
 export const api = {
   plano: (versao?: number) => pedir<Plano>(versao ? `/plano?versao=${versao}` : '/plano'),
   comparativo: () => pedir<Comparativo>('/comparativo'),
+  proposta: () => pedir<{ proposta: Proposta | null }>('/proposta'),
   folga: (folga: number) => pedir<Comparativo>('/folga', { method: 'PUT', body: JSON.stringify({ folga }) }),
 }
 
@@ -47,4 +48,21 @@ export const COR_AREA: Record<string, string> = {
   'Aerodinâmica': 'var(--color-aer)',
   'Dinâmica veicular': 'var(--color-din)',
   'Segurança passiva': 'var(--color-seg)',
+}
+
+export type Proposta = {
+  evento: string
+  sugestoes: { teste_id: string; de: string; para: string; inicio: number; fim: number }[]
+  impactados: { teste_id: string; area: string; motivo: string }[]
+  versao_nova: number
+}
+type ComProposta = { proposta: Proposta | null }
+
+export const replan = {
+  status: (teste_id: string, status: string, semanas = 1) =>
+    pedir<ComProposta>('/status', { method: 'POST', body: JSON.stringify({ teste_id, status, semanas }) }),
+  avaria: (a: Avaria) =>
+    pedir<ComProposta>('/avarias', { method: 'POST', body: JSON.stringify(a) }),
+  aceitar: () => pedir<{ versao: number }>('/proposta/aceitar', { method: 'POST' }),
+  recusar: () => pedir<ComProposta>('/proposta/recusar', { method: 'POST' }),
 }

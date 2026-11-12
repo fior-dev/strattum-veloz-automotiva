@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
-import { api, type Comparativo, type Plano } from './api'
+import { api, type Alocacao, type Comparativo, type Plano, type Proposta } from './api'
 import { Gantt, Legenda } from './Gantt'
+import { PainelProposta, PainelTeste } from './Paineis'
 
 // RF-07: todo número que vem do mock leva o selo com o ID da premissa (PREMISSAS.md)
 export function Selo({ id }: { id: string }) {
@@ -28,12 +29,24 @@ export default function App() {
   const [comp, setComp] = useState<Comparativo>()
   const [folga, setFolga] = useState(10)
   const [erro, setErro] = useState('')
+  const [versao, setVersao] = useState<number>() // undefined = a atual
+  const [aberto, setAberto] = useState<Alocacao>()
+  const [proposta, setProposta] = useState<Proposta>()
+  const [busca, setBusca] = useState('')
 
-  const carregar = () =>
-    Promise.all([api.plano(), api.comparativo()])
-      .then(([p, c]) => { setPlano(p); setComp(c); setErro('') })
+  const carregar = (v?: number) =>
+    Promise.all([api.plano(v), api.comparativo(), api.proposta()])
+      .then(([p, c, pr]) => { setPlano(p); setComp(c); setProposta(pr.proposta ?? undefined); setErro('') })
       .catch((e) => setErro(e.message))
   useEffect(() => { carregar() }, [])
+
+  const verVersao = (v?: number) => { setVersao(v); setAberto(undefined); carregar(v) }
+  const abrirTeste = (id: string) => {
+    const doTeste = plano?.alocacoes.filter((a) => a.teste_id === id.trim().toUpperCase()) ?? []
+    if (doTeste.length) setAberto(doTeste[doTeste.length - 1])
+  }
+  const atual = versao === undefined
+  const destaque = new Set([...(proposta?.sugestoes.map((s) => s.teste_id) ?? []), ...(proposta?.impactados.map((i) => i.teste_id) ?? [])])
 
   const mudarFolga = (pct: number) => {
     setFolga(pct)
@@ -69,7 +82,7 @@ export default function App() {
             Folga de reteste: {folga}% dos {comp.destrutivos} testes destrutivos = {comp.proposto.carros_reserva} carros<Selo id="MK-06" />
           </label>
           <input id="folga" type="range" min={0} max={30} step={5} value={folga} onChange={(e) => mudarFolga(Number(e.target.value))}
-            className="w-full accent-[var(--color-tinta)]" />
+            disabled={!atual} className="w-full accent-[var(--color-tinta)]" />
           <p className="text-xs text-grafite">Só o teste destrutivo que falha precisa de carro novo. O não destrutivo repete no mesmo carro (RN-08).</p>
         </div>
       </section>
@@ -79,7 +92,39 @@ export default function App() {
           <h2 className="font-cond text-2xl font-semibold">Quem usa cada carro, semana a semana</h2>
           <Legenda areas={plano.areas} />
         </div>
-        <Gantt plano={plano} />
+        <div className="flex flex-wrap items-center gap-3 mb-3 text-sm">
+          <form onSubmit={(e) => { e.preventDefault(); abrirTeste(busca) }} className="flex gap-1">
+            <input value={busca} onChange={(e) => setBusca(e.target.value)} placeholder="ID do teste, ex.: AER-99" list="ids"
+              className="border border-linha rounded-sm px-2 py-1 bg-pista w-48" aria-label="Abrir teste pelo ID" />
+            <datalist id="ids">{Object.keys(plano.testes).map((id) => <option key={id} value={id} />)}</datalist>
+            <button className="px-3 py-1 rounded-sm bg-tinta text-pista cursor-pointer">Abrir teste</button>
+          </form>
+          <span className="text-grafite">ou clique numa barra.</span>
+          <label className="ml-auto">Versão do plano{' '}
+            <select className="border border-linha rounded-sm px-2 py-1 bg-pista" value={versao ?? ''}
+              onChange={(e) => verVersao(e.target.value ? Number(e.target.value) : undefined)}>
+              <option value="">atual (v{plano.versoes[plano.versoes.length - 1]})</option>
+              {plano.versoes.slice(0, -1).map((v) => <option key={v} value={v}>v{v}, consulta</option>)}
+            </select>
+          </label>
+        </div>
+        <div className="grid lg:grid-cols-[1fr_24rem] gap-4 items-start">
+          <Gantt plano={plano} aoClicar={setAberto} destaque={destaque} />
+          <div className="space-y-4 lg:sticky lg:top-4">
+            {proposta && <PainelProposta proposta={proposta} plano={plano}
+              aoDecidir={() => { setProposta(undefined); setAberto(undefined); carregar() }} />}
+            {aberto && <PainelTeste plano={plano} aloc={aberto} somenteLeitura={!atual} key={`${aberto.teste_id}-${aberto.inicio}`}
+              aoProposta={(p) => { setProposta(p); setAberto(undefined) }} aoMudar={() => { setAberto(undefined); carregar() }}
+              aoFechar={() => setAberto(undefined)} />}
+            {!proposta && !aberto && <p className="text-sm text-grafite bg-pista border border-linha rounded-md p-4">
+              Abra um teste para registrar que começou, terminou, atrasou ou falhou, ou para registrar uma avaria no carro.
+              Se outro teste for afetado, o sistema propõe a troca e o gerente da coordenação decide.</p>}
+            {plano.nao_cabe.length > 0 && <div className="bg-pista border border-seg rounded-md p-4 text-sm">
+              <p className="font-medium text-seg">Testes sem carro no plano</p>
+              <ul className="list-disc pl-5">{plano.nao_cabe.map((n) => <li key={n.teste_id}><b>{n.teste_id}</b>: {n.motivo}</li>)}</ul>
+            </div>}
+          </div>
+        </div>
       </section>
     </main>
   )
