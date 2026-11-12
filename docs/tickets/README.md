@@ -20,14 +20,11 @@ status: proposto, aguardando revisão do José · 12/11/2026
 Regra: ticket que passar do dobro da estimativa corta escopo e manda o resto para o `ROADMAP.md`.
 
 ## Esperando pelo José
-- MK-06: a folga de reteste (10% dos destrutivos) diverge do ajuste 6, que trata a gordura de 10 a 20% como a própria folga. Manter as duas premissas ou aplicar a mesma gordura nos dois lados? (revisão independente, achado 3)
-- Supabase (05b): a organização `fiortech's Org` está no plano Pro, então todo projeto novo é pago. Ou o José cria uma organização Free com o projeto e passa o id, ou a 05b vai para o roadmap (recomendado)
-- Chave do OpenRouter em `backend/.env`: sem ela o copiloto roda offline e a 05 fica em andamento
+- MK-06: a folga de reteste (10% dos destrutivos) e a gordura do pedido (10% a 20%, ajuste 6) são duas premissas diferentes. Manter as duas ou aplicar a mesma gordura nos dois lados? (revisão independente, achado 3)
 - Adotar meta de 18 semanas (+11 carros, 2 semanas de folga no marco)?
-- Conflito RNF-01 "sem backend" × FastAPI (ADR 0001)
-- Atraso que passa da semana 20: hoje a proposta lista o teste como impactado, mas o plano aceito termina depois do marco e o Gantt corta a barra na semana 20. Bloquear o aceite, ou mostrar o estouro no Gantt? (revisão do código, achado 4)
-- Antes de tornar o repo público: tirar do README o caminho local da máquina do José e decidir se o ref do projeto Supabase e o nome da organização ficam (revisão do código, achado 13)
+- RNF-01 "sem backend" × FastAPI (ADR 0001): o José quer publicar em subdomínio próprio para a Strattum testar. Falta escolher a hospedagem e o domínio
+- Histórico do git: o ref do projeto Supabase saiu dos arquivos, mas segue nos commits antigos. Reescrever o histórico antes de tornar o repo público?
 
 ## Riscos
-- Copiloto depende do OpenRouter free: fora do ar ou sem chave, a demo usa o intérprete offline (só entende "<ID> atrasou N semanas" e "<ID> falhou")
+- Copiloto depende do OpenRouter free: em 12/11 o modelo respondeu 429 (limite do provedor) antes de completar. Fora do ar ou sem chave, a demo usa o intérprete offline (só entende "<ID> atrasou N semanas" e "<ID> falhou")
 - MK-01 é a premissa mais sensível: 125 testes por área foram calibrados para os pedidos somarem perto de 250

@@ -8,7 +8,7 @@ O cliente é fictício: a Veloz Automotiva quer reduzir a frota de 250 protótip
 Pré-requisitos: [uv](https://docs.astral.sh/uv/) e Node 20 ou mais novo.
 
 ```powershell
-cd "C:\Users\josefiori\OneDrive\Documentos\1. Pessoal\1. Projetos\Fior\Portfólio\strattum-veloz-automotiva"
+cd strattum-veloz-automotiva   # a pasta do clone
 powershell -ExecutionPolicy Bypass -File .\dev.ps1
 ```
 
@@ -30,10 +30,10 @@ Reinicie o backend. A tela mostra o modelo em uso embaixo da caixa do copiloto.
 
 ### Dados no Supabase (opcional)
 
-Por padrão o backend lê `backend/data/mock.json` e guarda as versões do plano em memória. Para usar o Postgres do Supabase (projeto `epyjydcjopqgskdakfmg`):
+Por padrão o backend lê `backend/data/mock.json` e guarda as versões do plano em memória. Para usar o Postgres de um projeto Supabase (o plano Free basta):
 
 1. No SQL Editor do projeto, rode `supabase/migrations/20261112000000_schema.sql`.
-2. No `backend/.env`, preencha `SUPABASE_URL` e `SUPABASE_SECRET_KEY` (Project Settings → API Keys, a chave `sb_secret_...`).
+2. No `backend/.env`, preencha `SUPABASE_URL` (`https://<ref>.supabase.co`) e `SUPABASE_SECRET_KEY` (Project Settings → API Keys, a chave `sb_secret_...`).
 3. Carregue o mock e ligue o Supabase:
 
 ```powershell

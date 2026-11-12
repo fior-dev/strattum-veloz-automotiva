@@ -1,6 +1,6 @@
 # 07 · Aceite de proposta que passa do marco
 
-Dor: D4 · Depende de: 04 · Estimativa: 30 min · Estado: feito · Real: 6 min · Commits: (este)
+Dor: D4 · Depende de: 04 · Estimativa: 30 min · Estado: feito · Real: 6 min · Commits: c1dd680
 
 Pedido do José em 12/11, a partir do achado 4 da revisão do código: um atraso que empurra um teste além da semana 20 gerava um plano aceito que terminava depois do marco, e o Gantt cortava a barra na semana 20.
 
