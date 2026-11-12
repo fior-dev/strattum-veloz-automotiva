@@ -448,7 +448,7 @@ function gantt(d) {
       return `<span class="barra b-${CLS[e.estado]}" style="left:${a.toFixed(2)}%;width:${Math.max(b - a, 0.6).toFixed(2)}%"></span>`;
     })() : '';
     const ticks = ms.map(m => `<span class="tick" style="left:${x(m.data).toFixed(2)}%" title="${esc(fmtDiaHora(m.data) + ': ' + m.rotulo)}"></span>`).join('');
-    return `<div class="g-linha"><div class="g-rot"><span class="g-num">${i + 1}</span><span class="g-nome">${esc(e.nome)}</span>${chip(e.estado, CLS[e.estado])}</div><div class="g-trilha">${barra}${ticks}</div></div>`;
+    return `<div class="g-linha"><div class="g-rot"><span class="g-num">${i + 1}</span><span class="g-nome">${esc(e.nome)}</span>${chip(e.estado === 'aguardando aprovação' ? 'aguarda o José' : e.estado, CLS[e.estado])}</div><div class="g-trilha">${barra}${ticks}</div></div>`;
   }).join('');
   return `<div class="gantt-rolagem" tabindex="0" role="region" aria-label="Linha de produção no tempo"><div class="gantt">
     <div class="g-eixo"><div class="g-rot"></div><div class="g-trilha">${horas.join('')}</div></div>
