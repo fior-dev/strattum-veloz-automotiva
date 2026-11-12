@@ -1,6 +1,6 @@
 # 04 · Replanejar: atraso de +N semanas, falha e aceite
 
-Dor: D4, D5 · Depende de: 03 · Estimativa: 2h · Estado: feito · Commits: f8b28e9
+Dor: D4, D5 · Depende de: 03 · Estimativa: 2h · Estado: feito · Real: 2 min · Commits: f8b28e9
 
 ## O quê
 - `domain/motor.py`: `replanejar(plano, evento) → proposta` (sugestões de troca, impactados, plano novo), regras do SPEC.
@@ -14,3 +14,5 @@ Dor: D4, D5 · Depende de: 03 · Estimativa: 2h · Estado: feito · Commits: f8b
 - [ ] RN-06 no replanejamento: passar da semana 20 vira impacto.
 - [ ] RF-05: atrasado ou falhou dispara o replanejamento na mesma ação.
 - [ ] RF-06: aceitar cria a versão N+1 e a N continua consultável.
+
+Tempo real: os tickets 04 e 04b saíram num só commit; o tempo medido entre o commit anterior e o deles foi dividido por igual.

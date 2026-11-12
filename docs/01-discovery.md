@@ -250,7 +250,6 @@ O mock do José previa 4 colunas nos Testes e 2 nos Carros `[P]`. A variante cai
 | 1 | Quem aprova a alocação dos veículos? | RN-07 | Resolvida em 12/11: o gerente da coordenação (José) |
 | 2 | As variantes valem? Há outra restrição entre testes? | RN-01, RN-09 | Resolvida em 11/11 `[E]`: os carros são idênticos, e existe desgaste parcial invisível ao planejamento |
 | 3 | O teste que falha repete no mesmo carro ou num novo? | RN-08 | Resolvida em 12/11: aprovada como está (José) |
-| RN-09 | Avaria. A engenharia registra o desgaste parcial no protótipo, com tipo e gravidade, e é ela quem classifica a gravidade. Avaria **leve** fica visível ao planejamento e não muda o plano. Avaria que **compromete reuso** tira o protótipo do pool. As alocações futuras dele são tratadas como colisão pelo RN-05 | existência do desgaste `[E]`; a regra é `[P]`, José em 12/11 |
 | 4 | Lista e quantidade de testes por área | mock | A Maira disse que não daria `[T]`. Fica no MK-01 |
 
 ## 18. Rastreabilidade: daqui para o PRD e para as specs

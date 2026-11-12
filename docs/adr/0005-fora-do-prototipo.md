@@ -13,5 +13,5 @@ Regra de desempate do prompt: se uma escolha melhora o número ou a sofisticaç�
 | Vários projetos ao mesmo tempo | D7; muda o modelo de dados | v3 |
 | Integração com o BI e a ferramenta de otimização | Sem acesso | Piloto |
 | Agent Dispatcher, MCP Gateway, LLM Serving | Um agente só, com uma ferramenta | v3 |
-| Deploy na AWS | O case pede protótipo local (ADR 0006) | Piloto |
+| Deploy na AWS | A entrevista pede "nada em produção" `[T]`; rodar local é hipótese do FDE `[H]` (ADR 0006) | Piloto |
 | Simulação de reprovações (H-2) | O replanejamento já mostra o mecanismo; a simulação só entra se sobrar tempo | v2 |

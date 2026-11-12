@@ -19,6 +19,7 @@ Fonte: **discovery** (fala ou e-mail da Maira), **José** (premissa aprovada), *
 | MK-05 | Gordura do pedido | 10% a 20% por área | A Maira disse que inventou o número na hora (ajuste 6). Fica como suposição | suposição |
 | MK-04 | Reprovação e atraso por clima | 10% e 10% por teste | Discovery §11 | suposição |
 | MK-06 | Folga de reteste no plano proposto | 10% dos testes destrutivos, arredondado para cima, ajustável na tela de 0% a 30% | Só o destrutivo que falha precisa de carro novo (RN-08). O não destrutivo repete no mesmo carro. O valor padrão segue a reprovação do MK-04 | suposição |
+| MK-09 | O Y% da frase de sucesso (§3) | Não é meta: é o resultado medido no mock, 245 → 168 carros (−31,4%) | O número sai do motor, não é calibrado (ver MK-01) | suposição |
 | MK-08 | Faixas do sinal da folga do projeto | Verde > 2 semanas, amarelo 1 a 2, vermelho ≤ 0 | Sem número da cliente; escolhido para a demo | suposição |
 | MK-07 | Semente do gerador do mock | 42 | Mesmo dado em toda execução (RNF-02) | suposição |
 | — | Nomes das 5 áreas | Elétrica/Eletrônica, Mecânica/Powertrain, Aerodinâmica, Dinâmica veicular, Segurança passiva | A Maira deixou o José nomear | José |

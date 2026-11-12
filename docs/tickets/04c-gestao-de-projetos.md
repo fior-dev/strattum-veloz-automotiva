@@ -1,6 +1,6 @@
 # 04c · Gestão de projetos na tela: caminho crítico, marco, impacto e uso da frota
 
-Dor: D8 · Origem: pedido do José, 12/11/2026, depois de ver a tela · Depende de: 04 · Estimativa: 1h30 · Antes da linha de corte das 13h · Estado: feito · Commits: 55bb20d
+Dor: D8 · Origem: pedido do José, 12/11/2026, depois de ver a tela · Depende de: 04 · Estimativa: 1h30 · Antes da linha de corte das 13h · Estado: feito · Real: 5 min · Commits: 55bb20d
 Decisão: ADR 0007. Ordem de corte se faltar tempo: elemento 4, depois 3, depois 2; o 1 fica.
 
 ## O quê

@@ -19,6 +19,7 @@ status: proposto, aguardando revisão do José · 12/11/2026
 Regra: ticket que passar do dobro da estimativa corta escopo e manda o resto para o `ROADMAP.md`.
 
 ## Esperando pelo José
+- MK-06: a folga de reteste (10% dos destrutivos) diverge do ajuste 6, que trata a gordura de 10 a 20% como a própria folga. Manter as duas premissas ou aplicar a mesma gordura nos dois lados? (revisão independente, achado 3)
 - Supabase (05b): a organização `fiortech's Org` está no plano Pro, então todo projeto novo é pago. Ou o José cria uma organização Free com o projeto e passa o id, ou a 05b vai para o roadmap (recomendado)
 - Chave do OpenRouter em `backend/.env`: sem ela o copiloto roda offline e a 05 fica em andamento
 - Adotar meta de 18 semanas (+11 carros, 2 semanas de folga no marco)?

@@ -1,6 +1,6 @@
 # 04b · Avarias (RN-09)
 
-Dor: D6 · Depende de: 04 · Estimativa: 1h · Estado: feito · Commits: f8b28e9
+Dor: D6 · Depende de: 04 · Estimativa: 1h · Estado: feito · Real: 2 min · Commits: f8b28e9
 
 ## O quê
 - A engenharia registra a avaria: protótipo, tipo (vidro, lataria, pneu, outro), gravidade (leve, compromete reuso), semana, área.
@@ -11,3 +11,5 @@ Dor: D6 · Depende de: 04 · Estimativa: 1h · Estado: feito · Commits: f8b28e9
 - [ ] RN-09 leve: plano igual, avaria visível na linha do carro.
 - [ ] RN-09 compromete reuso na semana 6: nenhuma alocação nova no carro; testes depois da semana 6 geram troca ou impacto.
 - [ ] RF-08: registrar dispara o RN-09 na mesma ação.
+
+Tempo real: os tickets 04 e 04b saíram num só commit; o tempo medido entre o commit anterior e o deles foi dividido por igual.

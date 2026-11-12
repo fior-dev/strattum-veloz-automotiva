@@ -1,6 +1,6 @@
 # 02 · Motor `planejar` e baseline "como hoje"
 
-Dor: D1 · Depende de: 01 · Estimativa: 2h · Estado: feito · Commits: ed2a939
+Dor: D1 · Depende de: 01 · Estimativa: 2h · Estado: feito · Real: 2 min · Commits: ed2a939
 
 ## O quê
 - `domain/motor.py`: `planejar(testes, prototipos, horizonte=20)`, a heurística do ADR 0002.
@@ -16,3 +16,5 @@ Dor: D1 · Depende de: 01 · Estimativa: 2h · Estado: feito · Commits: ed2a939
 - [ ] RN-06: teste que passaria da semana 20 vira "não cabe", com motivo.
 - [ ] RF-01: mock inválido recusado com o item.
 - [ ] RF-02: duas execuções, mesmo plano, alocação por alocação.
+
+Tempo real: os tickets 01 a 03 saíram num só commit; o tempo medido entre o commit anterior e o deles foi dividido por igual.

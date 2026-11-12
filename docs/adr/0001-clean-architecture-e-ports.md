@@ -29,7 +29,7 @@ O prompt previa uma port `SemanticLayer`. Ela não foi criada: o glossário e as
 
 Sem biblioteca de DI. `domain/` usa `dataclass`, não pydantic.
 
-Um teste (`backend/tests/test_fronteira.py`) falha se `domain/` ou `application/` importarem algo fora da biblioteca padrão ou de `infrastructure/`.
+Um teste (`backend/tests/test_fronteira.py`) falha se `domain/` ou `application/` importarem algo fora da biblioteca padrão e das camadas internas: `domain/` só importa a stdlib; `application/` importa `domain/` e a stdlib; nenhum dos dois importa `infrastructure/` nem `presentation/`.
 
 ## Alternativas descartadas
 - **Tudo num arquivo FastAPI.** Mais rápido hoje, mas a troca de JSON para Postgres ou de LLM mexeria na regra de negócio.

@@ -3,7 +3,7 @@
 status: proposto, aguardando revisão do José · 12/11/2026
 
 ## Contexto
-A Maira disse que importa pouco se 250 vira 240 ou 150. Importa o processo e se a coordenação entende o plano `[T]`. A coordenação não é técnica. A demo precisa dar o mesmo resultado sempre (RNF-02).
+A Maira disse que importa pouco se 250 vira 240 ou 150. Importa o processo e se a coordenação entende o plano `[H]`. A coordenação não é técnica. A demo precisa dar o mesmo resultado sempre (RNF-02).
 
 ## Decisão
 O motor é a heurística gulosa do discovery (RF-02):
@@ -11,6 +11,8 @@ O motor é a heurística gulosa do discovery (RF-02):
 2. cada teste vai para o protótipo já aberto que o comporta mais cedo; desempate pelo menor ID;
 3. só abre protótipo novo se nenhum serve;
 4. o que passaria da semana 20 vira "não cabe", com o motivo (RN-06).
+
+Desvio do RF-02: o discovery ordena por duração e põe o destrutivo por último em cada carro. Aqui todos os não destrutivos vão antes de todos os destrutivos. O efeito é o mesmo para a RN-04, e a ordem fica explicável em uma frase.
 
 Interface pequena, muito comportamento atrás: `planejar(testes, frota, horizonte) → plano` e `replanejar(plano, evento) → proposta`.
 

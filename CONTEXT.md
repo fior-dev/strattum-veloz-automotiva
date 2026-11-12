@@ -10,7 +10,7 @@ A fonte do negócio é `docs/01-discovery.md` v0.3. Etiquetas de fonte: `[T]` en
 | ID | Dor | Fonte | Fatia que ataca |
 |---|---|---|---|
 | D1 | **Plano no chute.** Cada área pede "N carros por S semanas" num Excel livre, sem dizer que testes vai rodar. A coordenação corta com base em lançamentos anteriores | `[T]` | 2 |
-| D2 | **Áreas sem visão única.** Cada área reserva carros só para si. Ninguém vê o carro que outra área libera | `[T]` | 1, 3 |
+| D2 | **Áreas sem visão única.** Cada área pede carros para si (reservar só para si é a H-1, `[H]`). O repasse de carros entre áreas é feito à mão pela coordenação, sem ver o calendário dos carros | `[T]` | 1, 3 |
 | D3 | **Gordura escondida.** A folga contra reprovação e o paralelismo ficam dentro do pedido, com tamanho desconhecido. O que sobra vira sucata de R$ 1 milhão ou mais | `[T]` | 3 |
 | D4 | **Replanejamento às cegas.** Atraso por clima ou reprovação chega no e-mail semanal, sem o impacto nos outros testes | `[T]` | 4, 5 |
 | D5 | **Sem resultado de teste.** A coordenação não sabe quando um teste falhou ou foi repetido | `[T]` | 4 |

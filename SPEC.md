@@ -29,7 +29,7 @@ ADR 0005.
 - **Atraso de A em +N semanas:** o fim de A anda N semanas. Todo teste B no mesmo carro que começa até o novo fim de A colide.
 - **Falha de A, não destrutivo:** A ganha um reteste com a mesma duração, no mesmo carro, logo depois do fim. O que colide com o reteste segue a regra de colisão.
 - **Falha de A, destrutivo:** o reteste vai para um carro livre, logo depois do fim de A.
-- **Avaria que compromete reuso no carro P, na semana s:** todo teste prometido a P que começa depois de s colide. Avaria leve não muda nada.
+- **Avaria que compromete reuso no carro P, na semana s:** todo teste prometido a P que começa depois de s colide. O teste em andamento na semana s fica no carro até o fim. Avaria leve não muda nada.
 - **Colisão de B:** o sistema procura outro carro livre nas mesmas semanas de B, primeiro entre os carros do plano, depois entre os carros da folga de reteste, pelo menor ID. Achou: sugestão "mover B de P1 para P2". Não achou: B e a área dele aparecem como impactados e B sai do plano até alguém decidir.
 - Passar da semana 20 também é impacto (RN-06).
 - A proposta só vira plano quando o gerente da coordenação aceita (RN-07). Simplificação: aceita-se a proposta inteira, não sugestão por sugestão.
