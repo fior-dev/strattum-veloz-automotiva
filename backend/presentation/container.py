@@ -19,9 +19,17 @@ MOCK = RAIZ / "data" / "mock.json"
 load_dotenv(RAIZ / ".env")
 
 
+def repositorio():
+    """DATA_BACKEND=json (padrão) lê o mock; DATA_BACKEND=supabase lê o Postgres (ticket 05b)."""
+    if os.getenv("DATA_BACKEND", "json") == "supabase":
+        from infrastructure.supabase_repo import SupabasePlanoRepository
+        return SupabasePlanoRepository(os.environ["SUPABASE_URL"], os.environ["SUPABASE_SECRET_KEY"])
+    return JsonPlanoRepository(MOCK)
+
+
 @lru_cache  # uma instância por processo: o plano em memória vive enquanto o backend roda
 def planejamento() -> Planejamento:
-    return Planejamento(JsonPlanoRepository(MOCK))
+    return Planejamento(repositorio())
 
 
 @lru_cache
