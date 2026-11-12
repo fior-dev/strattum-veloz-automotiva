@@ -1,0 +1,4664 @@
+{
+ "_fonte": "mock gerado por scripts/gerar_mock.py, semente 42; ver PREMISSAS.md",
+ "prototipos": [
+  "P001",
+  "P002",
+  "P003",
+  "P004",
+  "P005",
+  "P006",
+  "P007",
+  "P008",
+  "P009",
+  "P010",
+  "P011",
+  "P012",
+  "P013",
+  "P014",
+  "P015",
+  "P016",
+  "P017",
+  "P018",
+  "P019",
+  "P020",
+  "P021",
+  "P022",
+  "P023",
+  "P024",
+  "P025",
+  "P026",
+  "P027",
+  "P028",
+  "P029",
+  "P030",
+  "P031",
+  "P032",
+  "P033",
+  "P034",
+  "P035",
+  "P036",
+  "P037",
+  "P038",
+  "P039",
+  "P040",
+  "P041",
+  "P042",
+  "P043",
+  "P044",
+  "P045",
+  "P046",
+  "P047",
+  "P048",
+  "P049",
+  "P050",
+  "P051",
+  "P052",
+  "P053",
+  "P054",
+  "P055",
+  "P056",
+  "P057",
+  "P058",
+  "P059",
+  "P060",
+  "P061",
+  "P062",
+  "P063",
+  "P064",
+  "P065",
+  "P066",
+  "P067",
+  "P068",
+  "P069",
+  "P070",
+  "P071",
+  "P072",
+  "P073",
+  "P074",
+  "P075",
+  "P076",
+  "P077",
+  "P078",
+  "P079",
+  "P080",
+  "P081",
+  "P082",
+  "P083",
+  "P084",
+  "P085",
+  "P086",
+  "P087",
+  "P088",
+  "P089",
+  "P090",
+  "P091",
+  "P092",
+  "P093",
+  "P094",
+  "P095",
+  "P096",
+  "P097",
+  "P098",
+  "P099",
+  "P100",
+  "P101",
+  "P102",
+  "P103",
+  "P104",
+  "P105",
+  "P106",
+  "P107",
+  "P108",
+  "P109",
+  "P110",
+  "P111",
+  "P112",
+  "P113",
+  "P114",
+  "P115",
+  "P116",
+  "P117",
+  "P118",
+  "P119",
+  "P120",
+  "P121",
+  "P122",
+  "P123",
+  "P124",
+  "P125",
+  "P126",
+  "P127",
+  "P128",
+  "P129",
+  "P130",
+  "P131",
+  "P132",
+  "P133",
+  "P134",
+  "P135",
+  "P136",
+  "P137",
+  "P138",
+  "P139",
+  "P140",
+  "P141",
+  "P142",
+  "P143",
+  "P144",
+  "P145",
+  "P146",
+  "P147",
+  "P148",
+  "P149",
+  "P150",
+  "P151",
+  "P152",
+  "P153",
+  "P154",
+  "P155",
+  "P156",
+  "P157",
+  "P158",
+  "P159",
+  "P160",
+  "P161",
+  "P162",
+  "P163",
+  "P164",
+  "P165",
+  "P166",
+  "P167",
+  "P168",
+  "P169",
+  "P170",
+  "P171",
+  "P172",
+  "P173",
+  "P174",
+  "P175",
+  "P176",
+  "P177",
+  "P178",
+  "P179",
+  "P180",
+  "P181",
+  "P182",
+  "P183",
+  "P184",
+  "P185",
+  "P186",
+  "P187",
+  "P188",
+  "P189",
+  "P190",
+  "P191",
+  "P192",
+  "P193",
+  "P194",
+  "P195",
+  "P196",
+  "P197",
+  "P198",
+  "P199",
+  "P200",
+  "P201",
+  "P202",
+  "P203",
+  "P204",
+  "P205",
+  "P206",
+  "P207",
+  "P208",
+  "P209",
+  "P210",
+  "P211",
+  "P212",
+  "P213",
+  "P214",
+  "P215",
+  "P216",
+  "P217",
+  "P218",
+  "P219",
+  "P220",
+  "P221",
+  "P222",
+  "P223",
+  "P224",
+  "P225",
+  "P226",
+  "P227",
+  "P228",
+  "P229",
+  "P230",
+  "P231",
+  "P232",
+  "P233",
+  "P234",
+  "P235",
+  "P236",
+  "P237",
+  "P238",
+  "P239",
+  "P240",
+  "P241",
+  "P242",
+  "P243",
+  "P244",
+  "P245",
+  "P246",
+  "P247",
+  "P248",
+  "P249",
+  "P250"
+ ],
+ "pedidos": [
+  {
+   "area": "Elétrica/Eletrônica",
+   "carros": 39,
+   "semanas": 13,
+   "gordura": 0.156
+  },
+  {
+   "area": "Mecânica/Powertrain",
+   "carros": 52,
+   "semanas": 14,
+   "gordura": 0.137
+  },
+  {
+   "area": "Aerodinâmica",
+   "carros": 37,
+   "semanas": 14,
+   "gordura": 0.18
+  },
+  {
+   "area": "Dinâmica veicular",
+   "carros": 35,
+   "semanas": 14,
+   "gordura": 0.176
+  },
+  {
+   "area": "Segurança passiva",
+   "carros": 82,
+   "semanas": 10,
+   "gordura": 0.136
+  }
+ ],
+ "testes": [
+  {
+   "id": "ELE-01",
+   "area": "Elétrica/Eletrônica",
+   "nome": "Chicote elétrico #1",
+   "duracao": 6,
+   "destrutivo": false
+  },
+  {
+   "id": "ELE-02",
+   "area": "Elétrica/Eletrônica",
+   "nome": "Bateria 12V #2",
+   "duracao": 2,
+   "destrutivo": false
+  },
+  {
+   "id": "ELE-03",
+   "area": "Elétrica/Eletrônica",
+   "nome": "Sensores ADAS #3",
+   "duracao": 6,
+   "destrutivo": false
+  },
+  {
+   "id": "ELE-04",
+   "area": "Elétrica/Eletrônica",
+   "nome": "Chicote elétrico #4",
+   "duracao": 5,
+   "destrutivo": false
+  },
+  {
+   "id": "ELE-05",
+   "area": "Elétrica/Eletrônica",
+   "nome": "Chicote elétrico #5",
+   "duracao": 1,
+   "destrutivo": false
+  },
+  {
+   "id": "ELE-06",
+   "area": "Elétrica/Eletrônica",
+   "nome": "Iluminação #6",
+   "duracao": 5,
+   "destrutivo": false
+  },
+  {
+   "id": "ELE-07",
+   "area": "Elétrica/Eletrônica",
+   "nome": "Bateria 12V #7",
+   "duracao": 6,
+   "destrutivo": false
+  },
+  {
+   "id": "ELE-08",
+   "area": "Elétrica/Eletrônica",
+   "nome": "Iluminação #8",
+   "duracao": 4,
+   "destrutivo": false
+  },
+  {
+   "id": "ELE-09",
+   "area": "Elétrica/Eletrônica",
+   "nome": "Iluminação #9",
+   "duracao": 3,
+   "destrutivo": false
+  },
+  {
+   "id": "ELE-10",
+   "area": "Elétrica/Eletrônica",
+   "nome": "Chicote elétrico #10",
+   "duracao": 2,
+   "destrutivo": false
+  },
+  {
+   "id": "ELE-11",
+   "area": "Elétrica/Eletrônica",
+   "nome": "Infotainment #11",
+   "duracao": 3,
+   "destrutivo": false
+  },
+  {
+   "id": "ELE-12",
+   "area": "Elétrica/Eletrônica",
+   "nome": "Infotainment #12",
+   "duracao": 1,
+   "destrutivo": false
+  },
+  {
+   "id": "ELE-13",
+   "area": "Elétrica/Eletrônica",
+   "nome": "Chicote elétrico #13",
+   "duracao": 3,
+   "destrutivo": false
+  },
+  {
+   "id": "ELE-14",
+   "area": "Elétrica/Eletrônica",
+   "nome": "Iluminação #14",
+   "duracao": 3,
+   "destrutivo": false
+  },
+  {
+   "id": "ELE-15",
+   "area": "Elétrica/Eletrônica",
+   "nome": "Sensores ADAS #15",
+   "duracao": 4,
+   "destrutivo": false
+  },
+  {
+   "id": "ELE-16",
+   "area": "Elétrica/Eletrônica",
+   "nome": "Compatibilidade eletromagnética #16",
+   "duracao": 1,
+   "destrutivo": false
+  },
+  {
+   "id": "ELE-17",
+   "area": "Elétrica/Eletrônica",
+   "nome": "Sensores ADAS #17",
+   "duracao": 5,
+   "destrutivo": false
+  },
+  {
+   "id": "ELE-18",
+   "area": "Elétrica/Eletrônica",
+   "nome": "Infotainment #18",
+   "duracao": 5,
+   "destrutivo": false
+  },
+  {
+   "id": "ELE-19",
+   "area": "Elétrica/Eletrônica",
+   "nome": "Chicote elétrico #19",
+   "duracao": 1,
+   "destrutivo": false
+  },
+  {
+   "id": "ELE-20",
+   "area": "Elétrica/Eletrônica",
+   "nome": "Infotainment #20",
+   "duracao": 1,
+   "destrutivo": false
+  },
+  {
+   "id": "ELE-21",
+   "area": "Elétrica/Eletrônica",
+   "nome": "Chicote elétrico #21",
+   "duracao": 4,
+   "destrutivo": false
+  },
+  {
+   "id": "ELE-22",
+   "area": "Elétrica/Eletrônica",
+   "nome": "Sensores ADAS #22",
+   "duracao": 3,
+   "destrutivo": false
+  },
+  {
+   "id": "ELE-23",
+   "area": "Elétrica/Eletrônica",
+   "nome": "Infotainment #23",
+   "duracao": 2,
+   "destrutivo": false
+  },
+  {
+   "id": "ELE-24",
+   "area": "Elétrica/Eletrônica",
+   "nome": "Sensores ADAS #24",
+   "duracao": 6,
+   "destrutivo": false
+  },
+  {
+   "id": "ELE-25",
+   "area": "Elétrica/Eletrônica",
+   "nome": "Iluminação #25",
+   "duracao": 6,
+   "destrutivo": false
+  },
+  {
+   "id": "ELE-26",
+   "area": "Elétrica/Eletrônica",
+   "nome": "Sensores ADAS #26",
+   "duracao": 2,
+   "destrutivo": false
+  },
+  {
+   "id": "ELE-27",
+   "area": "Elétrica/Eletrônica",
+   "nome": "Compatibilidade eletromagnética #27",
+   "duracao": 3,
+   "destrutivo": false
+  },
+  {
+   "id": "ELE-28",
+   "area": "Elétrica/Eletrônica",
+   "nome": "Sensores ADAS #28",
+   "duracao": 6,
+   "destrutivo": false
+  },
+  {
+   "id": "ELE-29",
+   "area": "Elétrica/Eletrônica",
+   "nome": "Sensores ADAS #29",
+   "duracao": 3,
+   "destrutivo": false
+  },
+  {
+   "id": "ELE-30",
+   "area": "Elétrica/Eletrônica",
+   "nome": "Chicote elétrico #30",
+   "duracao": 2,
+   "destrutivo": false
+  },
+  {
+   "id": "ELE-31",
+   "area": "Elétrica/Eletrônica",
+   "nome": "Infotainment #31",
+   "duracao": 4,
+   "destrutivo": false
+  },
+  {
+   "id": "ELE-32",
+   "area": "Elétrica/Eletrônica",
+   "nome": "Bateria 12V #32",
+   "duracao": 5,
+   "destrutivo": false
+  },
+  {
+   "id": "ELE-33",
+   "area": "Elétrica/Eletrônica",
+   "nome": "Infotainment #33",
+   "duracao": 2,
+   "destrutivo": false
+  },
+  {
+   "id": "ELE-34",
+   "area": "Elétrica/Eletrônica",
+   "nome": "Compatibilidade eletromagnética #34",
+   "duracao": 6,
+   "destrutivo": false
+  },
+  {
+   "id": "ELE-35",
+   "area": "Elétrica/Eletrônica",
+   "nome": "Infotainment #35",
+   "duracao": 2,
+   "destrutivo": false
+  },
+  {
+   "id": "ELE-36",
+   "area": "Elétrica/Eletrônica",
+   "nome": "Iluminação #36",
+   "duracao": 5,
+   "destrutivo": false
+  },
+  {
+   "id": "ELE-37",
+   "area": "Elétrica/Eletrônica",
+   "nome": "Iluminação #37",
+   "duracao": 4,
+   "destrutivo": false
+  },
+  {
+   "id": "ELE-38",
+   "area": "Elétrica/Eletrônica",
+   "nome": "Compatibilidade eletromagnética #38",
+   "duracao": 3,
+   "destrutivo": false
+  },
+  {
+   "id": "ELE-39",
+   "area": "Elétrica/Eletrônica",
+   "nome": "Bateria 12V #39",
+   "duracao": 5,
+   "destrutivo": false
+  },
+  {
+   "id": "ELE-40",
+   "area": "Elétrica/Eletrônica",
+   "nome": "Chicote elétrico #40",
+   "duracao": 1,
+   "destrutivo": false
+  },
+  {
+   "id": "ELE-41",
+   "area": "Elétrica/Eletrônica",
+   "nome": "Bateria 12V #41",
+   "duracao": 6,
+   "destrutivo": false
+  },
+  {
+   "id": "ELE-42",
+   "area": "Elétrica/Eletrônica",
+   "nome": "Chicote elétrico #42",
+   "duracao": 4,
+   "destrutivo": false
+  },
+  {
+   "id": "ELE-43",
+   "area": "Elétrica/Eletrônica",
+   "nome": "Compatibilidade eletromagnética #43",
+   "duracao": 5,
+   "destrutivo": false
+  },
+  {
+   "id": "ELE-44",
+   "area": "Elétrica/Eletrônica",
+   "nome": "Iluminação #44",
+   "duracao": 1,
+   "destrutivo": false
+  },
+  {
+   "id": "ELE-45",
+   "area": "Elétrica/Eletrônica",
+   "nome": "Chicote elétrico #45",
+   "duracao": 6,
+   "destrutivo": false
+  },
+  {
+   "id": "ELE-46",
+   "area": "Elétrica/Eletrônica",
+   "nome": "Infotainment #46",
+   "duracao": 6,
+   "destrutivo": false
+  },
+  {
+   "id": "ELE-47",
+   "area": "Elétrica/Eletrônica",
+   "nome": "Infotainment #47",
+   "duracao": 4,
+   "destrutivo": false
+  },
+  {
+   "id": "ELE-48",
+   "area": "Elétrica/Eletrônica",
+   "nome": "Chicote elétrico #48",
+   "duracao": 6,
+   "destrutivo": false
+  },
+  {
+   "id": "ELE-49",
+   "area": "Elétrica/Eletrônica",
+   "nome": "Infotainment #49",
+   "duracao": 5,
+   "destrutivo": false
+  },
+  {
+   "id": "ELE-50",
+   "area": "Elétrica/Eletrônica",
+   "nome": "Iluminação #50",
+   "duracao": 1,
+   "destrutivo": false
+  },
+  {
+   "id": "ELE-51",
+   "area": "Elétrica/Eletrônica",
+   "nome": "Infotainment #51",
+   "duracao": 6,
+   "destrutivo": false
+  },
+  {
+   "id": "ELE-52",
+   "area": "Elétrica/Eletrônica",
+   "nome": "Bateria 12V #52",
+   "duracao": 2,
+   "destrutivo": false
+  },
+  {
+   "id": "ELE-53",
+   "area": "Elétrica/Eletrônica",
+   "nome": "Bateria 12V #53",
+   "duracao": 5,
+   "destrutivo": false
+  },
+  {
+   "id": "ELE-54",
+   "area": "Elétrica/Eletrônica",
+   "nome": "Iluminação #54",
+   "duracao": 1,
+   "destrutivo": false
+  },
+  {
+   "id": "ELE-55",
+   "area": "Elétrica/Eletrônica",
+   "nome": "Compatibilidade eletromagnética #55",
+   "duracao": 1,
+   "destrutivo": false
+  },
+  {
+   "id": "ELE-56",
+   "area": "Elétrica/Eletrônica",
+   "nome": "Infotainment #56",
+   "duracao": 3,
+   "destrutivo": false
+  },
+  {
+   "id": "ELE-57",
+   "area": "Elétrica/Eletrônica",
+   "nome": "Bateria 12V #57",
+   "duracao": 5,
+   "destrutivo": false
+  },
+  {
+   "id": "ELE-58",
+   "area": "Elétrica/Eletrônica",
+   "nome": "Chicote elétrico #58",
+   "duracao": 6,
+   "destrutivo": false
+  },
+  {
+   "id": "ELE-59",
+   "area": "Elétrica/Eletrônica",
+   "nome": "Chicote elétrico #59",
+   "duracao": 5,
+   "destrutivo": false
+  },
+  {
+   "id": "ELE-60",
+   "area": "Elétrica/Eletrônica",
+   "nome": "Bateria 12V #60",
+   "duracao": 6,
+   "destrutivo": false
+  },
+  {
+   "id": "ELE-61",
+   "area": "Elétrica/Eletrônica",
+   "nome": "Iluminação #61",
+   "duracao": 2,
+   "destrutivo": false
+  },
+  {
+   "id": "ELE-62",
+   "area": "Elétrica/Eletrônica",
+   "nome": "Iluminação #62",
+   "duracao": 4,
+   "destrutivo": false
+  },
+  {
+   "id": "ELE-63",
+   "area": "Elétrica/Eletrônica",
+   "nome": "Iluminação #63",
+   "duracao": 6,
+   "destrutivo": false
+  },
+  {
+   "id": "ELE-64",
+   "area": "Elétrica/Eletrônica",
+   "nome": "Sensores ADAS #64",
+   "duracao": 3,
+   "destrutivo": false
+  },
+  {
+   "id": "ELE-65",
+   "area": "Elétrica/Eletrônica",
+   "nome": "Sensores ADAS #65",
+   "duracao": 6,
+   "destrutivo": false
+  },
+  {
+   "id": "ELE-66",
+   "area": "Elétrica/Eletrônica",
+   "nome": "Iluminação #66",
+   "duracao": 4,
+   "destrutivo": false
+  },
+  {
+   "id": "ELE-67",
+   "area": "Elétrica/Eletrônica",
+   "nome": "Bateria 12V #67",
+   "duracao": 1,
+   "destrutivo": false
+  },
+  {
+   "id": "ELE-68",
+   "area": "Elétrica/Eletrônica",
+   "nome": "Iluminação #68",
+   "duracao": 5,
+   "destrutivo": false
+  },
+  {
+   "id": "ELE-69",
+   "area": "Elétrica/Eletrônica",
+   "nome": "Bateria 12V #69",
+   "duracao": 1,
+   "destrutivo": false
+  },
+  {
+   "id": "ELE-70",
+   "area": "Elétrica/Eletrônica",
+   "nome": "Sensores ADAS #70",
+   "duracao": 1,
+   "destrutivo": false
+  },
+  {
+   "id": "ELE-71",
+   "area": "Elétrica/Eletrônica",
+   "nome": "Chicote elétrico #71",
+   "duracao": 3,
+   "destrutivo": false
+  },
+  {
+   "id": "ELE-72",
+   "area": "Elétrica/Eletrônica",
+   "nome": "Bateria 12V #72",
+   "duracao": 3,
+   "destrutivo": false
+  },
+  {
+   "id": "ELE-73",
+   "area": "Elétrica/Eletrônica",
+   "nome": "Bateria 12V #73",
+   "duracao": 5,
+   "destrutivo": false
+  },
+  {
+   "id": "ELE-74",
+   "area": "Elétrica/Eletrônica",
+   "nome": "Iluminação #74",
+   "duracao": 5,
+   "destrutivo": false
+  },
+  {
+   "id": "ELE-75",
+   "area": "Elétrica/Eletrônica",
+   "nome": "Compatibilidade eletromagnética #75",
+   "duracao": 4,
+   "destrutivo": false
+  },
+  {
+   "id": "ELE-76",
+   "area": "Elétrica/Eletrônica",
+   "nome": "Chicote elétrico #76",
+   "duracao": 6,
+   "destrutivo": false
+  },
+  {
+   "id": "ELE-77",
+   "area": "Elétrica/Eletrônica",
+   "nome": "Compatibilidade eletromagnética #77",
+   "duracao": 4,
+   "destrutivo": false
+  },
+  {
+   "id": "ELE-78",
+   "area": "Elétrica/Eletrônica",
+   "nome": "Sensores ADAS #78",
+   "duracao": 1,
+   "destrutivo": false
+  },
+  {
+   "id": "ELE-79",
+   "area": "Elétrica/Eletrônica",
+   "nome": "Sensores ADAS #79",
+   "duracao": 1,
+   "destrutivo": false
+  },
+  {
+   "id": "ELE-80",
+   "area": "Elétrica/Eletrônica",
+   "nome": "Sensores ADAS #80",
+   "duracao": 3,
+   "destrutivo": false
+  },
+  {
+   "id": "ELE-81",
+   "area": "Elétrica/Eletrônica",
+   "nome": "Chicote elétrico #81",
+   "duracao": 2,
+   "destrutivo": false
+  },
+  {
+   "id": "ELE-82",
+   "area": "Elétrica/Eletrônica",
+   "nome": "Iluminação #82",
+   "duracao": 4,
+   "destrutivo": false
+  },
+  {
+   "id": "ELE-83",
+   "area": "Elétrica/Eletrônica",
+   "nome": "Bateria 12V #83",
+   "duracao": 3,
+   "destrutivo": false
+  },
+  {
+   "id": "ELE-84",
+   "area": "Elétrica/Eletrônica",
+   "nome": "Chicote elétrico #84",
+   "duracao": 4,
+   "destrutivo": false
+  },
+  {
+   "id": "ELE-85",
+   "area": "Elétrica/Eletrônica",
+   "nome": "Iluminação #85",
+   "duracao": 1,
+   "destrutivo": false
+  },
+  {
+   "id": "ELE-86",
+   "area": "Elétrica/Eletrônica",
+   "nome": "Iluminação #86",
+   "duracao": 1,
+   "destrutivo": false
+  },
+  {
+   "id": "ELE-87",
+   "area": "Elétrica/Eletrônica",
+   "nome": "Bateria 12V #87",
+   "duracao": 2,
+   "destrutivo": false
+  },
+  {
+   "id": "ELE-88",
+   "area": "Elétrica/Eletrônica",
+   "nome": "Compatibilidade eletromagnética #88",
+   "duracao": 2,
+   "destrutivo": false
+  },
+  {
+   "id": "ELE-89",
+   "area": "Elétrica/Eletrônica",
+   "nome": "Chicote elétrico #89",
+   "duracao": 2,
+   "destrutivo": false
+  },
+  {
+   "id": "ELE-90",
+   "area": "Elétrica/Eletrônica",
+   "nome": "Compatibilidade eletromagnética #90",
+   "duracao": 3,
+   "destrutivo": false
+  },
+  {
+   "id": "ELE-91",
+   "area": "Elétrica/Eletrônica",
+   "nome": "Compatibilidade eletromagnética #91",
+   "duracao": 3,
+   "destrutivo": false
+  },
+  {
+   "id": "ELE-92",
+   "area": "Elétrica/Eletrônica",
+   "nome": "Sensores ADAS #92",
+   "duracao": 5,
+   "destrutivo": false
+  },
+  {
+   "id": "ELE-93",
+   "area": "Elétrica/Eletrônica",
+   "nome": "Compatibilidade eletromagnética #93",
+   "duracao": 2,
+   "destrutivo": false
+  },
+  {
+   "id": "ELE-94",
+   "area": "Elétrica/Eletrônica",
+   "nome": "Bateria 12V #94",
+   "duracao": 1,
+   "destrutivo": false
+  },
+  {
+   "id": "ELE-95",
+   "area": "Elétrica/Eletrônica",
+   "nome": "Iluminação #95",
+   "duracao": 1,
+   "destrutivo": false
+  },
+  {
+   "id": "ELE-96",
+   "area": "Elétrica/Eletrônica",
+   "nome": "Chicote elétrico #96",
+   "duracao": 1,
+   "destrutivo": false
+  },
+  {
+   "id": "ELE-97",
+   "area": "Elétrica/Eletrônica",
+   "nome": "Iluminação #97",
+   "duracao": 5,
+   "destrutivo": false
+  },
+  {
+   "id": "ELE-98",
+   "area": "Elétrica/Eletrônica",
+   "nome": "Iluminação #98",
+   "duracao": 1,
+   "destrutivo": false
+  },
+  {
+   "id": "ELE-99",
+   "area": "Elétrica/Eletrônica",
+   "nome": "Chicote elétrico #99",
+   "duracao": 5,
+   "destrutivo": false
+  },
+  {
+   "id": "ELE-100",
+   "area": "Elétrica/Eletrônica",
+   "nome": "Bateria 12V #100",
+   "duracao": 4,
+   "destrutivo": false
+  },
+  {
+   "id": "ELE-101",
+   "area": "Elétrica/Eletrônica",
+   "nome": "Iluminação #101",
+   "duracao": 2,
+   "destrutivo": false
+  },
+  {
+   "id": "ELE-102",
+   "area": "Elétrica/Eletrônica",
+   "nome": "Chicote elétrico #102",
+   "duracao": 5,
+   "destrutivo": false
+  },
+  {
+   "id": "ELE-103",
+   "area": "Elétrica/Eletrônica",
+   "nome": "Sensores ADAS #103",
+   "duracao": 5,
+   "destrutivo": false
+  },
+  {
+   "id": "ELE-104",
+   "area": "Elétrica/Eletrônica",
+   "nome": "Infotainment #104",
+   "duracao": 3,
+   "destrutivo": false
+  },
+  {
+   "id": "ELE-105",
+   "area": "Elétrica/Eletrônica",
+   "nome": "Sensores ADAS #105",
+   "duracao": 3,
+   "destrutivo": false
+  },
+  {
+   "id": "ELE-106",
+   "area": "Elétrica/Eletrônica",
+   "nome": "Compatibilidade eletromagnética #106",
+   "duracao": 2,
+   "destrutivo": false
+  },
+  {
+   "id": "ELE-107",
+   "area": "Elétrica/Eletrônica",
+   "nome": "Infotainment #107",
+   "duracao": 4,
+   "destrutivo": false
+  },
+  {
+   "id": "ELE-108",
+   "area": "Elétrica/Eletrônica",
+   "nome": "Chicote elétrico #108",
+   "duracao": 1,
+   "destrutivo": false
+  },
+  {
+   "id": "ELE-109",
+   "area": "Elétrica/Eletrônica",
+   "nome": "Iluminação #109",
+   "duracao": 1,
+   "destrutivo": false
+  },
+  {
+   "id": "ELE-110",
+   "area": "Elétrica/Eletrônica",
+   "nome": "Bateria 12V #110",
+   "duracao": 5,
+   "destrutivo": false
+  },
+  {
+   "id": "ELE-111",
+   "area": "Elétrica/Eletrônica",
+   "nome": "Infotainment #111",
+   "duracao": 1,
+   "destrutivo": false
+  },
+  {
+   "id": "ELE-112",
+   "area": "Elétrica/Eletrônica",
+   "nome": "Infotainment #112",
+   "duracao": 3,
+   "destrutivo": false
+  },
+  {
+   "id": "ELE-113",
+   "area": "Elétrica/Eletrônica",
+   "nome": "Iluminação #113",
+   "duracao": 6,
+   "destrutivo": false
+  },
+  {
+   "id": "ELE-114",
+   "area": "Elétrica/Eletrônica",
+   "nome": "Sensores ADAS #114",
+   "duracao": 5,
+   "destrutivo": false
+  },
+  {
+   "id": "ELE-115",
+   "area": "Elétrica/Eletrônica",
+   "nome": "Iluminação #115",
+   "duracao": 3,
+   "destrutivo": false
+  },
+  {
+   "id": "ELE-116",
+   "area": "Elétrica/Eletrônica",
+   "nome": "Chicote elétrico #116",
+   "duracao": 2,
+   "destrutivo": false
+  },
+  {
+   "id": "ELE-117",
+   "area": "Elétrica/Eletrônica",
+   "nome": "Chicote elétrico #117",
+   "duracao": 6,
+   "destrutivo": false
+  },
+  {
+   "id": "ELE-118",
+   "area": "Elétrica/Eletrônica",
+   "nome": "Infotainment #118",
+   "duracao": 3,
+   "destrutivo": false
+  },
+  {
+   "id": "ELE-119",
+   "area": "Elétrica/Eletrônica",
+   "nome": "Sensores ADAS #119",
+   "duracao": 3,
+   "destrutivo": false
+  },
+  {
+   "id": "ELE-120",
+   "area": "Elétrica/Eletrônica",
+   "nome": "Sensores ADAS #120",
+   "duracao": 3,
+   "destrutivo": false
+  },
+  {
+   "id": "ELE-121",
+   "area": "Elétrica/Eletrônica",
+   "nome": "Infotainment #121",
+   "duracao": 1,
+   "destrutivo": false
+  },
+  {
+   "id": "ELE-122",
+   "area": "Elétrica/Eletrônica",
+   "nome": "Compatibilidade eletromagnética #122",
+   "duracao": 3,
+   "destrutivo": false
+  },
+  {
+   "id": "ELE-123",
+   "area": "Elétrica/Eletrônica",
+   "nome": "Infotainment #123",
+   "duracao": 2,
+   "destrutivo": false
+  },
+  {
+   "id": "ELE-124",
+   "area": "Elétrica/Eletrônica",
+   "nome": "Infotainment #124",
+   "duracao": 2,
+   "destrutivo": false
+  },
+  {
+   "id": "ELE-125",
+   "area": "Elétrica/Eletrônica",
+   "nome": "Iluminação #125",
+   "duracao": 6,
+   "destrutivo": false
+  },
+  {
+   "id": "MEC-01",
+   "area": "Mecânica/Powertrain",
+   "nome": "Durabilidade extrema #1",
+   "duracao": 5,
+   "destrutivo": true
+  },
+  {
+   "id": "MEC-02",
+   "area": "Mecânica/Powertrain",
+   "nome": "Durabilidade extrema #2",
+   "duracao": 5,
+   "destrutivo": true
+  },
+  {
+   "id": "MEC-03",
+   "area": "Mecânica/Powertrain",
+   "nome": "Consumo #3",
+   "duracao": 2,
+   "destrutivo": false
+  },
+  {
+   "id": "MEC-04",
+   "area": "Mecânica/Powertrain",
+   "nome": "Durabilidade extrema #4",
+   "duracao": 1,
+   "destrutivo": true
+  },
+  {
+   "id": "MEC-05",
+   "area": "Mecânica/Powertrain",
+   "nome": "Câmbio #5",
+   "duracao": 6,
+   "destrutivo": false
+  },
+  {
+   "id": "MEC-06",
+   "area": "Mecânica/Powertrain",
+   "nome": "Durabilidade do motor #6",
+   "duracao": 3,
+   "destrutivo": false
+  },
+  {
+   "id": "MEC-07",
+   "area": "Mecânica/Powertrain",
+   "nome": "Consumo #7",
+   "duracao": 5,
+   "destrutivo": false
+  },
+  {
+   "id": "MEC-08",
+   "area": "Mecânica/Powertrain",
+   "nome": "Câmbio #8",
+   "duracao": 2,
+   "destrutivo": false
+  },
+  {
+   "id": "MEC-09",
+   "area": "Mecânica/Powertrain",
+   "nome": "Câmbio #9",
+   "duracao": 4,
+   "destrutivo": false
+  },
+  {
+   "id": "MEC-10",
+   "area": "Mecânica/Powertrain",
+   "nome": "Durabilidade extrema #10",
+   "duracao": 4,
+   "destrutivo": true
+  },
+  {
+   "id": "MEC-11",
+   "area": "Mecânica/Powertrain",
+   "nome": "Câmbio #11",
+   "duracao": 3,
+   "destrutivo": false
+  },
+  {
+   "id": "MEC-12",
+   "area": "Mecânica/Powertrain",
+   "nome": "Durabilidade do motor #12",
+   "duracao": 4,
+   "destrutivo": false
+  },
+  {
+   "id": "MEC-13",
+   "area": "Mecânica/Powertrain",
+   "nome": "Consumo #13",
+   "duracao": 2,
+   "destrutivo": false
+  },
+  {
+   "id": "MEC-14",
+   "area": "Mecânica/Powertrain",
+   "nome": "Consumo #14",
+   "duracao": 3,
+   "destrutivo": false
+  },
+  {
+   "id": "MEC-15",
+   "area": "Mecânica/Powertrain",
+   "nome": "Câmbio #15",
+   "duracao": 2,
+   "destrutivo": false
+  },
+  {
+   "id": "MEC-16",
+   "area": "Mecânica/Powertrain",
+   "nome": "Durabilidade extrema #16",
+   "duracao": 4,
+   "destrutivo": true
+  },
+  {
+   "id": "MEC-17",
+   "area": "Mecânica/Powertrain",
+   "nome": "Durabilidade do motor #17",
+   "duracao": 3,
+   "destrutivo": false
+  },
+  {
+   "id": "MEC-18",
+   "area": "Mecânica/Powertrain",
+   "nome": "Emissões #18",
+   "duracao": 4,
+   "destrutivo": false
+  },
+  {
+   "id": "MEC-19",
+   "area": "Mecânica/Powertrain",
+   "nome": "Emissões #19",
+   "duracao": 3,
+   "destrutivo": false
+  },
+  {
+   "id": "MEC-20",
+   "area": "Mecânica/Powertrain",
+   "nome": "Durabilidade do motor #20",
+   "duracao": 3,
+   "destrutivo": false
+  },
+  {
+   "id": "MEC-21",
+   "area": "Mecânica/Powertrain",
+   "nome": "Arrefecimento #21",
+   "duracao": 1,
+   "destrutivo": false
+  },
+  {
+   "id": "MEC-22",
+   "area": "Mecânica/Powertrain",
+   "nome": "Durabilidade extrema #22",
+   "duracao": 3,
+   "destrutivo": true
+  },
+  {
+   "id": "MEC-23",
+   "area": "Mecânica/Powertrain",
+   "nome": "Arrefecimento #23",
+   "duracao": 4,
+   "destrutivo": false
+  },
+  {
+   "id": "MEC-24",
+   "area": "Mecânica/Powertrain",
+   "nome": "Emissões #24",
+   "duracao": 1,
+   "destrutivo": false
+  },
+  {
+   "id": "MEC-25",
+   "area": "Mecânica/Powertrain",
+   "nome": "Emissões #25",
+   "duracao": 2,
+   "destrutivo": false
+  },
+  {
+   "id": "MEC-26",
+   "area": "Mecânica/Powertrain",
+   "nome": "Consumo #26",
+   "duracao": 1,
+   "destrutivo": false
+  },
+  {
+   "id": "MEC-27",
+   "area": "Mecânica/Powertrain",
+   "nome": "Emissões #27",
+   "duracao": 6,
+   "destrutivo": false
+  },
+  {
+   "id": "MEC-28",
+   "area": "Mecânica/Powertrain",
+   "nome": "Câmbio #28",
+   "duracao": 3,
+   "destrutivo": false
+  },
+  {
+   "id": "MEC-29",
+   "area": "Mecânica/Powertrain",
+   "nome": "Arrefecimento #29",
+   "duracao": 5,
+   "destrutivo": false
+  },
+  {
+   "id": "MEC-30",
+   "area": "Mecânica/Powertrain",
+   "nome": "Durabilidade do motor #30",
+   "duracao": 6,
+   "destrutivo": false
+  },
+  {
+   "id": "MEC-31",
+   "area": "Mecânica/Powertrain",
+   "nome": "Emissões #31",
+   "duracao": 3,
+   "destrutivo": false
+  },
+  {
+   "id": "MEC-32",
+   "area": "Mecânica/Powertrain",
+   "nome": "Arrefecimento #32",
+   "duracao": 4,
+   "destrutivo": false
+  },
+  {
+   "id": "MEC-33",
+   "area": "Mecânica/Powertrain",
+   "nome": "Emissões #33",
+   "duracao": 2,
+   "destrutivo": false
+  },
+  {
+   "id": "MEC-34",
+   "area": "Mecânica/Powertrain",
+   "nome": "Consumo #34",
+   "duracao": 6,
+   "destrutivo": false
+  },
+  {
+   "id": "MEC-35",
+   "area": "Mecânica/Powertrain",
+   "nome": "Câmbio #35",
+   "duracao": 5,
+   "destrutivo": false
+  },
+  {
+   "id": "MEC-36",
+   "area": "Mecânica/Powertrain",
+   "nome": "Consumo #36",
+   "duracao": 5,
+   "destrutivo": false
+  },
+  {
+   "id": "MEC-37",
+   "area": "Mecânica/Powertrain",
+   "nome": "Arrefecimento #37",
+   "duracao": 3,
+   "destrutivo": false
+  },
+  {
+   "id": "MEC-38",
+   "area": "Mecânica/Powertrain",
+   "nome": "Emissões #38",
+   "duracao": 5,
+   "destrutivo": false
+  },
+  {
+   "id": "MEC-39",
+   "area": "Mecânica/Powertrain",
+   "nome": "Consumo #39",
+   "duracao": 4,
+   "destrutivo": false
+  },
+  {
+   "id": "MEC-40",
+   "area": "Mecânica/Powertrain",
+   "nome": "Câmbio #40",
+   "duracao": 5,
+   "destrutivo": false
+  },
+  {
+   "id": "MEC-41",
+   "area": "Mecânica/Powertrain",
+   "nome": "Câmbio #41",
+   "duracao": 6,
+   "destrutivo": false
+  },
+  {
+   "id": "MEC-42",
+   "area": "Mecânica/Powertrain",
+   "nome": "Durabilidade extrema #42",
+   "duracao": 1,
+   "destrutivo": true
+  },
+  {
+   "id": "MEC-43",
+   "area": "Mecânica/Powertrain",
+   "nome": "Câmbio #43",
+   "duracao": 6,
+   "destrutivo": false
+  },
+  {
+   "id": "MEC-44",
+   "area": "Mecânica/Powertrain",
+   "nome": "Câmbio #44",
+   "duracao": 2,
+   "destrutivo": false
+  },
+  {
+   "id": "MEC-45",
+   "area": "Mecânica/Powertrain",
+   "nome": "Durabilidade extrema #45",
+   "duracao": 4,
+   "destrutivo": true
+  },
+  {
+   "id": "MEC-46",
+   "area": "Mecânica/Powertrain",
+   "nome": "Durabilidade do motor #46",
+   "duracao": 4,
+   "destrutivo": false
+  },
+  {
+   "id": "MEC-47",
+   "area": "Mecânica/Powertrain",
+   "nome": "Emissões #47",
+   "duracao": 2,
+   "destrutivo": false
+  },
+  {
+   "id": "MEC-48",
+   "area": "Mecânica/Powertrain",
+   "nome": "Consumo #48",
+   "duracao": 4,
+   "destrutivo": false
+  },
+  {
+   "id": "MEC-49",
+   "area": "Mecânica/Powertrain",
+   "nome": "Câmbio #49",
+   "duracao": 6,
+   "destrutivo": false
+  },
+  {
+   "id": "MEC-50",
+   "area": "Mecânica/Powertrain",
+   "nome": "Durabilidade do motor #50",
+   "duracao": 4,
+   "destrutivo": false
+  },
+  {
+   "id": "MEC-51",
+   "area": "Mecânica/Powertrain",
+   "nome": "Emissões #51",
+   "duracao": 4,
+   "destrutivo": false
+  },
+  {
+   "id": "MEC-52",
+   "area": "Mecânica/Powertrain",
+   "nome": "Durabilidade extrema #52",
+   "duracao": 1,
+   "destrutivo": true
+  },
+  {
+   "id": "MEC-53",
+   "area": "Mecânica/Powertrain",
+   "nome": "Consumo #53",
+   "duracao": 6,
+   "destrutivo": false
+  },
+  {
+   "id": "MEC-54",
+   "area": "Mecânica/Powertrain",
+   "nome": "Emissões #54",
+   "duracao": 5,
+   "destrutivo": false
+  },
+  {
+   "id": "MEC-55",
+   "area": "Mecânica/Powertrain",
+   "nome": "Consumo #55",
+   "duracao": 5,
+   "destrutivo": false
+  },
+  {
+   "id": "MEC-56",
+   "area": "Mecânica/Powertrain",
+   "nome": "Emissões #56",
+   "duracao": 4,
+   "destrutivo": false
+  },
+  {
+   "id": "MEC-57",
+   "area": "Mecânica/Powertrain",
+   "nome": "Emissões #57",
+   "duracao": 4,
+   "destrutivo": false
+  },
+  {
+   "id": "MEC-58",
+   "area": "Mecânica/Powertrain",
+   "nome": "Consumo #58",
+   "duracao": 4,
+   "destrutivo": false
+  },
+  {
+   "id": "MEC-59",
+   "area": "Mecânica/Powertrain",
+   "nome": "Câmbio #59",
+   "duracao": 6,
+   "destrutivo": false
+  },
+  {
+   "id": "MEC-60",
+   "area": "Mecânica/Powertrain",
+   "nome": "Emissões #60",
+   "duracao": 4,
+   "destrutivo": false
+  },
+  {
+   "id": "MEC-61",
+   "area": "Mecânica/Powertrain",
+   "nome": "Arrefecimento #61",
+   "duracao": 4,
+   "destrutivo": false
+  },
+  {
+   "id": "MEC-62",
+   "area": "Mecânica/Powertrain",
+   "nome": "Durabilidade extrema #62",
+   "duracao": 2,
+   "destrutivo": true
+  },
+  {
+   "id": "MEC-63",
+   "area": "Mecânica/Powertrain",
+   "nome": "Arrefecimento #63",
+   "duracao": 5,
+   "destrutivo": false
+  },
+  {
+   "id": "MEC-64",
+   "area": "Mecânica/Powertrain",
+   "nome": "Durabilidade extrema #64",
+   "duracao": 2,
+   "destrutivo": true
+  },
+  {
+   "id": "MEC-65",
+   "area": "Mecânica/Powertrain",
+   "nome": "Câmbio #65",
+   "duracao": 6,
+   "destrutivo": false
+  },
+  {
+   "id": "MEC-66",
+   "area": "Mecânica/Powertrain",
+   "nome": "Consumo #66",
+   "duracao": 4,
+   "destrutivo": false
+  },
+  {
+   "id": "MEC-67",
+   "area": "Mecânica/Powertrain",
+   "nome": "Consumo #67",
+   "duracao": 4,
+   "destrutivo": false
+  },
+  {
+   "id": "MEC-68",
+   "area": "Mecânica/Powertrain",
+   "nome": "Durabilidade extrema #68",
+   "duracao": 4,
+   "destrutivo": true
+  },
+  {
+   "id": "MEC-69",
+   "area": "Mecânica/Powertrain",
+   "nome": "Emissões #69",
+   "duracao": 6,
+   "destrutivo": false
+  },
+  {
+   "id": "MEC-70",
+   "area": "Mecânica/Powertrain",
+   "nome": "Durabilidade extrema #70",
+   "duracao": 4,
+   "destrutivo": true
+  },
+  {
+   "id": "MEC-71",
+   "area": "Mecânica/Powertrain",
+   "nome": "Durabilidade extrema #71",
+   "duracao": 3,
+   "destrutivo": true
+  },
+  {
+   "id": "MEC-72",
+   "area": "Mecânica/Powertrain",
+   "nome": "Consumo #72",
+   "duracao": 5,
+   "destrutivo": false
+  },
+  {
+   "id": "MEC-73",
+   "area": "Mecânica/Powertrain",
+   "nome": "Emissões #73",
+   "duracao": 5,
+   "destrutivo": false
+  },
+  {
+   "id": "MEC-74",
+   "area": "Mecânica/Powertrain",
+   "nome": "Consumo #74",
+   "duracao": 2,
+   "destrutivo": false
+  },
+  {
+   "id": "MEC-75",
+   "area": "Mecânica/Powertrain",
+   "nome": "Consumo #75",
+   "duracao": 1,
+   "destrutivo": false
+  },
+  {
+   "id": "MEC-76",
+   "area": "Mecânica/Powertrain",
+   "nome": "Consumo #76",
+   "duracao": 6,
+   "destrutivo": false
+  },
+  {
+   "id": "MEC-77",
+   "area": "Mecânica/Powertrain",
+   "nome": "Consumo #77",
+   "duracao": 2,
+   "destrutivo": false
+  },
+  {
+   "id": "MEC-78",
+   "area": "Mecânica/Powertrain",
+   "nome": "Emissões #78",
+   "duracao": 1,
+   "destrutivo": false
+  },
+  {
+   "id": "MEC-79",
+   "area": "Mecânica/Powertrain",
+   "nome": "Emissões #79",
+   "duracao": 5,
+   "destrutivo": false
+  },
+  {
+   "id": "MEC-80",
+   "area": "Mecânica/Powertrain",
+   "nome": "Durabilidade do motor #80",
+   "duracao": 6,
+   "destrutivo": false
+  },
+  {
+   "id": "MEC-81",
+   "area": "Mecânica/Powertrain",
+   "nome": "Consumo #81",
+   "duracao": 2,
+   "destrutivo": false
+  },
+  {
+   "id": "MEC-82",
+   "area": "Mecânica/Powertrain",
+   "nome": "Durabilidade extrema #82",
+   "duracao": 3,
+   "destrutivo": true
+  },
+  {
+   "id": "MEC-83",
+   "area": "Mecânica/Powertrain",
+   "nome": "Arrefecimento #83",
+   "duracao": 3,
+   "destrutivo": false
+  },
+  {
+   "id": "MEC-84",
+   "area": "Mecânica/Powertrain",
+   "nome": "Consumo #84",
+   "duracao": 3,
+   "destrutivo": false
+  },
+  {
+   "id": "MEC-85",
+   "area": "Mecânica/Powertrain",
+   "nome": "Consumo #85",
+   "duracao": 3,
+   "destrutivo": false
+  },
+  {
+   "id": "MEC-86",
+   "area": "Mecânica/Powertrain",
+   "nome": "Consumo #86",
+   "duracao": 1,
+   "destrutivo": false
+  },
+  {
+   "id": "MEC-87",
+   "area": "Mecânica/Powertrain",
+   "nome": "Durabilidade do motor #87",
+   "duracao": 3,
+   "destrutivo": false
+  },
+  {
+   "id": "MEC-88",
+   "area": "Mecânica/Powertrain",
+   "nome": "Durabilidade do motor #88",
+   "duracao": 6,
+   "destrutivo": false
+  },
+  {
+   "id": "MEC-89",
+   "area": "Mecânica/Powertrain",
+   "nome": "Durabilidade extrema #89",
+   "duracao": 2,
+   "destrutivo": true
+  },
+  {
+   "id": "MEC-90",
+   "area": "Mecânica/Powertrain",
+   "nome": "Durabilidade do motor #90",
+   "duracao": 5,
+   "destrutivo": false
+  },
+  {
+   "id": "MEC-91",
+   "area": "Mecânica/Powertrain",
+   "nome": "Câmbio #91",
+   "duracao": 4,
+   "destrutivo": false
+  },
+  {
+   "id": "MEC-92",
+   "area": "Mecânica/Powertrain",
+   "nome": "Emissões #92",
+   "duracao": 2,
+   "destrutivo": false
+  },
+  {
+   "id": "MEC-93",
+   "area": "Mecânica/Powertrain",
+   "nome": "Arrefecimento #93",
+   "duracao": 3,
+   "destrutivo": false
+  },
+  {
+   "id": "MEC-94",
+   "area": "Mecânica/Powertrain",
+   "nome": "Emissões #94",
+   "duracao": 6,
+   "destrutivo": false
+  },
+  {
+   "id": "MEC-95",
+   "area": "Mecânica/Powertrain",
+   "nome": "Câmbio #95",
+   "duracao": 3,
+   "destrutivo": false
+  },
+  {
+   "id": "MEC-96",
+   "area": "Mecânica/Powertrain",
+   "nome": "Durabilidade extrema #96",
+   "duracao": 3,
+   "destrutivo": true
+  },
+  {
+   "id": "MEC-97",
+   "area": "Mecânica/Powertrain",
+   "nome": "Consumo #97",
+   "duracao": 4,
+   "destrutivo": false
+  },
+  {
+   "id": "MEC-98",
+   "area": "Mecânica/Powertrain",
+   "nome": "Câmbio #98",
+   "duracao": 1,
+   "destrutivo": false
+  },
+  {
+   "id": "MEC-99",
+   "area": "Mecânica/Powertrain",
+   "nome": "Câmbio #99",
+   "duracao": 1,
+   "destrutivo": false
+  },
+  {
+   "id": "MEC-100",
+   "area": "Mecânica/Powertrain",
+   "nome": "Arrefecimento #100",
+   "duracao": 6,
+   "destrutivo": false
+  },
+  {
+   "id": "MEC-101",
+   "area": "Mecânica/Powertrain",
+   "nome": "Durabilidade do motor #101",
+   "duracao": 5,
+   "destrutivo": false
+  },
+  {
+   "id": "MEC-102",
+   "area": "Mecânica/Powertrain",
+   "nome": "Arrefecimento #102",
+   "duracao": 5,
+   "destrutivo": false
+  },
+  {
+   "id": "MEC-103",
+   "area": "Mecânica/Powertrain",
+   "nome": "Arrefecimento #103",
+   "duracao": 1,
+   "destrutivo": false
+  },
+  {
+   "id": "MEC-104",
+   "area": "Mecânica/Powertrain",
+   "nome": "Arrefecimento #104",
+   "duracao": 1,
+   "destrutivo": false
+  },
+  {
+   "id": "MEC-105",
+   "area": "Mecânica/Powertrain",
+   "nome": "Consumo #105",
+   "duracao": 1,
+   "destrutivo": false
+  },
+  {
+   "id": "MEC-106",
+   "area": "Mecânica/Powertrain",
+   "nome": "Arrefecimento #106",
+   "duracao": 6,
+   "destrutivo": false
+  },
+  {
+   "id": "MEC-107",
+   "area": "Mecânica/Powertrain",
+   "nome": "Consumo #107",
+   "duracao": 6,
+   "destrutivo": false
+  },
+  {
+   "id": "MEC-108",
+   "area": "Mecânica/Powertrain",
+   "nome": "Câmbio #108",
+   "duracao": 6,
+   "destrutivo": false
+  },
+  {
+   "id": "MEC-109",
+   "area": "Mecânica/Powertrain",
+   "nome": "Arrefecimento #109",
+   "duracao": 5,
+   "destrutivo": false
+  },
+  {
+   "id": "MEC-110",
+   "area": "Mecânica/Powertrain",
+   "nome": "Emissões #110",
+   "duracao": 4,
+   "destrutivo": false
+  },
+  {
+   "id": "MEC-111",
+   "area": "Mecânica/Powertrain",
+   "nome": "Emissões #111",
+   "duracao": 3,
+   "destrutivo": false
+  },
+  {
+   "id": "MEC-112",
+   "area": "Mecânica/Powertrain",
+   "nome": "Câmbio #112",
+   "duracao": 1,
+   "destrutivo": false
+  },
+  {
+   "id": "MEC-113",
+   "area": "Mecânica/Powertrain",
+   "nome": "Consumo #113",
+   "duracao": 2,
+   "destrutivo": false
+  },
+  {
+   "id": "MEC-114",
+   "area": "Mecânica/Powertrain",
+   "nome": "Emissões #114",
+   "duracao": 5,
+   "destrutivo": false
+  },
+  {
+   "id": "MEC-115",
+   "area": "Mecânica/Powertrain",
+   "nome": "Arrefecimento #115",
+   "duracao": 1,
+   "destrutivo": false
+  },
+  {
+   "id": "MEC-116",
+   "area": "Mecânica/Powertrain",
+   "nome": "Arrefecimento #116",
+   "duracao": 2,
+   "destrutivo": false
+  },
+  {
+   "id": "MEC-117",
+   "area": "Mecânica/Powertrain",
+   "nome": "Arrefecimento #117",
+   "duracao": 3,
+   "destrutivo": false
+  },
+  {
+   "id": "MEC-118",
+   "area": "Mecânica/Powertrain",
+   "nome": "Emissões #118",
+   "duracao": 6,
+   "destrutivo": false
+  },
+  {
+   "id": "MEC-119",
+   "area": "Mecânica/Powertrain",
+   "nome": "Emissões #119",
+   "duracao": 1,
+   "destrutivo": false
+  },
+  {
+   "id": "MEC-120",
+   "area": "Mecânica/Powertrain",
+   "nome": "Câmbio #120",
+   "duracao": 1,
+   "destrutivo": false
+  },
+  {
+   "id": "MEC-121",
+   "area": "Mecânica/Powertrain",
+   "nome": "Consumo #121",
+   "duracao": 4,
+   "destrutivo": false
+  },
+  {
+   "id": "MEC-122",
+   "area": "Mecânica/Powertrain",
+   "nome": "Câmbio #122",
+   "duracao": 6,
+   "destrutivo": false
+  },
+  {
+   "id": "MEC-123",
+   "area": "Mecânica/Powertrain",
+   "nome": "Consumo #123",
+   "duracao": 4,
+   "destrutivo": false
+  },
+  {
+   "id": "MEC-124",
+   "area": "Mecânica/Powertrain",
+   "nome": "Durabilidade do motor #124",
+   "duracao": 3,
+   "destrutivo": false
+  },
+  {
+   "id": "MEC-125",
+   "area": "Mecânica/Powertrain",
+   "nome": "Câmbio #125",
+   "duracao": 3,
+   "destrutivo": false
+  },
+  {
+   "id": "AER-01",
+   "area": "Aerodinâmica",
+   "nome": "Vedação na chuva #1",
+   "duracao": 4,
+   "destrutivo": false
+  },
+  {
+   "id": "AER-02",
+   "area": "Aerodinâmica",
+   "nome": "Refrigeração de freios #2",
+   "duracao": 3,
+   "destrutivo": false
+  },
+  {
+   "id": "AER-03",
+   "area": "Aerodinâmica",
+   "nome": "Arrasto #3",
+   "duracao": 3,
+   "destrutivo": false
+  },
+  {
+   "id": "AER-04",
+   "area": "Aerodinâmica",
+   "nome": "Ruído aerodinâmico #4",
+   "duracao": 1,
+   "destrutivo": false
+  },
+  {
+   "id": "AER-05",
+   "area": "Aerodinâmica",
+   "nome": "Vedação na chuva #5",
+   "duracao": 1,
+   "destrutivo": false
+  },
+  {
+   "id": "AER-06",
+   "area": "Aerodinâmica",
+   "nome": "Ruído aerodinâmico #6",
+   "duracao": 2,
+   "destrutivo": false
+  },
+  {
+   "id": "AER-07",
+   "area": "Aerodinâmica",
+   "nome": "Arrasto #7",
+   "duracao": 3,
+   "destrutivo": false
+  },
+  {
+   "id": "AER-08",
+   "area": "Aerodinâmica",
+   "nome": "Refrigeração de freios #8",
+   "duracao": 5,
+   "destrutivo": false
+  },
+  {
+   "id": "AER-09",
+   "area": "Aerodinâmica",
+   "nome": "Túnel de vento #9",
+   "duracao": 2,
+   "destrutivo": false
+  },
+  {
+   "id": "AER-10",
+   "area": "Aerodinâmica",
+   "nome": "Vedação na chuva #10",
+   "duracao": 2,
+   "destrutivo": false
+  },
+  {
+   "id": "AER-11",
+   "area": "Aerodinâmica",
+   "nome": "Refrigeração de freios #11",
+   "duracao": 2,
+   "destrutivo": false
+  },
+  {
+   "id": "AER-12",
+   "area": "Aerodinâmica",
+   "nome": "Túnel de vento #12",
+   "duracao": 5,
+   "destrutivo": false
+  },
+  {
+   "id": "AER-13",
+   "area": "Aerodinâmica",
+   "nome": "Ruído aerodinâmico #13",
+   "duracao": 6,
+   "destrutivo": false
+  },
+  {
+   "id": "AER-14",
+   "area": "Aerodinâmica",
+   "nome": "Arrasto #14",
+   "duracao": 1,
+   "destrutivo": false
+  },
+  {
+   "id": "AER-15",
+   "area": "Aerodinâmica",
+   "nome": "Refrigeração de freios #15",
+   "duracao": 3,
+   "destrutivo": false
+  },
+  {
+   "id": "AER-16",
+   "area": "Aerodinâmica",
+   "nome": "Arrasto #16",
+   "duracao": 3,
+   "destrutivo": false
+  },
+  {
+   "id": "AER-17",
+   "area": "Aerodinâmica",
+   "nome": "Túnel de vento #17",
+   "duracao": 3,
+   "destrutivo": false
+  },
+  {
+   "id": "AER-18",
+   "area": "Aerodinâmica",
+   "nome": "Arrasto #18",
+   "duracao": 1,
+   "destrutivo": false
+  },
+  {
+   "id": "AER-19",
+   "area": "Aerodinâmica",
+   "nome": "Arrasto #19",
+   "duracao": 4,
+   "destrutivo": false
+  },
+  {
+   "id": "AER-20",
+   "area": "Aerodinâmica",
+   "nome": "Túnel de vento #20",
+   "duracao": 2,
+   "destrutivo": false
+  },
+  {
+   "id": "AER-21",
+   "area": "Aerodinâmica",
+   "nome": "Refrigeração de freios #21",
+   "duracao": 3,
+   "destrutivo": false
+  },
+  {
+   "id": "AER-22",
+   "area": "Aerodinâmica",
+   "nome": "Ruído aerodinâmico #22",
+   "duracao": 1,
+   "destrutivo": false
+  },
+  {
+   "id": "AER-23",
+   "area": "Aerodinâmica",
+   "nome": "Arrasto #23",
+   "duracao": 5,
+   "destrutivo": false
+  },
+  {
+   "id": "AER-24",
+   "area": "Aerodinâmica",
+   "nome": "Refrigeração de freios #24",
+   "duracao": 2,
+   "destrutivo": false
+  },
+  {
+   "id": "AER-25",
+   "area": "Aerodinâmica",
+   "nome": "Arrasto #25",
+   "duracao": 4,
+   "destrutivo": false
+  },
+  {
+   "id": "AER-26",
+   "area": "Aerodinâmica",
+   "nome": "Vedação na chuva #26",
+   "duracao": 5,
+   "destrutivo": false
+  },
+  {
+   "id": "AER-27",
+   "area": "Aerodinâmica",
+   "nome": "Vedação na chuva #27",
+   "duracao": 5,
+   "destrutivo": false
+  },
+  {
+   "id": "AER-28",
+   "area": "Aerodinâmica",
+   "nome": "Refrigeração de freios #28",
+   "duracao": 6,
+   "destrutivo": false
+  },
+  {
+   "id": "AER-29",
+   "area": "Aerodinâmica",
+   "nome": "Ruído aerodinâmico #29",
+   "duracao": 6,
+   "destrutivo": false
+  },
+  {
+   "id": "AER-30",
+   "area": "Aerodinâmica",
+   "nome": "Túnel de vento #30",
+   "duracao": 2,
+   "destrutivo": false
+  },
+  {
+   "id": "AER-31",
+   "area": "Aerodinâmica",
+   "nome": "Refrigeração de freios #31",
+   "duracao": 1,
+   "destrutivo": false
+  },
+  {
+   "id": "AER-32",
+   "area": "Aerodinâmica",
+   "nome": "Arrasto #32",
+   "duracao": 4,
+   "destrutivo": false
+  },
+  {
+   "id": "AER-33",
+   "area": "Aerodinâmica",
+   "nome": "Arrasto #33",
+   "duracao": 3,
+   "destrutivo": false
+  },
+  {
+   "id": "AER-34",
+   "area": "Aerodinâmica",
+   "nome": "Vedação na chuva #34",
+   "duracao": 6,
+   "destrutivo": false
+  },
+  {
+   "id": "AER-35",
+   "area": "Aerodinâmica",
+   "nome": "Arrasto #35",
+   "duracao": 1,
+   "destrutivo": false
+  },
+  {
+   "id": "AER-36",
+   "area": "Aerodinâmica",
+   "nome": "Vedação na chuva #36",
+   "duracao": 6,
+   "destrutivo": false
+  },
+  {
+   "id": "AER-37",
+   "area": "Aerodinâmica",
+   "nome": "Ruído aerodinâmico #37",
+   "duracao": 4,
+   "destrutivo": false
+  },
+  {
+   "id": "AER-38",
+   "area": "Aerodinâmica",
+   "nome": "Ruído aerodinâmico #38",
+   "duracao": 6,
+   "destrutivo": false
+  },
+  {
+   "id": "AER-39",
+   "area": "Aerodinâmica",
+   "nome": "Vedação na chuva #39",
+   "duracao": 2,
+   "destrutivo": false
+  },
+  {
+   "id": "AER-40",
+   "area": "Aerodinâmica",
+   "nome": "Ruído aerodinâmico #40",
+   "duracao": 3,
+   "destrutivo": false
+  },
+  {
+   "id": "AER-41",
+   "area": "Aerodinâmica",
+   "nome": "Refrigeração de freios #41",
+   "duracao": 3,
+   "destrutivo": false
+  },
+  {
+   "id": "AER-42",
+   "area": "Aerodinâmica",
+   "nome": "Arrasto #42",
+   "duracao": 6,
+   "destrutivo": false
+  },
+  {
+   "id": "AER-43",
+   "area": "Aerodinâmica",
+   "nome": "Arrasto #43",
+   "duracao": 3,
+   "destrutivo": false
+  },
+  {
+   "id": "AER-44",
+   "area": "Aerodinâmica",
+   "nome": "Arrasto #44",
+   "duracao": 4,
+   "destrutivo": false
+  },
+  {
+   "id": "AER-45",
+   "area": "Aerodinâmica",
+   "nome": "Túnel de vento #45",
+   "duracao": 4,
+   "destrutivo": false
+  },
+  {
+   "id": "AER-46",
+   "area": "Aerodinâmica",
+   "nome": "Refrigeração de freios #46",
+   "duracao": 3,
+   "destrutivo": false
+  },
+  {
+   "id": "AER-47",
+   "area": "Aerodinâmica",
+   "nome": "Ruído aerodinâmico #47",
+   "duracao": 6,
+   "destrutivo": false
+  },
+  {
+   "id": "AER-48",
+   "area": "Aerodinâmica",
+   "nome": "Refrigeração de freios #48",
+   "duracao": 5,
+   "destrutivo": false
+  },
+  {
+   "id": "AER-49",
+   "area": "Aerodinâmica",
+   "nome": "Vedação na chuva #49",
+   "duracao": 5,
+   "destrutivo": false
+  },
+  {
+   "id": "AER-50",
+   "area": "Aerodinâmica",
+   "nome": "Ruído aerodinâmico #50",
+   "duracao": 4,
+   "destrutivo": false
+  },
+  {
+   "id": "AER-51",
+   "area": "Aerodinâmica",
+   "nome": "Arrasto #51",
+   "duracao": 3,
+   "destrutivo": false
+  },
+  {
+   "id": "AER-52",
+   "area": "Aerodinâmica",
+   "nome": "Refrigeração de freios #52",
+   "duracao": 4,
+   "destrutivo": false
+  },
+  {
+   "id": "AER-53",
+   "area": "Aerodinâmica",
+   "nome": "Arrasto #53",
+   "duracao": 1,
+   "destrutivo": false
+  },
+  {
+   "id": "AER-54",
+   "area": "Aerodinâmica",
+   "nome": "Arrasto #54",
+   "duracao": 3,
+   "destrutivo": false
+  },
+  {
+   "id": "AER-55",
+   "area": "Aerodinâmica",
+   "nome": "Túnel de vento #55",
+   "duracao": 2,
+   "destrutivo": false
+  },
+  {
+   "id": "AER-56",
+   "area": "Aerodinâmica",
+   "nome": "Arrasto #56",
+   "duracao": 3,
+   "destrutivo": false
+  },
+  {
+   "id": "AER-57",
+   "area": "Aerodinâmica",
+   "nome": "Arrasto #57",
+   "duracao": 5,
+   "destrutivo": false
+  },
+  {
+   "id": "AER-58",
+   "area": "Aerodinâmica",
+   "nome": "Túnel de vento #58",
+   "duracao": 3,
+   "destrutivo": false
+  },
+  {
+   "id": "AER-59",
+   "area": "Aerodinâmica",
+   "nome": "Túnel de vento #59",
+   "duracao": 4,
+   "destrutivo": false
+  },
+  {
+   "id": "AER-60",
+   "area": "Aerodinâmica",
+   "nome": "Túnel de vento #60",
+   "duracao": 6,
+   "destrutivo": false
+  },
+  {
+   "id": "AER-61",
+   "area": "Aerodinâmica",
+   "nome": "Arrasto #61",
+   "duracao": 4,
+   "destrutivo": false
+  },
+  {
+   "id": "AER-62",
+   "area": "Aerodinâmica",
+   "nome": "Refrigeração de freios #62",
+   "duracao": 3,
+   "destrutivo": false
+  },
+  {
+   "id": "AER-63",
+   "area": "Aerodinâmica",
+   "nome": "Arrasto #63",
+   "duracao": 6,
+   "destrutivo": false
+  },
+  {
+   "id": "AER-64",
+   "area": "Aerodinâmica",
+   "nome": "Túnel de vento #64",
+   "duracao": 2,
+   "destrutivo": false
+  },
+  {
+   "id": "AER-65",
+   "area": "Aerodinâmica",
+   "nome": "Ruído aerodinâmico #65",
+   "duracao": 3,
+   "destrutivo": false
+  },
+  {
+   "id": "AER-66",
+   "area": "Aerodinâmica",
+   "nome": "Arrasto #66",
+   "duracao": 1,
+   "destrutivo": false
+  },
+  {
+   "id": "AER-67",
+   "area": "Aerodinâmica",
+   "nome": "Refrigeração de freios #67",
+   "duracao": 2,
+   "destrutivo": false
+  },
+  {
+   "id": "AER-68",
+   "area": "Aerodinâmica",
+   "nome": "Vedação na chuva #68",
+   "duracao": 5,
+   "destrutivo": false
+  },
+  {
+   "id": "AER-69",
+   "area": "Aerodinâmica",
+   "nome": "Arrasto #69",
+   "duracao": 1,
+   "destrutivo": false
+  },
+  {
+   "id": "AER-70",
+   "area": "Aerodinâmica",
+   "nome": "Túnel de vento #70",
+   "duracao": 4,
+   "destrutivo": false
+  },
+  {
+   "id": "AER-71",
+   "area": "Aerodinâmica",
+   "nome": "Ruído aerodinâmico #71",
+   "duracao": 4,
+   "destrutivo": false
+  },
+  {
+   "id": "AER-72",
+   "area": "Aerodinâmica",
+   "nome": "Vedação na chuva #72",
+   "duracao": 5,
+   "destrutivo": false
+  },
+  {
+   "id": "AER-73",
+   "area": "Aerodinâmica",
+   "nome": "Arrasto #73",
+   "duracao": 4,
+   "destrutivo": false
+  },
+  {
+   "id": "AER-74",
+   "area": "Aerodinâmica",
+   "nome": "Ruído aerodinâmico #74",
+   "duracao": 4,
+   "destrutivo": false
+  },
+  {
+   "id": "AER-75",
+   "area": "Aerodinâmica",
+   "nome": "Arrasto #75",
+   "duracao": 2,
+   "destrutivo": false
+  },
+  {
+   "id": "AER-76",
+   "area": "Aerodinâmica",
+   "nome": "Refrigeração de freios #76",
+   "duracao": 6,
+   "destrutivo": false
+  },
+  {
+   "id": "AER-77",
+   "area": "Aerodinâmica",
+   "nome": "Túnel de vento #77",
+   "duracao": 3,
+   "destrutivo": false
+  },
+  {
+   "id": "AER-78",
+   "area": "Aerodinâmica",
+   "nome": "Arrasto #78",
+   "duracao": 3,
+   "destrutivo": false
+  },
+  {
+   "id": "AER-79",
+   "area": "Aerodinâmica",
+   "nome": "Refrigeração de freios #79",
+   "duracao": 3,
+   "destrutivo": false
+  },
+  {
+   "id": "AER-80",
+   "area": "Aerodinâmica",
+   "nome": "Vedação na chuva #80",
+   "duracao": 6,
+   "destrutivo": false
+  },
+  {
+   "id": "AER-81",
+   "area": "Aerodinâmica",
+   "nome": "Refrigeração de freios #81",
+   "duracao": 5,
+   "destrutivo": false
+  },
+  {
+   "id": "AER-82",
+   "area": "Aerodinâmica",
+   "nome": "Arrasto #82",
+   "duracao": 2,
+   "destrutivo": false
+  },
+  {
+   "id": "AER-83",
+   "area": "Aerodinâmica",
+   "nome": "Arrasto #83",
+   "duracao": 3,
+   "destrutivo": false
+  },
+  {
+   "id": "AER-84",
+   "area": "Aerodinâmica",
+   "nome": "Refrigeração de freios #84",
+   "duracao": 4,
+   "destrutivo": false
+  },
+  {
+   "id": "AER-85",
+   "area": "Aerodinâmica",
+   "nome": "Vedação na chuva #85",
+   "duracao": 2,
+   "destrutivo": false
+  },
+  {
+   "id": "AER-86",
+   "area": "Aerodinâmica",
+   "nome": "Ruído aerodinâmico #86",
+   "duracao": 5,
+   "destrutivo": false
+  },
+  {
+   "id": "AER-87",
+   "area": "Aerodinâmica",
+   "nome": "Arrasto #87",
+   "duracao": 1,
+   "destrutivo": false
+  },
+  {
+   "id": "AER-88",
+   "area": "Aerodinâmica",
+   "nome": "Arrasto #88",
+   "duracao": 6,
+   "destrutivo": false
+  },
+  {
+   "id": "AER-89",
+   "area": "Aerodinâmica",
+   "nome": "Arrasto #89",
+   "duracao": 4,
+   "destrutivo": false
+  },
+  {
+   "id": "AER-90",
+   "area": "Aerodinâmica",
+   "nome": "Ruído aerodinâmico #90",
+   "duracao": 4,
+   "destrutivo": false
+  },
+  {
+   "id": "AER-91",
+   "area": "Aerodinâmica",
+   "nome": "Ruído aerodinâmico #91",
+   "duracao": 5,
+   "destrutivo": false
+  },
+  {
+   "id": "AER-92",
+   "area": "Aerodinâmica",
+   "nome": "Vedação na chuva #92",
+   "duracao": 1,
+   "destrutivo": false
+  },
+  {
+   "id": "AER-93",
+   "area": "Aerodinâmica",
+   "nome": "Arrasto #93",
+   "duracao": 1,
+   "destrutivo": false
+  },
+  {
+   "id": "AER-94",
+   "area": "Aerodinâmica",
+   "nome": "Arrasto #94",
+   "duracao": 1,
+   "destrutivo": false
+  },
+  {
+   "id": "AER-95",
+   "area": "Aerodinâmica",
+   "nome": "Arrasto #95",
+   "duracao": 6,
+   "destrutivo": false
+  },
+  {
+   "id": "AER-96",
+   "area": "Aerodinâmica",
+   "nome": "Túnel de vento #96",
+   "duracao": 4,
+   "destrutivo": false
+  },
+  {
+   "id": "AER-97",
+   "area": "Aerodinâmica",
+   "nome": "Vedação na chuva #97",
+   "duracao": 3,
+   "destrutivo": false
+  },
+  {
+   "id": "AER-98",
+   "area": "Aerodinâmica",
+   "nome": "Arrasto #98",
+   "duracao": 6,
+   "destrutivo": false
+  },
+  {
+   "id": "AER-99",
+   "area": "Aerodinâmica",
+   "nome": "Vedação na chuva #99",
+   "duracao": 6,
+   "destrutivo": false
+  },
+  {
+   "id": "AER-100",
+   "area": "Aerodinâmica",
+   "nome": "Arrasto #100",
+   "duracao": 3,
+   "destrutivo": false
+  },
+  {
+   "id": "AER-101",
+   "area": "Aerodinâmica",
+   "nome": "Arrasto #101",
+   "duracao": 5,
+   "destrutivo": false
+  },
+  {
+   "id": "AER-102",
+   "area": "Aerodinâmica",
+   "nome": "Túnel de vento #102",
+   "duracao": 2,
+   "destrutivo": false
+  },
+  {
+   "id": "AER-103",
+   "area": "Aerodinâmica",
+   "nome": "Vedação na chuva #103",
+   "duracao": 2,
+   "destrutivo": false
+  },
+  {
+   "id": "AER-104",
+   "area": "Aerodinâmica",
+   "nome": "Arrasto #104",
+   "duracao": 1,
+   "destrutivo": false
+  },
+  {
+   "id": "AER-105",
+   "area": "Aerodinâmica",
+   "nome": "Túnel de vento #105",
+   "duracao": 4,
+   "destrutivo": false
+  },
+  {
+   "id": "AER-106",
+   "area": "Aerodinâmica",
+   "nome": "Vedação na chuva #106",
+   "duracao": 1,
+   "destrutivo": false
+  },
+  {
+   "id": "AER-107",
+   "area": "Aerodinâmica",
+   "nome": "Túnel de vento #107",
+   "duracao": 3,
+   "destrutivo": false
+  },
+  {
+   "id": "AER-108",
+   "area": "Aerodinâmica",
+   "nome": "Arrasto #108",
+   "duracao": 2,
+   "destrutivo": false
+  },
+  {
+   "id": "AER-109",
+   "area": "Aerodinâmica",
+   "nome": "Arrasto #109",
+   "duracao": 5,
+   "destrutivo": false
+  },
+  {
+   "id": "AER-110",
+   "area": "Aerodinâmica",
+   "nome": "Ruído aerodinâmico #110",
+   "duracao": 2,
+   "destrutivo": false
+  },
+  {
+   "id": "AER-111",
+   "area": "Aerodinâmica",
+   "nome": "Refrigeração de freios #111",
+   "duracao": 4,
+   "destrutivo": false
+  },
+  {
+   "id": "AER-112",
+   "area": "Aerodinâmica",
+   "nome": "Ruído aerodinâmico #112",
+   "duracao": 4,
+   "destrutivo": false
+  },
+  {
+   "id": "AER-113",
+   "area": "Aerodinâmica",
+   "nome": "Ruído aerodinâmico #113",
+   "duracao": 2,
+   "destrutivo": false
+  },
+  {
+   "id": "AER-114",
+   "area": "Aerodinâmica",
+   "nome": "Vedação na chuva #114",
+   "duracao": 4,
+   "destrutivo": false
+  },
+  {
+   "id": "AER-115",
+   "area": "Aerodinâmica",
+   "nome": "Túnel de vento #115",
+   "duracao": 4,
+   "destrutivo": false
+  },
+  {
+   "id": "AER-116",
+   "area": "Aerodinâmica",
+   "nome": "Refrigeração de freios #116",
+   "duracao": 2,
+   "destrutivo": false
+  },
+  {
+   "id": "AER-117",
+   "area": "Aerodinâmica",
+   "nome": "Vedação na chuva #117",
+   "duracao": 5,
+   "destrutivo": false
+  },
+  {
+   "id": "AER-118",
+   "area": "Aerodinâmica",
+   "nome": "Arrasto #118",
+   "duracao": 6,
+   "destrutivo": false
+  },
+  {
+   "id": "AER-119",
+   "area": "Aerodinâmica",
+   "nome": "Vedação na chuva #119",
+   "duracao": 2,
+   "destrutivo": false
+  },
+  {
+   "id": "AER-120",
+   "area": "Aerodinâmica",
+   "nome": "Arrasto #120",
+   "duracao": 1,
+   "destrutivo": false
+  },
+  {
+   "id": "AER-121",
+   "area": "Aerodinâmica",
+   "nome": "Refrigeração de freios #121",
+   "duracao": 3,
+   "destrutivo": false
+  },
+  {
+   "id": "AER-122",
+   "area": "Aerodinâmica",
+   "nome": "Vedação na chuva #122",
+   "duracao": 1,
+   "destrutivo": false
+  },
+  {
+   "id": "AER-123",
+   "area": "Aerodinâmica",
+   "nome": "Arrasto #123",
+   "duracao": 3,
+   "destrutivo": false
+  },
+  {
+   "id": "AER-124",
+   "area": "Aerodinâmica",
+   "nome": "Túnel de vento #124",
+   "duracao": 5,
+   "destrutivo": false
+  },
+  {
+   "id": "AER-125",
+   "area": "Aerodinâmica",
+   "nome": "Vedação na chuva #125",
+   "duracao": 2,
+   "destrutivo": false
+  },
+  {
+   "id": "DIN-01",
+   "area": "Dinâmica veicular",
+   "nome": "Tração #1",
+   "duracao": 5,
+   "destrutivo": false
+  },
+  {
+   "id": "DIN-02",
+   "area": "Dinâmica veicular",
+   "nome": "Tração #2",
+   "duracao": 6,
+   "destrutivo": false
+  },
+  {
+   "id": "DIN-03",
+   "area": "Dinâmica veicular",
+   "nome": "Frenagem em pista seca #3",
+   "duracao": 3,
+   "destrutivo": false
+  },
+  {
+   "id": "DIN-04",
+   "area": "Dinâmica veicular",
+   "nome": "Frenagem em pista seca #4",
+   "duracao": 5,
+   "destrutivo": false
+  },
+  {
+   "id": "DIN-05",
+   "area": "Dinâmica veicular",
+   "nome": "Tração #5",
+   "duracao": 1,
+   "destrutivo": false
+  },
+  {
+   "id": "DIN-06",
+   "area": "Dinâmica veicular",
+   "nome": "Estabilidade #6",
+   "duracao": 6,
+   "destrutivo": false
+  },
+  {
+   "id": "DIN-07",
+   "area": "Dinâmica veicular",
+   "nome": "Tração #7",
+   "duracao": 2,
+   "destrutivo": false
+  },
+  {
+   "id": "DIN-08",
+   "area": "Dinâmica veicular",
+   "nome": "Estabilidade #8",
+   "duracao": 5,
+   "destrutivo": false
+  },
+  {
+   "id": "DIN-09",
+   "area": "Dinâmica veicular",
+   "nome": "Estabilidade #9",
+   "duracao": 2,
+   "destrutivo": false
+  },
+  {
+   "id": "DIN-10",
+   "area": "Dinâmica veicular",
+   "nome": "Suspensão #10",
+   "duracao": 3,
+   "destrutivo": false
+  },
+  {
+   "id": "DIN-11",
+   "area": "Dinâmica veicular",
+   "nome": "Estabilidade #11",
+   "duracao": 1,
+   "destrutivo": false
+  },
+  {
+   "id": "DIN-12",
+   "area": "Dinâmica veicular",
+   "nome": "Frenagem em pista seca #12",
+   "duracao": 2,
+   "destrutivo": false
+  },
+  {
+   "id": "DIN-13",
+   "area": "Dinâmica veicular",
+   "nome": "Tração #13",
+   "duracao": 6,
+   "destrutivo": false
+  },
+  {
+   "id": "DIN-14",
+   "area": "Dinâmica veicular",
+   "nome": "Suspensão #14",
+   "duracao": 5,
+   "destrutivo": false
+  },
+  {
+   "id": "DIN-15",
+   "area": "Dinâmica veicular",
+   "nome": "Suspensão #15",
+   "duracao": 1,
+   "destrutivo": false
+  },
+  {
+   "id": "DIN-16",
+   "area": "Dinâmica veicular",
+   "nome": "Frenagem em pista seca #16",
+   "duracao": 4,
+   "destrutivo": false
+  },
+  {
+   "id": "DIN-17",
+   "area": "Dinâmica veicular",
+   "nome": "Estabilidade #17",
+   "duracao": 5,
+   "destrutivo": false
+  },
+  {
+   "id": "DIN-18",
+   "area": "Dinâmica veicular",
+   "nome": "Estabilidade #18",
+   "duracao": 1,
+   "destrutivo": false
+  },
+  {
+   "id": "DIN-19",
+   "area": "Dinâmica veicular",
+   "nome": "Suspensão #19",
+   "duracao": 1,
+   "destrutivo": false
+  },
+  {
+   "id": "DIN-20",
+   "area": "Dinâmica veicular",
+   "nome": "Direção #20",
+   "duracao": 3,
+   "destrutivo": false
+  },
+  {
+   "id": "DIN-21",
+   "area": "Dinâmica veicular",
+   "nome": "Tração #21",
+   "duracao": 6,
+   "destrutivo": false
+  },
+  {
+   "id": "DIN-22",
+   "area": "Dinâmica veicular",
+   "nome": "Suspensão #22",
+   "duracao": 6,
+   "destrutivo": false
+  },
+  {
+   "id": "DIN-23",
+   "area": "Dinâmica veicular",
+   "nome": "Suspensão #23",
+   "duracao": 1,
+   "destrutivo": false
+  },
+  {
+   "id": "DIN-24",
+   "area": "Dinâmica veicular",
+   "nome": "Frenagem em pista seca #24",
+   "duracao": 3,
+   "destrutivo": false
+  },
+  {
+   "id": "DIN-25",
+   "area": "Dinâmica veicular",
+   "nome": "Frenagem em pista seca #25",
+   "duracao": 1,
+   "destrutivo": false
+  },
+  {
+   "id": "DIN-26",
+   "area": "Dinâmica veicular",
+   "nome": "Direção #26",
+   "duracao": 2,
+   "destrutivo": false
+  },
+  {
+   "id": "DIN-27",
+   "area": "Dinâmica veicular",
+   "nome": "Estabilidade #27",
+   "duracao": 6,
+   "destrutivo": false
+  },
+  {
+   "id": "DIN-28",
+   "area": "Dinâmica veicular",
+   "nome": "Direção #28",
+   "duracao": 4,
+   "destrutivo": false
+  },
+  {
+   "id": "DIN-29",
+   "area": "Dinâmica veicular",
+   "nome": "Tração #29",
+   "duracao": 4,
+   "destrutivo": false
+  },
+  {
+   "id": "DIN-30",
+   "area": "Dinâmica veicular",
+   "nome": "Suspensão #30",
+   "duracao": 5,
+   "destrutivo": false
+  },
+  {
+   "id": "DIN-31",
+   "area": "Dinâmica veicular",
+   "nome": "Estabilidade #31",
+   "duracao": 1,
+   "destrutivo": false
+  },
+  {
+   "id": "DIN-32",
+   "area": "Dinâmica veicular",
+   "nome": "Tração #32",
+   "duracao": 4,
+   "destrutivo": false
+  },
+  {
+   "id": "DIN-33",
+   "area": "Dinâmica veicular",
+   "nome": "Tração #33",
+   "duracao": 3,
+   "destrutivo": false
+  },
+  {
+   "id": "DIN-34",
+   "area": "Dinâmica veicular",
+   "nome": "Estabilidade #34",
+   "duracao": 5,
+   "destrutivo": false
+  },
+  {
+   "id": "DIN-35",
+   "area": "Dinâmica veicular",
+   "nome": "Estabilidade #35",
+   "duracao": 1,
+   "destrutivo": false
+  },
+  {
+   "id": "DIN-36",
+   "area": "Dinâmica veicular",
+   "nome": "Tração #36",
+   "duracao": 1,
+   "destrutivo": false
+  },
+  {
+   "id": "DIN-37",
+   "area": "Dinâmica veicular",
+   "nome": "Suspensão #37",
+   "duracao": 1,
+   "destrutivo": false
+  },
+  {
+   "id": "DIN-38",
+   "area": "Dinâmica veicular",
+   "nome": "Direção #38",
+   "duracao": 1,
+   "destrutivo": false
+  },
+  {
+   "id": "DIN-39",
+   "area": "Dinâmica veicular",
+   "nome": "Estabilidade #39",
+   "duracao": 2,
+   "destrutivo": false
+  },
+  {
+   "id": "DIN-40",
+   "area": "Dinâmica veicular",
+   "nome": "Direção #40",
+   "duracao": 2,
+   "destrutivo": false
+  },
+  {
+   "id": "DIN-41",
+   "area": "Dinâmica veicular",
+   "nome": "Direção #41",
+   "duracao": 2,
+   "destrutivo": false
+  },
+  {
+   "id": "DIN-42",
+   "area": "Dinâmica veicular",
+   "nome": "Tração #42",
+   "duracao": 3,
+   "destrutivo": false
+  },
+  {
+   "id": "DIN-43",
+   "area": "Dinâmica veicular",
+   "nome": "Direção #43",
+   "duracao": 1,
+   "destrutivo": false
+  },
+  {
+   "id": "DIN-44",
+   "area": "Dinâmica veicular",
+   "nome": "Tração #44",
+   "duracao": 2,
+   "destrutivo": false
+  },
+  {
+   "id": "DIN-45",
+   "area": "Dinâmica veicular",
+   "nome": "Tração #45",
+   "duracao": 1,
+   "destrutivo": false
+  },
+  {
+   "id": "DIN-46",
+   "area": "Dinâmica veicular",
+   "nome": "Frenagem em pista seca #46",
+   "duracao": 2,
+   "destrutivo": false
+  },
+  {
+   "id": "DIN-47",
+   "area": "Dinâmica veicular",
+   "nome": "Tração #47",
+   "duracao": 5,
+   "destrutivo": false
+  },
+  {
+   "id": "DIN-48",
+   "area": "Dinâmica veicular",
+   "nome": "Tração #48",
+   "duracao": 3,
+   "destrutivo": false
+  },
+  {
+   "id": "DIN-49",
+   "area": "Dinâmica veicular",
+   "nome": "Suspensão #49",
+   "duracao": 5,
+   "destrutivo": false
+  },
+  {
+   "id": "DIN-50",
+   "area": "Dinâmica veicular",
+   "nome": "Frenagem em pista seca #50",
+   "duracao": 4,
+   "destrutivo": false
+  },
+  {
+   "id": "DIN-51",
+   "area": "Dinâmica veicular",
+   "nome": "Estabilidade #51",
+   "duracao": 5,
+   "destrutivo": false
+  },
+  {
+   "id": "DIN-52",
+   "area": "Dinâmica veicular",
+   "nome": "Suspensão #52",
+   "duracao": 5,
+   "destrutivo": false
+  },
+  {
+   "id": "DIN-53",
+   "area": "Dinâmica veicular",
+   "nome": "Direção #53",
+   "duracao": 1,
+   "destrutivo": false
+  },
+  {
+   "id": "DIN-54",
+   "area": "Dinâmica veicular",
+   "nome": "Direção #54",
+   "duracao": 3,
+   "destrutivo": false
+  },
+  {
+   "id": "DIN-55",
+   "area": "Dinâmica veicular",
+   "nome": "Frenagem em pista seca #55",
+   "duracao": 1,
+   "destrutivo": false
+  },
+  {
+   "id": "DIN-56",
+   "area": "Dinâmica veicular",
+   "nome": "Suspensão #56",
+   "duracao": 4,
+   "destrutivo": false
+  },
+  {
+   "id": "DIN-57",
+   "area": "Dinâmica veicular",
+   "nome": "Suspensão #57",
+   "duracao": 6,
+   "destrutivo": false
+  },
+  {
+   "id": "DIN-58",
+   "area": "Dinâmica veicular",
+   "nome": "Frenagem em pista seca #58",
+   "duracao": 1,
+   "destrutivo": false
+  },
+  {
+   "id": "DIN-59",
+   "area": "Dinâmica veicular",
+   "nome": "Tração #59",
+   "duracao": 1,
+   "destrutivo": false
+  },
+  {
+   "id": "DIN-60",
+   "area": "Dinâmica veicular",
+   "nome": "Direção #60",
+   "duracao": 6,
+   "destrutivo": false
+  },
+  {
+   "id": "DIN-61",
+   "area": "Dinâmica veicular",
+   "nome": "Estabilidade #61",
+   "duracao": 4,
+   "destrutivo": false
+  },
+  {
+   "id": "DIN-62",
+   "area": "Dinâmica veicular",
+   "nome": "Direção #62",
+   "duracao": 3,
+   "destrutivo": false
+  },
+  {
+   "id": "DIN-63",
+   "area": "Dinâmica veicular",
+   "nome": "Direção #63",
+   "duracao": 4,
+   "destrutivo": false
+  },
+  {
+   "id": "DIN-64",
+   "area": "Dinâmica veicular",
+   "nome": "Frenagem em pista seca #64",
+   "duracao": 6,
+   "destrutivo": false
+  },
+  {
+   "id": "DIN-65",
+   "area": "Dinâmica veicular",
+   "nome": "Direção #65",
+   "duracao": 6,
+   "destrutivo": false
+  },
+  {
+   "id": "DIN-66",
+   "area": "Dinâmica veicular",
+   "nome": "Suspensão #66",
+   "duracao": 4,
+   "destrutivo": false
+  },
+  {
+   "id": "DIN-67",
+   "area": "Dinâmica veicular",
+   "nome": "Suspensão #67",
+   "duracao": 3,
+   "destrutivo": false
+  },
+  {
+   "id": "DIN-68",
+   "area": "Dinâmica veicular",
+   "nome": "Suspensão #68",
+   "duracao": 4,
+   "destrutivo": false
+  },
+  {
+   "id": "DIN-69",
+   "area": "Dinâmica veicular",
+   "nome": "Estabilidade #69",
+   "duracao": 4,
+   "destrutivo": false
+  },
+  {
+   "id": "DIN-70",
+   "area": "Dinâmica veicular",
+   "nome": "Estabilidade #70",
+   "duracao": 3,
+   "destrutivo": false
+  },
+  {
+   "id": "DIN-71",
+   "area": "Dinâmica veicular",
+   "nome": "Suspensão #71",
+   "duracao": 1,
+   "destrutivo": false
+  },
+  {
+   "id": "DIN-72",
+   "area": "Dinâmica veicular",
+   "nome": "Frenagem em pista seca #72",
+   "duracao": 1,
+   "destrutivo": false
+  },
+  {
+   "id": "DIN-73",
+   "area": "Dinâmica veicular",
+   "nome": "Estabilidade #73",
+   "duracao": 2,
+   "destrutivo": false
+  },
+  {
+   "id": "DIN-74",
+   "area": "Dinâmica veicular",
+   "nome": "Direção #74",
+   "duracao": 5,
+   "destrutivo": false
+  },
+  {
+   "id": "DIN-75",
+   "area": "Dinâmica veicular",
+   "nome": "Frenagem em pista seca #75",
+   "duracao": 4,
+   "destrutivo": false
+  },
+  {
+   "id": "DIN-76",
+   "area": "Dinâmica veicular",
+   "nome": "Suspensão #76",
+   "duracao": 6,
+   "destrutivo": false
+  },
+  {
+   "id": "DIN-77",
+   "area": "Dinâmica veicular",
+   "nome": "Estabilidade #77",
+   "duracao": 5,
+   "destrutivo": false
+  },
+  {
+   "id": "DIN-78",
+   "area": "Dinâmica veicular",
+   "nome": "Frenagem em pista seca #78",
+   "duracao": 5,
+   "destrutivo": false
+  },
+  {
+   "id": "DIN-79",
+   "area": "Dinâmica veicular",
+   "nome": "Tração #79",
+   "duracao": 6,
+   "destrutivo": false
+  },
+  {
+   "id": "DIN-80",
+   "area": "Dinâmica veicular",
+   "nome": "Frenagem em pista seca #80",
+   "duracao": 3,
+   "destrutivo": false
+  },
+  {
+   "id": "DIN-81",
+   "area": "Dinâmica veicular",
+   "nome": "Estabilidade #81",
+   "duracao": 1,
+   "destrutivo": false
+  },
+  {
+   "id": "DIN-82",
+   "area": "Dinâmica veicular",
+   "nome": "Direção #82",
+   "duracao": 2,
+   "destrutivo": false
+  },
+  {
+   "id": "DIN-83",
+   "area": "Dinâmica veicular",
+   "nome": "Direção #83",
+   "duracao": 5,
+   "destrutivo": false
+  },
+  {
+   "id": "DIN-84",
+   "area": "Dinâmica veicular",
+   "nome": "Direção #84",
+   "duracao": 1,
+   "destrutivo": false
+  },
+  {
+   "id": "DIN-85",
+   "area": "Dinâmica veicular",
+   "nome": "Estabilidade #85",
+   "duracao": 1,
+   "destrutivo": false
+  },
+  {
+   "id": "DIN-86",
+   "area": "Dinâmica veicular",
+   "nome": "Estabilidade #86",
+   "duracao": 3,
+   "destrutivo": false
+  },
+  {
+   "id": "DIN-87",
+   "area": "Dinâmica veicular",
+   "nome": "Tração #87",
+   "duracao": 2,
+   "destrutivo": false
+  },
+  {
+   "id": "DIN-88",
+   "area": "Dinâmica veicular",
+   "nome": "Suspensão #88",
+   "duracao": 1,
+   "destrutivo": false
+  },
+  {
+   "id": "DIN-89",
+   "area": "Dinâmica veicular",
+   "nome": "Frenagem em pista seca #89",
+   "duracao": 1,
+   "destrutivo": false
+  },
+  {
+   "id": "DIN-90",
+   "area": "Dinâmica veicular",
+   "nome": "Tração #90",
+   "duracao": 4,
+   "destrutivo": false
+  },
+  {
+   "id": "DIN-91",
+   "area": "Dinâmica veicular",
+   "nome": "Estabilidade #91",
+   "duracao": 2,
+   "destrutivo": false
+  },
+  {
+   "id": "DIN-92",
+   "area": "Dinâmica veicular",
+   "nome": "Estabilidade #92",
+   "duracao": 5,
+   "destrutivo": false
+  },
+  {
+   "id": "DIN-93",
+   "area": "Dinâmica veicular",
+   "nome": "Frenagem em pista seca #93",
+   "duracao": 2,
+   "destrutivo": false
+  },
+  {
+   "id": "DIN-94",
+   "area": "Dinâmica veicular",
+   "nome": "Direção #94",
+   "duracao": 1,
+   "destrutivo": false
+  },
+  {
+   "id": "DIN-95",
+   "area": "Dinâmica veicular",
+   "nome": "Estabilidade #95",
+   "duracao": 4,
+   "destrutivo": false
+  },
+  {
+   "id": "DIN-96",
+   "area": "Dinâmica veicular",
+   "nome": "Suspensão #96",
+   "duracao": 5,
+   "destrutivo": false
+  },
+  {
+   "id": "DIN-97",
+   "area": "Dinâmica veicular",
+   "nome": "Estabilidade #97",
+   "duracao": 2,
+   "destrutivo": false
+  },
+  {
+   "id": "DIN-98",
+   "area": "Dinâmica veicular",
+   "nome": "Frenagem em pista seca #98",
+   "duracao": 3,
+   "destrutivo": false
+  },
+  {
+   "id": "DIN-99",
+   "area": "Dinâmica veicular",
+   "nome": "Estabilidade #99",
+   "duracao": 6,
+   "destrutivo": false
+  },
+  {
+   "id": "DIN-100",
+   "area": "Dinâmica veicular",
+   "nome": "Suspensão #100",
+   "duracao": 5,
+   "destrutivo": false
+  },
+  {
+   "id": "DIN-101",
+   "area": "Dinâmica veicular",
+   "nome": "Frenagem em pista seca #101",
+   "duracao": 2,
+   "destrutivo": false
+  },
+  {
+   "id": "DIN-102",
+   "area": "Dinâmica veicular",
+   "nome": "Direção #102",
+   "duracao": 1,
+   "destrutivo": false
+  },
+  {
+   "id": "DIN-103",
+   "area": "Dinâmica veicular",
+   "nome": "Estabilidade #103",
+   "duracao": 2,
+   "destrutivo": false
+  },
+  {
+   "id": "DIN-104",
+   "area": "Dinâmica veicular",
+   "nome": "Estabilidade #104",
+   "duracao": 3,
+   "destrutivo": false
+  },
+  {
+   "id": "DIN-105",
+   "area": "Dinâmica veicular",
+   "nome": "Frenagem em pista seca #105",
+   "duracao": 4,
+   "destrutivo": false
+  },
+  {
+   "id": "DIN-106",
+   "area": "Dinâmica veicular",
+   "nome": "Tração #106",
+   "duracao": 2,
+   "destrutivo": false
+  },
+  {
+   "id": "DIN-107",
+   "area": "Dinâmica veicular",
+   "nome": "Tração #107",
+   "duracao": 5,
+   "destrutivo": false
+  },
+  {
+   "id": "DIN-108",
+   "area": "Dinâmica veicular",
+   "nome": "Estabilidade #108",
+   "duracao": 1,
+   "destrutivo": false
+  },
+  {
+   "id": "DIN-109",
+   "area": "Dinâmica veicular",
+   "nome": "Frenagem em pista seca #109",
+   "duracao": 4,
+   "destrutivo": false
+  },
+  {
+   "id": "DIN-110",
+   "area": "Dinâmica veicular",
+   "nome": "Frenagem em pista seca #110",
+   "duracao": 3,
+   "destrutivo": false
+  },
+  {
+   "id": "DIN-111",
+   "area": "Dinâmica veicular",
+   "nome": "Direção #111",
+   "duracao": 4,
+   "destrutivo": false
+  },
+  {
+   "id": "DIN-112",
+   "area": "Dinâmica veicular",
+   "nome": "Suspensão #112",
+   "duracao": 3,
+   "destrutivo": false
+  },
+  {
+   "id": "DIN-113",
+   "area": "Dinâmica veicular",
+   "nome": "Frenagem em pista seca #113",
+   "duracao": 3,
+   "destrutivo": false
+  },
+  {
+   "id": "DIN-114",
+   "area": "Dinâmica veicular",
+   "nome": "Direção #114",
+   "duracao": 4,
+   "destrutivo": false
+  },
+  {
+   "id": "DIN-115",
+   "area": "Dinâmica veicular",
+   "nome": "Estabilidade #115",
+   "duracao": 1,
+   "destrutivo": false
+  },
+  {
+   "id": "DIN-116",
+   "area": "Dinâmica veicular",
+   "nome": "Frenagem em pista seca #116",
+   "duracao": 2,
+   "destrutivo": false
+  },
+  {
+   "id": "DIN-117",
+   "area": "Dinâmica veicular",
+   "nome": "Suspensão #117",
+   "duracao": 5,
+   "destrutivo": false
+  },
+  {
+   "id": "DIN-118",
+   "area": "Dinâmica veicular",
+   "nome": "Estabilidade #118",
+   "duracao": 6,
+   "destrutivo": false
+  },
+  {
+   "id": "DIN-119",
+   "area": "Dinâmica veicular",
+   "nome": "Estabilidade #119",
+   "duracao": 2,
+   "destrutivo": false
+  },
+  {
+   "id": "DIN-120",
+   "area": "Dinâmica veicular",
+   "nome": "Frenagem em pista seca #120",
+   "duracao": 5,
+   "destrutivo": false
+  },
+  {
+   "id": "DIN-121",
+   "area": "Dinâmica veicular",
+   "nome": "Estabilidade #121",
+   "duracao": 3,
+   "destrutivo": false
+  },
+  {
+   "id": "DIN-122",
+   "area": "Dinâmica veicular",
+   "nome": "Tração #122",
+   "duracao": 2,
+   "destrutivo": false
+  },
+  {
+   "id": "DIN-123",
+   "area": "Dinâmica veicular",
+   "nome": "Estabilidade #123",
+   "duracao": 2,
+   "destrutivo": false
+  },
+  {
+   "id": "DIN-124",
+   "area": "Dinâmica veicular",
+   "nome": "Tração #124",
+   "duracao": 6,
+   "destrutivo": false
+  },
+  {
+   "id": "DIN-125",
+   "area": "Dinâmica veicular",
+   "nome": "Suspensão #125",
+   "duracao": 4,
+   "destrutivo": false
+  },
+  {
+   "id": "SEG-01",
+   "area": "Segurança passiva",
+   "nome": "Cintos e fixações #1",
+   "duracao": 6,
+   "destrutivo": false
+  },
+  {
+   "id": "SEG-02",
+   "area": "Segurança passiva",
+   "nome": "Crash lateral #2",
+   "duracao": 1,
+   "destrutivo": true
+  },
+  {
+   "id": "SEG-03",
+   "area": "Segurança passiva",
+   "nome": "Cintos e fixações #3",
+   "duracao": 3,
+   "destrutivo": false
+  },
+  {
+   "id": "SEG-04",
+   "area": "Segurança passiva",
+   "nome": "Cintos e fixações #4",
+   "duracao": 5,
+   "destrutivo": false
+  },
+  {
+   "id": "SEG-05",
+   "area": "Segurança passiva",
+   "nome": "Crash lateral #5",
+   "duracao": 4,
+   "destrutivo": true
+  },
+  {
+   "id": "SEG-06",
+   "area": "Segurança passiva",
+   "nome": "Crash lateral #6",
+   "duracao": 3,
+   "destrutivo": true
+  },
+  {
+   "id": "SEG-07",
+   "area": "Segurança passiva",
+   "nome": "Crash frontal #7",
+   "duracao": 5,
+   "destrutivo": true
+  },
+  {
+   "id": "SEG-08",
+   "area": "Segurança passiva",
+   "nome": "Cintos e fixações #8",
+   "duracao": 4,
+   "destrutivo": false
+  },
+  {
+   "id": "SEG-09",
+   "area": "Segurança passiva",
+   "nome": "Airbags #9",
+   "duracao": 4,
+   "destrutivo": false
+  },
+  {
+   "id": "SEG-10",
+   "area": "Segurança passiva",
+   "nome": "Airbags #10",
+   "duracao": 3,
+   "destrutivo": false
+  },
+  {
+   "id": "SEG-11",
+   "area": "Segurança passiva",
+   "nome": "Airbags #11",
+   "duracao": 1,
+   "destrutivo": false
+  },
+  {
+   "id": "SEG-12",
+   "area": "Segurança passiva",
+   "nome": "Cintos e fixações #12",
+   "duracao": 6,
+   "destrutivo": false
+  },
+  {
+   "id": "SEG-13",
+   "area": "Segurança passiva",
+   "nome": "Capotamento #13",
+   "duracao": 2,
+   "destrutivo": true
+  },
+  {
+   "id": "SEG-14",
+   "area": "Segurança passiva",
+   "nome": "Capotamento #14",
+   "duracao": 4,
+   "destrutivo": true
+  },
+  {
+   "id": "SEG-15",
+   "area": "Segurança passiva",
+   "nome": "Airbags #15",
+   "duracao": 3,
+   "destrutivo": false
+  },
+  {
+   "id": "SEG-16",
+   "area": "Segurança passiva",
+   "nome": "Crash lateral #16",
+   "duracao": 4,
+   "destrutivo": true
+  },
+  {
+   "id": "SEG-17",
+   "area": "Segurança passiva",
+   "nome": "Cintos e fixações #17",
+   "duracao": 6,
+   "destrutivo": false
+  },
+  {
+   "id": "SEG-18",
+   "area": "Segurança passiva",
+   "nome": "Cintos e fixações #18",
+   "duracao": 1,
+   "destrutivo": false
+  },
+  {
+   "id": "SEG-19",
+   "area": "Segurança passiva",
+   "nome": "Capotamento #19",
+   "duracao": 6,
+   "destrutivo": true
+  },
+  {
+   "id": "SEG-20",
+   "area": "Segurança passiva",
+   "nome": "Crash lateral #20",
+   "duracao": 6,
+   "destrutivo": true
+  },
+  {
+   "id": "SEG-21",
+   "area": "Segurança passiva",
+   "nome": "Airbags #21",
+   "duracao": 3,
+   "destrutivo": false
+  },
+  {
+   "id": "SEG-22",
+   "area": "Segurança passiva",
+   "nome": "Capotamento #22",
+   "duracao": 2,
+   "destrutivo": true
+  },
+  {
+   "id": "SEG-23",
+   "area": "Segurança passiva",
+   "nome": "Cintos e fixações #23",
+   "duracao": 6,
+   "destrutivo": false
+  },
+  {
+   "id": "SEG-24",
+   "area": "Segurança passiva",
+   "nome": "Cintos e fixações #24",
+   "duracao": 2,
+   "destrutivo": false
+  },
+  {
+   "id": "SEG-25",
+   "area": "Segurança passiva",
+   "nome": "Airbags #25",
+   "duracao": 3,
+   "destrutivo": false
+  },
+  {
+   "id": "SEG-26",
+   "area": "Segurança passiva",
+   "nome": "Cintos e fixações #26",
+   "duracao": 2,
+   "destrutivo": false
+  },
+  {
+   "id": "SEG-27",
+   "area": "Segurança passiva",
+   "nome": "Airbags #27",
+   "duracao": 6,
+   "destrutivo": false
+  },
+  {
+   "id": "SEG-28",
+   "area": "Segurança passiva",
+   "nome": "Cintos e fixações #28",
+   "duracao": 1,
+   "destrutivo": false
+  },
+  {
+   "id": "SEG-29",
+   "area": "Segurança passiva",
+   "nome": "Crash frontal #29",
+   "duracao": 2,
+   "destrutivo": true
+  },
+  {
+   "id": "SEG-30",
+   "area": "Segurança passiva",
+   "nome": "Crash lateral #30",
+   "duracao": 2,
+   "destrutivo": true
+  },
+  {
+   "id": "SEG-31",
+   "area": "Segurança passiva",
+   "nome": "Crash frontal #31",
+   "duracao": 2,
+   "destrutivo": true
+  },
+  {
+   "id": "SEG-32",
+   "area": "Segurança passiva",
+   "nome": "Crash frontal #32",
+   "duracao": 5,
+   "destrutivo": true
+  },
+  {
+   "id": "SEG-33",
+   "area": "Segurança passiva",
+   "nome": "Airbags #33",
+   "duracao": 6,
+   "destrutivo": false
+  },
+  {
+   "id": "SEG-34",
+   "area": "Segurança passiva",
+   "nome": "Capotamento #34",
+   "duracao": 2,
+   "destrutivo": true
+  },
+  {
+   "id": "SEG-35",
+   "area": "Segurança passiva",
+   "nome": "Airbags #35",
+   "duracao": 2,
+   "destrutivo": false
+  },
+  {
+   "id": "SEG-36",
+   "area": "Segurança passiva",
+   "nome": "Capotamento #36",
+   "duracao": 5,
+   "destrutivo": true
+  },
+  {
+   "id": "SEG-37",
+   "area": "Segurança passiva",
+   "nome": "Airbags #37",
+   "duracao": 6,
+   "destrutivo": false
+  },
+  {
+   "id": "SEG-38",
+   "area": "Segurança passiva",
+   "nome": "Cintos e fixações #38",
+   "duracao": 3,
+   "destrutivo": false
+  },
+  {
+   "id": "SEG-39",
+   "area": "Segurança passiva",
+   "nome": "Airbags #39",
+   "duracao": 4,
+   "destrutivo": false
+  },
+  {
+   "id": "SEG-40",
+   "area": "Segurança passiva",
+   "nome": "Cintos e fixações #40",
+   "duracao": 2,
+   "destrutivo": false
+  },
+  {
+   "id": "SEG-41",
+   "area": "Segurança passiva",
+   "nome": "Cintos e fixações #41",
+   "duracao": 4,
+   "destrutivo": false
+  },
+  {
+   "id": "SEG-42",
+   "area": "Segurança passiva",
+   "nome": "Airbags #42",
+   "duracao": 3,
+   "destrutivo": false
+  },
+  {
+   "id": "SEG-43",
+   "area": "Segurança passiva",
+   "nome": "Cintos e fixações #43",
+   "duracao": 4,
+   "destrutivo": false
+  },
+  {
+   "id": "SEG-44",
+   "area": "Segurança passiva",
+   "nome": "Cintos e fixações #44",
+   "duracao": 5,
+   "destrutivo": false
+  },
+  {
+   "id": "SEG-45",
+   "area": "Segurança passiva",
+   "nome": "Airbags #45",
+   "duracao": 2,
+   "destrutivo": false
+  },
+  {
+   "id": "SEG-46",
+   "area": "Segurança passiva",
+   "nome": "Airbags #46",
+   "duracao": 3,
+   "destrutivo": false
+  },
+  {
+   "id": "SEG-47",
+   "area": "Segurança passiva",
+   "nome": "Crash lateral #47",
+   "duracao": 3,
+   "destrutivo": true
+  },
+  {
+   "id": "SEG-48",
+   "area": "Segurança passiva",
+   "nome": "Airbags #48",
+   "duracao": 6,
+   "destrutivo": false
+  },
+  {
+   "id": "SEG-49",
+   "area": "Segurança passiva",
+   "nome": "Airbags #49",
+   "duracao": 3,
+   "destrutivo": false
+  },
+  {
+   "id": "SEG-50",
+   "area": "Segurança passiva",
+   "nome": "Crash frontal #50",
+   "duracao": 3,
+   "destrutivo": true
+  },
+  {
+   "id": "SEG-51",
+   "area": "Segurança passiva",
+   "nome": "Airbags #51",
+   "duracao": 4,
+   "destrutivo": false
+  },
+  {
+   "id": "SEG-52",
+   "area": "Segurança passiva",
+   "nome": "Crash frontal #52",
+   "duracao": 4,
+   "destrutivo": true
+  },
+  {
+   "id": "SEG-53",
+   "area": "Segurança passiva",
+   "nome": "Airbags #53",
+   "duracao": 4,
+   "destrutivo": false
+  },
+  {
+   "id": "SEG-54",
+   "area": "Segurança passiva",
+   "nome": "Capotamento #54",
+   "duracao": 3,
+   "destrutivo": true
+  },
+  {
+   "id": "SEG-55",
+   "area": "Segurança passiva",
+   "nome": "Crash frontal #55",
+   "duracao": 3,
+   "destrutivo": true
+  },
+  {
+   "id": "SEG-56",
+   "area": "Segurança passiva",
+   "nome": "Crash lateral #56",
+   "duracao": 1,
+   "destrutivo": true
+  },
+  {
+   "id": "SEG-57",
+   "area": "Segurança passiva",
+   "nome": "Cintos e fixações #57",
+   "duracao": 2,
+   "destrutivo": false
+  },
+  {
+   "id": "SEG-58",
+   "area": "Segurança passiva",
+   "nome": "Crash lateral #58",
+   "duracao": 4,
+   "destrutivo": true
+  },
+  {
+   "id": "SEG-59",
+   "area": "Segurança passiva",
+   "nome": "Airbags #59",
+   "duracao": 6,
+   "destrutivo": false
+  },
+  {
+   "id": "SEG-60",
+   "area": "Segurança passiva",
+   "nome": "Airbags #60",
+   "duracao": 1,
+   "destrutivo": false
+  },
+  {
+   "id": "SEG-61",
+   "area": "Segurança passiva",
+   "nome": "Crash frontal #61",
+   "duracao": 2,
+   "destrutivo": true
+  },
+  {
+   "id": "SEG-62",
+   "area": "Segurança passiva",
+   "nome": "Cintos e fixações #62",
+   "duracao": 1,
+   "destrutivo": false
+  },
+  {
+   "id": "SEG-63",
+   "area": "Segurança passiva",
+   "nome": "Airbags #63",
+   "duracao": 3,
+   "destrutivo": false
+  },
+  {
+   "id": "SEG-64",
+   "area": "Segurança passiva",
+   "nome": "Crash frontal #64",
+   "duracao": 4,
+   "destrutivo": true
+  },
+  {
+   "id": "SEG-65",
+   "area": "Segurança passiva",
+   "nome": "Cintos e fixações #65",
+   "duracao": 1,
+   "destrutivo": false
+  },
+  {
+   "id": "SEG-66",
+   "area": "Segurança passiva",
+   "nome": "Crash lateral #66",
+   "duracao": 5,
+   "destrutivo": true
+  },
+  {
+   "id": "SEG-67",
+   "area": "Segurança passiva",
+   "nome": "Airbags #67",
+   "duracao": 6,
+   "destrutivo": false
+  },
+  {
+   "id": "SEG-68",
+   "area": "Segurança passiva",
+   "nome": "Crash lateral #68",
+   "duracao": 1,
+   "destrutivo": true
+  },
+  {
+   "id": "SEG-69",
+   "area": "Segurança passiva",
+   "nome": "Airbags #69",
+   "duracao": 5,
+   "destrutivo": false
+  },
+  {
+   "id": "SEG-70",
+   "area": "Segurança passiva",
+   "nome": "Airbags #70",
+   "duracao": 5,
+   "destrutivo": false
+  },
+  {
+   "id": "SEG-71",
+   "area": "Segurança passiva",
+   "nome": "Airbags #71",
+   "duracao": 5,
+   "destrutivo": false
+  },
+  {
+   "id": "SEG-72",
+   "area": "Segurança passiva",
+   "nome": "Airbags #72",
+   "duracao": 4,
+   "destrutivo": false
+  },
+  {
+   "id": "SEG-73",
+   "area": "Segurança passiva",
+   "nome": "Airbags #73",
+   "duracao": 6,
+   "destrutivo": false
+  },
+  {
+   "id": "SEG-74",
+   "area": "Segurança passiva",
+   "nome": "Crash lateral #74",
+   "duracao": 3,
+   "destrutivo": true
+  },
+  {
+   "id": "SEG-75",
+   "area": "Segurança passiva",
+   "nome": "Cintos e fixações #75",
+   "duracao": 1,
+   "destrutivo": false
+  },
+  {
+   "id": "SEG-76",
+   "area": "Segurança passiva",
+   "nome": "Capotamento #76",
+   "duracao": 6,
+   "destrutivo": true
+  },
+  {
+   "id": "SEG-77",
+   "area": "Segurança passiva",
+   "nome": "Cintos e fixações #77",
+   "duracao": 2,
+   "destrutivo": false
+  },
+  {
+   "id": "SEG-78",
+   "area": "Segurança passiva",
+   "nome": "Capotamento #78",
+   "duracao": 3,
+   "destrutivo": true
+  },
+  {
+   "id": "SEG-79",
+   "area": "Segurança passiva",
+   "nome": "Airbags #79",
+   "duracao": 6,
+   "destrutivo": false
+  },
+  {
+   "id": "SEG-80",
+   "area": "Segurança passiva",
+   "nome": "Cintos e fixações #80",
+   "duracao": 6,
+   "destrutivo": false
+  },
+  {
+   "id": "SEG-81",
+   "area": "Segurança passiva",
+   "nome": "Crash frontal #81",
+   "duracao": 1,
+   "destrutivo": true
+  },
+  {
+   "id": "SEG-82",
+   "area": "Segurança passiva",
+   "nome": "Cintos e fixações #82",
+   "duracao": 1,
+   "destrutivo": false
+  },
+  {
+   "id": "SEG-83",
+   "area": "Segurança passiva",
+   "nome": "Crash frontal #83",
+   "duracao": 2,
+   "destrutivo": true
+  },
+  {
+   "id": "SEG-84",
+   "area": "Segurança passiva",
+   "nome": "Cintos e fixações #84",
+   "duracao": 3,
+   "destrutivo": false
+  },
+  {
+   "id": "SEG-85",
+   "area": "Segurança passiva",
+   "nome": "Cintos e fixações #85",
+   "duracao": 3,
+   "destrutivo": false
+  },
+  {
+   "id": "SEG-86",
+   "area": "Segurança passiva",
+   "nome": "Capotamento #86",
+   "duracao": 2,
+   "destrutivo": true
+  },
+  {
+   "id": "SEG-87",
+   "area": "Segurança passiva",
+   "nome": "Crash frontal #87",
+   "duracao": 6,
+   "destrutivo": true
+  },
+  {
+   "id": "SEG-88",
+   "area": "Segurança passiva",
+   "nome": "Crash frontal #88",
+   "duracao": 3,
+   "destrutivo": true
+  },
+  {
+   "id": "SEG-89",
+   "area": "Segurança passiva",
+   "nome": "Cintos e fixações #89",
+   "duracao": 6,
+   "destrutivo": false
+  },
+  {
+   "id": "SEG-90",
+   "area": "Segurança passiva",
+   "nome": "Cintos e fixações #90",
+   "duracao": 3,
+   "destrutivo": false
+  },
+  {
+   "id": "SEG-91",
+   "area": "Segurança passiva",
+   "nome": "Cintos e fixações #91",
+   "duracao": 6,
+   "destrutivo": false
+  },
+  {
+   "id": "SEG-92",
+   "area": "Segurança passiva",
+   "nome": "Cintos e fixações #92",
+   "duracao": 1,
+   "destrutivo": false
+  },
+  {
+   "id": "SEG-93",
+   "area": "Segurança passiva",
+   "nome": "Airbags #93",
+   "duracao": 4,
+   "destrutivo": false
+  },
+  {
+   "id": "SEG-94",
+   "area": "Segurança passiva",
+   "nome": "Airbags #94",
+   "duracao": 5,
+   "destrutivo": false
+  },
+  {
+   "id": "SEG-95",
+   "area": "Segurança passiva",
+   "nome": "Crash frontal #95",
+   "duracao": 1,
+   "destrutivo": true
+  },
+  {
+   "id": "SEG-96",
+   "area": "Segurança passiva",
+   "nome": "Crash lateral #96",
+   "duracao": 3,
+   "destrutivo": true
+  },
+  {
+   "id": "SEG-97",
+   "area": "Segurança passiva",
+   "nome": "Cintos e fixações #97",
+   "duracao": 2,
+   "destrutivo": false
+  },
+  {
+   "id": "SEG-98",
+   "area": "Segurança passiva",
+   "nome": "Cintos e fixações #98",
+   "duracao": 4,
+   "destrutivo": false
+  },
+  {
+   "id": "SEG-99",
+   "area": "Segurança passiva",
+   "nome": "Crash lateral #99",
+   "duracao": 5,
+   "destrutivo": true
+  },
+  {
+   "id": "SEG-100",
+   "area": "Segurança passiva",
+   "nome": "Cintos e fixações #100",
+   "duracao": 6,
+   "destrutivo": false
+  },
+  {
+   "id": "SEG-101",
+   "area": "Segurança passiva",
+   "nome": "Airbags #101",
+   "duracao": 1,
+   "destrutivo": false
+  },
+  {
+   "id": "SEG-102",
+   "area": "Segurança passiva",
+   "nome": "Cintos e fixações #102",
+   "duracao": 3,
+   "destrutivo": false
+  },
+  {
+   "id": "SEG-103",
+   "area": "Segurança passiva",
+   "nome": "Airbags #103",
+   "duracao": 1,
+   "destrutivo": false
+  },
+  {
+   "id": "SEG-104",
+   "area": "Segurança passiva",
+   "nome": "Capotamento #104",
+   "duracao": 6,
+   "destrutivo": true
+  },
+  {
+   "id": "SEG-105",
+   "area": "Segurança passiva",
+   "nome": "Airbags #105",
+   "duracao": 2,
+   "destrutivo": false
+  },
+  {
+   "id": "SEG-106",
+   "area": "Segurança passiva",
+   "nome": "Capotamento #106",
+   "duracao": 3,
+   "destrutivo": true
+  },
+  {
+   "id": "SEG-107",
+   "area": "Segurança passiva",
+   "nome": "Capotamento #107",
+   "duracao": 1,
+   "destrutivo": true
+  },
+  {
+   "id": "SEG-108",
+   "area": "Segurança passiva",
+   "nome": "Cintos e fixações #108",
+   "duracao": 3,
+   "destrutivo": false
+  },
+  {
+   "id": "SEG-109",
+   "area": "Segurança passiva",
+   "nome": "Crash frontal #109",
+   "duracao": 5,
+   "destrutivo": true
+  },
+  {
+   "id": "SEG-110",
+   "area": "Segurança passiva",
+   "nome": "Crash lateral #110",
+   "duracao": 4,
+   "destrutivo": true
+  },
+  {
+   "id": "SEG-111",
+   "area": "Segurança passiva",
+   "nome": "Crash lateral #111",
+   "duracao": 2,
+   "destrutivo": true
+  },
+  {
+   "id": "SEG-112",
+   "area": "Segurança passiva",
+   "nome": "Airbags #112",
+   "duracao": 6,
+   "destrutivo": false
+  },
+  {
+   "id": "SEG-113",
+   "area": "Segurança passiva",
+   "nome": "Capotamento #113",
+   "duracao": 4,
+   "destrutivo": true
+  },
+  {
+   "id": "SEG-114",
+   "area": "Segurança passiva",
+   "nome": "Airbags #114",
+   "duracao": 3,
+   "destrutivo": false
+  },
+  {
+   "id": "SEG-115",
+   "area": "Segurança passiva",
+   "nome": "Cintos e fixações #115",
+   "duracao": 2,
+   "destrutivo": false
+  },
+  {
+   "id": "SEG-116",
+   "area": "Segurança passiva",
+   "nome": "Cintos e fixações #116",
+   "duracao": 6,
+   "destrutivo": false
+  },
+  {
+   "id": "SEG-117",
+   "area": "Segurança passiva",
+   "nome": "Cintos e fixações #117",
+   "duracao": 2,
+   "destrutivo": false
+  },
+  {
+   "id": "SEG-118",
+   "area": "Segurança passiva",
+   "nome": "Crash frontal #118",
+   "duracao": 4,
+   "destrutivo": true
+  },
+  {
+   "id": "SEG-119",
+   "area": "Segurança passiva",
+   "nome": "Capotamento #119",
+   "duracao": 4,
+   "destrutivo": true
+  },
+  {
+   "id": "SEG-120",
+   "area": "Segurança passiva",
+   "nome": "Cintos e fixações #120",
+   "duracao": 6,
+   "destrutivo": false
+  },
+  {
+   "id": "SEG-121",
+   "area": "Segurança passiva",
+   "nome": "Crash frontal #121",
+   "duracao": 5,
+   "destrutivo": true
+  },
+  {
+   "id": "SEG-122",
+   "area": "Segurança passiva",
+   "nome": "Cintos e fixações #122",
+   "duracao": 2,
+   "destrutivo": false
+  },
+  {
+   "id": "SEG-123",
+   "area": "Segurança passiva",
+   "nome": "Airbags #123",
+   "duracao": 3,
+   "destrutivo": false
+  },
+  {
+   "id": "SEG-124",
+   "area": "Segurança passiva",
+   "nome": "Airbags #124",
+   "duracao": 2,
+   "destrutivo": false
+  },
+  {
+   "id": "SEG-125",
+   "area": "Segurança passiva",
+   "nome": "Airbags #125",
+   "duracao": 4,
+   "destrutivo": false
+  }
+ ]
+}

@@ -1,0 +1,25 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Barlow", system-ui, sans-serif;
+  --font-cond: "Barlow Condensed", "Barlow", sans-serif;
+  --color-asfalto: #e9edf1;
+  --color-pista: #f7f9fb;
+  --color-tinta: #14213d;
+  --color-grafite: #5b6676;
+  --color-linha: #cfd6de;
+  --color-faixa: #f2b705;
+  /* uma cor por área */
+  --color-ele: #3a6ea5;
+  --color-mec: #8a5a2b;
+  --color-aer: #2a9d8f;
+  --color-din: #7b4fa0;
+  --color-seg: #c0392b;
+}
+
+body { background: var(--color-asfalto); color: var(--color-tinta); }
+:focus-visible { outline: 2px solid var(--color-faixa); outline-offset: 2px; }
+@media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+
+/* carro destruído: listras de fita zebrada */
+.destruido { background: repeating-linear-gradient(135deg, #d9dee4 0 4px, #eef1f4 4px 8px); }

@@ -11,7 +11,7 @@ Fonte: **discovery** (fala ou e-mail da Maira), **José** (premissa aprovada), *
 | — | Horizonte | 20 semanas | Plano da Veloz | discovery `[T]` |
 | — | Custo por protótipo | R$ 1 milhão a R$ 1,5 milhão | Fala da Maira | discovery `[T]` |
 | RN-01 | Protótipos idênticos | Sem variante | E-mail de 11/11 | discovery `[E]` |
-| MK-01 | Testes por área | 30 a 40 (no mock: ver `backend/data/mock.json`) | **Desvio do discovery**, que dizia 8 a 12. Com 8 a 12 testes por área, os pedidos não chegam a 250 carros sem uma gordura absurda. O §11 diz que o MK é "a calibrar ao gerar os dados" | suposição |
+| MK-01 | Testes por área | 125 (625 no total) | **Desvio do discovery**, que dizia 8 a 12. Com testes de 1 a 6 semanas, 8 a 12 testes por área ocupam uns 10 carros por área, longe dos 250. O número de testes foi a única entrada calibrada: com 125 por área, os pedidos somam 245. O §11 diz que o MK é "a calibrar ao gerar os dados" | suposição |
 | MK-01b | Duração de um teste | 1 a 6 semanas | Discovery §11 | suposição |
 | MK-02 | Testes destrutivos | 10% a 20%, concentrados em Segurança passiva e Mecânica | Discovery §11 | suposição |
 | MK-03 | Pedido de cada área | A área planeja só com os próprios carros, numa janela menor que 20 semanas (paralelismo), e soma a gordura. A soma dos 5 pedidos fica perto de 250 | As duas fontes de gordura que a Maira citou: reprovação e paralelismo | suposição |
