@@ -252,7 +252,7 @@ export const MARCOS = [
   { quando: '2026-11-12T15:00', nome: 'Docs finais (6b) começam', curto: '15h docs', comeca: ['06b'] },
   { quando: '2026-11-12T17:00', nome: 'Protótipo pronto; o José começa a testar', curto: '17h pronto', todos: true },
   { quando: '2026-11-12T19:00', nome: 'Fim do teste do José', curto: '19h teste' },
-  { quando: '2026-11-13T10:00', nome: 'Apresentação para a Strattum', curto: 'sex 10h' },
+  { quando: '2026-11-13T10:00', nome: 'Apresentação para a Strattum', curto: 'apresentação' },
 ].map(m => ({ ...m, data: brt(m.quando) }));
 
 export function montar(raiz = RAIZ, { agora = new Date(), git = gitLog(raiz), github = baseGithub(raiz) } = {}) {
@@ -430,7 +430,7 @@ function gantt(d) {
   for (let t = ini.getTime(); t <= fim.getTime(); t += 3 * 36e5) {
     const dt = new Date(t), h = Number(fmt(dt, { hour: '2-digit', hourCycle: 'h23' }));
     if (h >= 2 && h < 8) continue;
-    horas.push(`<span class="hora${h === 0 ? ' dia' : ''}" style="left:${x(dt).toFixed(2)}%">${h === 0 ? fmt(dt, { weekday: 'short' }).replace('.', '') + ' ' + fmtDia(dt) : h + 'h'}</span>`);
+    horas.push(`<span class="hora${h === 10 ? ' dia' : ''}" style="left:${x(dt).toFixed(2)}%">${h === 10 ? fmt(dt, { weekday: 'short' }).replace('.', '') + ' ' + fmtDia(dt) : h + 'h'}</span>`);
   }
   const noites = ['2026-11-12', '2026-11-13'].map(dia => `<span class="noite" style="left:${x(brt(dia + 'T02:00')).toFixed(2)}%;width:${(x(brt(dia + 'T08:00')) - x(brt(dia + 'T02:00'))).toFixed(2)}%" title="Madrugada, escala reduzida"></span>`).join('');
   const marcos = d.marcos.map((m, i) => `<span class="marco m-${m.estado.replace(' ', '-')}" style="left:${x(m.data).toFixed(2)}%"><span class="marco-rot ${i % 2 ? 'baixo' : ''}">${esc(m.curto)}</span></span>`).join('');
@@ -463,7 +463,7 @@ function decisoes(d) {
   const adrs = d.adrs.length ? d.adrs.map(a => `<details class="adr a-${a.estado}">
     <summary>
       <span class="adr-num">${esc(a.numero)}</span>
-      <span class="adr-tit">${esc(a.titulo)}${a.substituidoPor ? `<span class="mudo"> Substituído pelo ${esc(a.substituidoPor)}</span>` : ''}</span>
+      <span class="adr-tit">${inline(a.titulo)}${a.substituidoPor ? `<span class="mudo"> Substituído pelo ${esc(a.substituidoPor)}</span>` : ''}</span>
       <span class="adr-meta">${chip(ROT_ADR[a.estado], CLS[a.estado])}<span>${esc(a.data)}</span><span>${esc(a.decidido)}</span></span>
     </summary>
     <div class="adr-corpo">
@@ -495,7 +495,7 @@ function quadro(d) {
       <span class="t-lin"><span class="t-rot">estimado</span><span class="t-bar"><i style="width:${((t.estimativa || 0) / max * 100).toFixed(0)}%"></i></span><span>${fmtDur(t.estimativa)}</span></span>
       <span class="t-lin real${t.real > 2 * (t.estimativa || Infinity) ? ' estouro' : ''}"><span class="t-rot">real</span><span class="t-bar"><i style="width:${((t.real || 0) / max * 100).toFixed(0)}%"></i></span><span>${fmtDur(t.real)}</span></span></div>` : '';
     return `<article class="card">
-      <header><span class="c-num">${esc(t.numero)}</span>${aLink(t.link, t.titulo)}</header>
+      <header><span class="c-num">${esc(t.numero)}</span><a href="${esc(t.link)}">${inline(t.titulo)}</a></header>
       <div class="c-dores">${t.dores.map(x => chip(x, 'dor')).join('') || '<span class="mudo">sem dor</span>'}${t.depende ? `<span class="mudo">depois do ${esc(t.depende)}</span>` : ''}</div>
       ${tempo}
       <div class="c-rodape">
@@ -567,7 +567,7 @@ function riscos(d) {
 export function render(d) {
   const feitos = d.tickets.filter(t => t.estado === 'feito').length;
   const ativos = d.tickets.filter(t => t.estado !== 'cortado').length;
-  const prox = d.marcos.find(m => !m.passou);
+  const prox = d.marcos.find(m => !m.passou && m.estado !== 'cumprido');
   const aprovados = d.adrs.filter(a => a.estado === 'aprovado').length;
   const SEC = [['linha', 'Linha de produção'], ['decisoes', 'Decisões'], ['tickets', 'Tickets'], ['rastreio', 'Rastreabilidade'], ['prazo', 'Prazo'], ['premissas', 'Premissas'], ['ia', 'Uso de IA'], ['riscos', 'Riscos']];
   const sec = (id, tit, sub, corpo) => `<section id="${id}" class="secao"><header class="s-cab"><h2>${tit}</h2>${sub ? `<p>${sub}</p>` : ''}</header>${corpo}</section>`;
@@ -612,6 +612,7 @@ export function render(d) {
 </main>
 <footer class="rodape"><p>Gerado por <code>painel/gerar.mjs</code> em ${esc(fmtDiaHora(d.agora))}, horário de Brasília. Dado do protótipo é mockado e marcado com o ID da premissa.${d.links.repo ? ` ${aLink(d.links.repo, 'Repositório')}` : ''}</p></footer>
 <script>
+(function(){var g=document.querySelector('.gantt-rolagem'),a=g&&g.querySelector('.agora');if(a&&g.scrollWidth>g.clientWidth)g.scrollLeft=a.getBoundingClientRect().left-g.getBoundingClientRect().left-g.clientWidth/2})();
 document.querySelector('.tema').addEventListener('click',function(){var r=document.documentElement,e=r.dataset.theme||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light'),n=e==='dark'?'light':'dark';r.dataset.theme=n;try{localStorage.setItem('tema',n)}catch(x){}});
 </script>
 </body>
@@ -650,7 +651,7 @@ h1,h2,h3,h4{font-family:var(--tit);font-weight:600;line-height:1.15;margin:0}
 .nav a:hover{color:var(--tinta);border-bottom-color:var(--alvo)}
 main{max-width:1180px;margin:0 auto;padding:0 20px}
 .abertura{padding:56px 0 36px;max-width:900px}
-.abertura h1{font-size:clamp(34px,5.4vw,58px);font-weight:600;letter-spacing:-.01em;font-stretch:88%;max-width:16ch}
+.abertura h1{font-size:clamp(34px,5.4vw,58px);font-weight:600;letter-spacing:-.01em;max-width:19ch}
 .lead{font-size:17px;max-width:64ch;color:var(--tinta-2);margin:18px 0 32px}
 .fatos{display:grid;grid-template-columns:repeat(4,1fr);gap:0;margin:0;border-top:3px solid var(--tinta)}
 .fatos>div{padding:14px 16px 4px 0;border-right:1px solid var(--linha);margin-right:16px}
@@ -683,7 +684,7 @@ td{padding:9px 10px;border-bottom:1px solid var(--linha);vertical-align:top}
 .id.forte{background:var(--tinta);color:var(--papel);padding:1px 6px;border-radius:3px}
 /* gantt */
 .gantt-rolagem{overflow-x:auto;background:var(--sup);border:1px solid var(--linha);border-radius:10px;padding:8px 0 10px}
-.gantt{min-width:920px;position:relative}
+.gantt{min-width:920px;position:relative;padding-bottom:30px}
 .g-linha,.g-eixo{display:grid;grid-template-columns:250px 1fr;align-items:center}
 .g-rot{position:sticky;left:0;z-index:2;background:var(--sup);display:flex;align-items:center;gap:8px;padding:0 12px 0 16px;height:44px;border-right:1px solid var(--linha)}
 .g-eixo .g-rot{height:52px}
@@ -694,7 +695,7 @@ td{padding:9px 10px;border-bottom:1px solid var(--linha);vertical-align:top}
 .g-eixo .g-trilha{height:52px}
 .g-linha+.g-linha .g-trilha{border-top:1px dashed var(--linha)}
 .hora{position:absolute;bottom:6px;transform:translateX(-50%);font-size:11.5px;color:var(--tinta-2);white-space:nowrap}
-.hora.dia{font:600 12px var(--tit);color:var(--tinta)}
+.hora.dia{font:600 12px var(--tit);color:var(--tinta);transform:none;padding-left:4px;border-left:1px solid var(--tinta-2)}
 .g-corpo{position:relative}
 .g-sobre{position:absolute;top:0;bottom:0;left:260px;right:18px;pointer-events:none}
 .noite{position:absolute;top:0;bottom:0;background:repeating-linear-gradient(135deg,transparent 0 4px,var(--sup-2) 4px 5px)}

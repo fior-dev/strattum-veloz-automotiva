@@ -5,8 +5,9 @@
 
 ## Regenerar (Windows PowerShell)
 
+Na raiz do repositório:
+
 ```powershell
-cd "C:\Users\josefiori\OneDrive\Documentos\1. Pessoal\1. Projetos\Fior\Portfólio\strattum-veloz-automotiva"
 node painel/gerar.mjs
 ```
 
