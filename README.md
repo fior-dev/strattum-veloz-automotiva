@@ -15,6 +15,19 @@ powershell -ExecutionPolicy Bypass -File .\dev.ps1
 Abre duas janelas: o backend em http://127.0.0.1:8000/docs (Swagger) e a tela em http://localhost:5173.
 Reiniciar o backend volta o plano para a versão 1 do mock.
 
+### Copiloto com LLM (opcional)
+
+Sem chave, o copiloto roda offline e entende só "AER-99 atrasou 2 semanas" e "AER-99 falhou". Para ligar o LLM (LiteLLM → OpenRouter, modelo free):
+
+```powershell
+cd backend
+Copy-Item .env.example .env
+notepad .env   # preencha OPENROUTER_API_KEY e salve
+```
+
+Reinicie o backend. A tela mostra o modelo em uso embaixo da caixa do copiloto.
+**Trocar para a Anthropic é só o `.env`:** `LLM_MODEL=anthropic/claude-sonnet-5-5`, `LLM_FALLBACKS=` vazio e `ANTHROPIC_API_KEY=...`. Nenhuma linha de código muda (ADR 0003).
+
 Testes: `cd backend; uv run pytest`. Build da tela: `cd frontend; npm run build`.
 
 ## Onde está cada coisa
@@ -42,6 +55,6 @@ Testes: `cd backend; uv run pytest`. Build da tela: `cd frontend; npm run build`
 | 04 Replanejar | pronta |
 | 04b Avarias | pronta |
 | 04c Gestão de projetos | pronta |
-| 05 Copiloto | — |
+| 05 Copiloto | pronta (modo offline até a chave do OpenRouter entrar no `.env`) |
 | 05b Supabase | — |
 | 06 Acabamento e docs | — |

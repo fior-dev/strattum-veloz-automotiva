@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { api, type Alocacao, type Comparativo, type Gestao, type Plano, type Proposta } from './api'
 import { Marco, UsoFrota } from './Gestao'
+import { Copiloto } from './Copiloto'
 import { Gantt, Legenda } from './Gantt'
 import { PainelProposta, PainelTeste } from './Paineis'
 
@@ -115,6 +116,7 @@ export default function App() {
         <div className="grid lg:grid-cols-[1fr_24rem] gap-4 items-start">
           <Gantt plano={plano} aoClicar={setAberto} destaque={destaque} folgas={gestao.folgas} marco={gestao.marco} />
           <div className="space-y-4 lg:sticky lg:top-4">
+            {atual && <Copiloto aoProposta={() => carregar()} />}
             {proposta && <PainelProposta proposta={proposta} plano={plano}
               aoDecidir={() => { setProposta(undefined); setAberto(undefined); carregar() }} />}
             {aberto && <PainelTeste plano={plano} aloc={aberto} somenteLeitura={!atual} key={`${aberto.teste_id}-${aberto.inicio}`}

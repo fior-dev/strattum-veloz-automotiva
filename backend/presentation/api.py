@@ -10,7 +10,9 @@ from application.planejamento import Planejamento, Replanejamento
 from domain.modelo import AREAS, HORIZONTE, Avaria
 from domain.motor import EventoInvalido
 
-from .container import planejamento, replanejamento
+from application.copiloto import Copiloto
+
+from .container import copiloto, modo_llm, planejamento, replanejamento
 
 app = FastAPI(title="Veloz · alocação da frota de protótipos", version="0.1.0")
 
@@ -106,3 +108,19 @@ def aceitar(rp: Replanejamento = Depends(replanejamento)):
 def recusar(rp: Replanejamento = Depends(replanejamento)):
     rp.recusar()
     return {"proposta": None}
+
+
+# ---------------------------------------------------------------- copiloto (fatia 5, ADR 0003)
+
+class Mensagem(BaseModel):
+    texto: str = Field(min_length=3, max_length=500, examples=["O teste de vedação na chuva AER-99 atrasou 2 semanas"])
+
+
+@app.get("/api/copiloto", summary="Qual modelo o copiloto usa (ou offline, sem chave)")
+def copiloto_modo():
+    return {"modo": modo_llm() or "offline"}
+
+
+@app.post("/api/copiloto", summary="Texto livre → evento → replanejar → explicação. Nada muda até o aceite (RN-07)")
+def copiloto_perguntar(corpo: Mensagem, cp: Copiloto = Depends(copiloto)):
+    return {**cp.perguntar(corpo.texto), "modo": modo_llm() or "offline"}

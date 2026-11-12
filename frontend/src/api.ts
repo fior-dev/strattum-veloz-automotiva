@@ -76,3 +76,9 @@ export const replan = {
   aceitar: () => pedir<{ versao: number }>('/proposta/aceitar', { method: 'POST' }),
   recusar: () => pedir<ComProposta>('/proposta/recusar', { method: 'POST' }),
 }
+
+export type RespostaCopiloto = { evento: unknown; pergunta: string | null; explicacao: string | null; modo: string }
+export const copiloto = {
+  modo: () => pedir<{ modo: string }>('/copiloto'),
+  perguntar: (texto: string) => pedir<RespostaCopiloto>('/copiloto', { method: 'POST', body: JSON.stringify({ texto }) }),
+}
