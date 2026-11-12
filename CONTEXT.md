@@ -16,6 +16,7 @@ A fonte do negócio é `docs/01-discovery.md` v0.3. Etiquetas de fonte: `[T]` en
 | D5 | **Sem resultado de teste.** A coordenação não sabe quando um teste falhou ou foi repetido | `[T]` | 4 |
 | D6 | **Desgaste parcial invisível.** O carro volta de um teste com avaria e o planejamento não vê | `[E]` | 4b |
 | D7 | **Recomeçar a cada modelo.** O processo volta a cada lançamento, e dois projetos disputam as mesmas engenharias | `[T]` | roadmap |
+| D8 | **Ninguém vê o que segura a data de lançamento.** O problema central é de gestão de projetos e de troca de informação entre a engenharia e a coordenação (recap validado pela Maira, discovery §2). Sem caminho crítico nem marco, a coordenação não sabe quais atrasos mexem no lançamento | `[T]` recap; a dor formulada é `[H]`, José em 12/11 | 04c |
 
 ## Glossário
 
@@ -46,3 +47,7 @@ A fonte do negócio é `docs/01-discovery.md` v0.3. Etiquetas de fonte: `[T]` en
 | Semana de fim | Maior `semana_fim` entre as alocações |
 | Taxa de reuso | Alocações por protótipo |
 | Não cabe | Testes sem alocação porque passariam da semana 20 (RN-06) |
+| Folga de um teste | Fim do plano − fim da cadeia do carro dele (ADR 0007) |
+| Caminho crítico | Testes com folga 0 |
+| Folga do projeto | Semana do lançamento (20) − fim do plano. Verde acima de 2 semanas, amarelo de 1 a 2, vermelho 0 ou menos (MK-08) |
+| Carros-semana parados | Soma, nas 20 semanas, dos carros da frota que não estão em teste nem destruídos |

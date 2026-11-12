@@ -61,6 +61,10 @@ def test_api_cenario_da_demo_atraso_aceite_e_versao_antiga():
     c = TestClient(app)
     r = c.post("/api/status", json={"teste_id": "AER-99", "status": "atrasado", "semanas": 2}).json()["proposta"]
     assert [(s["teste_id"], s["de"]) for s in r["sugestoes"]] == [("DIN-02", "P006")]
+    assert r["marco"]["estava_no_caminho_critico"] and r["marco"]["semanas_consumidas"] == 0
+    g = c.get("/api/gestao").json()
+    assert g["fim_plano"] == 20 and g["sinal"] == "vermelho" and len(g["uso"]["plano"]) == 20
+    assert g["curva_meta"][0] == {"meta": 20, "carros": 161, "folga_projeto": 0, "nao_cabe": 0}
     assert c.get("/api/plano").json()["versao"] == 1  # nada muda antes do aceite (RN-07)
     assert c.post("/api/proposta/aceitar").json()["versao"] == 2
     v2 = c.get("/api/plano").json()

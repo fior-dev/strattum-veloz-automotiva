@@ -29,6 +29,13 @@ def ver_plano(versao: int | None = None, uc: Planejamento = Depends(planejamento
     return _plano_json(plano, uc)
 
 
+@app.get("/api/gestao", summary="Caminho crítico, marco do lançamento e uso da frota por semana (ticket 04c)")
+def gestao(versao: int | None = None, uc: Planejamento = Depends(planejamento)):
+    if uc.plano(versao) is None:
+        raise HTTPException(404, f"Versão {versao} não existe")
+    return uc.gestao(versao)
+
+
 @app.get("/api/comparativo", summary="Como hoje × plano compartilhado (RF-03)")
 def comparativo(uc: Planejamento = Depends(planejamento)):
     return uc.comparativo()
@@ -64,7 +71,7 @@ def _proposta_json(p) -> dict | None:
     if p is None:
         return None
     return {"evento": p.evento, "sugestoes": [asdict(s) for s in p.sugestoes],
-            "impactados": [asdict(i) for i in p.impactados], "versao_nova": p.plano.versao}
+            "impactados": [asdict(i) for i in p.impactados], "versao_nova": p.plano.versao, "marco": p.marco}
 
 
 def _sem_erro(func):

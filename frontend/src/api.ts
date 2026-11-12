@@ -38,6 +38,7 @@ async function pedir<T>(caminho: string, init?: RequestInit): Promise<T> {
 export const api = {
   plano: (versao?: number) => pedir<Plano>(versao ? `/plano?versao=${versao}` : '/plano'),
   comparativo: () => pedir<Comparativo>('/comparativo'),
+  gestao: (versao?: number) => pedir<Gestao>(versao ? `/gestao?versao=${versao}` : '/gestao'),
   proposta: () => pedir<{ proposta: Proposta | null }>('/proposta'),
   folga: (folga: number) => pedir<Comparativo>('/folga', { method: 'PUT', body: JSON.stringify({ folga }) }),
 }
@@ -55,6 +56,15 @@ export type Proposta = {
   sugestoes: { teste_id: string; de: string; para: string; inicio: number; fim: number }[]
   impactados: { teste_id: string; area: string; motivo: string }[]
   versao_nova: number
+  marco: { fim_antes: number; fim_depois: number; semanas_consumidas: number; folga_projeto_antes: number;
+    folga_projeto_depois: number; estava_no_caminho_critico: boolean } | null
+}
+export type UsoSemana = { semana: number; em_uso: number; parados: number; fora: number }
+export type Gestao = {
+  marco: number; fim_plano: number; folga_projeto: number; sinal: 'verde' | 'amarelo' | 'vermelho'
+  criticos: number; testes_no_plano: number; folgas: Record<string, number>
+  uso: { plano: UsoSemana[]; como_hoje: UsoSemana[] }
+  curva_meta: { meta: number; carros: number; folga_projeto: number; nao_cabe: number }[]
 }
 type ComProposta = { proposta: Proposta | null }
 

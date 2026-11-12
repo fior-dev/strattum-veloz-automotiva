@@ -1,7 +1,9 @@
-import { COR_AREA, type Alocacao, type Plano } from './api'
+﻿import { COR_AREA, type Alocacao, type Plano } from './api'
 
 // RF-04: uma linha por protótipo, uma coluna por semana. Cada barra mostra a área (cor) e o ID do teste.
-export function Gantt({ plano, aoClicar, destaque }: { plano: Plano; aoClicar?: (a: Alocacao) => void; destaque?: Set<string> }) {
+export function Gantt({ plano, aoClicar, destaque, folgas = {}, marco = 20 }: {
+  plano: Plano; aoClicar?: (a: Alocacao) => void; destaque?: Set<string>; folgas?: Record<string, number>; marco?: number
+}) {
   const semanas = Array.from({ length: plano.horizonte }, (_, i) => i + 1)
   const porCarro = new Map<string, Alocacao[]>()
   for (const a of plano.alocacoes) porCarro.set(a.prototipo_id, [...(porCarro.get(a.prototipo_id) ?? []), a])
@@ -12,7 +14,7 @@ export function Gantt({ plano, aoClicar, destaque }: { plano: Plano; aoClicar?: 
     <div className="overflow-auto max-h-[70vh] border border-linha rounded-md bg-pista">
       <div className="grid sticky top-0 z-10 bg-tinta text-pista text-xs font-cond" style={{ gridTemplateColumns: colunas }}>
         <div className="px-2 py-1.5 sticky left-0 bg-tinta">Protótipo</div>
-        {semanas.map((s) => <div key={s} className="py-1.5 text-center">S{s}</div>)}
+        {semanas.map((s) => <div key={s} className={`py-1.5 text-center ${s === marco ? 'border-r-4 border-seg' : ''}`}><span className={s === marco ? 'font-bold text-faixa' : ''} title={s === marco ? 'Lançamento' : undefined}>S{s}</span></div>)}
       </div>
       {linhas.map((pid) => {
         const alocs = porCarro.get(pid) ?? []
@@ -29,6 +31,7 @@ export function Gantt({ plano, aoClicar, destaque }: { plano: Plano; aoClicar?: 
                   className={v.gravidade === 'leve' ? 'text-faixa' : 'text-seg'}>⚠</span>
               ))}
             </div>
+            <div aria-hidden className="border-r-4 border-seg pointer-events-none" style={{ gridColumn: marco + 1, gridRow: 1 }} />
             {destrutivo && destrutivo.fim < plano.horizonte && (
               <div className="destruido" title="Destruído pelo teste destrutivo"
                 style={{ gridColumn: `${destrutivo.fim + 2} / ${plano.horizonte + 2}`, gridRow: 1 }} />
@@ -36,10 +39,11 @@ export function Gantt({ plano, aoClicar, destaque }: { plano: Plano; aoClicar?: 
             {alocs.map((a) => {
               const t = plano.testes[a.teste_id]
               const status = plano.status[a.teste_id]
+              const folga = folgas[a.teste_id]
               return (
                 <button key={`${a.teste_id}-${a.inicio}`} onClick={() => aoClicar?.(a)}
                   title={`${a.teste_id} · ${t.nome}\n${t.area}\nSemanas ${a.inicio} a ${a.fim}${t.destrutivo ? '\nDestrutivo: o carro sai da frota' : ''}${a.reteste ? '\nReteste' : ''}\nStatus: ${status}`}
-                  className={`m-0.5 rounded-sm px-1 text-left text-white truncate font-cond font-medium cursor-pointer hover:brightness-110 ${a.reteste ? 'border-2 border-dashed border-white/80' : ''} ${status === 'atrasado' || status === 'falhou' ? 'ring-2 ring-faixa' : ''} ${destaque?.has(a.teste_id) ? 'outline-3 outline-tinta outline-offset-1' : ''}`}
+                  className={`m-0.5 rounded-sm px-1 text-left text-white truncate font-cond font-medium cursor-pointer hover:brightness-110 ${a.reteste ? 'border-2 border-dashed border-white/80' : ''} ${status === 'atrasado' || status === 'falhou' ? 'ring-2 ring-faixa' : ''} ${destaque?.has(a.teste_id) ? 'outline-3 outline-tinta outline-offset-1' : ''} ${folga === 0 ? 'shadow-[inset_0_3px_0_var(--color-faixa)]' : ''}`}
                   style={{ gridColumn: `${Math.min(a.inicio, plano.horizonte) + 1} / ${Math.min(a.fim, plano.horizonte) + 2}`, gridRow: 1, background: COR_AREA[t.area] }}>
                   {t.destrutivo ? '✕ ' : ''}{a.teste_id}
                 </button>
@@ -60,6 +64,8 @@ export function Legenda({ areas }: { areas: string[] }) {
       ))}
       <li className="flex items-center gap-1.5"><span className="w-5 h-3 destruido border border-linha" />Carro destruído</li>
       <li>✕ teste destrutivo</li>
+      <li className="flex items-center gap-1.5"><span className="w-4 h-3 rounded-sm bg-grafite shadow-[inset_0_3px_0_var(--color-faixa)]" />caminho crítico</li>
+      <li className="flex items-center gap-1.5"><span className="w-1 h-3 bg-seg" />lançamento</li>
     </ul>
   )
 }

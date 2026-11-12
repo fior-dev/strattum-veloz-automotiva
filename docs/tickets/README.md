@@ -10,6 +10,7 @@ status: proposto, aguardando revisão do José · 12/11/2026
 | 03 | [Gantt e comparativo com folga](03-gantt-comparativo.md) | 02 | 1h30 | D2, D3 | manhã |
 | 04 | [Replanejar](04-replanejar.md) | 03 | 2h | D4, D5 | 13h (linha de corte) |
 | 04b | [Avarias](04b-avarias.md) | 04 | 1h | D6 | depois do corte |
+| 04c | [Gestão de projetos](04c-gestao-de-projetos.md) | 04 | 1h30 | D8 | 13h (pedido do José, 12/11) |
 | 05 | [Copiloto de replanejamento](05-copiloto.md) | 04 | 2h | D4 | só se 01–04 às 13h |
 | 05b | [Adapter Supabase](05b-supabase.md) | 04 | 45 min (teto) | — | só se 01–04 às 13h |
 | 06a | [Acabamento visual](06a-acabamento.md) | 04 | 1h | — | — |

@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
-import { api, type Alocacao, type Comparativo, type Plano, type Proposta } from './api'
+import { api, type Alocacao, type Comparativo, type Gestao, type Plano, type Proposta } from './api'
+import { Marco, UsoFrota } from './Gestao'
 import { Gantt, Legenda } from './Gantt'
 import { PainelProposta, PainelTeste } from './Paineis'
 
@@ -27,6 +28,7 @@ function Numero({ titulo, carros, semana, selo, detalhe }: { titulo: string; car
 export default function App() {
   const [plano, setPlano] = useState<Plano>()
   const [comp, setComp] = useState<Comparativo>()
+  const [gestao, setGestao] = useState<Gestao>()
   const [folga, setFolga] = useState(10)
   const [erro, setErro] = useState('')
   const [versao, setVersao] = useState<number>() // undefined = a atual
@@ -35,8 +37,8 @@ export default function App() {
   const [busca, setBusca] = useState('')
 
   const carregar = (v?: number) =>
-    Promise.all([api.plano(v), api.comparativo(), api.proposta()])
-      .then(([p, c, pr]) => { setPlano(p); setComp(c); setProposta(pr.proposta ?? undefined); setErro('') })
+    Promise.all([api.plano(v), api.comparativo(), api.proposta(), api.gestao(v)])
+      .then(([p, c, pr, g]) => { setPlano(p); setComp(c); setProposta(pr.proposta ?? undefined); setGestao(g); setErro('') })
       .catch((e) => setErro(e.message))
   useEffect(() => { carregar() }, [])
 
@@ -59,7 +61,7 @@ export default function App() {
       <p className="mt-2">{erro}. Confira se a API está no ar em http://127.0.0.1:8000/docs (comando no README) e recarregue a página.</p>
     </main>
   )
-  if (!plano || !comp) return <main className="p-8">Carregando o plano…</main>
+  if (!plano || !comp || !gestao) return <main className="p-8">Carregando o plano…</main>
 
   return (
     <main className="px-4 md:px-8 py-6 max-w-[1500px] mx-auto">
@@ -87,6 +89,8 @@ export default function App() {
         </div>
       </section>
 
+      <div className="mt-6"><Marco g={gestao} /></div>
+
       <section className="mt-6">
         <div className="flex flex-wrap items-baseline justify-between gap-2 mb-2">
           <h2 className="font-cond text-2xl font-semibold">Quem usa cada carro, semana a semana</h2>
@@ -109,7 +113,7 @@ export default function App() {
           </label>
         </div>
         <div className="grid lg:grid-cols-[1fr_24rem] gap-4 items-start">
-          <Gantt plano={plano} aoClicar={setAberto} destaque={destaque} />
+          <Gantt plano={plano} aoClicar={setAberto} destaque={destaque} folgas={gestao.folgas} marco={gestao.marco} />
           <div className="space-y-4 lg:sticky lg:top-4">
             {proposta && <PainelProposta proposta={proposta} plano={plano}
               aoDecidir={() => { setProposta(undefined); setAberto(undefined); carregar() }} />}
@@ -126,6 +130,8 @@ export default function App() {
           </div>
         </div>
       </section>
+
+      <div className="mt-6"><UsoFrota g={gestao} /></div>
     </main>
   )
 }

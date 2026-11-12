@@ -88,6 +88,12 @@ export function PainelProposta({ proposta, plano, aoDecidir }: { proposta: Propo
     <aside className="bg-pista border-2 border-faixa rounded-md p-4 text-sm space-y-3">
       <p className="font-cond text-xl font-semibold">Proposta de replanejamento</p>
       <p>{proposta.evento}.</p>
+      {proposta.marco && <p className="bg-asfalto rounded-sm p-2">
+        {proposta.marco.estava_no_caminho_critico ? 'O teste estava no caminho crítico. ' : 'O teste não estava no caminho crítico. '}
+        {proposta.marco.semanas_consumidas > 0
+          ? <>Este evento move o fim do plano da semana {proposta.marco.fim_antes} para a <b>{proposta.marco.fim_depois}</b> e consome {proposta.marco.semanas_consumidas} das {Math.max(proposta.marco.folga_projeto_antes, 0)} semanas de folga do projeto.</>
+          : <>Com a proposta, o fim do plano continua na semana <b>{proposta.marco.fim_depois}</b>: o lançamento não se move.</>}
+      </p>}
       {vazio && <p>Nenhum outro teste é afetado.</p>}
       {proposta.sugestoes.length > 0 && <div>
         <p className="font-medium">Trocas sugeridas</p>

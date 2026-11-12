@@ -7,7 +7,7 @@ Fonte do negócio: `docs/01-discovery.md` v0.3. Glossário e dores: `CONTEXT.md`
 A coordenação de projetos da Veloz aloca 250 protótipos de R$ 1 milhão ou mais entre 5 engenharias, sem dado. Cada área pede carros para si, com gordura escondida; ninguém vê o carro que a outra libera; atraso e reprovação chegam pelo e-mail semanal. Sobra vira sucata, falta atrasa o lançamento.
 
 ## Dores atacadas
-D1 a D6 do `CONTEXT.md`. D7 (multi-projeto) fica no roadmap.
+D1 a D6 e D8 do `CONTEXT.md`. D7 (multi-projeto) fica no roadmap.
 
 ## Escopo do protótipo
 | Fatia | Entrega para a coordenação | Requisitos | Dor |
@@ -17,6 +17,7 @@ D1 a D6 do `CONTEXT.md`. D7 (multi-projeto) fica no roadmap.
 | 3 | Gantt por protótipo × semana; comparativo como hoje × proposto, com folga de reteste ajustável | RF-03, RF-04, RF-07 | D2, D3 |
 | 4 | Status do teste; atraso de +N semanas e falha geram sugestões de troca ou impactados; aceitar cria versão N+1 | RF-05, RF-06, RN-05, RN-07, RN-08 | D4, D5 |
 | 4b | Registro de avaria: leve só aparece; compromete reuso tira o carro do pool e replaneja | RF-08, RN-09 | D6 |
+| 4c | Caminho crítico, marco do lançamento, impacto no marco e uso da frota por semana | ADR 0007 | D8 |
 | 5 | Copiloto: texto livre → evento → `replanejar` → explicação; a coordenação aprova | ADR 0003 | D4 |
 | 5b | Opcional: adapter Postgres (Supabase) no lugar do JSON | ADR 0006 | — |
 | 6 | Acabamento, README, ROADMAP, diagrama final | — | — |

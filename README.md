@@ -40,6 +40,7 @@ Testes: `cd backend; uv run pytest`. Build da tela: `cd frontend; npm run build`
 | 03 Gantt e comparativo | pronta |
 | 04 Replanejar | pronta |
 | 04b Avarias | pronta |
+| 04c Gestão de projetos | pronta |
 | 05 Copiloto | — |
 | 05b Supabase | — |
 | 06 Acabamento e docs | — |

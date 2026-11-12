@@ -1,7 +1,10 @@
 """Casos de uso do planejamento. Recebem a port pelo construtor (ADR 0001)."""
 from dataclasses import replace
 
+from functools import cache
+
 from domain.folga import FOLGA_PADRAO, carros_de_reserva, comparar
+from domain.gestao import curva_meta, folgas, impacto_no_marco, resumo_marco, uso_como_hoje, uso_por_semana
 from domain.modelo import GRAVIDADES, STATUS, TIPOS_AVARIA, Avaria, Plano
 from domain.motor import Atraso, EventoInvalido, Falha, Proposta, RegistroAvaria, planejar, replanejar
 from domain.ports import PlanoRepository
@@ -32,6 +35,23 @@ class Planejamento:
 
     def comparativo(self) -> dict:
         return comparar(self.plano(), self.repo.pedidos(), self.repo.testes())
+
+    def gestao(self, versao: int | None = None) -> dict:
+        """Caminho crítico, marco, uso da frota por semana e a curva meta × carros (ticket 04c)."""
+        plano = self.plano(versao)
+        testes = {t.id: t for t in self.repo.testes()}
+        frota = len(plano.prototipos()) + len(plano.reserva)
+        return {**resumo_marco(plano, testes), "folgas": folgas(plano),
+                "uso": {"plano": uso_por_semana(plano, testes, frota), "como_hoje": self._uso_como_hoje()},
+                "curva_meta": self._curva_meta()}
+
+    @cache  # ponytail: o mock não muda enquanto o processo vive; com dado vivo, invalidar ao carregar
+    def _uso_como_hoje(self):
+        return uso_como_hoje(self.repo.testes(), self.repo.pedidos(), self.repo.prototipos())
+
+    @cache
+    def _curva_meta(self):
+        return curva_meta(self.repo.testes(), self.repo.prototipos())
 
 
 class Replanejamento:
@@ -72,7 +92,9 @@ class Replanejamento:
         return proposta
 
     def propor(self, evento) -> Proposta:
-        self.pendente = replanejar(self.planejamento.plano(), evento, self._testes())
+        atual = self.planejamento.plano()
+        self.pendente = replanejar(atual, evento, self._testes())
+        self.pendente.marco = impacto_no_marco(atual, self.pendente.plano, getattr(evento, "teste_id", None))
         return self.pendente
 
     def aceitar(self) -> Plano:
