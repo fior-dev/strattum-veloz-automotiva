@@ -18,3 +18,13 @@ A demo não pode falhar por rede ou banco. O dado é mockado. O plano tem versõ
 ## Consequências
 - Com o JSON, o plano aceito some ao reiniciar: a demo é reproduzível. Com o Supabase, ele fica: `scripts/seed_supabase.py` volta ao mock.
 - Plano como documento: não dá para consultar uma alocação solta em SQL. Aceitável enquanto só o motor lê; vira tabela de alocações quando o BI precisar (ROADMAP v3).
+
+## Publicação para a avaliação (ticket 08)
+
+status: proposto, aguardando revisão do José · 12/11/2026
+
+RNF-01 pedia "sem backend". O protótipo tem FastAPI (ADR 0001), então a saída é publicar um contêiner único (tela e API na mesma porta) numa URL do José. A Strattum testa sem instalar nada.
+- Uma instância, um worker: a proposta pendente fica na memória. Por isso não serve serverless para a API.
+- `DATA_BACKEND=json` no host: nenhuma chave do Supabase fora da máquina do José, e reiniciar volta a demo ao início.
+- Descartado: Vercel com a API como função. Cada chamada pode cair numa instância diferente e perder a proposta; resolver isso pediria gravar a proposta pendente no banco, mudança de `application/` sem ganho para a demo.
+- Perde-se: login e limite de chamadas. Fica no ROADMAP (v2, login e perfis).

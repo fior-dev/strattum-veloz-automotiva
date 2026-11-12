@@ -1,7 +1,10 @@
 """Rotas FastAPI. Swagger em /docs. Uvicorn: presentation.api:app"""
+import os
 from dataclasses import asdict
+from pathlib import Path
 
 from fastapi import Depends, FastAPI, HTTPException
+from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel, Field
 
 from typing import Literal
@@ -125,3 +128,10 @@ def copiloto_modo():
 @app.post("/api/copiloto", summary="Texto livre → evento → replanejar → explicação. Nada muda até o aceite (RN-07)")
 def copiloto_perguntar(corpo: Mensagem, cp: Copiloto = Depends(copiloto)):
     return {**cp.perguntar(corpo.texto), "modo": modo_llm() or "offline"}
+
+
+# ---------------------------------------------------------------- tela publicada (ticket 08)
+# No contêiner, a mesma porta serve a tela e a API. Montado depois das rotas /api para não escondê-las.
+_TELA = os.getenv("TELA_DIR")
+if _TELA and Path(_TELA).is_dir():
+    app.mount("/", StaticFiles(directory=_TELA, html=True), name="tela")

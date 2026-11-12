@@ -44,6 +44,17 @@ uv run pytest tests/test_repositorios.py
 
 Depois, `DATA_BACKEND=supabase` no `.env` e reinicie o backend. No Supabase o plano aceito sobrevive ao reinício: para a demo voltar ao início, rode o seed de novo.
 
+### Contêiner (ticket 08)
+
+Um contêiner serve a tela e a API em http://127.0.0.1:8088. As chaves entram só na hora de rodar:
+
+```powershell
+docker build -t veloz-demo .
+docker run --rm -p 8088:8000 --env-file backend\.env -e DATA_BACKEND=json veloz-demo
+```
+
+Sem `--env-file`, o copiloto roda offline. Todos que abrem a URL dividem o mesmo plano; reiniciar o contêiner volta à versão 1.
+
 Testes: `cd backend; uv run pytest`. Build da tela: `cd frontend; npm run build`.
 
 ## Roteiro da demo (10 min)

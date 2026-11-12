@@ -1,0 +1,18 @@
+# Segurança: nenhuma chave entra na imagem
+.env
+.env.*
+**/.env
+**/.env.*
+!**/.env.example
+.mcp.json
+.claude/
+supabase/.temp/
+# Peso
+.git/
+**/node_modules/
+**/.venv/
+**/dist/
+**/__pycache__/
+**/.pytest_cache/
+painel/
+docs/
