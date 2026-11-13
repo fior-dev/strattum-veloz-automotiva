@@ -3,7 +3,7 @@ import os
 from dataclasses import asdict
 from pathlib import Path
 
-from fastapi import Depends, FastAPI, HTTPException
+from fastapi import Depends, FastAPI, HTTPException, Query
 from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel, Field
 
@@ -54,6 +54,25 @@ class Folga(BaseModel):
 def ajustar_folga(corpo: Folga, uc: Planejamento = Depends(planejamento), rp: Replanejamento = Depends(replanejamento)):
     _sem_erro(lambda: rp.ajustar_folga(corpo.folga))
     return uc.comparativo()
+
+
+@app.get("/api/simular", summary="E se: menos testes, outra meta de fim, destrutivo no fim. Só leitura (ticket 10)")
+def simular(por_area: int = Query(125, ge=25, le=125, description="Quantos testes cada área registra"),
+            meta: int = Query(HORIZONTE, ge=16, le=HORIZONTE, description="Semana em que o plano quer terminar"),
+            destrutivo_no_fim: bool = False, folga: float = Query(0.1, ge=0, le=0.3),
+            uc: Planejamento = Depends(planejamento)):
+    return uc.simular(por_area, meta, destrutivo_no_fim, folga)
+
+
+class NovoPlano(BaseModel):
+    meta: int = Field(HORIZONTE, ge=16, le=HORIZONTE, description="Semana em que o plano quer terminar")
+    destrutivo_no_fim: bool = False
+    folga: float = Field(0.1, ge=0, le=0.3)
+
+
+@app.post("/api/plano/regerar", summary="A coordenação adota a meta e a regra do destrutivo: plano refeito, versão N+1 (ticket 10)")
+def regerar(corpo: NovoPlano, rp: Replanejamento = Depends(replanejamento)):
+    return {"versao": _sem_erro(lambda: rp.regerar(corpo.meta, corpo.destrutivo_no_fim, corpo.folga)).versao}
 
 
 # ---------------------------------------------------------------- replanejamento (fatias 4 e 4b)

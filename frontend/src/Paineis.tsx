@@ -105,7 +105,9 @@ export function PainelProposta({ proposta, plano, aoDecidir, podeDecidir = true 
         {proposta.marco.estava_no_caminho_critico === null ? '' : proposta.marco.estava_no_caminho_critico ? 'O teste estava no caminho crítico. ' : 'O teste não estava no caminho crítico. '}
         {proposta.marco.semanas_consumidas > 0
           ? <>Este evento move o fim do plano da semana {m!.fim_antes} para a <b>{m!.fim_depois}</b>{m!.folga_projeto_antes > 0
-            ? <> e consome {m!.semanas_consumidas} das {m!.folga_projeto_antes} semanas de folga do projeto.</>
+            ? m!.fim_depois > plano.horizonte
+              ? <>: consome as {m!.folga_projeto_antes} semana(s) de folga do projeto e atrasa o lançamento {m!.fim_depois - plano.horizonte} semana(s).</>
+              : <> e consome {m!.semanas_consumidas} das {m!.folga_projeto_antes} semanas de folga do projeto.</>
             : <>. Não havia folga: o lançamento atrasa {m!.fim_depois - Math.max(m!.fim_antes, plano.horizonte)} semana(s).</>}</>
           : m!.fim_depois > plano.horizonte
             ? <>Com a proposta, o fim do plano continua na semana <b>{m!.fim_depois}</b>, que já é depois do lançamento: este evento não piora o atraso.</>

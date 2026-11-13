@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { api, type Alocacao, type Comparativo, type Gestao, type Plano, type Proposta } from './api'
-import { Marco, UsoFrota } from './Gestao'
+import { Marco, MemoriaDeCalculo, Simulador, UsoFrota } from './Gestao'
 import { Copiloto } from './Copiloto'
 import { Gantt, Legenda } from './Gantt'
 import { PainelProposta, PainelTeste } from './Paineis'
@@ -48,13 +48,15 @@ function Guia({ passo, ir, comp, g }: { passo: number; ir: (p: number) => void; 
     <>A gordura escondida vira uma folga à vista: <b>{p.carros_reserva} carros de reserva</b>, para repetir teste destrutivo que
       falha. {p.carros_plano} + {p.carros_reserva} = <b>{p.carros}</b>, contra {comp.como_hoje.carros} dos pedidos:
       {' '}<b>{comp.como_hoje.carros - p.carros} carros a menos</b>. Mexa no controle da folga para ver quanto custa cada ponto.
+      O bloco "De onde saem os {p.carros_plano} carros" mostra a conta inteira, do piso de {g.memoria.piso} carros até o plano.
       O gráfico de baixo mostra o motivo: nos pedidos por área, os carros ficam parados {parados(g.uso.como_hoje).toLocaleString('pt-BR')} carros-semana, contra {parados(g.uso.plano).toLocaleString('pt-BR')} no plano.</>,
     <>O preço da frota menor é o prazo. O plano enche cada carro até a semana {g.fim_plano}, então <b>{g.criticos} de {g.testes_no_plano} testes</b>{' '}
-      estão no caminho crítico: se um deles atrasa e não há troca de carro, o lançamento atrasa. A tabela mostra quanto custa
-      comprar prazo. Escolher a meta é decisão da coordenação, não do sistema.</>,
+      estão no caminho crítico: se um deles atrasa e não há troca de carro, o fim do plano atrasa. A tabela mostra quanto custa
+      comprar prazo. Na simulação, a coordenação escolhe a meta de fim, quando roda o teste destrutivo e quantos testes entram,
+      vê o plano que sairia e, se quiser, adota.</>,
     <>Agora um imprevisto. Escreva no copiloto <b>"o teste AER-99 atrasou 2 semanas"</b>, ou abra o teste e clique em Atrasou.
       O sistema mostra quem é afetado, propõe a troca de carro e diz se o lançamento se move. Nada muda até o gerente da
-      coordenação aceitar; o aceite cria a versão 2 do plano e a versão 1 fica para consulta.</>,
+      coordenação aceitar; o aceite cria uma versão nova do plano e a anterior fica para consulta.</>,
   ][passo - 1]
   return (
     <section className="mt-4 bg-tinta text-pista rounded-md p-5" aria-live="polite">
@@ -166,17 +168,24 @@ export default function App() {
         <div className="md:border-l border-linha md:pl-6">
           <p className="font-cond text-4xl font-bold">{Math.abs(menos)} carros a {menos >= 0 ? 'menos' : 'mais'} ({menos >= 0 ? '−' : '+'}{Math.abs(comp.reducao_pct).toLocaleString('pt-BR')}%)</p>
           <p className="text-sm mt-1">A frota cai porque um carro que uma área libera passa a servir a outra, e a gordura de cada pedido vira uma folga única e à vista.
-            O preço é o prazo: o plano compartilhado usa as 20 semanas até o lançamento.</p>
+            O preço é o prazo: o plano compartilhado vai até a semana {comp.proposto.semana_fim}; os pedidos por área, até a {comp.como_hoje.semana_fim}.</p>
           <label className="block mt-3 text-sm font-medium" htmlFor="folga">
-            Folga de reteste: {folga}% dos {comp.destrutivos} testes destrutivos = {comp.proposto.carros_reserva} carros<Selo id="MK-06" />
+            Folga de reteste: {folga}% dos {comp.destrutivos} testes destrutivos. Reserva livre agora: {comp.proposto.carros_reserva} carros<Selo id="MK-06" />
           </label>
           <input id="folga" type="range" min={0} max={30} step={5} value={folga} onChange={(e) => mudarFolga(Number(e.target.value))}
             disabled={!atual || !!proposta} title={proposta ? 'Aceite ou recuse a proposta antes de mudar a folga' : undefined} className="w-full accent-[var(--color-tinta)]" />
-          <p className="text-xs text-grafite">Carros de reserva, fora do plano, para repetir um teste destrutivo que falha. O não destrutivo repete no mesmo carro (RN-08).</p>
+          <p className="text-xs text-grafite">Carros de reserva, fora do plano, para repetir um teste destrutivo que falha. O não destrutivo repete no mesmo carro (RN-08).
+            A reserva é de carros, não de prazo: por isso mexer nela não muda o plano, a folga do projeto nem o caminho crítico.</p>
         </div>
       </section>}
 
+      {p >= 3 && <div className="mt-6"><MemoriaDeCalculo m={gestao.memoria} reserva={comp.proposto.carros_reserva} /></div>}
+
       {p >= 4 && <div className="mt-6"><Marco g={gestao} /></div>}
+
+      {p >= 4 && atual && <div className="mt-6"><Simulador comp={comp} g={gestao} folgaPct={folga} podeAdotar={perfil === 'gerente' && !proposta}
+        motivo={proposta ? 'Aceite ou recuse a proposta pendente antes de adotar outro plano.' : perfil !== 'gerente' ? 'Só o gerente da coordenação adota um plano.' : ''}
+        aoAdotar={() => { setAberto(undefined); carregar() }} /></div>}
 
       {p >= 2 && <section className="mt-6">
         <div className="flex flex-wrap items-baseline justify-between gap-2 mb-2">

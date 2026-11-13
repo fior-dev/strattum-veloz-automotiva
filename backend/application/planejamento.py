@@ -2,10 +2,11 @@
 import threading
 from dataclasses import replace
 
-from functools import cache
+from functools import cache, lru_cache
 
 from domain.folga import FOLGA_PADRAO, carros_de_reserva, comparar
-from domain.gestao import MARCO, curva_meta, folgas, impacto_no_marco, resumo_marco, uso_como_hoje, uso_por_semana
+from domain.gestao import (MARCO, curva_meta, folgas, impacto_no_marco, memoria, resumo_marco, simular, uso_como_hoje,
+                           uso_por_semana)
 from domain.modelo import GRAVIDADES, STATUS, TIPOS_AVARIA, Avaria, Plano
 from domain.motor import Atraso, EventoInvalido, Falha, Proposta, RegistroAvaria, planejar, replanejar
 from domain.ports import PlanoRepository
@@ -42,7 +43,7 @@ class Planejamento:
         plano = self.plano(versao)
         testes = {t.id: t for t in self.repo.testes()}
         frota = len(plano.prototipos()) + len(plano.reserva)
-        return {**resumo_marco(plano, testes), "folgas": folgas(plano),
+        return {**resumo_marco(plano, testes), "folgas": folgas(plano), "memoria": memoria(plano, testes),
                 "uso": {"plano": uso_por_semana(plano, testes, frota), "como_hoje": self._uso_como_hoje()},
                 "curva_meta": self._curva_meta()}
 
@@ -53,6 +54,25 @@ class Planejamento:
     @cache
     def _curva_meta(self):
         return curva_meta(self.repo.testes(), self.repo.prototipos())
+
+    @lru_cache(maxsize=512)  # a rota é pública: o cache não pode crescer sem limite
+    def simular(self, por_area: int, meta: int, destrutivo_no_fim: bool, folga: float) -> dict:
+        """Só leitura (ticket 10): o plano em vigor não muda."""
+        return simular(self.repo.testes(), self.repo.pedidos(), self.repo.prototipos(), por_area, meta, destrutivo_no_fim, folga)
+
+    def regerar(self, meta: int, destrutivo_no_fim: bool, folga: float) -> Plano:
+        """A coordenação adota outra meta de fim ou outra regra do destrutivo: o plano é refeito do zero e vira a
+        versão N+1. Os imprevistos já aceitos não entram no plano novo; a versão anterior fica para consulta."""
+        if not 1 <= meta <= MARCO or not 0 <= folga <= 0.3:
+            raise EventoInvalido(f"A meta vai de 1 a {MARCO} e a folga de reteste de 0% a 30%")
+        fora = sorted({v.prototipo_id for v in self.plano().avarias if v.gravidade == "compromete_reuso"})
+        if fora:  # ponytail: refazer do zero devolveria o carro avariado à frota (RN-09); replanejar sem ele fica para a v2
+            raise EventoInvalido(f"O plano em vigor tem carro fora da frota por avaria ({', '.join(fora)}). Refazer o plano do zero o devolveria à frota")
+        plano = planejar(self.repo.testes(), self.repo.prototipos(), horizonte=meta, destrutivo_no_fim=destrutivo_no_fim)
+        plano.versao = self.plano().versao + 1
+        plano.reserva = carros_de_reserva(plano, self.repo.prototipos(), self.repo.testes(), folga)
+        self.repo.salvar(plano)
+        return plano
 
 
 class Replanejamento:
@@ -109,6 +129,11 @@ class Replanejamento:
     def ajustar_folga(self, folga: float) -> Plano:
         self._sem_pendente()
         return self.planejamento.ajustar_folga(folga)
+
+    def regerar(self, meta: int, destrutivo_no_fim: bool, folga: float) -> Plano:
+        with self._trava:
+            self._sem_pendente()
+            return self.planejamento.regerar(meta, destrutivo_no_fim, folga)
 
     def propor(self, evento) -> Proposta:
         with self._trava:

@@ -38,20 +38,28 @@ def ordem(testes: list[Teste]) -> list[Teste]:
     return sorted(testes, key=lambda t: (t.destrutivo, -t.duracao, t.id))
 
 
-def planejar(testes: list[Teste], prototipos: list[str], horizonte: int = HORIZONTE) -> Plano:
-    """Gera o plano compartilhado: menos protótipos primeiro, menor semana de fim depois."""
+def planejar(testes: list[Teste], prototipos: list[str], horizonte: int = HORIZONTE, destrutivo_no_fim: bool = False) -> Plano:
+    """Gera o plano compartilhado: menos protótipos primeiro, menor semana de fim depois.
+
+    destrutivo_no_fim=False (padrão, ADR 0002): o destrutivo roda o quanto antes; o carro sai da frota cedo.
+    destrutivo_no_fim=True (ticket 10): cada destrutivo abre um carro e ocupa as últimas semanas dele; os outros
+    testes entram antes. Menos carros, mas o resultado do teste destrutivo só chega no fim do plano."""
     por_id = {t.id: t for t in testes}
     livres = sorted(prototipos)  # carros ainda não abertos, menor ID primeiro
     abertos: dict[str, list[Alocacao]] = {}
     alocacoes, nao_cabe = [], []
 
-    for teste in ordem(testes):
+    fila = ordem(testes)
+    if destrutivo_no_fim:  # os destrutivos reservam o fim dos carros antes de os outros entrarem
+        fila.sort(key=lambda t: not t.destrutivo)
+    for teste in fila:
+        no_fim = destrutivo_no_fim and teste.destrutivo
         if teste.duracao > horizonte:
             nao_cabe.append(NaoCabe(teste.id, f"Dura {teste.duracao} semanas; o plano acaba na semana {horizonte}"))
             continue
         # o carro já aberto que comporta o teste mais cedo; empate fica com o menor ID
         melhor = None
-        for pid in sorted(abertos):
+        for pid in ([] if no_fim else sorted(abertos)):
             semana = primeira_semana(abertos[pid], teste.duracao, teste.destrutivo, por_id, horizonte)
             if semana is not None and (melhor is None or semana < melhor[1]):
                 melhor = (pid, semana)
@@ -59,7 +67,7 @@ def planejar(testes: list[Teste], prototipos: list[str], horizonte: int = HORIZO
             if not livres:
                 nao_cabe.append(NaoCabe(teste.id, f"Não há protótipo livre até a semana {horizonte}"))
                 continue
-            melhor = (livres.pop(0), 1)
+            melhor = (livres.pop(0), horizonte - teste.duracao + 1 if no_fim else 1)
             abertos[melhor[0]] = []
         pid, semana = melhor
         aloc = Alocacao(pid, teste.id, semana, semana + teste.duracao - 1)

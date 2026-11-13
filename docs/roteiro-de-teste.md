@@ -50,22 +50,32 @@ A tela abre no passo 1 e se monta aos poucos. O botão amarelo avança; "Pular" 
   2. Cada teste vai para o carro já em uso que fica livre mais cedo.
   3. Só abre um carro novo se nenhum serve.
   4. O teste destrutivo é sempre o último do carro.
-- **Por que 161:** é o que sobra quando um carro que a Aerodinâmica libera na semana 12 passa a servir a Elétrica na 13. Veja o P006: AER-98 (semanas 1 a 6), AER-99 (7 a 12), ELE-01 (13 a 18), AER-125 (19 e 20).
+- **As regras não mudam com o número de testes.** Com 100 ou com 625 testes, são as mesmas 4. O que muda é o dado de entrada, e com ele o plano. A simulação do passo 4 mostra isso.
+- **O que define cada coisa:** a duração do teste e se ele é destrutivo vêm da área (no mock, sorteados: 1 a 6 semanas, MK-01b e MK-02). O carro e a ordem saem das 4 regras: o motor percorre os testes do mais longo ao mais curto e põe cada um no carro em uso que o comporta mais cedo.
+- **Exemplo de carro compartilhado:** o P006 roda AER-98 (semanas 1 a 6), AER-99 (7 a 12), ELE-01 (13 a 18) e AER-125 (19 e 20). O carro que a Aerodinâmica libera na semana 12 serve a Elétrica na 13.
+- **Por que 161:** a conta inteira está no passo 3, no bloco "De onde saem os 161 carros".
 
 ### Passo 3 · A conta da frota
 
 - **Fazer:** avançar. Mexer o controle da folga de reteste e voltar para 10%.
-- **Deve aparecer:** 245 à esquerda, 168 no meio, "77 carros a menos (−31,4%)" à direita. Embaixo, o gráfico de carros em uso e parados.
+- **Deve aparecer:** 245 à esquerda, 168 no meio, "77 carros a menos (−31,4%)" à direita. Abaixo, o bloco "De onde saem os 161 carros do plano". No fim da tela, o gráfico de carros em uso e parados.
 - **A conta:** 161 carros no plano + 7 de reserva = 168. A reserva é a **folga de reteste**: 10% dos 65 testes destrutivos, arredondado para cima = 7 carros. Só o teste destrutivo que falha precisa de carro novo; o não destrutivo repete no mesmo carro.
-- **O controle:** em 25% a reserva vira 17 carros e o total vira 178. Em 0%, 161. O plano não muda, só a reserva.
+- **O controle:** em 25% a reserva vira 17 carros e o total vira 178. Em 0%, 161. O plano não muda, só a reserva. Motivo: a reserva são carros parados fora do plano, esperando um teste destrutivo falhar. Ela não entra no calendário, então não mexe em nenhuma alocação, na folga do projeto nem no caminho crítico. São duas folgas diferentes: a de reteste é de **carros**; a do projeto é de **semanas**.
+- **De onde saem os 161** (bloco novo, logo abaixo):
+  1. Os 625 testes somam 2.139 carros-semana (a soma das durações).
+  2. 2.139 ÷ 20 semanas = 107 carros. É o piso: nenhum plano faz com menos.
+  3. Os 65 testes destrutivos destroem o carro. O motor roda o destrutivo o quanto antes, então o carro some cedo: 1.081 carros-semana perdidos.
+  4. Nenhum carro inteiro fica vazio: 0.
+  5. (2.139 + 1.081 + 0) ÷ 20 = 161.
+- **De onde saem os 65 destrutivos:** da lista de testes. No mock, cada teste de Segurança passiva foi sorteado com 40% de chance de ser destrutivo, e cada um de Mecânica com 15% (MK-02); saíram 48 e 17, total 65. No uso real, é a área que diz. Por isso o número é fixo: é dado de entrada, não parâmetro. Na simulação, com menos testes, ele muda.
 - **Dizer:** "A gordura que estava escondida em cada pedido virou uma folga única, com tamanho à vista, que a coordenação escolhe."
 - **Se perguntarem se a comparação é justa:** a gordura do pedido cobre reprovação e paralelismo. O plano compartilhado já resolve o paralelismo; sobra a reprovação. Pior caso, com a mesma gordura dos pedidos (15,2%, média ponderada pelos carros) nos dois lados: 161 × 1,152 ≈ 186, ainda 24% abaixo de 245.
-- **O gráfico:** somando as 20 semanas, os carros ficam parados 1.716 carros-semana nos pedidos por área, contra 140 no plano.
+- **O gráfico:** somando as 20 semanas, os carros ficam parados 1.716 carros-semana nos pedidos por área, contra 140 no plano. Os 140 são os 7 carros de reserva, parados as 20 semanas.
 
 ### Passo 4 · O que segura o lançamento
 
 - **Fazer:** avançar. Ler o bloco do marco e a tabela.
-- **Deve aparecer:** sinal vermelho, folga do projeto 0 semanas, "553 de 625 testes estão no caminho crítico".
+- **Deve aparecer:** sinal vermelho, folga do projeto 0 semanas, "553 de 625 testes (88%) estão no caminho crítico". Abaixo, o bloco "Simule antes de decidir".
 
 | Meta de fim | Carros no plano | Folga do projeto |
 |---|---|---|
@@ -75,8 +85,24 @@ A tela abre no passo 1 e se monta aos poucos. O botão amarelo avança; "Pular" 
 | semana 17 | 178 (+17) | 3 |
 
 - **Dizer:** "O preço da frota menor é o prazo. O motor enche cada carro até a semana 20, então quase todo teste é crítico: se atrasa e não há troca de carro, o lançamento atrasa. A tabela mostra quanto custa comprar prazo. Essa escolha é da coordenação; o sistema só mostra o preço."
-- **Vocabulário:** *caminho crítico* = os testes sem nenhuma semana de sobra. *Folga do projeto* = semana do lançamento (20) menos a semana em que o plano acaba. *Marco* = a data do lançamento.
-- **Minha recomendação, se perguntarem:** meta na semana 18. Custa 11 carros e dá 2 semanas de folga; a frota fica em 172 + 7 = 179, ainda 27% abaixo de 245.
+- **Vocabulário:** *caminho crítico* = os testes sem nenhuma semana de sobra até o fim do plano (que pode ser antes do lançamento, se a meta for menor que 20). *Folga do projeto* = semana do lançamento (20) menos a semana em que o plano acaba. *Marco* = a data do lançamento.
+- **Minha recomendação, se perguntarem:** meta na semana 18. O plano passa de 161 para 172 carros (11 a mais) e ganha 2 semanas de folga. Somando os 7 carros da reserva de reteste (10% dos 65 destrutivos), a frota fica em 172 + 7 = 179, ainda 27% abaixo de 245. Os 11 e os 7 são coisas diferentes: 11 compram prazo, 7 cobrem reteste.
+- **Por que 18 e não 19 ou 17:** até a semana 17, cada semana de folga custa 5 ou 6 carros (R$ 5 a 9 milhões, pelo custo que a Maira citou). Não há um ponto em que o preço cai. Escolhi 2 semanas porque é o maior atraso do roteiro (AER-11 +2) e tira o sinal do vermelho. É julgamento, não cálculo: para calcular falta o custo de uma semana de atraso no lançamento, que a cliente não informou.
+
+**Simulação (bloco "Simule antes de decidir")**
+
+- **Fazer:** trocar a meta para a semana 18. Depois trocar "Quando roda o teste destrutivo" para "No fim do carro". Depois puxar "Testes que cada área registra" para 50. Voltar tudo ao padrão.
+- **Deve aparecer** (coluna Simulação; o que muda fica amarelo):
+
+| Entrada | Pedidos por área | Carros no plano | Piso | Frota total | Fim | Folga do projeto | Críticos |
+|---|---|---|---|---|---|---|---|
+| padrão (125 testes, meta 20, o quanto antes) | 245 | 161 | 107 | 168 | 20 | 0 | 553 de 625 |
+| meta 18 | 245 | 172 | 119 | 179 | 18 | 2 | 559 de 625 |
+| destrutivo no fim, meta 20 | 245 | 107 | 107 | 114 | 20 | 0 | 606 de 625 |
+| 50 testes por área, meta 20 | 104 | 65 | 44 | 68 | 20 | 0 | 219 de 250 |
+
+- **Dizer:** "O sistema não escolhe pela coordenação: mostra o preço de cada escolha. Comprar 2 semanas de folga custa 11 carros. Rodar o teste destrutivo no fim do carro economiza 54 carros, mas o resultado do crash só sai na semana 20."
+- **Adotar (opcional, deixe para o fim):** com a meta 18 escolhida, clicar em "Adotar esta simulação como o plano". Nasce uma versão nova: plano acaba na semana 18, folga do projeto 2, sinal amarelo. O atraso do AER-99 em +2 continua propondo a troca do ELE-01, agora para o P173. Os cenários 5a a 5f foram escritos para o plano padrão: para voltar a ele, adote a simulação com meta 20 e "o quanto antes", ou reinicie o backend. Com avaria que compromete reuso já aceita (cenário 5e), o botão recusa: refazer do zero devolveria o carro avariado à frota.
 
 ### Passo 5 · O imprevisto
 
@@ -126,7 +152,7 @@ Os resultados abaixo valem partindo da versão 1. Depois de aceitar uma proposta
 
 **Por que não um solver?** A Maira disse que importa mais o processo do que o número. A heurística se explica em 4 frases e dá sempre o mesmo resultado. O solver entra na v2 atrás da mesma função `planejar`, com a heurística como piso de comparação.
 
-**Quão longe do ótimo?** Não sei, e digo isso. O piso teórico é 107 carros (2.139 semanas de teste ÷ 20). O plano dá 161. O ótimo está entre os dois; só o solver diz onde.
+**Quão longe do ótimo?** 54 carros, e a tela mostra por quê. O piso é 107 carros (2.139 semanas de teste ÷ 20), e o motor chega nele com o destrutivo no fim do carro. Os 54 de diferença são o preço de ter o resultado do teste destrutivo cedo. Para a regra "o quanto antes", só o solver diz se dá para baixar de 161.
 
 **Por que o LLM não monta o plano?** Um LLM que calcula erra sem avisar e dá um resultado diferente a cada vez. Aqui ele traduz e explica; o motor calcula; a coordenação decide. Trocar de modelo muda a qualidade da tradução, nunca o número.
 
@@ -136,7 +162,7 @@ Os resultados abaixo valem partindo da versão 1. Depois de aceitar uma proposta
 
 **E segurança?** Sem login: quem tem a URL chama qualquer rota. As chaves ficam só no `backend/.env`, fora do git e fora da imagem do contêiner. No Supabase, a segurança por linha está ligada sem nenhuma política: a chave pública não lê nem grava nada.
 
-**O que eu faria diferente com mais uma semana?** Login com permissão por área, o piso ao lado do plano, e o levantamento das dependências entre testes com as áreas, que é o que falta para mostrar o gargalo real (ADR 0007).
+**O que eu faria diferente com mais uma semana?** Login com permissão por área, e o levantamento das dependências entre testes com as áreas, que é o que falta para mostrar o gargalo real (ADR 0007).
 
 ## Parte 3 · O que não mostrar, ou mostrar com cuidado
 

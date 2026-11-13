@@ -16,6 +16,7 @@ status: aprovado pelo José · 12/11/2026 · Decidido por: José
 | 07 | [Aceite que passa do marco](07-passar-do-marco.md) | 04 | 30 min | D4 | pedido do José, 12/11 |
 | 08 | [Publicar para a Strattum testar](08-publicar.md) | 06b | 1h | — | pedido do José, 12/11 |
 | 09 | [Ajustes da revisão dos documentos](09-revisao-dos-docs.md) | 06b | 1h | — | pedido do José, 12/11 |
+| 10 | [Memória de cálculo e simulação](10-memoria-e-simulacao.md) | 09 | 2h | D3, D8 | pedido do José, 12/11 |
 | 06a | [Acabamento visual](06a-acabamento.md) | 04 | 1h | — | — |
 | 06b | [README, ROADMAP, diagrama](06b-docs-finais.md) | — | 1h30 | — | começa até 15h; tudo pronto 17h |
 

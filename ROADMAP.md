@@ -30,7 +30,7 @@ O que existe: plano compartilhado com folga à vista, Gantt, replanejamento com 
 | Solver (OR-Tools CP-SAT) | Mesmo contrato `planejar(testes, frota, horizonte)`, com a gulosa como piso de comparação (ADR 0002) | `domain/` ganha uma segunda implementação atrás da mesma função |
 | CPM completo | CPM é o método do caminho crítico (*Critical Path Method*), da gestão de projetos: dadas as tarefas e quais dependem de quais, acha a sequência que define a data final. Hoje a única dependência é a fila de testes no mesmo carro; o completo inclui dependência técnica entre testes de carros diferentes (ADR 0007). Primeiro passo: levantar essas dependências com as áreas | `domain/gestao.py` |
 | Copiloto edita o plano | Frase vira evento de edição ("passa o ELE-01 para o P030"); o motor valida, o gerente aceita (ADR 0003) | evento novo em `domain/motor.py`; `application/copiloto.py` |
-| Piso barato ao lado do plano | max(⌈Σ duração ÷ 20⌉, nº de destrutivos): mostra a distância até o ótimo sem solver | `domain/folga.py`, comparativo na tela |
+| Piso barato ao lado do plano (feito em 12/11, ticket 10) | max(⌈Σ duração ÷ 20⌉, nº de destrutivos): mostra a distância até o ótimo sem solver. Entrou junto com a memória de cálculo e a simulação | `domain/gestao.py` (`memoria`, `simular`), blocos na tela |
 | Guardrails no copiloto | O texto do usuário só vira evento validado; recusa pedido fora do escopo e dado pessoal na entrada e na saída | `infrastructure/llm_litellm.py` (antes e depois da chamada); `application/copiloto.py` já recusa evento inválido |
 | Streaming da explicação | A explicação do copiloto aparece enquanto o modelo escreve | `infrastructure/llm_litellm.py` (`stream=True`) e rota SSE em `presentation/api.py` |
 | Histograma de uso com o plano estourado | Hoje o histograma para na semana 20 mesmo quando o gerente aceitou passar do marco (revisão de 12/11, achado 7) | `domain/gestao.py` (`uso_por_semana` com o fim do plano) |
@@ -44,7 +44,7 @@ Nota = Alcance × Impacto × Confiança ÷ Esforço. Alcance: quantos dos crité
 |---|---|---|---|---|---|---|
 | Perfil simulado na tela (fatia de "Login e perfis") | 3 | 2 | 90% | 0,5 h | 10,8 | feito em 12/11 |
 | Apresentação guiada em 5 passos | 3 | 3 | 80% | 1 h | 7,2 | feito em 12/11 |
-| Piso barato ao lado do plano | 2 | 2 | 80% | 0,5 h | 6,4 | próximo: responde "quão longe do ótimo?" (hoje só no ADR 0002) |
+| Piso barato ao lado do plano | 2 | 2 | 80% | 0,5 h | 6,4 | feito em 12/11 (ticket 10), com a memória de cálculo e a simulação |
 | Supabase como banco | 2 | 2 | 90% | 1 h | 3,6 | feito (ticket 05b) |
 | Contêiner único (degrau da AWS) | 2 | 2 | 90% | 1 h | 3,6 | feito (ticket 08); publicar é do José |
 | Langfuse no copiloto | 1 | 2 | 70% | 1 h | 1,4 | depois: pede conta e chave |

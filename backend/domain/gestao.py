@@ -2,6 +2,8 @@
 
 Funções puras sobre o Plano. Nenhuma recalcula alocação: quem aloca é o motor.
 """
+import math
+
 from .modelo import HORIZONTE, Pedido, Plano, Teste
 from .motor import planejar
 
@@ -82,3 +84,48 @@ def curva_meta(testes: list[Teste], prototipos: list[str], metas=(20, 19, 18, 17
         curva.append({"meta": meta, "carros": len(p.prototipos()), "folga_projeto": MARCO - p.semana_fim(),
                       "nao_cabe": len(p.nao_cabe)})
     return curva
+
+
+def memoria(plano: Plano, testes: dict[str, Teste]) -> dict:
+    """Memória de cálculo: de onde sai o número de carros do plano (ticket 10).
+    carros × semanas = carros-semana em teste + perdidos (carro destruído antes do fim) + vazios.
+    O piso é o menor número de carros que qualquer plano precisaria: a soma das durações dividida pelas semanas,
+    e nunca menos que um carro por teste destrutivo (RN-04)."""
+    carros, semanas = len(plano.prototipos()), plano.semana_fim()
+    uso = uso_por_semana(plano, testes, carros, semanas)
+    em_teste = sum(u["em_uso"] for u in uso)
+    destrutivos = len({a.teste_id for a in plano.alocacoes if testes[a.teste_id].destrutivo})
+    return {"testes": len({a.teste_id for a in plano.alocacoes}), "destrutivos": destrutivos, "semanas": semanas,
+            "carros": carros, "em_teste": em_teste, "destruido": sum(u["fora"] for u in uso),
+            "vazio": sum(u["parados"] for u in uso),
+            "piso": max(math.ceil(em_teste / semanas), destrutivos) if semanas else 0}
+
+
+def simular(testes: list[Teste], pedidos: list[Pedido], prototipos: list[str], por_area: int, meta: int,
+            destrutivo_no_fim: bool, folga: float) -> dict:
+    """E se as áreas registrassem menos testes, a meta de fim fosse outra, ou o destrutivo rodasse no fim? (ticket 10)
+    Só leitura: não toca no plano em vigor. O pedido de cada área é refeito do jeito do mock (MK-03): a área
+    sozinha, na janela dela, com a mesma gordura do pedido original."""
+    # ponytail: a amostra são os N primeiros testes de cada área na lista do mock; com dado real, a lista vem das áreas
+    vistos: dict[str, int] = {}
+    amostra = []
+    for t in sorted(testes, key=lambda t: (len(t.id), t.id)):  # ordem fixa, igual no JSON e no Postgres
+        vistos[t.area] = vistos.get(t.area, 0) + 1
+        if vistos[t.area] <= por_area:
+            amostra.append(t)
+    por_id = {t.id: t for t in amostra}
+    plano = planejar(amostra, prototipos, horizonte=meta, destrutivo_no_fim=destrutivo_no_fim)
+    pedidos_sim = []
+    for p in pedidos:
+        cheio = len(planejar([t for t in testes if t.area == p.area], prototipos, horizonte=p.semanas).prototipos())
+        so = len(planejar([t for t in amostra if t.area == p.area], prototipos, horizonte=p.semanas).prototipos())
+        pedidos_sim.append({"area": p.area, "carros": -(-so * p.carros // cheio), "semanas": p.semanas})
+    destrutivos = sum(t.destrutivo for t in amostra)
+    reserva = math.ceil(round(folga * destrutivos, 6))
+    f = folgas(plano)
+    return {"por_area": por_area, "meta": meta, "destrutivo_no_fim": destrutivo_no_fim, "testes": len(amostra),
+            "destrutivos": destrutivos, "pedidos": sum(p["carros"] for p in pedidos_sim), "pedidos_por_area": pedidos_sim,
+            "carros_plano": len(plano.prototipos()), "carros_reserva": reserva,
+            "carros": len(plano.prototipos()) + reserva, "semana_fim": plano.semana_fim(),
+            "folga_projeto": MARCO - plano.semana_fim(), "criticos": sum(1 for v in f.values() if v == 0),
+            "nao_cabe": len(plano.nao_cabe), "memoria": memoria(plano, por_id)}

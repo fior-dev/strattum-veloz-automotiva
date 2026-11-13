@@ -42,6 +42,9 @@ export const api = {
   gestao: (versao?: number) => pedir<Gestao>(versao ? `/gestao?versao=${versao}` : '/gestao'),
   proposta: () => pedir<{ proposta: Proposta | null }>('/proposta'),
   folga: (folga: number) => pedir<Comparativo>('/folga', { method: 'PUT', body: JSON.stringify({ folga }) }),
+  simular: (q: Cenario & { por_area: number }) =>
+    pedir<Simulacao>(`/simular?${new URLSearchParams(Object.entries(q).map(([k, v]) => [k, String(v)]))}`),
+  regerar: (c: Cenario) => pedir<{ versao: number }>('/plano/regerar', { method: 'POST', body: JSON.stringify(c) }),
 }
 
 export const COR_AREA: Record<string, string> = {
@@ -60,10 +63,17 @@ export type Proposta = {
   marco: { fim_antes: number; fim_depois: number; semanas_consumidas: number; folga_projeto_antes: number;
     folga_projeto_depois: number; estava_no_caminho_critico: boolean | null } | null
 }
+// Memória de cálculo: carros × semanas = em_teste + destruido + vazio (ticket 10)
+export type Memoria = { testes: number; destrutivos: number; semanas: number; carros: number; em_teste: number; destruido: number; vazio: number; piso: number }
+export type Cenario = { meta: number; destrutivo_no_fim: boolean; folga: number }
+export type Simulacao = Cenario & {
+  por_area: number; testes: number; destrutivos: number; pedidos: number; carros_plano: number; carros_reserva: number
+  carros: number; semana_fim: number; folga_projeto: number; criticos: number; nao_cabe: number; memoria: Memoria
+}
 export type UsoSemana = { semana: number; em_uso: number; parados: number; fora: number }
 export type Gestao = {
   marco: number; fim_plano: number; folga_projeto: number; sinal: 'verde' | 'amarelo' | 'vermelho'
-  criticos: number; testes_no_plano: number; folgas: Record<string, number>
+  criticos: number; testes_no_plano: number; folgas: Record<string, number>; memoria: Memoria
   uso: { plano: UsoSemana[]; como_hoje: UsoSemana[] }
   curva_meta: { meta: number; carros: number; folga_projeto: number; nao_cabe: number }[]
 }
