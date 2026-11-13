@@ -1,6 +1,6 @@
 # 11 · Ajustes do teste do José na tela
 
-Dor: D3, D4, D8 · Depende de: 10 · Estimativa: 2h · Estado: feito, esperando o teste do José · Pedido do José em 13/11, ao testar a tela pelo roteiro (wireframes 1 a 5 e gráfico opção A aprovados).
+Dor: D3, D4, D8 · Depende de: 10 · Estimativa: 2h · Estado: feito · Pedido do José em 13/11, ao testar a tela pelo roteiro (wireframes 1 a 5 e gráfico opção A aprovados).
 
 ## O quê
 - **Conta dos 161 em uma linha.** O bloco "De onde saem os 161 carros" saiu: ocupava espaço demais. A conta virou um texto pequeno embaixo de "161 no plano + 7 de folga de reteste".

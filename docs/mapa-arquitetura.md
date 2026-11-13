@@ -1,6 +1,6 @@
 # Mapa de arquitetura
 
-status: aprovado pelo José · 13/11/2026 · Decidido por: José
+status: aprovado pelo José · 12/11/2026 · Decidido por: José
 
 Uma linha por entrada: rota, tabela, script. SIPOC = quem fornece, o que entra, o que a entrada faz, o que sai, quem recebe.
 

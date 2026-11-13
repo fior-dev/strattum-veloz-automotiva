@@ -1,6 +1,6 @@
 # ADR 0007 · Caminho crítico pela cadeia do carro, não CPM completo
 
-status: aprovado pelo José · 13/11/2026 · Decidido por: José (a simplificação em 12/11; os detalhes de implementação, aprovados em 13/11 sem a rodada de grill)
+status: aprovado pelo José · 12/11/2026 · Decidido por: José
 data: 12/11/2026 · dor: D8 · ticket: 04c
 
 ## Contexto

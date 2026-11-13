@@ -1,6 +1,6 @@
 # Roadmap · do protótipo ao produto
 
-status: aprovado pelo José · 13/11/2026 · Decidido por: José
+status: aprovado pelo José · 12/11/2026 · Decidido por: José
 
 Cada etapa diz o valor para a Veloz, o risco que ela tira e como validar com a coordenação antes de seguir. Cada item diz qual camada ou adapter toca (ADR 0001). O motor (`domain/`) só muda onde está escrito.
 
