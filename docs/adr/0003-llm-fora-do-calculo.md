@@ -1,6 +1,6 @@
 # ADR 0003 · O LLM traduz e explica; quem calcula é o motor; quem decide é a coordenação
 
-status: proposto, aguardando revisão do José · 12/11/2026
+status: aprovado pelo José · 12/11/2026 · Decidido por: José
 
 ## Contexto
 O único uso de agente é o copiloto de replanejamento: a coordenação escreve "o teste de chuva da Aerodinâmica atrasou 2 semanas". Um LLM que calcula alocação erra sem avisar e não reproduz o resultado.

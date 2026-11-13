@@ -1,6 +1,6 @@
 # SPEC · Protótipo de alocação da frota da Veloz
 
-status: proposto, aguardando revisão do José · 12/11/2026
+status: aprovado pelo José · 12/11/2026 · Decidido por: José
 Fonte do negócio: `docs/01-discovery.md` v0.3. Glossário e dores: `CONTEXT.md`. Números: `PREMISSAS.md`.
 
 ## Problema

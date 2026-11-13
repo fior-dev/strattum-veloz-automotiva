@@ -1,6 +1,6 @@
 # ADR 0005 · O que ficou fora do protótipo, e por quê
 
-status: proposto, aguardando revisão do José · 12/11/2026
+status: aprovado pelo José · 12/11/2026 · Decidido por: José
 
 Regra de desempate do prompt: se uma escolha melhora o número ou a sofisticação mas piora a clareza ou põe o prazo em risco, vai para o roadmap.
 

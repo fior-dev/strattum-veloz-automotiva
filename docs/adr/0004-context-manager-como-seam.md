@@ -1,6 +1,6 @@
 # ADR 0004 · Context Manager como seam; a Strattum fica atrás dele
 
-status: proposto, aguardando revisão do José · 12/11/2026
+status: aprovado pelo José · 12/11/2026 · Decidido por: José
 
 ## Contexto
 Na arquitetura-alvo, o contexto da empresa (glossário, regras, histórico de lançamentos, registros das áreas) é servido aos agentes por uma plataforma de contexto. Esse é o papel da Strattum. Não temos a API da Strattum e não vamos inventá-la.

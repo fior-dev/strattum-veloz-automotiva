@@ -1,7 +1,7 @@
 # Tickets
 
 Fatias verticais tracer-bullet: cada uma atravessa motor → API → tela e se demonstra sozinha.
-status: proposto, aguardando revisão do José · 12/11/2026
+status: aprovado pelo José · 12/11/2026 · Decidido por: José
 
 | # | Ticket | Depende de | Estimativa | Dor | Prazo (ajuste 9) |
 |---|---|---|---|---|---|

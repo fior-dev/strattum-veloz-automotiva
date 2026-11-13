@@ -1,6 +1,6 @@
 # ADR 0001 · Clean Architecture com injeção por construtor, e onde ficam as ports
 
-status: proposto, aguardando revisão do José · 12/11/2026
+status: aprovado pelo José · 12/11/2026 · Decidido por: José
 
 ## Contexto
 O protótipo é uma fatia fina de uma plataforma. Três peças vão trocar com certeza: a fonte de dados (JSON hoje, Postgres depois), o contexto da empresa (arquivo local hoje, Strattum depois) e o LLM (OpenRouter hoje, Anthropic ou modelo próprio depois). O resto não tem troca prevista.

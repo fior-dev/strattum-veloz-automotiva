@@ -1,6 +1,6 @@
 # ADR 0006 · Dados em JSON no protótipo, Postgres (Supabase) como alvo; nuvem-alvo AWS
 
-status: proposto, aguardando revisão do José · 12/11/2026
+status: aprovado pelo José · 12/11/2026 · Decidido por: José
 
 ## Contexto
 A demo não pode falhar por rede ou banco. O dado é mockado. O plano tem versões (RF-06).

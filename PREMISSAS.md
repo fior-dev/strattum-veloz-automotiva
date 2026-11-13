@@ -1,6 +1,6 @@
 # PREMISSAS
 
-status: proposto, aguardando revisão do José
+status: aprovado pelo José · 12/11/2026 · Decidido por: José
 
 Todo número que não veio da cliente está aqui, com o ID que aparece na tela (RF-07).
 Fonte: **discovery** (fala ou e-mail da Maira), **José** (premissa aprovada), **suposição** (do FDE, ajustável) ou **IA** (gerado por IA).

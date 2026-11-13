@@ -1,6 +1,6 @@
 # ADR 0002 · Heurística gulosa determinística, solver no roadmap
 
-status: proposto, aguardando revisão do José · 12/11/2026
+status: aprovado pelo José · 12/11/2026 · Decidido por: José
 
 ## Contexto
 A Maira disse que importa pouco se 250 vira 240 ou 150. Importa o processo e se a coordenação entende o plano `[H]`. A coordenação não é técnica. A demo precisa dar o mesmo resultado sempre (RNF-02).

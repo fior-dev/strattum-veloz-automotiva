@@ -1,6 +1,6 @@
 # CONTEXT · Veloz Automotiva
 
-status: proposto, aguardando revisão do José
+status: aprovado pelo José · 12/11/2026 · Decidido por: José
 
 Glossário do domínio e dores numeradas. É a fonte do Semantic Layer: `backend/semantic/contexto.json` repete estes termos, e a API e o copiloto leem de lá.
 A fonte do negócio é `docs/01-discovery.md` v0.3. Etiquetas de fonte: `[T]` entrevista, `[E]` e-mail da Maira, `[P]` premissa aprovada pelo José, `[H]` hipótese do FDE.
