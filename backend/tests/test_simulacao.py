@@ -68,7 +68,7 @@ def test_api_simular_nao_muda_o_plano_e_regerar_cria_a_versao_seguinte(cliente):
     assert cliente.post("/api/plano/regerar", json={"meta": 18, "folga": 0.1}).json() == {"versao": 2}
     g = cliente.get("/api/gestao").json()
     assert (g["fim_plano"], g["folga_projeto"], g["sinal"], g["memoria"]["carros"]) == (18, 2, "amarelo", 172)
-    assert g["custos"] == {"carro": 1.25, "semana_atraso": 20.0} and g["custo_frota"] == 179 * 1.25  # MK-10 e MK-11
+    assert g["custos"] == {"carro": 1.25, "preco_suv": 0.15, "suvs_semana": 1000} and g["custo_frota"] == 179 * 1.25  # MK-10 e MK-11
 
 
 def test_ticket11_carros_da_proposta_e_marcacao_de_folga(cliente):

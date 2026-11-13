@@ -15,7 +15,8 @@ export function Simulador({ comp, g, folgaPct, podeAdotar, motivo, aoAdotar }: {
   const [porArea, setPorArea] = useState(125)
   const [meta, setMeta] = useState(g.marco)
   const [noFim, setNoFim] = useState(false)
-  const [custoSemana, setCustoSemana] = useState(g.custos.semana_atraso)
+  const [suvsSemana, setSuvsSemana] = useState(g.custos.suvs_semana)
+  const custoSemana = suvsSemana * g.custos.preco_suv  // faturamento que uma semana de atraso adia, em milhões
   const [s, setS] = useState<Simulacao>()
   const [erro, setErro] = useState('')
   const cenario = { meta, destrutivo_no_fim: noFim, folga: folgaPct / 100 }
@@ -26,7 +27,7 @@ export function Simulador({ comp, g, folgaPct, podeAdotar, motivo, aoAdotar }: {
   }, [porArea, meta, noFim, folgaPct])
 
   const menos = (pedidos: number, carros: number) => `${pedidos - carros} (−${n(Math.round((1000 * (pedidos - carros)) / pedidos) / 10)}%)`
-  // ponytail: única conta de negócio feita na tela: semanas de folga × o custo que a pessoa digita.
+  // ponytail: única conta de negócio feita na tela: semanas de folga × SUVs por semana que a pessoa digita × preço de venda.
   // Levar o valor digitado à rota furaria o cache de 350 combinações da simulação (ticket 10)
   const util = (folga: number) => Math.max(folga, 0)  // folga negativa não absorve nada
   const absorve = (folga: number) => mi(util(folga) * custoSemana)
@@ -41,7 +42,7 @@ export function Simulador({ comp, g, folgaPct, podeAdotar, motivo, aoAdotar }: {
     [<>Custo da frota, a {mi(g.custos.carro)} por carro<Selo id="MK-11" /></>, mi(g.custo_frota), mi(s.custo_frota)],
     ['Semana em que o plano termina', g.fim_plano, s.semana_fim],
     ['Folga do projeto, até o lançamento', sem(g.folga_projeto), sem(s.folga_projeto)],
-    ['Atraso que a folga absorve, em dinheiro', absorve(g.folga_projeto), absorve(s.folga_projeto)],
+    ['Faturamento que a folga protege de atraso', absorve(g.folga_projeto), absorve(s.folga_projeto)],
     ['Testes sem folga até o fim do plano', `${g.criticos} de ${g.testes_no_plano}`, `${s.criticos} de ${s.testes - s.nao_cabe}`],
     ['Testes sem alocação', comp.proposto.nao_cabe, s.nao_cabe],
   ] : []
@@ -87,10 +88,11 @@ export function Simulador({ comp, g, folgaPct, podeAdotar, motivo, aoAdotar }: {
           </select>
           <span className="font-normal text-grafite">Nos dois casos ele é o último teste do carro (RN-04).</span>
         </label>
-        <label className="block font-medium">Custo de uma semana de atraso no lançamento
-          <span className="flex items-center gap-1 mt-1 font-normal">R$ <input type="number" min={0} max={500} step={5} value={custoSemana}
-            onChange={(e) => setCustoSemana(Math.max(0, Number(e.target.value) || 0))} className={`${campo} w-20`} /> milhões<Selo id="MK-10" /></span>
-          <span className="font-normal text-grafite">Suposição: 1.000 SUVs por semana × R$ 20 mil de margem. Ajuste para o número real.</span>
+        <label className="block font-medium">Quanto uma semana de atraso no lançamento adia de faturamento
+          <span className="flex flex-wrap items-center gap-1 mt-1 font-normal"><input type="number" min={0} max={20000} step={100} value={suvsSemana}
+            onChange={(e) => setSuvsSemana(Math.max(0, Number(e.target.value) || 0))} className={`${campo} w-24`} aria-label="SUVs vendidos por semana" />
+            SUVs por semana<Selo id="MK-10" /> × R$ 150 mil = <b>{mi(custoSemana)}</b></span>
+          <span className="font-normal text-grafite">R$ 150 mil é o preço de venda do SUV (discovery). O volume de {n(g.custos.suvs_semana)} por semana é suposição: troque pelo número real.</span>
         </label>
       </div>
       {erro && <p className="mt-2 text-seg text-sm" role="alert">{erro}</p>}
@@ -104,9 +106,9 @@ export function Simulador({ comp, g, folgaPct, podeAdotar, motivo, aoAdotar }: {
       {s && porArea === 125 && !atrasado && (carrosAMais !== 0 || folgaAMais !== 0) && <p className="text-sm mt-2 max-w-[85ch]"><b>A troca, em dinheiro:</b>{' '}
         {[carrosAMais > 0 && `${carrosAMais} carro${carrosAMais === 1 ? '' : 's'} a mais custam ${mi(custoAMais)}`,
           carrosAMais < 0 && `${-carrosAMais} carro${carrosAMais === -1 ? '' : 's'} a menos poupam ${mi(-custoAMais)}`,
-          folgaAMais > 0 && `${sem(folgaAMais)} de folga a mais absorvem até ${mi(folgaAMais * custoSemana)} de atraso`,
-          folgaAMais < 0 && `${sem(-folgaAMais)} de folga a menos deixam de absorver ${mi(-folgaAMais * custoSemana)} de atraso`].filter(Boolean).join('; ')}.
-        {folgaAMais > 0 && ' A folga só vale esse dinheiro se o atraso acontecer.'}</p>}
+          folgaAMais > 0 && `${sem(folgaAMais)} de folga a mais protegem até ${mi(folgaAMais * custoSemana)} de faturamento`,
+          folgaAMais < 0 && `${sem(-folgaAMais)} de folga a menos deixam de proteger ${mi(-folgaAMais * custoSemana)} de faturamento`].filter(Boolean).join('; ')}.
+        {folgaAMais > 0 && ' É faturamento que deixa de entrar na data, não lucro; e a folga só vale se o atraso acontecer.'}</p>}
       {s && noFim && <p className="text-sm mt-2 max-w-[85ch]"><b>O que se perde com o destrutivo no fim:</b> o resultado dos {s.destrutivos} testes destrutivos só sai
         na semana {s.semana_fim}. Se um deles falha, a repetição só cabe nas semanas de folga que a meta deixar.</p>}
       {s && <div className="mt-3 flex flex-wrap items-center gap-3 text-sm">

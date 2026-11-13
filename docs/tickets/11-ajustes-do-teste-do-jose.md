@@ -5,7 +5,7 @@ Dor: D3, D4, D8 · Depende de: 10 · Estimativa: 2h · Estado: feito, esperando 
 ## O quê
 - **Conta dos 161 em uma linha.** O bloco "De onde saem os 161 carros" saiu: ocupava espaço demais. A conta virou um texto pequeno embaixo de "161 no plano + 7 de folga de reteste".
 - **O marco dentro da simulação.** O bloco "O que segura a data de lançamento" virou um quadro pequeno no topo de "Simule antes de decidir": sinal, folga do projeto e testes sem folga. A tabela meta × carros virou o texto de cada opção da meta ("semana 18: 2 semanas de folga, 172 carros no plano").
-- **Dinheiro na simulação.** Duas linhas novas na tabela: custo da frota e atraso que a folga absorve. Uma frase resume a troca ("11 carros a mais custam R$ 13,75 mi; 2 semanas de folga a mais absorvem até R$ 40 mi de atraso"). O custo do carro é o meio da faixa do discovery (MK-11); o custo da semana de atraso é suposição (MK-10), e a pessoa pode trocar na tela.
+- **Dinheiro na simulação.** Duas linhas novas na tabela: custo da frota e faturamento que a folga protege. Uma frase resume a troca ("11 carros a mais custam R$ 13,75 mi; 2 semanas de folga a mais protegem até R$ 300 mi de faturamento"). O custo do carro é o meio da faixa do discovery (MK-11); a semana de atraso vale o faturamento adiado (MK-10).
 - **Gantt: filtro e marcação invertida** (racional no ADR 0007). O seletor "Mostrar" tem três opções: todos os carros, só os afetados pela proposta, só os que têm teste com folga. Com proposta pendente, o filtro dos afetados liga sozinho. A faixa amarela no topo da barra passou a marcar o teste **com** folga (72 de 625), não o crítico (553).
 - **Prévia da troca no Gantt** (ideia 1): com proposta pendente, o teste aparece tracejado no carro de destino e esmaecido no de origem.
 - **O passo mostra o bloco novo** (ideia 2): ao avançar, a tela rola até o bloco que apareceu, e ele pisca uma vez.
@@ -20,10 +20,12 @@ Dor: D3, D4, D8 · Depende de: 10 · Estimativa: 2h · Estado: feito, esperando 
 - **Plano que já passou do marco** (depois do roteiro 5f): a faixa de folga some e o filtro "com folga" fica desabilitado. A folga é medida até o fim do plano; num plano atrasado ela marcaria 621 de 625 barras.
 - **Abas: não entraram.** Os 5 passos já são a navegação, e aba esconderia o Gantt ao lado da proposta. Fica como opção para a v2, com wireframe antes.
 
+- **Semana de atraso em faturamento, não em margem** (correção do José, 13/11). A primeira versão usava "R$ 20 mil de margem por carro", número sem fonte e sem dizer se era bruto ou líquido. Agora a tela mostra a conta: SUVs por semana (suposto, editável) × R$ 150 mil de preço de venda (discovery) = R$ 150 mi por semana.
+
 ## Aceite
 - [x] `uv run pytest`: 67 passam (1 novo: carros da proposta, marcação de folga, curva até a semana 16).
 - [x] `npm run build` passa.
-- [x] No navegador (Playwright, 1280×720 e 390 de largura, 0 erros no console): a conta dos 161 aparece embaixo do número; meta 18 mostra R$ 223,75 mi de frota e R$ 40 mi de atraso absorvido; AER-99 +2 liga o filtro e deixa 2 linhas (P006 e P162) com a prévia do ELE-01; recusar volta para todos os carros; avaria leve mostra a confirmação; sem rolagem horizontal em 390.
+- [x] No navegador (Playwright, 1280×720 e 390 de largura, 0 erros no console): a conta dos 161 aparece embaixo do número; meta 18 mostra R$ 223,75 mi de frota e R$ 300 mi de faturamento protegido; AER-99 +2 liga o filtro e deixa 2 linhas (P006 e P162) com a prévia do ELE-01; recusar volta para todos os carros; avaria leve mostra a confirmação; sem rolagem horizontal em 390.
 - [x] Revisão independente (Fable 5.2, esforço high) sobre o diff: 3 graves (Gantt vazio em proposta sem troca; marcação de folga em plano atrasado; "+N carros" errado com menos testes, na meta 16 e depois de adotar), 6 médios e 9 menores. Corrigidos os 3 graves, os 6 médios e 7 menores. Conferido no motor pela revisão: 72 testes e 65 carros com folga, a conta dos 161, os valores em dinheiro e os 34% do roteiro.
 
 ## Fica para depois

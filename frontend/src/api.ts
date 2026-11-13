@@ -77,7 +77,7 @@ export type Gestao = {
   criticos: number; testes_no_plano: number; folgas: Record<string, number>; memoria: Memoria
   uso: { plano: UsoSemana[]; como_hoje: UsoSemana[] }
   curva_meta: { meta: number; carros: number; folga_projeto: number; nao_cabe: number }[]
-  custos: { carro: number; semana_atraso: number }  // em milhões de reais (MK-10, MK-11)
+  custos: { carro: number; preco_suv: number; suvs_semana: number }  // valores em milhões de reais (MK-10, MK-11)
   custo_frota: number; carros_com_folga: string[]  // vazio quando o plano já passa do marco
 }
 type ComProposta = { proposta: Proposta | null }

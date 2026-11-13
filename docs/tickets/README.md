@@ -25,7 +25,7 @@ Regra: ticket que passar do dobro da estimativa corta escopo e manda o resto par
 
 ## Esperando pelo José
 - MK-06: a folga de reteste (10% dos destrutivos) e a gordura do pedido (10% a 20%, ajuste 6) são duas premissas diferentes. Manter as duas ou aplicar a mesma gordura nos dois lados? (revisão independente, achado 3)
-- Adotar meta de 18 semanas (+11 carros, 2 semanas de folga no marco)? Com os custos supostos (MK-10, MK-11): R$ 13,75 mi em carros para absorver até R$ 40 mi de atraso
+- Adotar meta de 18 semanas (+11 carros, 2 semanas de folga no marco)? Com os custos supostos (MK-10, MK-11): R$ 13,75 mi em carros para proteger até R$ 300 mi de faturamento (2 semanas × 1.000 SUVs × R$ 150 mil)
 - Ticket 08: escolher a hospedagem do contêiner (Lightsail ou Railway) e o domínio. A publicação é do José
 - Histórico do git: o ref do projeto Supabase saiu dos arquivos, mas segue nos commits antigos. Reescrever o histórico antes de tornar o repo público?
 

@@ -8,8 +8,9 @@ from .modelo import HORIZONTE, Pedido, Plano, Teste
 from .motor import planejar
 
 MARCO = HORIZONTE  # semana do lançamento: o plano não passa dela (RN-06)
-# Em milhões de reais. carro: meio da faixa do discovery (R$ 1 a 1,5 milhão), MK-11. semana_atraso: suposição, MK-10
-CUSTOS = {"carro": 1.25, "semana_atraso": 20.0}
+# Em milhões de reais. carro: meio da faixa do discovery (R$ 1 a 1,5 milhão), MK-11.
+# preco_suv: preço de venda do carro de série (R$ 150 mil, discovery). suvs_semana: volume de vendas suposto, MK-10
+CUSTOS = {"carro": 1.25, "preco_suv": 0.15, "suvs_semana": 1000}
 AMARELO_ATE = 2  # MK-08: folga do projeto de 1 a 2 semanas é amarelo; 0 ou menos, vermelho
 
 
