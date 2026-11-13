@@ -76,7 +76,24 @@ flowchart LR
   classDef u fill:#ffffff,color:#111111,stroke:#555555
 ```
 
-Tracejado é roadmap. No protótipo, a API chama o copiloto direto (sem Dispatcher nem MCP), o `ContextProvider` lê arquivos locais e o banco é JSON em memória, ou o Supabase com `DATA_BACKEND=supabase` (ticket 05b). Cada caixa tem a sua linha em `docs/mapa-arquitetura.md`; o que é tracejado está no `ROADMAP.md`.
+O motor de alocação é a peça de valor. O resto é a plataforma que deixa vários agentes de IA usarem o motor com segurança, custo controlado e o vocabulário da Veloz. O que é tracejado entra quando houver um segundo agente ou uma exigência de dado, sem reescrever o motor.
+
+**O que é cada caixa**
+
+| Componente | Para que serve (uma frase) | No protótipo |
+|---|---|---|
+| SPA React | É a tela em que a coordenação vê o plano e as engenharias registram status e avaria. | Implementada (`frontend/`). |
+| API FastAPI | Expõe os casos de uso da camada de aplicação para a tela. | Implementada (`backend/presentation/`). |
+| Motor de alocação | Calcula o plano (`planejar`) e o replanejamento depois de um imprevisto (`replanejar`). | Implementado no domínio (`backend/domain/`), sem LLM: o LLM fica fora do cálculo (ADR 0003). |
+| Model Gateway (LiteLLM) | É o ponto único de saída para LLMs: roteamento, custo e fallback. | Implementado: LiteLLM apontando para o OpenRouter, um modelo, atrás de uma porta (ADR 0001, ADR 0003). |
+| Semantic Layer | Dá definição única ao vocabulário e às métricas do domínio. | Fino: o glossário do `CONTEXT.md` e as métricas num arquivo que o copiloto lê (`backend/semantic/contexto.json`). |
+| Context Manager (ContextProvider) | Serve aos agentes o contexto da empresa; na arquitetura-alvo, esse papel é da Strattum. | Só o seam: a porta `ContextProvider` e um adapter que lê arquivos locais. O adapter Strattum é roadmap (ADR 0004). |
+| Postgres/Supabase | Guarda as versões do plano. | JSON em memória por padrão, ou Supabase com `DATA_BACKEND=supabase`, atrás da porta `PlanoRepository` (ADR 0001, ticket 05b). |
+| Agent Dispatcher | Roteia os pedidos para agentes especializados, como planejamento, compras de protótipo e BI. | Roadmap: no protótipo há um agente só (ADR 0005, `ROADMAP.md`). |
+| MCP Gateway | Expõe o motor e os dados como ferramentas governadas para mais de um agente. | Roadmap: no protótipo, tool calling direto para `replanejar` (ADR 0005, `ROADMAP.md`). |
+| LLM Serving | Modelos próprios/hospedados. | Roadmap. |
+
+Tracejado é roadmap. No protótipo, a API chama o copiloto direto (sem Dispatcher nem MCP), o `ContextProvider` lê arquivos locais e o banco é JSON em memória, ou o Supabase com `DATA_BACKEND=supabase` (ticket 05b). Cada caixa tem a sua linha em `docs/mapa-arquitetura.md`; o que é tracejado está no `ROADMAP.md`. A seta do motor para o banco simplifica o desenho. No código, o motor não toca no banco. Quem chama o repositório é a camada de aplicação, pela porta `PlanoRepository` (ADR 0001).
 
 ## Critérios de aceite
 Os do §13 do discovery, um teste automatizado por critério de regra. Mais:
