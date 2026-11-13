@@ -365,7 +365,7 @@ export function montar(raiz = RAIZ, { agora = new Date(), git = gitLog(raiz), gi
       const ls = e.id === 'review' ? reviews : demos;
       marcas = ls.filter(l => l.quando).map(l => ({ data: l.quando, rotulo: `${l.data} ${l.etapa}` }));
       estado = ls.length ? 'em andamento' : 'não iniciado';
-    } else if (e.id === 'entrega') estado = existe('ROADMAP.md') && ticket('06b')?.estado === 'feito' ? 'feito' : existe('ROADMAP.md') ? 'em andamento' : 'não iniciado';
+    } else if (e.id === 'entrega') estado = existe('ROADMAP.md') && ativos.length && feitos.length === ativos.length && demos.length ? 'feito' : existe('ROADMAP.md') ? 'em andamento' : 'não iniciado';
     else estado = (e.exige || e.caminhos).every(existe) ? (e.caminhos.some(c => propostos.some(x => x.arquivo.startsWith(c))) ? 'aguardando aprovação' : 'feito') : (e.caminhos.some(existe) ? 'em andamento' : 'não iniciado');
     marcas.sort((a, b) => a.data - b.data);
     return { ...e, estado, marcas, ultima: marcas.at(-1)?.data || null, link: existe(e.artefato.replace(/\/$/, '')) ? link(e.artefato.replace(/\/$/, '')) : null };
