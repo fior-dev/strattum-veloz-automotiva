@@ -1,6 +1,6 @@
 # 10 · Memória de cálculo e simulação
 
-Dor: D3, D8 · Depende de: 09 · Estimativa: 2h · Estado: feito, esperando o teste do José · Pedido do José em 12/11, ao testar a tela pelo roteiro.
+Dor: D3, D8 · Depende de: 09 · Estimativa: 2h · Estado: feito · Pedido do José em 12/11, ao testar a tela pelo roteiro.
 
 O José não conseguia explicar de onde saem os 161 carros, e a tela só deixava mexer na folga de reteste, que não muda o plano.
 
