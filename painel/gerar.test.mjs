@@ -87,6 +87,17 @@ test('durações e ids de teste', () => {
   assert.deepEqual(idsDoTeste('test_folga_muda_a_reserva'), []);
 });
 
+test('etapa aprovada mostra a data da aprovação, não a do último commit', () => {
+  const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'painel-'));
+  try {
+    fs.writeFileSync(path.join(dir, 'SPEC.md'), '# Spec\n\nstatus: aprovado pelo José · 12/11/2026 · Decidido por: José\n');
+    const git = [{ hash: 'abc1234', data: new Date('2026-11-13T09:51:00-03:00'), assunto: 'revisão', arquivos: ['SPEC.md'] }];
+    const d = montar(dir, { agora: new Date('2026-11-13T11:00:00-03:00'), git, github: null });
+    assert.equal(d.etapas.find(e => e.id === 'spec').aprovadoEm, '12/11');
+    assert.match(render(d), /aprovado em 12\/11/);
+  } finally { fs.rmSync(dir, { recursive: true, force: true }); }
+});
+
 test('repo vazio: tudo aparece como não iniciado, sem erro', () => {
   const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'painel-'));
   try {

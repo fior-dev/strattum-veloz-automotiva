@@ -368,7 +368,10 @@ export function montar(raiz = RAIZ, { agora = new Date(), git = gitLog(raiz), gi
     } else if (e.id === 'entrega') estado = existe('ROADMAP.md') && ativos.length && feitos.length === ativos.length && demos.length ? 'feito' : existe('ROADMAP.md') ? 'em andamento' : 'não iniciado';
     else estado = (e.exige || e.caminhos).every(existe) ? (e.caminhos.some(c => propostos.some(x => x.arquivo.startsWith(c))) ? 'aguardando aprovação' : 'feito') : (e.caminhos.some(existe) ? 'em andamento' : 'não iniciado');
     marcas.sort((a, b) => a.data - b.data);
-    return { ...e, estado, marcas, ultima: marcas.at(-1)?.data || null, link: existe(e.artefato.replace(/\/$/, '')) ? link(e.artefato.replace(/\/$/, '')) : null };
+    // A data da etapa é a da aprovação (status do artefato), não a do último commit: revisão posterior não muda quando a etapa foi feita.
+    const ca = campos(ler(raiz, e.artefato));
+    const aprovadoEm = /^aprovad/i.test(ca.status || '') && ca.data ? ca.data.split('/').slice(0, 2).map(x => x.padStart(2, '0')).join('/') : null;
+    return { ...e, estado, marcas, aprovadoEm, ultima: marcas.at(-1)?.data || null, link: existe(e.artefato.replace(/\/$/, '')) ? link(e.artefato.replace(/\/$/, '')) : null };
   });
   const entregue = etapas.find(e => e.id === 'entrega').estado === 'feito';
   for (const e of etapas) if ((e.id === 'review' || e.id === 'demo') && entregue && e.estado === 'em andamento') e.estado = 'feito';
@@ -460,7 +463,7 @@ function gantt(d) {
 function etapasLista(d) {
   return `<ol class="etapas">${d.etapas.map(e => `<li class="etapa e-${CLS[e.estado]}">
     <span class="etapa-nome">${esc(e.nome)}</span>
-    <span class="etapa-meta">${chip(e.estado, CLS[e.estado])}<span>${e.ultima ? esc(fmtDiaHora(e.ultima)) : '—'}</span></span>
+    <span class="etapa-meta">${chip(e.estado, CLS[e.estado])}<span>${e.id === 'entrega' && e.estado === 'feito' ? esc(fmtDiaHora(MARCOS.at(-1).data)) : e.aprovadoEm ? `aprovado em ${esc(e.aprovadoEm)}` :e.ultima ? esc(fmtDiaHora(e.ultima)) : '—'}</span></span>
     <span class="etapa-art">${e.link ? aLink(e.link, e.artefato) : `<span class="mudo">${esc(e.artefato)} ainda não existe</span>`}${e.detalhe ? `<span class="mudo">${esc(e.detalhe)}</span>` : ''}</span>
   </li>`).join('')}</ol>`;
 }

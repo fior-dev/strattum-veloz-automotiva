@@ -1,5 +1,7 @@
 # Discovery · Veloz Automotiva, alocação da frota de protótipos
 
+status: aprovado pelo José · 12/11/2026 · Decidido por: José
+
 Versão 0.4, 13/11/2026. A v0.4 corrige trechos do §1, §11, §14 e §17 e aponta, no §19, onde cada desvio do protótipo está explicado. A v0.2 foi aprovada pelo José em 12/11. A v0.3 aplica a resposta da Maira por e-mail: os protótipos são idênticos, e existe desgaste parcial. Também aprova a RN-07 e a RN-08 e cria a RN-09 (avarias). Este é o documento de descobertas da entrevista de discovery do case de FDE da Strattum.
 O método é o *Fiortech's FDE Playbook*, Fase 1. O documento é a base para escrever o PRD e as specs (SDD). Ele não substitui nenhum dos dois.
 
