@@ -39,11 +39,11 @@ A revisão leu os rascunhos das 00h21, antes do mock existir. Parte dos achados 
 |---|---|---|
 | 1 | O "como hoje" não chega a 250 com 30 a 40 testes por área | Já resolvido: o mock foi calibrado para 125 testes por área (MK-01); os pedidos somam 245 e o plano compartilhado sai do motor (168). A queda em degraus não foi feita |
 | 2 | Destrutivo em "carro livre" pode deixar de ser o último do carro (RN-04) | Já atendido: `cabe()` em `backend/domain/motor.py` recusa destrutivo com qualquer alocação depois; destrutivo sem carro vira impactado |
-| 3 | A folga de reteste (MK-06) diverge do ajuste 6 | Aberto: vai para o José (`docs/tickets/README.md`, Esperando pelo José) |
+| 3 | A folga de reteste (MK-06) diverge do ajuste 6 | Decidido pelo José em 12/11: manter as duas premissas (`PREMISSAS.md`, MK-06) |
 | 4 | MK-01 é a premissa mais sensível | Entrou em Riscos e na fala da apresentação |
 | 5 | Etiquetas de fonte erradas | Corrigido em `CONTEXT.md` (D2), ADR 0002 e ADR 0005 |
 | 6 | Replanejamento não determinístico; falta "Recusar" | Já atendido: colisões em ordem de início e ID; "B sai do plano" declarado no SPEC; `POST /api/proposta/recusar` existe |
-| 7 | A agenda não cabe; 04b sem status | 04b feita; 05b depende do José |
+| 7 | A agenda não cabe; 04b sem status | 04b feita; 05b feita depois que o José criou o projeto Supabase gratuito |
 | 8 | Semana de fim do "como hoje" indefinida | Já atendido: a maior janela pedida (`backend/domain/folga.py`) |
 | 9 | Y% da frase de sucesso fora do PREMISSAS | MK-09: é o resultado medido, −31,4% |
 | 10 | Heurística mudou em silêncio | Desvio declarado no ADR 0002 |
@@ -59,7 +59,7 @@ Cada achado do motor virou primeiro um teste vermelho (`test_rn09_reteste_nao_vo
 | 1 | Bloqueante: no roteiro do README, o passo 4 (copiloto) não repetia a proposta do passo 3, porque o passo 3 já tinha aceitado | Roteiro corrigido: recusar no passo 3, aceitar no passo 4. Conferido na API |
 | 2 | Reteste voltava para carro fora do pool (RN-09) | Corrigido: carro fora do pool trata o reteste como o destrutivo, em outro carro |
 | 3 | Reteste que não cabe sumia depois do aceite (RN-06) | Corrigido: vira "não cabe" no plano novo |
-| 4 | Atraso que passa da semana 20 deixa o plano aceito terminando depois do marco, e o Gantt corta a barra | Aberto: decisão do José (Esperando pelo José) |
+| 4 | Atraso que passa da semana 20 deixa o plano aceito terminando depois do marco, e o Gantt corta a barra | Decidido pelo José: aceite que passa do marco só com opção explícita (ticket 07) |
 | 5 | Avaria leve apagava a proposta pendente e criava versão sem o gerente (RN-07) | Corrigido: leve grava no plano atual, sem versão nova e sem tocar na proposta |
 | 6 | Falha de destrutivo gastava carro da reserva sem aparecer na proposta | Corrigido: a proposta mostra "Repetir X fora do P1 no P2" |
 | 7 | Anthropic recusa `temperature=0` nos modelos novos: "só o `.env`" seria falso | Corrigido: `temperature` só vai para modelos fora da Anthropic. Não testado ao vivo (sem chave) |
@@ -68,7 +68,7 @@ Cada achado do motor virou primeiro um teste vermelho (`test_rn09_reteste_nao_vo
 | 10 | Controle da folga volta a 10% ao recarregar a página | Não corrigido: cosmético; o número de carros ao lado está certo |
 | 11 | `CONTEXT.md` citava `glossario.json` | Corrigido para `contexto.json` |
 | 12 | Linha tirada do §17 do discovery sem subir versão | Mantido: só tirou uma duplicata; registrado acima |
-| 13 | Caminho local, nome da organização Supabase e ref do projeto no repo | Aberto: antes de tornar o repo público (Esperando pelo José) |
+| 13 | Caminho local, nome da organização Supabase e ref do projeto no repo | Corrigido: saíram dos arquivos |
 
 ### Segunda revisão independente, só do diff das correções (Opus 5.5, esforço high), 12/11 12h
 | # | Achado | O que foi feito |
@@ -80,7 +80,7 @@ Cada achado do motor virou primeiro um teste vermelho (`test_rn09_reteste_nao_vo
 | 5 | Evento novo apagava a proposta pendente sem aviso | Corrigido: uma decisão por vez (RN-07); o evento novo volta com "aceite ou recuse antes" |
 | 6 | Motivo errado para destrutivo no fim do horizonte; chave repetida no React; texto "Repetir … fora do" | Corrigidos |
 | 7 | `temperature=0` ainda vai a um fallback `anthropic/` atrás de um modelo do OpenRouter | Não corrigido: a configuração do `.env.example` não usa fallback da Anthropic |
-| 8 | Atraso que passa da semana 20 mantém a alocação até a 23 | Já estava em Esperando pelo José (achado 4 da primeira revisão) |
+| 8 | Atraso que passa da semana 20 mantém a alocação até a 23 | Resolvido no ticket 07 (achado 4 da primeira revisão) |
 
 ### Terceira revisão independente, do diff `11763b7..5065c91`: tickets 07 e 08 (Opus 5.5, esforço high), 12/11 15h
 | # | Achado | O que foi feito |

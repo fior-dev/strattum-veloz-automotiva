@@ -23,11 +23,9 @@ status: aprovado pelo José · 12/11/2026 · Decidido por: José
 
 Regra: ticket que passar do dobro da estimativa corta escopo e manda o resto para o `ROADMAP.md`.
 
-## Esperando pelo José
-- MK-06: a folga de reteste (10% dos destrutivos) e a gordura do pedido (10% a 20%, ajuste 6) são duas premissas diferentes. Manter as duas ou aplicar a mesma gordura nos dois lados? (revisão independente, achado 3)
-- Histórico do git: o ref do projeto Supabase saiu dos arquivos, mas segue nos commits antigos. Reescrever o histórico antes de tornar o repo público?
-
 ## Decidido pelo José
+- 12/11: MK-06 mantém as duas premissas, a gordura no pedido e a folga de reteste no plano (`PREMISSAS.md`).
+- 12/11: aceite que passa da semana 20 só com opção explícita do gerente (ticket 07).
 - 13/11: o plano fica na meta 20 por enquanto. A meta 18 continua na simulação, com o preço à vista.
 - 13/11: publicação sem hospedagem. O backend roda na máquina do José e um Cloudflare Tunnel publica a URL, atrás do Cloudflare Access (login por e-mail). O contêiner fica para o piloto (ticket 08, ADR 0006).
 
