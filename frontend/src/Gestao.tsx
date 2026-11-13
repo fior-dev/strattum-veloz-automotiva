@@ -35,7 +35,9 @@ export function Simulador({ comp, g, folgaPct, podeAdotar, motivo, aoAdotar }: {
     ['Testes registrados pelas 5 áreas', comp.testes, s.testes],
     ['Processo atual: soma dos pedidos por área', comp.como_hoje.carros, s.pedidos],
     ['Carros no plano compartilhado', comp.proposto.carros_plano, s.carros_plano],
-    ['Piso: mínimo de carros para essa meta', g.memoria.piso, s.memoria.piso],
+    g.memoria.semanas === s.memoria.semanas
+      ? [`Piso: mínimo de carros para terminar na semana ${s.memoria.semanas}`, g.memoria.piso, s.memoria.piso]
+      : ['Piso: mínimo de carros para terminar na semana N', `${g.memoria.piso} (N = ${g.memoria.semanas})`, `${s.memoria.piso} (N = ${s.memoria.semanas})`],
     ['Reserva para reteste', comp.proposto.carros_reserva, s.carros_reserva],
     ['Frota total (plano + reserva)', comp.proposto.carros, s.carros],
     ['Carros a menos que o processo atual', menos(comp.como_hoje.carros, comp.proposto.carros), menos(s.pedidos, s.carros)],
