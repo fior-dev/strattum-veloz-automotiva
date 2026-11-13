@@ -76,7 +76,7 @@ export function Simulador({ comp, g, folgaPct, podeAdotar, motivo, aoAdotar }: {
           <span className="font-normal text-grafite">Os {porArea} primeiros testes de cada área, na lista do mock.</span>
         </label>
         <label className="block font-medium">Meta de fim do plano
-          <select className={`${campo} block mt-1`} value={meta} onChange={(e) => setMeta(Number(e.target.value))}>
+          <select className={`${campo} block mt-1 max-w-full`} value={meta} onChange={(e) => setMeta(Number(e.target.value))}>
             {[0, 1, 2, 3, 4].map((d) => <option key={d} value={g.marco - d}>semana {g.marco - d}{d ? `: ${d} semana${d > 1 ? 's' : ''} de folga` : ': sem folga'}{maisCarros(g.marco - d)}</option>)}
           </select>
           <span className="font-normal text-grafite">O lançamento continua na semana {g.marco}.</span>
