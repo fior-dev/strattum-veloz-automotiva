@@ -1,6 +1,6 @@
 # Discovery · Veloz Automotiva, alocação da frota de protótipos
 
-Versão 0.3, 12/11/2026. A v0.2 foi aprovada pelo José em 12/11. A v0.3 aplica a resposta da Maira por e-mail: os protótipos são idênticos, e existe desgaste parcial. Também aprova a RN-07 e a RN-08 e cria a RN-09 (avarias). Este é o documento de descobertas da entrevista de discovery do case de FDE da Strattum.
+Versão 0.4, 13/11/2026. A v0.4 corrige trechos do §1, §11, §14 e §17 e aponta, no §19, onde cada desvio do protótipo está explicado. A v0.2 foi aprovada pelo José em 12/11. A v0.3 aplica a resposta da Maira por e-mail: os protótipos são idênticos, e existe desgaste parcial. Também aprova a RN-07 e a RN-08 e cria a RN-09 (avarias). Este é o documento de descobertas da entrevista de discovery do case de FDE da Strattum.
 O método é o *Fiortech's FDE Playbook*, Fase 1. O documento é a base para escrever o PRD e as specs (SDD). Ele não substitui nenhum dos dois.
 
 **Etiqueta de fonte em cada afirmação:**
@@ -165,7 +165,7 @@ Hoje a tradução entre áreas mora no Excel de formato livre. O sistema troca e
 - Otimização matemática ótima.
 
 **Não funcionais**
-- RNF-01: É só protótipo, sem nada rodando em produção `[T]`. Roda local, sem backend `[H]`.
+- RNF-01: É só protótipo, sem nada rodando em produção `[T]`. Roda local, sem backend `[H]`. Na construção, ganhou backend (ver §19).
 - RNF-02: A geração do plano é determinística: o mesmo dado sempre dá o mesmo plano, para a demo ser reproduzível.
 - RNF-03: Toda suposição é rastreável pelo ID (RN-xx ou MK-xx).
 
@@ -269,3 +269,18 @@ O mock do José previa 4 colunas nos Testes e 2 nos Carros `[P]`. A variante cai
 | Regras e invariantes | 9 |
 | Critérios de aceite e testes | 13 |
 | Cenário de ponta a ponta | 14 |
+
+## 19. O que mudou na construção
+
+O discovery registra o que se sabia antes de construir. Os desvios do protótipo estão explicados nestes documentos:
+
+| Aqui | No protótipo | Onde está explicado |
+|---|---|---|
+| RNF-01: roda local, sem backend | Backend FastAPI com a SPA React. A chave do LLM não pode ir para o navegador | ADR 0001 |
+| RNF-01: roda local | Publicado para a avaliação por Cloudflare Tunnel, com login por e-mail | ADR 0006, ticket 08 |
+| MK-01: 8 a 12 testes por área | 125 por área, para os pedidos somarem perto de 250 | `PREMISSAS.md`, MK-01 |
+| RF-02: ordena por duração, destrutivo por último em cada carro | Todos os não destrutivos antes de todos os destrutivos | ADR 0002 |
+| §8 e RN-05: atraso de +1 semana | Atraso de +N semanas | `docs/prompt-execucao.md`, ajuste 8 |
+| §14: a frota cai de N para M | 245 para 168 carros | `PREMISSAS.md`, MK-09 |
+| §15: fases 0 a 3 | Protótipo, v2 (piloto) e v3 (produto) | `ROADMAP.md` |
+| Escopo do §11 | Também entraram o copiloto com LLM, a simulação de meta, o custo em reais e o Supabase | `SPEC.md` |
