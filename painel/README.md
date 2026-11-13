@@ -1,7 +1,7 @@
 # Painel de gestão do projeto
 
-`painel/index.html` mostra o rastro do processo: decisões, linha de produção do SDLC, tickets, rastreabilidade, prazo, premissas, uso de IA e riscos.
-É um HTML só, sem dependência e sem CDN. Abra o arquivo no navegador.
+`painel/index.html` é a gestão do projeto: decisões, linha de produção do SDLC, tickets, rastreabilidade, prazo, premissas, uso de IA e riscos.
+É um HTML só, sem dependência e sem CDN. Abra o arquivo no navegador, ou a versão publicada pelo GitHub Pages (`.github/workflows/painel-pages.yml`), que sai a cada push que muda `painel/index.html`.
 
 ## Regenerar (Windows PowerShell)
 

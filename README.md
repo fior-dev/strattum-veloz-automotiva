@@ -3,6 +3,11 @@
 Este repositório guarda o case técnico de Forward Deployed Engineer da Strattum, com apresentação na sexta 13/11/2026.
 O cliente é fictício: a Veloz Automotiva quer reduzir a frota de 250 protótipos de um SUV sem atrasar o lançamento.
 
+## Apresentação
+
+- **Deck da apresentação à Strattum (13/11):** [Protótipo Veloz Automotiva](https://claude.ai/artifact/UEPz8WSuFAwW2qxCzZY38g), feito no Claude Design.
+- **Gestão do projeto Veloz:** [painel publicado](https://fior-dev.github.io/strattum-veloz-automotiva/) com as decisões, os tickets, os testes e o prazo, da entrevista à entrega. É o `painel/index.html`, gerado a partir deste repositório.
+
 ## Como subir (Windows PowerShell)
 
 Pré-requisitos: [uv](https://docs.astral.sh/uv/) e Node 20 ou mais novo.
@@ -80,7 +85,7 @@ Testes: `cd backend; uv run pytest`. Build da tela: `cd frontend; npm run build`
 | `docs/adr/` | Decisões difíceis de reverter |
 | `docs/tickets/` | Fatias do protótipo |
 | `AI-LOG.md` | Registro do uso de IA, uma das entregas do case |
-| [`painel/index.html`](painel/index.html) | Painel de gestão do projeto: decisões, SDLC, tickets, rastreabilidade e prazo. Regenerar: `node painel/gerar.mjs` |
+| [`painel/index.html`](painel/index.html) | Gestão do projeto Veloz: decisões, SDLC, tickets, rastreabilidade e prazo. Publicado no GitHub Pages. Regenerar: `node painel/gerar.mjs` |
 | `backend/domain/motor.py` | O motor de alocação |
 | `backend/scripts/gerar_mock.py` | Gera o dado mockado, com semente fixa |
 

@@ -583,7 +583,7 @@ export function render(d) {
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Rastro do projeto Veloz</title>
+<title>Gestão do projeto Veloz</title>
 <meta name="description" content="Painel de gestão do case de FDE da Strattum: decisões, SDLC, tickets e rastreabilidade do protótipo da Veloz Automotiva.">
 <script>try{var t=localStorage.getItem('tema');if(t)document.documentElement.dataset.theme=t}catch(e){}</script>
 <style>${CSS}</style>
@@ -599,7 +599,7 @@ export function render(d) {
 </header>
 <main>
   <section class="abertura">
-    <h1>O rastro do protótipo, da entrevista à entrega</h1>
+    <h1>Gestão do projeto Veloz, da entrevista à entrega</h1>
     <p class="lead">A Veloz Automotiva quer testar um SUV com menos que os 250 protótipos do plano atual, de R$ 1 milhão a R$ 1,5 milhão cada, sem atrasar o lançamento. Esta página mostra como a solução foi decidida e construída: cada decisão, ticket e teste ligado à dor que resolve. Os dados são lidos do repositório e do git a cada geração. Os marcos do prazo vêm do ajuste 9 de <code>docs/prompt-execucao.md</code>.</p>
     <dl class="fatos">
       <div><dt>Decisões registradas</dt><dd>${d.adrs.length}</dd><span>${aprovados} aprovada${aprovados === 1 ? '' : 's'} pelo José</span></div>

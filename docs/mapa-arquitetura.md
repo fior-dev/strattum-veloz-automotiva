@@ -41,4 +41,4 @@ Uma linha por entrada: rota, tabela, script. SIPOC = quem fornece, o que entra, 
 | Entrada | Fornece | Entra | Faz | Sai | Recebe | Credencial |
 |---|---|---|---|---|---|---|
 | OpenRouter (via LiteLLM) | Backend | frase + catálogo de testes + contexto | Tool calling `registrar_evento`; texto da explicação | evento JSON, texto | `application/copiloto.py` | `OPENROUTER_API_KEY` no `backend/.env` |
-| `painel/index.html` | `node painel/gerar.mjs` | arquivos do repo e `git log` | Rastro do processo para a Strattum | HTML estático | quem abre o arquivo | nenhuma |
+| `painel/index.html` | `node painel/gerar.mjs` | arquivos do repo e `git log` | Gestão do projeto: decisões, tickets e prazo | HTML estático | qualquer pessoa, pelo GitHub Pages (só leitura; não chama a API) | nenhuma |
