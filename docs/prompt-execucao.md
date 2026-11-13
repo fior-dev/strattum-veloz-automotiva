@@ -19,6 +19,7 @@ Registro: 12/11/2026, 00h.
    - Dor própria: o planejamento não vê o desgaste parcial (e-mail da Maira).
 4. **Quem aprova** o plano e as trocas é o gerente da coordenação (RN-07). A RN-08, regra de repetição, está aprovada.
 5. **Áreas:** Elétrica/Eletrônica, Mecânica/Powertrain, Aerodinâmica, Dinâmica veicular e Segurança passiva. Não usar "performance".
+   - *Nota de 12/11 (ticket 09): "Dinâmica veicular" virou "Hidráulica" (testes `HID-xx`). O texto acima é o prompt como foi enviado.*
 6. **Gordura de 10 a 20%:** a Maira disse que inventou o número na hora. Vai em `PREMISSAS.md` como suposição ajustável (a folga de reteste).
 7. **Thierry:** escreva "Thierry (go-to-market)", sem afirmar o cargo.
 8. **Replanejamento:** o atraso é de +N semanas, não só +1.

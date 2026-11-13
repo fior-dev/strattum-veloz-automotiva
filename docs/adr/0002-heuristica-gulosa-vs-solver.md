@@ -3,7 +3,7 @@
 status: aprovado pelo José · 12/11/2026 · Decidido por: José
 
 ## Contexto
-A Maira disse que importa pouco se 250 vira 240 ou 150. Importa o processo e se a coordenação entende o plano `[H]`. A coordenação não é técnica. A demo precisa dar o mesmo resultado sempre (RNF-02).
+A Maira disse que importa pouco se 250 vira 240 ou 150. Importa o processo e se a coordenação entende o plano `[T]`. A coordenação não é técnica. A demo precisa dar o mesmo resultado sempre (RNF-02).
 
 ## Decisão
 **Por que "gulosa":** é o nome técnico (em inglês, *greedy*) do algoritmo que, a cada passo, pega a melhor opção daquele momento e nunca volta atrás para rever. É rápido e fácil de explicar; não garante o melhor resultado possível.

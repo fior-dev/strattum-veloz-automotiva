@@ -20,7 +20,7 @@ Na v0.3 não há mais item `[A ESCLARECER]`: a Maira e o José responderam todos
 ## 1. Contexto
 
 - A Veloz Automotiva, uma montadora fictícia, está testando um SUV novo. `[T]`
-- Os protótipos são montados quase à mão, fora da linha de produção. Cada um custa de R$ 1 milhão a R$ 1,5 milhão. O carro de série vai custar uns R$ 150 mil. `[T]`
+- Os protótipos são montados quase à mão, fora da linha de produção. Cada um custa de R$ 1 milhão a R$ 1,5 milhão. O carro de série vai ser vendido por uns R$ 150 mil (preço de venda ao cliente). `[T]`
 - O plano atual prevê **250 protótipos em 20 semanas** de teste. `[T]`
 - Cinco áreas de engenharia usam os protótipos. Alguns testes inutilizam o carro, como o crash test. `[T]`
 - **A diretoria quer reduzir a frota sem atrasar o lançamento.** `[T]`
@@ -175,7 +175,7 @@ Hoje a tradução entre áreas mora no Excel de formato livre. O sistema troca e
 |---|---|
 | MK-01 | De 8 a 12 testes por área, com duração de 1 a 6 semanas |
 | MK-02 | De 10% a 20% dos testes são destrutivos, concentrados em Segurança passiva e Mecânica |
-| MK-03 | Os pedidos "como hoje" somam 250 carros. Cada área pede 1 carro por teste que roda em paralelo, mais a gordura |
+| MK-03 | Os pedidos "como hoje" somam perto de 250 carros (no mock gerado, 245; ver `PREMISSAS.md`). Cada área pede 1 carro por teste que roda em paralelo, mais a gordura |
 | MK-04 | Taxa de reprovação de 10% e de atraso por clima de 10% por teste |
 
 ## 12. Modelo de dados mínimo
@@ -222,8 +222,8 @@ O mock do José previa 4 colunas nos Testes e 2 nos Carros `[P]`. A variante cai
 ## 14. Cenário da demo ("momento uau")
 
 1. O "como hoje", com os pedidos somados por área, contra o plano compartilhado: a frota cai de N para M, com os números do mock.
-2. Ao vivo: o teste de aerodinâmica é marcado "Atrasado (+1 semana)", porque precisava de chuva. `[T]`
-3. O sistema mostra que o protótipo estava prometido a um teste da Hidráulica e sugere outro carro livre.
+2. Ao vivo: o teste de aerodinâmica é marcado "Atrasado", porque precisava de chuva. `[T]` Na demo, o AER-99 atrasa +2 semanas.
+3. O sistema mostra que o protótipo estava prometido a um teste da Elétrica (ELE-01) e sugere outro carro livre.
 4. A coordenação aceita, e o plano ganha a versão 2.
 
 ## 15. Roadmap `[H]`
@@ -247,7 +247,7 @@ O mock do José previa 4 colunas nos Testes e 2 nos Carros `[P]`. A variante cai
 
 | # | Pergunta | Afeta | Situação |
 |---|---|---|---|
-| 1 | Quem aprova a alocação dos veículos? | RN-07 | Resolvida em 12/11: o gerente da coordenação (José) |
+| 1 | Quem aprova a alocação dos veículos? | RN-07 | Resolvida em 12/11 pelo José: o gerente da coordenação |
 | 2 | As variantes valem? Há outra restrição entre testes? | RN-01, RN-09 | Resolvida em 11/11 `[E]`: os carros são idênticos, e existe desgaste parcial invisível ao planejamento |
 | 3 | O teste que falha repete no mesmo carro ou num novo? | RN-08 | Resolvida em 12/11: aprovada como está (José) |
 | 4 | Lista e quantidade de testes por área | mock | A Maira disse que não daria `[T]`. Fica no MK-01 |
