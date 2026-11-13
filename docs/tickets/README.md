@@ -25,14 +25,14 @@ Regra: ticket que passar do dobro da estimativa corta escopo e manda o resto par
 
 ## Esperando pelo José
 - MK-06: a folga de reteste (10% dos destrutivos) e a gordura do pedido (10% a 20%, ajuste 6) são duas premissas diferentes. Manter as duas ou aplicar a mesma gordura nos dois lados? (revisão independente, achado 3)
-- Ticket 08: escolher a hospedagem do contêiner (Lightsail ou Railway) e o domínio. A publicação é do José
 - Histórico do git: o ref do projeto Supabase saiu dos arquivos, mas segue nos commits antigos. Reescrever o histórico antes de tornar o repo público?
 
 ## Decidido pelo José
 - 13/11: o plano fica na meta 20 por enquanto. A meta 18 continua na simulação, com o preço à vista.
+- 13/11: publicação sem hospedagem. O backend roda na máquina do José e um Cloudflare Tunnel publica a URL, atrás do Cloudflare Access (login por e-mail). O contêiner fica para o piloto (ticket 08, ADR 0006).
 
 ## Riscos
-- Publicado sem login nem limite de chamadas: quem tiver a URL muda o plano e usa o copiloto. Todos os avaliadores dividem o mesmo plano e a mesma proposta pendente. Só a chave do OpenRouter free vai para o host, nunca a da Anthropic
-- Nesta máquina, o Kaspersky intercepta o HTTPS (o certificado do openrouter.ai vem assinado pela raiz do Kaspersky). O LiteLLM usa o `certifi` e recusa esse certificado, então parte das chamadas do copiloto falha com `SSLCertVerificationError`, também dentro do Docker. Na demo local: excluir openrouter.ai da verificação de HTTPS do Kaspersky, ou usar o intérprete offline
-- Copiloto depende do OpenRouter free: em 12/11 o modelo respondeu 429 (limite do provedor) antes de completar. Fora do ar ou sem chave, a demo usa o intérprete offline (só entende "<ID> atrasou N semanas" e "<ID> falhou")
+- Publicado atrás de login por e-mail (Cloudflare Access), sem perfis nem limite de chamadas: todo avaliador liberado muda o plano e usa o copiloto. Todos dividem o mesmo plano e a mesma proposta pendente. A demo depende da máquina do José ligada. A chave do LLM fica no `.env` do José e não vai para nenhum host
+- Na máquina de desenvolvimento, o antivírus (Kaspersky) intercepta o HTTPS (o certificado do openrouter.ai vem assinado pela raiz do Kaspersky). O LiteLLM usa o `certifi` e recusa esse certificado, então parte das chamadas do copiloto falha com `SSLCertVerificationError`, também dentro do Docker. Na demo local: excluir openrouter.ai da verificação de HTTPS do Kaspersky, ou usar o intérprete offline
+- Copiloto depende do OpenRouter free: em 12/11 o modelo respondeu 429 (limite do provedor) antes de completar. Sem chave, a demo usa o intérprete offline (só entende "<ID> atrasou N semanas" e "<ID> falhou"). Com chave e o provedor fora do ar, o copiloto responde "fora do ar" e a mesma ação segue pelo botão "Atrasou"
 - MK-01 é a premissa mais sensível: 125 testes por área foram calibrados para os pedidos somarem perto de 250

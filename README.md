@@ -59,9 +59,7 @@ Testes: `cd backend; uv run pytest`. Build da tela: `cd frontend; npm run build`
 
 ## Roteiro da demo (10 min)
 
-O roteiro completo, com o que clicar, o que deve aparecer e o que dizer, está em [docs/roteiro-de-teste.md](docs/roteiro-de-teste.md). Resumo:
-
-1. **O número.** Passos 1 a 3 da tela: pedidos por área, 245 carros até a semana 14; plano compartilhado, 168 carros até a semana 20 (−31%). A folga de reteste está à vista e o controle deslizante muda só a reserva.
+1. **O número.** Passos 1 a 3 da tela: pedidos por área, 245 carros até a semana 14; plano compartilhado, 168 carros até a semana 20 (−31%). A semana 14 dos pedidos é suposição (MK-03b); o programa tem 20 semanas até o lançamento. Terminando o programa na mesma semana 14, o plano compartilhado pede 209 carros (202 + 7), 14,7% a menos (medido com `planejar(..., horizonte=14)`; a tela simula de 16 a 20). A folga de reteste está à vista e o controle deslizante muda só a reserva.
 2. **O que segura o lançamento.** Bloco "Simule antes de decidir": 553 de 625 testes não têm folga; o plano troca folga de prazo por carros. A simulação mostra o preço de adiantar o fim, em carros e em dinheiro.
 3. **O imprevisto.** Busque `AER-99` → "Atrasou" → +2 semanas. O sistema propõe mover o ELE-01 do P006 para o P162, da folga, e diz que o marco não se move. Clique em **Recusar**: o plano fica na versão 1. (A decisão é do gerente da coordenação, RN-07.)
 4. **O copiloto.** Na caixa de texto, escreva "o AER-99 atrasou duas semanas por causa da chuva". A proposta é a mesma do passo 3: o LLM só traduz a frase, quem calcula é o motor. Agora clique em **Aceitar**: nasce a versão 2, e a versão 1 continua para consulta no seletor de versão.
@@ -73,6 +71,7 @@ O roteiro completo, com o que clicar, o que deve aparecer e o que dizer, está e
 | Arquivo | O que é |
 |---|---|
 | `docs/01-discovery.md` | Descobertas da entrevista, fonte da verdade do negócio |
+| `docs/prompt-execucao.md` | O prompt que dirigiu a execução, com os 15 ajustes do José |
 | `CONTEXT.md` | Glossário e dores (D1 a D8) |
 | `PREMISSAS.md` | Todo número suposto, com ID (MK-xx) |
 | `SPEC.md` | Escopo, regras do replanejamento, arquitetura-alvo (diagrama) |
@@ -95,7 +94,12 @@ O roteiro completo, com o que clicar, o que deve aparecer e o que dizer, está e
 | 04 Replanejar | pronta |
 | 04b Avarias | pronta |
 | 04c Gestão de projetos | pronta |
-| 05 Copiloto | pronta (modo offline até a chave do OpenRouter entrar no `.env`) |
-| 05b Supabase | em andamento (adapter e teste prontos; falta o José rodar o schema e pôr a chave) |
+| 05 Copiloto | pronta (com LLM pelo OpenRouter; sem chave, roda offline) |
+| 05b Supabase | pronta (adapter, schema e seed; passa nos mesmos testes do JSON) |
 | 06a Acabamento visual | pronta |
 | 06b README, roadmap e mapa | pronta |
+| 07 Aceite que passa do marco | pronta |
+| 08 Publicar para a avaliação | pronta (contêiner no repo; a demo está no ar por túnel, com login por e-mail) |
+| 09 Ajustes da revisão dos documentos | pronta |
+| 10 Memória de cálculo e simulação | pronta |
+| 11 Ajustes do teste na tela | pronta |

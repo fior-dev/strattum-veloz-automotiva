@@ -4,7 +4,7 @@ status: proposto, aguardando revisão do José · 12/11/2026
 
 Uma linha por entrada: rota, tabela, script. SIPOC = quem fornece, o que entra, o que a entrada faz, o que sai, quem recebe.
 
-**Quem pode chamar, no protótipo:** local, a API escuta só em `127.0.0.1:8000`, sem login: quem está na máquina chama qualquer rota. Publicado (ticket 08), o contêiner escuta em `0.0.0.0` e qualquer um com a URL chama qualquer rota, sem login. A tela (Vite, `localhost:5173`) repassa `/api` para a API. Login e perfis entram na v2 (ROADMAP.md).
+**Quem pode chamar, no protótipo:** local, a API escuta só em `127.0.0.1:8000`, sem login: quem está na máquina chama qualquer rota. Publicado para a avaliação (ticket 08, 13/11), a API continua em `127.0.0.1:8000` na máquina do José: um Cloudflare Tunnel leva a URL pública até ela, e o Cloudflare Access exige login por e-mail antes de qualquer rota. Depois do login, todo avaliador chama qualquer rota: a API não tem perfis. No contêiner (caminho do piloto), a API escuta em `0.0.0.0`, sem login próprio. A tela (Vite, `localhost:5173`) repassa `/api` para a API. Login e perfis entram na v2 (ROADMAP.md).
 
 **Onde fica o "painel de proposta" na tela:** é a caixa de borda amarela "Proposta de replanejamento", na coluna à direita do Gantt. Ela só existe enquanto há uma proposta esperando decisão: depois de "Atrasou", "Falhou, vai repetir", avaria que compromete reuso, ou uma frase no copiloto. Aceitar ou recusar faz a caixa sumir.
 
@@ -25,7 +25,7 @@ Uma linha por entrada: rota, tabela, script. SIPOC = quem fornece, o que entra, 
 | `POST /api/proposta/recusar` | Gerente da coordenação | — | Descarta a proposta; o plano fica na versão N | — | Gantt | nenhuma (v2: só o gerente) | [0001](adr/0001-clean-architecture-e-ports.md) |
 | `GET /api/copiloto` | Tela | — | Diz qual modelo está em uso, ou "offline" sem chave | nome do modelo | caixa do copiloto | nenhuma | [0003](adr/0003-llm-fora-do-calculo.md) |
 | `POST /api/copiloto` | Coordenação, texto livre | frase ("AER-99 atrasou 2 semanas") | LLM só traduz a frase em evento; o motor calcula; o LLM explica com os números do motor. Evento inválido volta como pergunta | evento, explicação, proposta | caixa do copiloto e painel de proposta | nenhuma na rota; a chave do LLM fica no `backend/.env` e só o backend lê | [0003](adr/0003-llm-fora-do-calculo.md), [0004](adr/0004-context-manager-como-seam.md) |
-| `GET /` e arquivos da tela | Navegador | — | Serve o build da tela (Vite) quando `TELA_DIR` existe, só no contêiner; montado depois das rotas `/api` | HTML, JS, CSS | navegador | nenhuma | [0006](adr/0006-dados-e-nuvem.md) (ticket 08) |
+| `GET /` e arquivos da tela | Navegador | — | Serve o build da tela (Vite) quando `TELA_DIR` existe (no contêiner e na publicação por túnel); montado depois das rotas `/api` | HTML, JS, CSS | navegador | nenhuma | [0006](adr/0006-dados-e-nuvem.md) (ticket 08) |
 
 ## Dados
 

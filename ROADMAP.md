@@ -49,7 +49,7 @@ Nota = Alcance × Impacto × Confiança ÷ Esforço. Alcance: quantos dos crité
 | Apresentação guiada em 5 passos | 3 | 3 | 80% | 1 h | 7,2 | feito em 12/11 |
 | Piso barato ao lado do plano | 2 | 2 | 80% | 0,5 h | 6,4 | feito em 12/11 (ticket 10), com a memória de cálculo e a simulação |
 | Supabase como banco | 2 | 2 | 90% | 1 h | 3,6 | feito (ticket 05b) |
-| Contêiner único (degrau da AWS) | 2 | 2 | 90% | 1 h | 3,6 | feito (ticket 08); publicar é do José |
+| Contêiner único (degrau da AWS) | 2 | 2 | 90% | 1 h | 3,6 | feito (ticket 08); a demo foi publicada por túnel em 13/11, o contêiner fica para o piloto |
 | Langfuse no copiloto | 1 | 2 | 70% | 1 h | 1,4 | depois: pede conta e chave |
 | Guardrails no copiloto | 2 | 1 | 70% | 2 h | 0,7 | parte existe: evento validado, texto limitado a 500 caracteres |
 | Login de verdade (Supabase Auth + RLS) | 2 | 3 | 60% | 6 h | 0,6 | piloto |

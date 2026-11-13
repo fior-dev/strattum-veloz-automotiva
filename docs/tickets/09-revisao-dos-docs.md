@@ -7,7 +7,7 @@ Dor: — · Depende de: 06b · Estimativa: 1h · Estado: feito · Pedido do Jos�
 - A área "Dinâmica veicular" virou "Hidráulica" (testes `HID-xx`). O mock foi regerado: os números não mudaram (245 → 168). A troca do cenário da demo agora move o ELE-01, não mais o DIN-02, porque o desempate é pelo ID.
 - Tela: apresentação guiada em 5 passos; seletor de perfil simulado (gerente ou engenharia), que só trava os botões da proposta; lista de avarias da versão; tabela dos pedidos por área (a planilha de hoje).
 - Documentos: explicações pedidas em PREMISSAS, SPEC, ROADMAP (com a RICE), mapa e ADRs 0001, 0002, 0003, 0006 e 0007. Diagrama do SPEC com texto escuro nas caixas claras.
-- `docs/roteiro-de-teste.md`: o que clicar, o que deve aparecer e o que dizer.
+- `docs/roteiro-de-teste.md`: o que clicar, o que deve aparecer e o que dizer (roteiro de ensaio do José; saiu do repositório em 13/11).
 - Banco: migration `area_hidraulica` aceita o nome novo da área; o seed passou a apagar testes e pedidos antigos antes de carregar.
 
 ## Aceite

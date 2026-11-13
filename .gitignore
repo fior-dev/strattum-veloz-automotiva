@@ -11,3 +11,7 @@ dist/
 
 .mcp.json
 supabase/.temp/
+
+# material do José, fora do remoto
+privado/
+docs/roteiro-de-teste.md

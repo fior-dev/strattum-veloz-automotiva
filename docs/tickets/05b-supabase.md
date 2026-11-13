@@ -3,7 +3,7 @@
 Dor: — · Depende de: 04 · Teto: 45 min · Só entra se 01 a 04 estiverem prontas às 13h (ajuste 14). · Estado: feito · Real: 14 min · Commits: 6d1a5c8
 
 ## O quê
-- Projeto Supabase novo, free, numa organização Free do José (criado por ele em 12/11: a organização da Fiortech é Pro e cobraria o projeto).
+- Projeto Supabase novo, free, numa organização Free do José (criado por ele em 12/11: a outra organização dele é Pro e cobraria o projeto).
 - Schema mínimo (prototipos, testes, pedidos, planos com versão) e seed do `mock.json`.
 - `SupabasePlanoRepository`; o `container.py` escolhe por `DATA_BACKEND=json|supabase`.
 
