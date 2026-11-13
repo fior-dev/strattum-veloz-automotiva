@@ -57,11 +57,14 @@ def ajustar_folga(corpo: Folga, uc: Planejamento = Depends(planejamento), rp: Re
 
 
 @app.get("/api/simular", summary="E se: menos testes, outra meta de fim, destrutivo no fim. Só leitura (ticket 10)")
-def simular(por_area: int = Query(125, ge=25, le=125, description="Quantos testes cada área registra"),
+def simular(por_area: int = Query(125, ge=25, le=125, multiple_of=25, description="Quantos testes cada área registra"),
             meta: int = Query(HORIZONTE, ge=16, le=HORIZONTE, description="Semana em que o plano quer terminar"),
             destrutivo_no_fim: bool = False, folga: float = Query(0.1, ge=0, le=0.3),
             uc: Planejamento = Depends(planejamento)):
-    return uc.simular(por_area, meta, destrutivo_no_fim, folga)
+    # só os passos que a tela oferece: no máximo 5 × 5 × 2 × 7 = 350 simulações diferentes, todas cabem no cache
+    if abs(folga * 20 - round(folga * 20)) > 1e-9:
+        raise HTTPException(422, "A folga de reteste vai de 5 em 5 pontos: 0, 0.05, ... 0.30")
+    return uc.simular(por_area, meta, destrutivo_no_fim, round(folga, 2))
 
 
 class NovoPlano(BaseModel):

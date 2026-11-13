@@ -55,7 +55,7 @@ class Planejamento:
     def _curva_meta(self):
         return curva_meta(self.repo.testes(), self.repo.prototipos())
 
-    @lru_cache(maxsize=512)  # a rota é pública: o cache não pode crescer sem limite
+    @lru_cache(maxsize=512)  # a rota é pública e só aceita 350 combinações (ver api.py): o cache não cresce nem é furado
     def simular(self, por_area: int, meta: int, destrutivo_no_fim: bool, folga: float) -> dict:
         """Só leitura (ticket 10): o plano em vigor não muda."""
         return simular(self.repo.testes(), self.repo.pedidos(), self.repo.prototipos(), por_area, meta, destrutivo_no_fim, folga)

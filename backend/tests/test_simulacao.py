@@ -76,6 +76,9 @@ def test_rn07_regerar_e_recusado_com_proposta_pendente(cliente):
     r = cliente.post("/api/plano/regerar", json={"meta": 18})
     assert r.status_code == 422 and "proposta" in r.json()["detail"]
     assert cliente.get("/api/simular", params={"meta": 15}).status_code == 422  # fora da faixa da tela
+    assert cliente.get("/api/simular", params={"folga": 0.1234}).status_code == 422  # só os passos da tela: o cache não é furado
+    assert cliente.get("/api/simular", params={"por_area": 30}).status_code == 422
+    assert cliente.get("/api/simular", params={"folga": 0.15, "por_area": 50}).status_code == 200
 
 
 def test_rn09_regerar_e_recusado_se_ha_carro_fora_da_frota_por_avaria(cliente):
