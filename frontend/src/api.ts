@@ -60,6 +60,7 @@ export type Proposta = {
   sugestoes: { teste_id: string; de: string; para: string; inicio: number; fim: number; reteste: boolean }[]
   impactados: { teste_id: string; area: string; motivo: string }[]
   versao_nova: number
+  carros: string[]  // carros que a proposta toca, com o do evento
   marco: { fim_antes: number; fim_depois: number; semanas_consumidas: number; folga_projeto_antes: number;
     folga_projeto_depois: number; estava_no_caminho_critico: boolean | null } | null
 }
@@ -68,7 +69,7 @@ export type Memoria = { testes: number; destrutivos: number; semanas: number; ca
 export type Cenario = { meta: number; destrutivo_no_fim: boolean; folga: number }
 export type Simulacao = Cenario & {
   por_area: number; testes: number; destrutivos: number; pedidos: number; carros_plano: number; carros_reserva: number
-  carros: number; semana_fim: number; folga_projeto: number; criticos: number; nao_cabe: number; memoria: Memoria
+  carros: number; semana_fim: number; folga_projeto: number; criticos: number; nao_cabe: number; memoria: Memoria; custo_frota: number
 }
 export type UsoSemana = { semana: number; em_uso: number; parados: number; fora: number }
 export type Gestao = {
@@ -76,6 +77,8 @@ export type Gestao = {
   criticos: number; testes_no_plano: number; folgas: Record<string, number>; memoria: Memoria
   uso: { plano: UsoSemana[]; como_hoje: UsoSemana[] }
   curva_meta: { meta: number; carros: number; folga_projeto: number; nao_cabe: number }[]
+  custos: { carro: number; semana_atraso: number }  // em milhões de reais (MK-10, MK-11)
+  custo_frota: number; carros_com_folga: string[]  // vazio quando o plano já passa do marco
 }
 type ComProposta = { proposta: Proposta | null }
 

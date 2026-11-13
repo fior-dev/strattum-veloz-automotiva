@@ -19,7 +19,11 @@
 
 body { background: var(--color-asfalto); color: var(--color-tinta); }
 :focus-visible { outline: 2px solid var(--color-faixa); outline-offset: 2px; }
-@media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+@media (prefers-reduced-motion: reduce) { * { transition: none !important; animation: none !important; scroll-behavior: auto !important; } }
+
+/* o bloco que o passo da apresentação acabou de mostrar pisca uma vez na cor da faixa */
+@keyframes surgir { from { box-shadow: 0 0 0 6px var(--color-faixa); } to { box-shadow: 0 0 0 0 transparent; } }
+.surgir { animation: surgir 1.6s ease-out; border-radius: 0.375rem; }
 
 /* carro destruído: listras de fita zebrada */
 .destruido { background: repeating-linear-gradient(135deg, #d9dee4 0 4px, #eef1f4 4px 8px); }

@@ -34,6 +34,9 @@ O que existe: plano compartilhado com folga à vista, Gantt, replanejamento com 
 | Guardrails no copiloto | O texto do usuário só vira evento validado; recusa pedido fora do escopo e dado pessoal na entrada e na saída | `infrastructure/llm_litellm.py` (antes e depois da chamada); `application/copiloto.py` já recusa evento inválido |
 | Streaming da explicação | A explicação do copiloto aparece enquanto o modelo escreve | `infrastructure/llm_litellm.py` (`stream=True`) e rota SSE em `presentation/api.py` |
 | Histograma de uso com o plano estourado | Hoje o histograma para na semana 20 mesmo quando o gerente aceitou passar do marco (revisão de 12/11, achado 7) | `domain/gestao.py` (`uso_por_semana` com o fim do plano) |
+| Comparar alternativas de replanejamento | Hoje o sistema propõe uma troca só. Mostrar duas ou três lado a lado (trocar de carro, empurrar o teste, usar a reserva), cada uma com o efeito no marco e nos carros, para o gerente escolher. Pedido do José em 13/11 | `domain/motor.py` (`replanejar` devolve mais de uma proposta); painel da proposta |
+| Avisar as pessoas afetadas | Quando o gerente aceita, as áreas donas dos testes movidos recebem um aviso (e-mail ou Teams) com o antes e o depois. Hoje elas só veem se abrirem a tela. Pedido do José em 13/11 | port novo de notificação em `domain/ports.py`, adapter em `infrastructure/`; chamado no aceite, em `application/` |
+| Histórico de avarias por carro | Tabela própria de avarias e tela com o histórico de cada carro, inclusive entre lançamentos. Hoje a avaria fica gravada dentro de cada versão do plano | schema e `infrastructure/supabase_repo.py`; tela nova |
 | Simulação de reprovações (H-2) | Monte Carlo sobre o plano: quantos carros de folga seguram 90% dos cenários | `domain/` (função pura nova), sem tocar no motor |
 
 ## O que antecipar para a avaliação (RICE)

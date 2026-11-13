@@ -19,6 +19,8 @@ O José não conseguia explicar de onde saem os 161 carros, e a tela só deixava
 - [x] Adotar é recusado se o plano em vigor tem carro fora da frota por avaria (RN-09): refazer do zero o devolveria à frota.
 - [ ] Teste do José pelo roteiro.
 
+**13/11:** o bloco da memória de cálculo virou uma linha embaixo do número, e o José decidiu manter o destrutivo "o quanto antes" como padrão (ticket 11, ADR 0002).
+
 ## Fica para depois
 - Adotar um plano novo preservando avarias e testes concluídos (hoje refaz do zero).
 - A versão antiga em consulta mistura o texto do guia com os números da versão atual.

@@ -124,6 +124,7 @@ class Proposta:
     impactados: list[Impactado] = field(default_factory=list)
     plano: Plano | None = None
     marco: dict | None = None  # impacto no marco do lançamento (ticket 04c)
+    carros: list[str] = field(default_factory=list)  # carros que a proposta toca, com o do evento (ticket 11)
 
 
 class EventoInvalido(ValueError):

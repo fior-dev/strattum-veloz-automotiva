@@ -22,6 +22,8 @@ Fonte: **discovery** (fala ou e-mail da Maira), **José** (premissa aprovada), *
 | MK-09 | O Y% da frase de sucesso (§3) | Não é meta: é o resultado medido no mock, 245 → 168 carros (77 a menos, −31,4%) | O número sai do motor, não é calibrado (ver MK-01) | suposição |
 | MK-08 | Faixas do sinal da folga do projeto | Verde > 2 semanas, amarelo 1 a 2, vermelho ≤ 0 | Sem número da cliente; escolhido para a demo | suposição |
 | MK-07 | Semente do gerador do mock | 42 | Mesmo dado em toda execução (RNF-02) | suposição |
+| MK-10 | Custo de uma semana de atraso no lançamento | R$ 20 milhões, ajustável na tela | A cliente não informou. Conta de ordem de grandeza: 1.000 SUVs por semana × R$ 20 mil de margem por carro (13% do preço de R$ 150 mil do discovery). O volume e a margem são supostos. Serve só para pôr carro e prazo na mesma unidade; o José autorizou supor em 13/11 | suposição |
+| MK-11 | Custo de um protótipo | R$ 1,25 milhão | Meio da faixa que a Maira deu (R$ 1 a 1,5 milhão, discovery §1). O meio é escolha do FDE | `[T]` a faixa; o meio é suposição |
 | — | Nomes das 5 áreas | Elétrica/Eletrônica, Mecânica/Powertrain, Aerodinâmica, Hidráulica, Segurança passiva | A Maira deixou o José nomear | José |
 | — | Nomes dos testes | Gerados por script a partir de uma lista por área | Ilustrativos | IA |
 

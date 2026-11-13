@@ -98,7 +98,7 @@ def _proposta_json(p) -> dict | None:
     if p is None:
         return None
     return {"evento": p.evento, "sugestoes": [asdict(s) for s in p.sugestoes],
-            "impactados": [asdict(i) for i in p.impactados], "versao_nova": p.plano.versao, "marco": p.marco}
+            "impactados": [asdict(i) for i in p.impactados], "versao_nova": p.plano.versao, "marco": p.marco, "carros": p.carros}
 
 
 def _sem_erro(func):

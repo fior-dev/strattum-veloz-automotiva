@@ -5,7 +5,7 @@ from dataclasses import replace
 from functools import cache, lru_cache
 
 from domain.folga import FOLGA_PADRAO, carros_de_reserva, comparar
-from domain.gestao import (MARCO, curva_meta, folgas, impacto_no_marco, memoria, resumo_marco, simular, uso_como_hoje,
+from domain.gestao import (CUSTOS, MARCO, curva_meta, folgas, impacto_no_marco, memoria, resumo_marco, simular, uso_como_hoje,
                            uso_por_semana)
 from domain.modelo import GRAVIDADES, STATUS, TIPOS_AVARIA, Avaria, Plano
 from domain.motor import Atraso, EventoInvalido, Falha, Proposta, RegistroAvaria, planejar, replanejar
@@ -43,9 +43,13 @@ class Planejamento:
         plano = self.plano(versao)
         testes = {t.id: t for t in self.repo.testes()}
         frota = len(plano.prototipos()) + len(plano.reserva)
-        return {**resumo_marco(plano, testes), "folgas": folgas(plano), "memoria": memoria(plano, testes),
+        resumo, f = resumo_marco(plano, testes), folgas(plano)
+        # plano que já passa do marco: a folga até o fim do plano não é margem nenhuma, então nada é marcado (ticket 11)
+        com_folga = sorted({a.prototipo_id for a in plano.alocacoes if f[a.teste_id] > 0}) if resumo["folga_projeto"] >= 0 else []
+        return {**resumo, "folgas": f, "memoria": memoria(plano, testes),
+                "carros_com_folga": com_folga, "custo_frota": frota * CUSTOS["carro"],
                 "uso": {"plano": uso_por_semana(plano, testes, frota), "como_hoje": self._uso_como_hoje()},
-                "curva_meta": self._curva_meta()}
+                "curva_meta": self._curva_meta(), "custos": CUSTOS}
 
     @cache  # ponytail: o mock não muda enquanto o processo vive; com dado vivo, invalidar ao carregar
     def _uso_como_hoje(self):
@@ -141,6 +145,11 @@ class Replanejamento:
             atual = self.planejamento.plano()
             p = replanejar(atual, evento, self._testes())
             p.marco = impacto_no_marco(atual, p.plano, getattr(evento, "teste_id", None))
+            tid = getattr(evento, "teste_id", None)
+            do_evento = {evento.avaria.prototipo_id} if tid is None else set()
+            tocados = {tid} | {i.teste_id for i in p.impactados}
+            p.carros = sorted(do_evento | {a.prototipo_id for a in atual.alocacoes if a.teste_id in tocados}
+                              | {c for s in p.sugestoes for c in (s.de, s.para)})
             self.pendente = p
             return p
 

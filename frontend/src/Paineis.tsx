@@ -18,7 +18,7 @@ const NOME_STATUS: Record<string, string> = {
 // O que a engenharia informa sobre um teste e sobre o carro dele (RF-05, RF-08)
 export function PainelTeste({ plano, aloc, somenteLeitura, aoProposta, aoMudar, aoFechar }: {
   plano: Plano; aloc: Alocacao; somenteLeitura: boolean
-  aoProposta: (p: Proposta) => void; aoMudar: () => void; aoFechar: () => void
+  aoProposta: (p: Proposta) => void; aoMudar: (aviso: string) => void; aoFechar: () => void
 }) {
   const t = plano.testes[aloc.teste_id]
   const [semanas, setSemanas] = useState(1)
@@ -26,8 +26,8 @@ export function PainelTeste({ plano, aloc, somenteLeitura, aoProposta, aoMudar, 
   const [erro, setErro] = useState('')
   const ref = useAparecer()
 
-  const enviar = (p: Promise<{ proposta: Proposta | null }>) =>
-    p.then((r) => (r.proposta ? aoProposta(r.proposta) : aoMudar())).catch((e) => setErro(e.message))
+  const enviar = (p: Promise<{ proposta: Proposta | null }>, aviso: string) =>
+    p.then((r) => (r.proposta ? aoProposta(r.proposta) : aoMudar(aviso))).catch((e) => setErro(e.message))
 
   return (
     <aside ref={ref} className="bg-pista border border-linha rounded-md p-4 text-sm space-y-3">
@@ -48,12 +48,12 @@ export function PainelTeste({ plano, aloc, somenteLeitura, aoProposta, aoMudar, 
         <fieldset className="space-y-2">
           <legend className="font-medium">O que aconteceu com o teste</legend>
           <div className="flex flex-wrap gap-2">
-            <button className={botao} onClick={() => enviar(replan.status(t.id, 'em_andamento'))}>Começou</button>
-            <button className={botao} onClick={() => enviar(replan.status(t.id, 'concluido'))}>Terminou</button>
-            <button className={botao} onClick={() => enviar(replan.status(t.id, 'falhou'))}>Falhou, vai repetir</button>
+            <button className={botao} onClick={() => enviar(replan.status(t.id, 'em_andamento'), `${t.id} marcado como em andamento.`)}>Começou</button>
+            <button className={botao} onClick={() => enviar(replan.status(t.id, 'concluido'), `${t.id} marcado como concluído.`)}>Terminou</button>
+            <button className={botao} onClick={() => enviar(replan.status(t.id, 'falhou'), '')}>Falhou, vai repetir</button>
           </div>
           <div className="flex items-center gap-2">
-            <button className={botao} onClick={() => enviar(replan.status(t.id, 'atrasado', semanas))}>Atrasou</button>
+            <button className={botao} onClick={() => enviar(replan.status(t.id, 'atrasado', semanas), '')}>Atrasou</button>
             <input type="number" min={1} max={10} value={semanas} onChange={(e) => setSemanas(Number(e.target.value))}
               className="w-16 border border-linha rounded-sm px-2 py-1" aria-label="Semanas de atraso" />
             <span>semana(s)</span>
@@ -75,7 +75,8 @@ export function PainelTeste({ plano, aloc, somenteLeitura, aoProposta, aoMudar, 
             <label>semana <input type="number" min={1} max={plano.horizonte} value={avaria.semana}
               onChange={(e) => setAvaria({ ...avaria, semana: Number(e.target.value) })}
               className="w-16 border border-linha rounded-sm px-2 py-1" /></label>
-            <button className={botao} onClick={() => enviar(replan.avaria({ prototipo_id: aloc.prototipo_id, area: t.area, ...avaria }))}>
+            <button className={botao} onClick={() => enviar(replan.avaria({ prototipo_id: aloc.prototipo_id, area: t.area, ...avaria }),
+              `Avaria leve (${avaria.tipo}) registrada no ${aloc.prototipo_id}, semana ${avaria.semana}. O carro segue na frota e o plano não muda. Ela aparece com ⚠ na linha do carro.`)}>
               Registrar avaria
             </button>
           </div>

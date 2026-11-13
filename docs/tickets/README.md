@@ -17,6 +17,7 @@ status: aprovado pelo José · 12/11/2026 · Decidido por: José
 | 08 | [Publicar para a Strattum testar](08-publicar.md) | 06b | 1h | — | pedido do José, 12/11 |
 | 09 | [Ajustes da revisão dos documentos](09-revisao-dos-docs.md) | 06b | 1h | — | pedido do José, 12/11 |
 | 10 | [Memória de cálculo e simulação](10-memoria-e-simulacao.md) | 09 | 2h | D3, D8 | pedido do José, 12/11 |
+| 11 | [Ajustes do teste do José na tela](11-ajustes-do-teste-do-jose.md) | 10 | 2h | D3, D4, D8 | pedido do José, 13/11 |
 | 06a | [Acabamento visual](06a-acabamento.md) | 04 | 1h | — | — |
 | 06b | [README, ROADMAP, diagrama](06b-docs-finais.md) | — | 1h30 | — | começa até 15h; tudo pronto 17h |
 
@@ -24,7 +25,7 @@ Regra: ticket que passar do dobro da estimativa corta escopo e manda o resto par
 
 ## Esperando pelo José
 - MK-06: a folga de reteste (10% dos destrutivos) e a gordura do pedido (10% a 20%, ajuste 6) são duas premissas diferentes. Manter as duas ou aplicar a mesma gordura nos dois lados? (revisão independente, achado 3)
-- Adotar meta de 18 semanas (+11 carros, 2 semanas de folga no marco)?
+- Adotar meta de 18 semanas (+11 carros, 2 semanas de folga no marco)? Com os custos supostos (MK-10, MK-11): R$ 13,75 mi em carros para absorver até R$ 40 mi de atraso
 - Ticket 08: escolher a hospedagem do contêiner (Lightsail ou Railway) e o domínio. A publicação é do José
 - Histórico do git: o ref do projeto Supabase saiu dos arquivos, mas segue nos commits antigos. Reescrever o histórico antes de tornar o repo público?
 

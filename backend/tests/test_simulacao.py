@@ -68,6 +68,26 @@ def test_api_simular_nao_muda_o_plano_e_regerar_cria_a_versao_seguinte(cliente):
     assert cliente.post("/api/plano/regerar", json={"meta": 18, "folga": 0.1}).json() == {"versao": 2}
     g = cliente.get("/api/gestao").json()
     assert (g["fim_plano"], g["folga_projeto"], g["sinal"], g["memoria"]["carros"]) == (18, 2, "amarelo", 172)
+    assert g["custos"] == {"carro": 1.25, "semana_atraso": 20.0} and g["custo_frota"] == 179 * 1.25  # MK-10 e MK-11
+
+
+def test_ticket11_carros_da_proposta_e_marcacao_de_folga(cliente):
+    g = cliente.get("/api/gestao").json()
+    assert len(g["carros_com_folga"]) == 65 and sum(v > 0 for v in g["folgas"].values()) == 72
+    assert [c["meta"] for c in g["curva_meta"]] == [20, 19, 18, 17, 16]
+    # atraso de um destrutivo, último do carro: proposta sem troca, mas o carro do evento vem na lista
+    destrutivo = next(t["id"] for t in MOCK["testes"] if t["destrutivo"])
+    p = cliente.post("/api/status", json={"teste_id": destrutivo, "status": "atrasado", "semanas": 1}).json()["proposta"]
+    assert not p["sugestoes"] and len(p["carros"]) >= 1
+    cliente.post("/api/proposta/recusar")
+    p = cliente.post("/api/status", json={"teste_id": "AER-99", "status": "atrasado", "semanas": 2}).json()["proposta"]
+    assert p["carros"] == ["P006", "P162"]
+    cliente.post("/api/proposta/recusar")
+    # plano aceito além do marco: nenhum carro é marcado como tendo folga
+    cliente.post("/api/status", json={"teste_id": "AER-11", "status": "atrasado", "semanas": 2})
+    assert cliente.post("/api/proposta/aceitar", params={"estourar": "true"}).status_code == 200
+    g = cliente.get("/api/gestao").json()
+    assert g["folga_projeto"] < 0 and g["carros_com_folga"] == []
     assert cliente.get("/api/plano", params={"versao": 1}).json()["semana_fim"] == 20  # a v1 fica para consulta
 
 

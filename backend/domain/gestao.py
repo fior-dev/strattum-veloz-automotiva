@@ -8,6 +8,8 @@ from .modelo import HORIZONTE, Pedido, Plano, Teste
 from .motor import planejar
 
 MARCO = HORIZONTE  # semana do lançamento: o plano não passa dela (RN-06)
+# Em milhões de reais. carro: meio da faixa do discovery (R$ 1 a 1,5 milhão), MK-11. semana_atraso: suposição, MK-10
+CUSTOS = {"carro": 1.25, "semana_atraso": 20.0}
 AMARELO_ATE = 2  # MK-08: folga do projeto de 1 a 2 semanas é amarelo; 0 ou menos, vermelho
 
 
@@ -75,7 +77,7 @@ def uso_como_hoje(testes: list[Teste], pedidos: list[Pedido], prototipos: list[s
     return total
 
 
-def curva_meta(testes: list[Teste], prototipos: list[str], metas=(20, 19, 18, 17)) -> list[dict]:
+def curva_meta(testes: list[Teste], prototipos: list[str], metas=(20, 19, 18, 17, 16)) -> list[dict]:
     """Quantos carros o plano pede para cada meta de fim: o preço de comprar folga de prazo com frota.
     Só leitura: não muda o plano em vigor."""
     curva = []
@@ -128,4 +130,5 @@ def simular(testes: list[Teste], pedidos: list[Pedido], prototipos: list[str], p
             "carros_plano": len(plano.prototipos()), "carros_reserva": reserva,
             "carros": len(plano.prototipos()) + reserva, "semana_fim": plano.semana_fim(),
             "folga_projeto": MARCO - plano.semana_fim(), "criticos": sum(1 for v in f.values() if v == 0),
-            "nao_cabe": len(plano.nao_cabe), "memoria": memoria(plano, por_id)}
+            "nao_cabe": len(plano.nao_cabe), "memoria": memoria(plano, por_id),
+            "custo_frota": (len(plano.prototipos()) + reserva) * CUSTOS["carro"]}

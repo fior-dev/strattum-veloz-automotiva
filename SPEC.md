@@ -18,7 +18,7 @@ D1 a D6 e D8 do `CONTEXT.md`. D7 (multi-projeto) fica no roadmap.
 | 4 | Status do teste; atraso de +N semanas e falha geram sugestões de troca ou impactados; aceitar cria versão N+1 | RF-05, RF-06, RN-05, RN-07, RN-08 | D4, D5 |
 | 4b | Registro de avaria: leve só fica registrada; compromete reuso tira o carro do pool e replaneja. As avarias da versão aparecem na lista "Avarias registradas", ao lado do Gantt, e como ⚠ na linha do carro | RF-08, RN-09 | D6 |
 | 4c | Caminho crítico, marco do lançamento, impacto no marco e uso da frota por semana | ADR 0007 | D8 |
-| 4d | Memória de cálculo do número de carros (do piso ao plano). Simulação só leitura: testes por área, meta de fim e quando roda o destrutivo. O gerente da coordenação pode adotar a simulação, que vira a versão N+1 (ticket 10) | RF-02, RF-03, RN-07 | D3, D8 |
+| 4d | Memória de cálculo do número de carros (do piso ao plano). Simulação só leitura: testes por área, meta de fim e quando roda o destrutivo. O gerente da coordenação pode adotar a simulação, que vira a versão N+1 (ticket 10). Em 13/11 (ticket 11): a memória virou uma linha, a simulação mostra o custo em dinheiro (MK-10, MK-11), e o Gantt ganhou filtro de carros, prévia da troca e marcação dos testes com folga | RF-02, RF-03, RN-07 | D3, D8 |
 | 5 | Copiloto: texto livre → evento → `replanejar` → explicação; a coordenação aprova | ADR 0003 | D4 |
 | 5b | Opcional: adapter Postgres (Supabase) no lugar do JSON | ADR 0006 | — |
 | 6 | Acabamento, README, ROADMAP, diagrama final | — | — |

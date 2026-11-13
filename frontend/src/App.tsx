@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { api, type Alocacao, type Comparativo, type Gestao, type Plano, type Proposta } from './api'
-import { Marco, MemoriaDeCalculo, Simulador, UsoFrota } from './Gestao'
+import { Simulador, UsoFrota } from './Gestao'
 import { Copiloto } from './Copiloto'
 import { Gantt, Legenda } from './Gantt'
 import { PainelProposta, PainelTeste } from './Paineis'
@@ -48,14 +48,14 @@ function Guia({ passo, ir, comp, g }: { passo: number; ir: (p: number) => void; 
     <>A gordura escondida vira uma folga à vista: <b>{p.carros_reserva} carros de reserva</b>, para repetir teste destrutivo que
       falha. {p.carros_plano} + {p.carros_reserva} = <b>{p.carros}</b>, contra {comp.como_hoje.carros} dos pedidos:
       {' '}<b>{comp.como_hoje.carros - p.carros} carros a menos</b>. Mexa no controle da folga para ver quanto custa cada ponto.
-      O bloco "De onde saem os {p.carros_plano} carros" mostra a conta inteira, do piso de {g.memoria.piso} carros até o plano.
+      A conta dos {p.carros_plano} carros está logo abaixo do número, com o piso de {g.memoria.piso}.
       O gráfico de baixo mostra o motivo: nos pedidos por área, os carros ficam parados {parados(g.uso.como_hoje).toLocaleString('pt-BR')} carros-semana, contra {parados(g.uso.plano).toLocaleString('pt-BR')} no plano.</>,
-    <>O preço da frota menor é o prazo. O plano enche cada carro até a semana {g.fim_plano}, então <b>{g.criticos} de {g.testes_no_plano} testes</b>{' '}
-      estão no caminho crítico: se um deles atrasa e não há troca de carro, o fim do plano atrasa. A tabela mostra quanto custa
-      comprar prazo. Na simulação, a coordenação escolhe a meta de fim, quando roda o teste destrutivo e quantos testes entram,
-      vê o plano que sairia e, se quiser, adota.</>,
+    <>O preço da frota menor é o prazo. O plano enche cada carro até a semana {g.fim_plano}, então {g.folga_projeto < 0 ? <b>nenhum teste tem folga, e o plano em vigor já passa do lançamento.</b>
+        : <><b>{g.criticos} de {g.testes_no_plano} testes</b> não têm folga: se um deles atrasa e não há troca de carro, o fim do plano atrasa.
+          No Gantt, a faixa amarela marca os poucos testes que têm folga.</>} Na simulação, a coordenação escolhe a meta de fim, quando roda o teste destrutivo e quantos testes entram,
+      vê o plano que sairia, quanto custa em carros e em dinheiro e, se quiser, adota.</>,
     <>Agora um imprevisto. Escreva no copiloto <b>"o teste AER-99 atrasou 2 semanas"</b>, ou abra o teste e clique em Atrasou.
-      O sistema mostra quem é afetado, propõe a troca de carro e diz se o lançamento se move. Nada muda até o gerente da
+      O sistema mostra quem é afetado, propõe a troca de carro e diz se o lançamento se move. O Gantt passa a mostrar só os carros afetados, com a troca tracejada no carro de destino. Nada muda até o gerente da
       coordenação aceitar; o aceite cria uma versão nova do plano e a anterior fica para consulta.</>,
   ][passo - 1]
   return (
@@ -105,6 +105,8 @@ export default function App() {
   const [busca, setBusca] = useState('')
   const [naoAchei, setNaoAchei] = useState('')
   const [passo, setPasso] = useState(1)
+  const [filtro, setFiltro] = useState<'todos' | 'afetados' | 'folga'>('todos')
+  const [aviso, setAviso] = useState('')
   // ponytail: perfil simulado, só na tela; a API não confere quem chama. Login e perfis são v2 (ADR 0005)
   const [perfil, setPerfil] = useState<'gerente' | 'engenharia'>('gerente')
 
@@ -115,15 +117,28 @@ export default function App() {
   useEffect(() => { carregar() }, [])
   // proposta pendente precisa do passo 5 (é lá que ela aparece); o usuário continua livre para voltar
   useEffect(() => { if (proposta) setPasso((s) => Math.max(s, 5)) }, [proposta])
+  // com proposta, o Gantt mostra só os carros que ela toca: origem e destino ficam lado a lado (ticket 11)
+  const temProposta = !!proposta
+  useEffect(() => { setFiltro(temProposta ? 'afetados' : 'todos') }, [temProposta])
+  // cada passo rola até o bloco que ele acabou de mostrar
+  const carregou = !!plano
+  useEffect(() => { document.querySelector('.surgir')?.scrollIntoView({ behavior: 'smooth', block: 'nearest' }) }, [passo, carregou])
 
-  const verVersao = (v?: number) => { setVersao(v); setAberto(undefined); carregar(v) }
+  const verVersao = (v?: number) => { setVersao(v); setAberto(undefined); setAviso(''); carregar(v) }
   const abrirTeste = (id: string) => {
     const doTeste = plano?.alocacoes.filter((a) => a.teste_id === id.trim().toUpperCase()) ?? []
-    if (doTeste.length) { setAberto(doTeste[doTeste.length - 1]); setNaoAchei('') }
+    if (doTeste.length) { setAberto(doTeste[doTeste.length - 1]); setNaoAchei(''); setAviso('') }
     else setNaoAchei(id.trim() ? `Não achei o teste ${id.trim().toUpperCase()} neste plano.` : 'Digite o ID de um teste.')
   }
   const atual = versao === undefined
   const destaque = new Set([...(proposta?.sugestoes.map((s) => s.teste_id) ?? []), ...(proposta?.impactados.map((i) => i.teste_id) ?? [])])
+
+  // as duas listas vêm do backend; a tela só escolhe qual mostrar
+  const afetados = proposta?.carros ?? []
+  const comFolga = gestao?.carros_com_folga ?? []
+  const filtroEf = (filtro === 'afetados' && !afetados.length) || (filtro === 'folga' && !comFolga.length) ? 'todos' : filtro
+  const soCarros = filtroEf === 'todos' ? undefined : new Set([...(filtroEf === 'afetados' ? afetados : comFolga), ...(aberto ? [aberto.prototipo_id] : [])])
+  const novo = (n: number) => (passo === n ? 'surgir' : '')
 
   const mudarFolga = (pct: number) => {
     setFolga(pct)
@@ -139,6 +154,8 @@ export default function App() {
   if (!plano || !comp || !gestao) return <main className="p-8">Carregando o plano…</main>
 
   const p = passo
+  const m = gestao.memoria
+  const nf = (x: number) => x.toLocaleString('pt-BR')
   const menos = comp.como_hoje.carros - comp.proposto.carros
 
   return (
@@ -157,14 +174,16 @@ export default function App() {
 
       <Guia passo={p} ir={setPasso} comp={comp} g={gestao} />
 
-      {p === 1 && <PedidosPorArea comp={comp} />}
+      {p === 1 && <div className={`w-fit max-w-full ${novo(1)}`}><PedidosPorArea comp={comp} /></div>}
 
-      {p >= 3 && <section className="mt-6 grid md:grid-cols-[1fr_1fr_1.2fr] gap-6 bg-pista border border-linha rounded-md p-5">
+      {p >= 3 && <section className={`mt-6 grid md:grid-cols-[1fr_1fr_1.2fr] gap-6 bg-pista border border-linha rounded-md p-5 ${novo(3)}`}>
         <Numero titulo="Processo atual: pedidos por área, somados" carros={comp.como_hoje.carros} semana={comp.como_hoje.semana_fim} selo="MK-03"
           detalhe={comp.como_hoje.por_area.map((x) => `${x.area.split('/')[0]} ${x.carros}`).join(' · ')} />
         <Numero titulo="Plano compartilhado" carros={comp.proposto.carros} semana={comp.proposto.semana_fim} selo="MK-06"
           detalhe={<>{comp.proposto.carros_plano} no plano + {comp.proposto.carros_reserva} de folga de reteste
-            {comp.proposto.nao_cabe > 0 && <> · <b className="text-seg">{comp.proposto.nao_cabe} testes sem alocação</b></>}</>} />
+            {comp.proposto.nao_cabe > 0 && <> · <b className="text-seg">{comp.proposto.nao_cabe} testes sem alocação</b></>}
+            <span className="block mt-1">Conta dos {m.carros}: ({nf(m.em_teste)} semanas de teste + {nf(m.destruido)} perdidas com o carro já destruído
+              {m.vazio > 0 && ` + ${nf(m.vazio)} com carro vazio`}) ÷ {m.semanas} semanas. Piso, sem perda nenhuma: {m.piso} carros.</span></>} />
         <div className="md:border-l border-linha md:pl-6">
           <p className="font-cond text-4xl font-bold">{Math.abs(menos)} carros a {menos >= 0 ? 'menos' : 'mais'} ({menos >= 0 ? '−' : '+'}{Math.abs(comp.reducao_pct).toLocaleString('pt-BR')}%)</p>
           <p className="text-sm mt-1">A frota cai porque um carro que uma área libera passa a servir a outra, e a gordura de cada pedido vira uma folga única e à vista.
@@ -179,15 +198,11 @@ export default function App() {
         </div>
       </section>}
 
-      {p >= 3 && <div className="mt-6"><MemoriaDeCalculo m={gestao.memoria} reserva={comp.proposto.carros_reserva} /></div>}
-
-      {p >= 4 && <div className="mt-6"><Marco g={gestao} /></div>}
-
-      {p >= 4 && atual && <div className="mt-6"><Simulador comp={comp} g={gestao} folgaPct={folga} podeAdotar={perfil === 'gerente' && !proposta}
+      {p >= 4 && atual && <div className={`mt-6 ${novo(4)}`}><Simulador comp={comp} g={gestao} folgaPct={folga} podeAdotar={perfil === 'gerente' && !proposta}
         motivo={proposta ? 'Aceite ou recuse a proposta pendente antes de adotar outro plano.' : perfil !== 'gerente' ? 'Só o gerente da coordenação adota um plano.' : ''}
-        aoAdotar={() => { setAberto(undefined); carregar() }} /></div>}
+        aoAdotar={() => { setAberto(undefined); setAviso(''); carregar() }} /></div>}
 
-      {p >= 2 && <section className="mt-6">
+      {p >= 2 && <section className={`mt-6 ${novo(2)}`}>
         <div className="flex flex-wrap items-baseline justify-between gap-2 mb-2">
           <h2 className="font-cond text-2xl font-semibold">Quem usa cada carro, semana a semana</h2>
           <Legenda areas={plano.areas} />
@@ -200,6 +215,13 @@ export default function App() {
             <button className="px-3 py-1 rounded-sm bg-tinta text-pista cursor-pointer">Abrir teste</button>
           </form>
           <span className={naoAchei ? 'text-seg font-medium' : 'text-grafite'} role="status">{naoAchei || 'ou clique numa barra.'}</span>
+          <label>Mostrar{' '}
+            <select className="border border-linha rounded-sm px-2 py-1 bg-pista" value={filtroEf} onChange={(e) => setFiltro(e.target.value as typeof filtro)}>
+              <option value="todos">todos os carros ({plano.prototipos.length + plano.reserva.length})</option>
+              <option value="afetados" disabled={!afetados.length}>só os carros afetados pela proposta ({afetados.length})</option>
+              <option value="folga" disabled={!comFolga.length}>só os carros com teste com folga ({comFolga.length})</option>
+            </select>
+          </label>
           <label className="ml-auto">Versão do plano{' '}
             <select className="border border-linha rounded-sm px-2 py-1 bg-pista" value={versao ?? ''}
               onChange={(e) => verVersao(e.target.value ? Number(e.target.value) : undefined)}>
@@ -209,14 +231,16 @@ export default function App() {
           </label>
         </div>
         <div className="grid lg:grid-cols-[1fr_21rem] gap-4 items-start">
-          <Gantt plano={plano} aoClicar={setAberto} destaque={destaque} folgas={gestao.folgas} marco={gestao.marco} />
+          <Gantt plano={plano} aoClicar={(a) => { setAberto(a); setAviso('') }} destaque={destaque} folgas={comFolga.length ? gestao.folgas : {}} marco={gestao.marco}
+            soCarros={soCarros} aberto={aberto?.teste_id} previa={atual ? proposta?.sugestoes : undefined} />
           <div className="space-y-4 lg:sticky lg:top-4">
+            <p role="status" className={aviso ? 'bg-pista border-2 border-[#2e8b57] rounded-md p-3 text-sm' : 'sr-only'}>{aviso && `✓ ${aviso}`}</p>
             {proposta && <PainelProposta proposta={proposta} plano={plano} podeDecidir={perfil === 'gerente'}
-              aoDecidir={() => { setProposta(undefined); setAberto(undefined); carregar() }} />}
+              aoDecidir={() => { setProposta(undefined); setAberto(undefined); setAviso(''); carregar() }} />}
             {aberto && <PainelTeste plano={plano} aloc={aberto} somenteLeitura={!atual} key={`${aberto.teste_id}-${aberto.inicio}`}
-              aoProposta={(pr) => { setProposta(pr); setAberto(undefined) }} aoMudar={() => { setAberto(undefined); carregar() }}
+              aoProposta={(pr) => { setProposta(pr); setAberto(undefined); setAviso('') }} aoMudar={(msg) => { setAberto(undefined); setAviso(msg); carregar() }}
               aoFechar={() => setAberto(undefined)} />}
-            {atual && p >= 5 && <Copiloto key={plano.versao} aoProposta={() => carregar()} />}
+            {atual && p >= 5 && <div className={novo(5)}><Copiloto key={plano.versao} aoProposta={() => carregar()} /></div>}
             {!proposta && !aberto && <p className="text-sm text-grafite bg-pista border border-linha rounded-md p-4">
               Abra um teste para registrar que começou, terminou, atrasou ou falhou, ou para registrar uma avaria no carro.
               Se outro teste for afetado, o sistema propõe a troca e o gerente da coordenação decide.</p>}
@@ -234,7 +258,7 @@ export default function App() {
         </div>
       </section>}
 
-      {p >= 3 && <div className="mt-6"><UsoFrota g={gestao} /></div>}
+      {p >= 3 && <div className="mt-6"><UsoFrota g={gestao} comp={comp} /></div>}
     </main>
   )
 }
